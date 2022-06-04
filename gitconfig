@@ -1,0 +1,41 @@
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	ui = true
+
+
+[color "status"]
+    # added = green bold
+    # changed = red bold strike
+    # untracked = cyan
+    #branch = gray black bold ul
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+
+[icdiff]
+	options = --highlight --line-numbers
+
+[branch "develop"]
+	rebase = true
+[user]
+	name = hubogle
+	email = hubogle@gmail.com
+#[http]
+#    proxy = socks5://127.0.0.1:7891
+[alias]
+	ad = forgit add
+[core]
+	quotepath = false
