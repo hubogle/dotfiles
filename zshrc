@@ -89,11 +89,11 @@ export GOPROXY=https://goproxy.cn
 alias ls='exa'
 alias cat='bat'
 alias r='trash'
-alias mvi='mvim'
 alias rm='trash'
 alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
 alias ll='exa --long --all --header --icons --git --time-style long-iso'
 alias vi='nvim'
+alias vim='nvim'
 #===================================================

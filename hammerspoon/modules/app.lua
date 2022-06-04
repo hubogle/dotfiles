@@ -1,7 +1,6 @@
 function open(appBundleID)
     return function()
         local app = hs.application.frontmostApplication()
-        --print(app:bundleID())
         if app ~= nil and app:bundleID() == appBundleID then
             -- 不为空并且置顶，隐藏
             app:hide()
@@ -13,31 +12,21 @@ function open(appBundleID)
     end
 end
 
---- 快速打开Finder，微信，Chrome等等
--- hs.hotkey.bind({"cmd"}, "E", open("com.apple.finder"))
+-- osascript -e 'id of app "VimR"'
+-- 获取包名
 hs.hotkey.bind({"cmd","shift"}, "W", open("com.tencent.WeWorkMac"))
 hs.hotkey.bind({"alt"}, "E", open("com.apple.finder"))
 hs.hotkey.bind({"alt"}, "F", open("com.apple.finder"))
-hs.hotkey.bind({"alt"}, ".", open("com.googlecode.iterm2"))
---hs.hotkey.bind({"cmd"}, ".", open("com.googlecode.iterm2"))
---hs.hotkey.bind({"cmd"}, ".", open("com.apple.Terminal"))
 hs.hotkey.bind({"cmd"}, ".", open("io.alacritty"))
 hs.hotkey.bind({"alt"}, "C", open("com.google.Chrome"))
-hs.hotkey.bind({"alt"}, "M", open("org.vim.MacVim"))
+hs.hotkey.bind({"alt"}, ".", open("com.apple.Terminal"))
+hs.hotkey.bind({"alt"}, "M", open("com.qvacua.VimR"))
 hs.hotkey.bind({"alt"}, "V", open("com.microsoft.VSCode"))
---hs.hotkey.bind({"alt"}, "S", open("com.sublimetext.3"))
---hs.hotkey.bind({"alt"}, "W", open("com.tencent.xinWeChat"))
---hs.hotkey.bind({"alt"}, "D", open("com.jetbrains.datagrip"))
 hs.hotkey.bind({"alt"}, "T", open("ru.keepcoder.Telegram"))
 hs.hotkey.bind({"alt"}, "P", open("com.luckymarmot.Paw"))
---hs.hotkey.bind({"alt"}, "S", open("com.sublimetext.4"))
 hs.hotkey.bind({"alt"}, "S", open("org.vim.MacVim"))
---hs.hotkey.bind({"alt"}, "U", open("com.ulyssesapp.mac"))
 hs.hotkey.bind({"alt"}, "U", open("com.lukilabs.lukiapp"))
-
-
---hs.hotkey.bind({"alt"}, "P", open("PyCharm"))
---hs.hotkey.bind({"alt"}, "M", open("QQ音乐"))
+hs.hotkey.bind({"alt"}, "W", open("com.tencent.xinWeChat"))
 
 
 -- 当前目录打开终端
@@ -72,17 +61,27 @@ function terminal()
           set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
         end tell
         -- 待执行命令
-        set cd_cmd to "cd " & dir_path
         -- 打开 iterm
         tell application "Terminal"
           activate
+          set cd_cmd to "cd " & dir_path
           try
-            tell current session of first window
-              write text cd_cmd
-            end tell
+            set sesh to current session of current terminal
           on error
-            create window with profile "Default" command cd_cmd
+            set currentWindow to (create window with default profile)
           end try
+          -- try
+          --   set sesh to current session of current terminal
+          -- on error
+          --   set term to (make new terminal)
+          --   tell term
+          --     launch session "Default"
+          --     set sesh to current session
+          --   end tell
+          -- end try
+          -- tell sesh
+          --   write text "cd " & dir_path & ";clear;"
+          -- end tell
         end tell
     ]]
     )
@@ -90,4 +89,3 @@ function terminal()
 end
 
 hs.hotkey.bind({"cmd", "alt"}, ".", terminal)
-
