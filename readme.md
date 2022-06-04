@@ -24,7 +24,7 @@
 
 ## Tmux 恢复
 
-1. 三方插件：`git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+1. 三方插件：`git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm`
 
 ## NvChad 安装
 

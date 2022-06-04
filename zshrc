@@ -96,4 +96,5 @@ alias cp="cp -i"    # 防止拷贝覆盖
 alias ll='exa --long --all --header --icons --git --time-style long-iso'
 alias vi='nvim'
 alias vim='nvim'
+alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
 #===================================================

@@ -39,3 +39,4 @@
 	ad = forgit add
 [core]
 	quotepath = false
+
