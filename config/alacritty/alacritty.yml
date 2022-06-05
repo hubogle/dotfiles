@@ -470,13 +470,20 @@ hints:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
+  # xxd -psd 获取按键值
   - { key: LBracket, mods: Command, chars: "\x60\x70" } # Command + [ 上个窗口
   - { key: RBracket, mods: Command, chars: "\x60\x6e" } # Command + ] 下个窗口
-  - { Key: Left, mods: Command, chars: "\x60\x1b\x5b\x44"} # 选择左面板
-  - { Key: Right, mods: Command, chars: "\x60\x1b\x5b\x43"}
-  - { Key: Up, mods: Command, chars: "\x60\x1b\x5b\x41"}
-  - { Key: Down, mods: Command, chars: "\x60\x1b\x5b\x42"}
+  - { Key: Left,     mods: Command, chars: "\x60\x1b\x5b\x44"} # 选择左面板
+  - { Key: Right,    mods: Command, chars: "\x60\x1b\x5b\x43"}
+  - { Key: Up,       mods: Command, chars: "\x60\x1b\x5b\x41"}
+  - { Key: Down,     mods: Command, chars: "\x60\x1b\x5b\x42"}
+  - { Key: T,        mods: Command, chars: "\x60\x63"} # 新建 windows
+  - { key: W,        mods: Command, chars: "\x60\x78"} # 关闭 windows
+  - { key: R,        mods: Command, chars: "\x60\x2c"} # 重命名 windows
+  - { key: Tab,        mods: Control, chars: "\x60\x6e"} # 下个窗口
+  # - { key: ,,        mods: Command, chars: "\x60\x6e"} # 下个窗口
 
+  - { key: Key0, mods: Command, chars: "\x60\x5b"} # vim 模式
   - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
   - { key: Key2, mods: Command, chars: "\x60\x32"}
   - { key: Key3, mods: Command, chars: "\x60\x33"}
@@ -559,7 +566,6 @@ key_bindings:
   # (macOS only)
   - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
   - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
-  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
   - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
   - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
   - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
@@ -572,7 +578,6 @@ key_bindings:
   - { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   - { key: M,              mods: Command,                    action: Minimize              }
   - { key: Q,              mods: Command,                    action: Quit                  }
-  - { key: W,              mods: Command,                    action: Hide                  }
   - { key: N,              mods: Command,                    action: SpawnNewInstance      }
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }

@@ -186,7 +186,7 @@ main()
       elif $show_military; then # only military time
         script="%a %m/%d %R ${timezone} "
       elif $show_day_month; then # only dd/mm
-        script="%a %d/%m %I:%M %p ${timezone} "
+        script="%a %d/%m %I:%M${timezone} "
       else
         #script="%a %m/%d %I:%M %p ${timezone} "
         script="%a %m/%d %H:%M${timezone}" # 设定时间格式 date '+%a %m/%d %H:%M'
