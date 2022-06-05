@@ -69,6 +69,10 @@
 ```
 [官方文档](https://support.google.com/chrome/a/answer/7591084)
 
+## FZF 安装
+
+[fzfP提示](https://github.com/kevinhwang91/fzf-tmux-script/blob/main/popup/fzfp)
+
 ## 软件推荐
 
 [Panda](https://bear.app/cn/alpha/) `Makrdown` 编辑器

@@ -1,3 +1,2 @@
 DOTFILES_DIRS="/Users/hubo/Documents/File/dotfiles"
-EXCLUDES="readme.md Brewfile aria2 cheat"
-
+EXCLUDES="readme.md Brewfile aria2"

@@ -22,6 +22,7 @@ cheats:
   paths:
     - ~/.config/navi
     - ~/.config/navi/cheat
+    - /Users/hubo/Library/Application Support/navi/cheats/
 
 # search:
   # tags: git,!checkout # equivalent to the --tag-rules option

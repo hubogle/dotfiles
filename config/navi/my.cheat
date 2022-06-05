@@ -53,7 +53,9 @@ git reset <SHA>
 # go build 汇编
 go build -gcflags -S
 
+# go 逃逸分析
+go build -gcflags=-m
+
 % limit
 # 系统句柄
 ulimit -a
-
