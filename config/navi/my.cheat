@@ -56,3 +56,4 @@ go build -gcflags -S
 % limit
 # 系统句柄
 ulimit -a
+

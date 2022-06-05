@@ -27,6 +27,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
+# rm -f ~/.zcompdump; compinit
 zi light zsh-users/zsh-completions  # 自动补全
 
 zi ice depth=1
@@ -43,7 +44,7 @@ zi snippet OMZP::git  # git alias
 #==================================================
 #=====================zoxide=======================
 # 更智能的CD命令，可跳转目录
-eval "$(zoxide init zsh --cmd j)"       # 在调用compinit后添加上述行
+eval "$(zoxide init zsh --cmd cd)"       # 在调用compinit后添加上述行
 export _ZO_DATA_DIR='/Users/hubo/.cache/zoxide' # 可删除 zcompdump
 #==================================================
 #====================历史记录========================
@@ -84,7 +85,14 @@ export GOPATH="$GOENV_GOPATH_PREFIX/1.18.0" # 自定义版本路径
 export PATH="$GOPATH/bin:$GOENV_ROOT/shims:$PATH"
 export GO111MODULE=auto # on
 export GOPROXY=https://goproxy.cn
-#================================================
+#===================================================
+#===================NAVI============================
+eval "$(navi widget zsh)"
+export NAVI_CONFIG=$HOME/.config/navi/config.yaml
+#===================================================
+#=====================RCM===========================
+export RCRC=$HOME/.config/rcm/rcrc
+#===================================================
 #===================ALIAS===========================
 alias ls='exa'
 alias cat='bat'
@@ -97,4 +105,6 @@ alias ll='exa --long --all --header --icons --git --time-style long-iso'
 alias vi='nvim'
 alias vim='nvim'
 alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
+alias top='btm'
+alias q='exit'
 #===================================================
