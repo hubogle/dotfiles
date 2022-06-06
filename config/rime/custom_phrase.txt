@@ -6,6 +6,9 @@ ls	ls	4
 Rime	rime	4
 sync	sync	3
 Rime	rime	4
+git pull	git	4
+git push	git	3
+gst	gst	4
 鼠须管	rime	3
 https://rime.im/	rime	2
 Squirrel	rime	1
@@ -285,5 +288,3 @@ YouTube Premium	yp
 有时候	yshou
 什么的	smd
 什么是	sms
-
-
