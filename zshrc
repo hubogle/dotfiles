@@ -120,4 +120,5 @@ alias vim='nvim'
 alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
 alias top='btm'
 alias q='exit'
+alias lip="curl cip.cc; curl ifconfig.me"
 #===================================================

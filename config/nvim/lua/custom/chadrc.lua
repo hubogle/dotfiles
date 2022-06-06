@@ -8,7 +8,7 @@ local plugin_conf = require "custom.configs" -- 插件变量配置
 -- example of changing theme:
 
 M.ui = {
-   theme = "gruvchad", -- 更改主题
+   theme = "onedark", -- 更改主题
 }
 
 M.options = {

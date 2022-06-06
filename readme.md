@@ -76,3 +76,7 @@
 ## 软件推荐
 
 [Panda](https://bear.app/cn/alpha/) `Makrdown` 编辑器
+
+## MAC 设置
+
+* `Finder` 标题栏显示完整路径：`defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES;killall Finder`
