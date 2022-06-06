@@ -105,6 +105,7 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 #===================================================
 #=====================RCM===========================
 export RCRC=$HOME/.config/rcm/rcrc
+export DOTFILES_DIRS="/Users/hubo/Documents/File/dotfiles"
 #===================================================
 #===================ALIAS===========================
 alias ls='exa'
