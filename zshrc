@@ -25,8 +25,8 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
-zstyle ':fzf-tab:*' fzf-command fzfp
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
+# zstyle ':fzf-tab:*' fzf-command fzf
 
 zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
 # rm -f ~/.zcompdump; compinit
@@ -106,6 +106,7 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 #=====================RCM===========================
 export RCRC=$HOME/.config/rcm/rcrc
 export DOTFILES_DIRS="/Users/hubo/Documents/File/dotfiles"
+export EXCLUDES="readme.md Brewfile aria2"
 #===================================================
 #===================ALIAS===========================
 alias ls='exa'

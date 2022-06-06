@@ -4,5 +4,5 @@
 ln -sfn $DOTFILES_DIRS/config/rime/custom_phrase.txt ~/Library/Rime/custom_phrase.txt
 
 # 同步 fzfp 脚本
-ln -sfn $DOTFILES_DIRS/config/fzfp/fzfp /opt/homebrew/bin/fzfp
-chmod +x /opt/homebrew/bin/fzfp
+# ln -sfn $DOTFILES_DIRS/config/fzf/fzfp /opt/homebrew/bin/fzfp
+# chmod +x /opt/homebrew/bin/fzfp

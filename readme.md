@@ -15,23 +15,9 @@
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
 
-## zi 安装
+## 插件依赖安装
 
-1. `zi_home="${HOME}/.zi" && mkdir -p $zi_home`
-2. `git clone https://github.com/z-shell/zi.git "${zi_home}/bin"`
-
-## NvChad 安装
-
-`git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 ; nvim`
-
-## RCM 恢复 dotfiles
-
-1. `echo "~/Documents/File/dotfiles/Brewfile" >> ~/.rcrc`
-2. `rcup` 同步隐藏文件
-
-## Tmux 恢复
-
-三方插件库：`git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm`
+`zi`插件、`NvChad`、`TMux`插件，放在 `hooks/pre-up` 下自动安装。
 
 ## Chrome 禁止更新
 
@@ -68,10 +54,6 @@
 </plist>
 ```
 [官方文档](https://support.google.com/chrome/a/answer/7591084)
-
-## FZF 安装
-
-[fzfP提示](https://github.com/kevinhwang91/fzf-tmux-script/blob/main/popup/fzfp)
 
 ## 软件推荐
 
