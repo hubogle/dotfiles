@@ -6,8 +6,8 @@ env: # 设置终端 256 色
 window: # 重启生效
 
   dimensions:  # 默认初始化大小
-    columns: 90
-    lines: 30
+    columns: 120
+    lines: 40
 
   #position:   # 窗口位置
   #  x: 0
@@ -25,7 +25,7 @@ window: # 重启生效
   # transparent: 标题栏、透明背景和标题栏按钮
   # buttonless: 标题栏、透明背景和无标题栏按钮
   decorations: buttonless #  窗口样式
-  opacity: 0.9  # 窗口透明度
+  opacity: 0.93  # 窗口透明度
 
   #   - Windowed
   #   - Maximized
@@ -49,25 +49,25 @@ font: # 字体设置
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "Hack Nerd Font"
+    family: Hack Nerd Font Mono
     style: Regular
 
   # Bold font face
-  bold:
-    family: "Hack Nerd Font"
-    style: Bold
+  # bold:
+  #   family: "Hack Nerd Font"
+  #   style: Bold
 
   # Italic font face
-  italic:
-    family: "Hack Nerd Font"
-    style: Italic
+  # italic:
+  #   family: "Hack Nerd Font"
+  #   style: Italic
 
   # Bold italic font face
-  bold_italic:
-    family: "Hack Nerd Font"
-    style: Bold Italic
+  # bold_italic:
+  #   family: "Hack Nerd Font"
+  #   style: Bold Italic
 
-  size: 13.0
+  size: 12
   # 字间距设置
   offset:
     x: 0
@@ -82,7 +82,7 @@ font: # 字体设置
 
   # Thin stroke font rendering (macOS only)
   # 细线字体适用于视网膜屏幕
-  use_thin_strokes: false
+  use_thin_strokes: true
   builtin_box_drawing: false # true 对方框图形字符使用内置字体
 
 draw_bold_text_with_bright_colors: true  # true 使用明亮的颜色变体绘制粗体文本。

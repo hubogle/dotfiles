@@ -14,10 +14,12 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 #=================================================
 #======================ZI=========================
 #https://z-shell.pages.dev/zh-Hans/docs/getting_started/installation/
-zi_home="${HOME}/.zi"
-source "${zi_home}/bin/zi.zsh"
+source "${HOME}/.zi/bin/zi.zsh"
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
+
+# 初始化自动完成
+autoload -Uz compinit && compinit -i
 
 zi light Aloxaf/fzf-tab     # fzf 提供补全菜单
 zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
@@ -45,10 +47,6 @@ export _ZO_DATA_DIR='/Users/hubo/.cache/zoxide' # 可删除 zcompdump
 #==================================================
 #====================历史记录========================
 # https://qastack.cn/unix/273861/unlimited-history-in-zsh
-#export HISTCONTROL=ignoreboth # 忽略重复的命令
-# ignorespace: 忽略空格开头的命令
-# ignoredups: 忽略连续重复命令
-# ignoreboth: 表示上述两个参数都设置
 export HISTTIMEFORMAT="%F %T "
 HISTFILE="$HOME/.zsh_history"   # zsh 历史文件地址
 export SAVEHIST=100000          # 默认保存 10000 $HISTSIZE
@@ -98,24 +96,18 @@ source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 #===================================================
 #========================fzf-tab====================
-# # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'  # 修正大小写
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}+l:|?=** r:|?=**'    # 允许自动完成不区分大小写
-zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}   # 突出显示当前的自动完成选项
-
 # fzf-tab 预览调整 https://github.com/Aloxaf/fzf-tab/wiki/Preview
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
 # zstyle ':fzf-tab:*' fzf-command fzf
-
-
-# Better SSH/Rsync/SCP 完成功能
-# zstyle ':completion:*:(scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
-# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
-# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+#==================================================
+#========================completion================
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'  # 修正大小写
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}   # 突出显示当前的自动完成选项
 
 #错误校正
 zstyle ':completion:*' completer _complete _match _approximate
@@ -126,8 +118,28 @@ zstyle ':completion:*' expand 'yes'
 zstyle ':completion:*' squeeze-shlashes 'yes'
 zstyle ':completion::complete:*' '\\'
 
-# 初始化自动完成
-autoload -Uz compinit && compinit -u
+#自动补全选项
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' menu select
+zstyle ':completion:*:*:default' force-list always
+zstyle ':completion:*' select-prompt '%SSelect: lines: %L matches: %M   [%p]'
+zstyle ':completion::prefix-1:*' completer _complete
+zstyle ':completion:predict:*' completer _complete
+zstyle ':completion:incremental:*' completer _complete _correct
+
+#补全类型提示分组
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+zstyle ':completion:*:descriptions' format $'\e[01;33m -- %d --\e[0m'
+zstyle ':completion:*:messages' format $'\e[01;35m -- %d --\e[0m'
+zstyle ':completion:*:warnings' format $'\e[01;31m -- No Matches Found --\e[0m'
+zstyle ':completion:*:corrections' format $'\e[01;32m -- %d (errors: %e) --\e[0m'
+
+# scp file username@<TAB><TAB>:/<TAB>
+zstyle ':completion:*:(ssh|scp|ftp|sftp):*' hosts $hosts
+zstyle ':completion:*:(ssh|scp|ftp|sftp):*' users $users
 #====================================================
 #===================NAVI============================
 eval "$(navi widget zsh)"
@@ -162,17 +174,5 @@ sudo-command-line() {
     zle end-of-line                 #光标移动到行末
 }
 zle -N sudo-command-line
-#定义快捷键为： [Esc] [Esc]
-bindkey "\e\e" sudo-command-line
+bindkey "\e\e" sudo-command-line    #定义快捷键为： [Esc] [Esc]
 #===================================================
-# h=()
-# if [[ -r ~/.ssh/config ]]; then
-#   h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-# fi
-# if [[ -r ~/.ssh/known_hosts ]]; then
-#   h=($h ${${${(f)"$(cat ~/.ssh/known_hosts{,2} || true)"}%%\ *}%%,*}) 2>/dev/null
-# fi
-# if [[ $#h -gt 0 ]]; then
-#   zstyle ':completion:*:ssh:*' hosts $h
-#   zstyle ':completion:*:slogin:*' hosts $h
-# fi

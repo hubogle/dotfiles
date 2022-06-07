@@ -13,6 +13,8 @@ gst	gst	4
 https://rime.im/	rime	2
 Squirrel	rime	1
 进行	jinx	1
+今年	jinn	1
+视频	ship	1
 >	dy	2
 ≥	dy	1
 <	xy	2
