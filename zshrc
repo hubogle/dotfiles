@@ -98,18 +98,25 @@ source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 #===================================================
 #========================fzf-tab====================
-# fzf-tab 预览调整 https://github.com/Aloxaf/fzf-tab/wiki/Preview
-autoload -Uz compinit && compinit -u
+# # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'  # 修正大小写
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}+l:|?=** r:|?=**'    # 允许自动完成不区分大小写
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}   # 突出显示当前的自动完成选项
+
+# fzf-tab 预览调整 https://github.com/Aloxaf/fzf-tab/wiki/Preview
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
 # zstyle ':fzf-tab:*' fzf-command fzf
 
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'  # 修正大小写
+
+# Better SSH/Rsync/SCP 完成功能
+# zstyle ':completion:*:(scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+
 #错误校正
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
@@ -118,6 +125,9 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*' expand 'yes'
 zstyle ':completion:*' squeeze-shlashes 'yes'
 zstyle ':completion::complete:*' '\\'
+
+# 初始化自动完成
+autoload -Uz compinit && compinit -u
 #====================================================
 #===================NAVI============================
 eval "$(navi widget zsh)"
@@ -155,3 +165,14 @@ zle -N sudo-command-line
 #定义快捷键为： [Esc] [Esc]
 bindkey "\e\e" sudo-command-line
 #===================================================
+# h=()
+# if [[ -r ~/.ssh/config ]]; then
+#   h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+# fi
+# if [[ -r ~/.ssh/known_hosts ]]; then
+#   h=($h ${${${(f)"$(cat ~/.ssh/known_hosts{,2} || true)"}%%\ *}%%,*}) 2>/dev/null
+# fi
+# if [[ $#h -gt 0 ]]; then
+#   zstyle ':completion:*:ssh:*' hosts $h
+#   zstyle ':completion:*:slogin:*' hosts $h
+# fi
