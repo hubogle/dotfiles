@@ -81,7 +81,7 @@ function unproxy(){
 #===============================================
 #=======================pyEnv====================
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 #================================================
 #=======================goEnv====================
 export GOENV_ROOT="$HOME/.goenv"
@@ -168,11 +168,11 @@ hash -d dow="~/Downloads" # 路径别名
 #===================================================
 #====================sudo===========================
 ##在命令前插入 sudo
-sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
-    zle end-of-line                 #光标移动到行末
-}
-zle -N sudo-command-line
-bindkey "\e\e" sudo-command-line    #定义快捷键为： [Esc] [Esc]
+# sudo-command-line() {
+#     [[ -z $BUFFER ]] && zle up-history
+#     [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+#     zle end-of-line                 #光标移动到行末
+# }
+# zle -N sudo-command-line
+# bindkey "\e\e" sudo-command-line    #定义快捷键为： [Esc] [Esc]
 #===================================================

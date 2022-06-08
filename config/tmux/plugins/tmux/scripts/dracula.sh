@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # setting the locale, some users have issues with different locales, this forces the correct one
-export LC_ALL=en_US.UTF-8
+export LC_ALL=zh_CN.UTF-8
 
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $current_dir/utils.sh
@@ -74,7 +74,7 @@ main()
     false)
       timezone="";;
     true)
-      timezone="#(date +%Z)";;
+      timezone="";;
   esac
 
   case $show_flags in
@@ -186,10 +186,10 @@ main()
       elif $show_military; then # only military time
         script="%a %m/%d %R ${timezone} "
       elif $show_day_month; then # only dd/mm
-        script="%a %d/%m %I:%M${timezone} "
+        script="%d/%m %I:%M${timezone} "
       else
         #script="%a %m/%d %I:%M %p ${timezone} "
-        script="%a %m/%d %H:%M${timezone}" # 设定时间格式 date '+%a %m/%d %H:%M'
+        script="%m/%d %H:%M${timezone}" # 设定时间格式 date '+%a %m/%d %H:%M'
       fi
     fi
 
