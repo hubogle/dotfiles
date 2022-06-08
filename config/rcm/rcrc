@@ -1,1 +1,1 @@
-EXCLUDES="readme.md Brewfile aria2"
+EXCLUDES="readme.md Brewfile rime aria2"
