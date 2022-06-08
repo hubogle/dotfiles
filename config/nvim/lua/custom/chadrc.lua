@@ -1,35 +1,33 @@
 -- Just an example, supposed to be placed in /lua/custom/
 
 local M = {}
-local plugins = require "custom.plugins"
-local plugin_conf = require "custom.configs" -- 插件变量配置
 
 -- make sure you maintain the structure of `core/default_config.lua` here,
 -- example of changing theme:
 
-M.ui = {
-   theme = "onedark", -- 更改主题
-}
+-- 覆盖插件配置
+local pluginConfs = require "custom.plugins.configs"
 
-M.options = {
-   user = function()
-      vim.opt.encoding = "utf-8"
-      vim.opt.relativenumber = true -- 相对行号
-   end,
+M.ui = {
+   theme = "chadracula",
+   transparency = true, -- 开启透明
+   hl_override = {
+      CursorLine = {   -- 光标行
+         bg = "one_bg",
+      },
+      -- Normal = {
+      --    bg = "none" -- 背景色彩
+      --    fg = "none" -- 字体颜色
+      -- },
+   },
 }
 
 M.plugins = {
-   install = plugins,
-   status = {
-      colorizer = true,
-      dashboard = true,
+   override = {
+      ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
+      ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree,
    },
-   default_plugin_config_replace = {
-      dashboard = "custom.plugins.dashboard",
-      nvim_treesitter = plugin_conf.treesitter,
-      nvim_tree = plugin_conf.nvimtree,
-      statusline = plugin_conf.statusline,
-   },
+   -- user = require "custom.plugins",
 }
 
 return M

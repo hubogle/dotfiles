@@ -12,6 +12,7 @@
 6. 切换 `zsh`：`chsh -s /opt/homebrew/bin/zsh`
 7. 安装三方未知来源：`sudo spctl --master-disable`
 8. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
+9. 设置主机名 `sudo scutil --set HostName "MacX"`
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
 
