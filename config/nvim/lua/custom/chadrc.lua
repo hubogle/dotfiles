@@ -9,16 +9,17 @@ local M = {}
 local pluginConfs = require "custom.plugins.configs"
 
 M.ui = {
-   theme = "chadracula",
-   transparency = true, -- 开启透明
+   theme = "monekai",
+   -- transparency = true, -- 开启透明，行也透明
+   theme_toggle = {"chadracula", "monekai"}, -- 主题切换
    hl_override = {
       CursorLine = {   -- 光标行
          bg = "one_bg",
       },
-      -- Normal = {
-      --    bg = "none" -- 背景色彩
+      Normal = {
+         bg = "none" -- 背景色彩
       --    fg = "none" -- 字体颜色
-      -- },
+      },
    },
 }
 

@@ -470,6 +470,7 @@ hints:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
+  - { key: Back, action:  ReceiveChar} # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
   # 映射 tmux 按键，xxd -psd 获取按键码
   - { key: LBracket, mods: Command,       chars: "\x60\x70" } # Command + [ 上个窗口
   - { key: RBracket, mods: Command,       chars: "\x60\x6e" } # Command + ] 下个窗口
