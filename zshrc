@@ -19,7 +19,10 @@ autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
 # 初始化自动完成
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit
+
+# zcompdump 存储路径配置
+compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
 zi light Aloxaf/fzf-tab     # fzf 提供补全菜单
 zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
@@ -90,8 +93,6 @@ zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
 zstyle ':completion:*' use-cache true                         # 对使用缓存的命令使用缓存
 # zcompcache 存储路径配置
 zstyle ':completion:*' cache-path "$HOME/.cache/zi/zcompcache"
-# zcompdump 存储路径配置
-compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 zstyle ':completion:*' menu select                            # 允许您在菜单中选择
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'  # 大小写模糊
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'        # 虚线值的智能匹配，例如f-b匹配foo-bar
