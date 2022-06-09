@@ -21,3 +21,8 @@ if [ ! -d "${HOME}/.config/tmux" ]; then
     echo "正在安装 TMUX 插件" 1>&2
     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 fi
+
+# tig 历史记录文件位置
+if [ ! -d "${HOME}/.local/share/tig" ]; then
+    mkdir -p ${HOME}/.local/share/tig
+fi

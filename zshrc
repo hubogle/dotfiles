@@ -202,6 +202,7 @@ alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
 alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
+alias python="ipython"
 hash -d dow="~/Downloads" # 路径别名
 #===================================================
 #====================sudo===========================
