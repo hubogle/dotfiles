@@ -16,12 +16,17 @@ M.ui = {
       CursorLine = {   -- 光标行
          bg = "one_bg",
       },
-      Normal = {
-         bg = "none" -- 背景色彩
+      Normal = {}
+      -- Normal = {
+         -- bg = "none" -- 背景色彩
       --    fg = "none" -- 字体颜色
-      },
+      -- },
    },
 }
+
+if vim.fn.has('gui_running') == 0 then -- 非 GUI 背景设置为透明
+   M.ui["hl_override"]["Normal"]["bg"] = "none"
+end
 
 M.plugins = {
    override = {

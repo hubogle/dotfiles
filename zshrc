@@ -78,6 +78,7 @@ setopt promptsubst              # 每次绘制提示时启用提示内的参数�
 setopt MENU_COMPLETE            # 自动突出显示完成菜单的第一个元素
 setopt AUTO_LIST                # 自动列出不明确完成的选项
 setopt COMPLETE_IN_WORD         # 从一个词的两端完成的
+# setopt glob_dots                # cd 提示所有隐藏文件
 #======================================================
 #========================fzf-tab=======================
 # fzf-tab 预览调整 https://github.com/Aloxaf/fzf-tab/wiki/Preview
