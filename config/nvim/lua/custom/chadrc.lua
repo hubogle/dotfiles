@@ -9,9 +9,9 @@ local M = {}
 local pluginConfs = require "custom.plugins.configs"
 
 M.ui = {
-   theme = "monekai",
+   theme = "onenord",
    -- transparency = true, -- 开启透明，行也透明
-   theme_toggle = {"chadracula", "monekai"}, -- 主题切换
+   theme_toggle = {"onenord", "onenord_light"}, -- 主题切换
    hl_override = {
       CursorLine = {   -- 光标行
          bg = "one_bg",
@@ -28,7 +28,7 @@ M.plugins = {
       ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
       ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree,
    },
-   -- user = require "custom.plugins",
+   user = require "custom.plugins",
 }
 
 return M

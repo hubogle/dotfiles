@@ -39,8 +39,15 @@ opt.incsearch = true -- set incremental search, like modern browsers
 opt.lazyredraw = false -- don't redraw while executing macros
 opt.magic = true -- set magic on, for regular expressions
 
+-- https://yianwillis.github.io/vimcdoc/doc/autocmd.html
+
 -- 从它最后离开的位置打开文件
 vim.cmd([[au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]])
 
 -- 最后一个窗口退出，关闭目录树
 vim.cmd([[ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nvimtree') | q | endif ]])
+
+-- 按 ESC 后切换英文输入法
+vim.cmd([[ autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC]])
+-- https://github.com/rime/squirrel/issues/482
+-- vim.cmd([[ autocmd InsertEnter * :silent !/opt/homebrew/bin/im-select im.rime.inputmethod.Squirrel.Rime]])

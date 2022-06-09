@@ -5,6 +5,9 @@ local M = {
     --       require("startup").setup(require "custom.themes.my_theme")
     --     end
     --   }
+    -- ["brglng/vim-im-select"] = {
+    --     requires = {"brglng/vim-im-select"}
+    -- }
 }
 
 return M

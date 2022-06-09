@@ -26,3 +26,10 @@ fi
 if [ ! -d "${HOME}/.local/share/tig" ]; then
     mkdir -p ${HOME}/.local/share/tig
 fi
+
+# im-select 脚本安装
+if [ ! -f "/opt/homebrew/bin/im-select" ]; then
+    echo "安装 im-select"
+    cp $DOTFILES_DIRS/config/im-select/im-select /opt/homebrew/bin/im-select
+    chmod +x /opt/homebrew/bin/im-select
+fi
