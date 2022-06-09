@@ -88,7 +88,10 @@ zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
 #========================zstyle=======================o=
 # 参考 https://github.com/sorin-ionescu/prezto/blob/master/modules/completion/init.zsh
 zstyle ':completion:*' use-cache true                         # 对使用缓存的命令使用缓存
-zstyle ':completion:*' cache-path "$HOME/.cache/zi/zcompcache"# 自定义路径
+# zcompcache 存储路径配置
+zstyle ':completion:*' cache-path "$HOME/.cache/zi/zcompcache"
+# zcompdump 存储路径配置
+compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 zstyle ':completion:*' menu select                            # 允许您在菜单中选择
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'  # 大小写模糊
 zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'        # 虚线值的智能匹配，例如f-b匹配foo-bar
@@ -195,7 +198,7 @@ alias rm='trash'
 alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
-alias ll='exa --long --all --header --icons --git --time-style long-iso'
+alias ll='exa -l -a -h --icons --git --time-style long-iso --colour-scale --no-user'
 alias vi='nvim'
 alias vim='nvim'
 alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
@@ -203,7 +206,7 @@ alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
 alias python="ipython"
-hash -d dow="~/Downloads" # 路径别名
+# hash -d dow="~/Downloads" # 路径别名
 #===================================================
 #====================sudo===========================
 ##在命令前插入 sudo
