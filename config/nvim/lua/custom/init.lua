@@ -14,7 +14,6 @@ opt.relativenumber = true   -- 相对坐标
 opt.scrolloff = 4 -- 光标上方和下方的最小行
 opt.wrap = true     -- 自动换行
 opt.textwidth = 120 -- 配置完字符数后，换行
-opt.viminfo = "'50,<1000,s100,:0,n~/.local/share/nvim/viminfo"
 
 -- 缩进设置
 opt.tabstop = 4

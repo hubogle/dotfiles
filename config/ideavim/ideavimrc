@@ -29,6 +29,8 @@ map Q gq
 """ Map leader to space ---------------------
 let mapleader=";"
 
+" 配置文件 https://github.com/JetBrains/ideavim#files
+
 
 """ Plugins  --------------------------------
 set surround              " 命令

@@ -1,5 +1,10 @@
 export LC_ALL=zh_CN.UTF-8
 export LANG=zh_CN.UTF-8
+#=====================config====================
+export LESSHISTFILE=~/.local/share/less/history
+export MYCLI_HISTFILE=~/.local/share/mycli/history
+export IPYTHONDIR=~/.local/share/ipython
+#===============================================
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -207,7 +212,6 @@ alias vim='nvim'
 alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
-alias python="ipython"
 # hash -d dow="~/Downloads" # 路径别名
 #===================================================
 #====================sudo===========================

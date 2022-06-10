@@ -27,6 +27,16 @@ if [ ! -d "${HOME}/.local/share/tig" ]; then
     mkdir -p ${HOME}/.local/share/tig
 fi
 
+# less 历史记录文件位置
+if [ ! -d "${HOME}/.local/share/less" ]; then
+    mkdir -p ${HOME}/.local/share/less
+fi
+
+# mycli 历史文件记录位置
+if [ ! -d "${HOME}/.local/share/mycli" ]; then
+    mkdir -p ${HOME}/.local/share/mycli
+fi
+
 # im-select 脚本安装
 if [ ! -f "/opt/homebrew/bin/im-select" ]; then
     echo "安装 im-select"
