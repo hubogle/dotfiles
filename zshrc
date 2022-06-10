@@ -12,7 +12,7 @@ alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanu
 export HOMEBREW_NO_AUTO_UPDATE=true     # 自动更新关闭
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 #=================================================
-#======================ZI=========================
+#======================ZI========================
 #https://z-shell.pages.dev/zh-Hans/docs/getting_started/installation/
 source "${HOME}/.zi/bin/zi.zsh"
 autoload -Uz _zi
@@ -42,11 +42,6 @@ zi light zdharma/fast-syntax-highlighting # 高亮插件
 
 zi snippet OMZL::git.zsh  # git alias
 zi snippet OMZP::git  # git alias
-#==================================================
-#=====================zoxide=======================
-# 更智能的CD命令，可跳转目录
-eval "$(zoxide init zsh --cmd cd)"       # 在调用compinit后添加上述行
-export _ZO_DATA_DIR='/Users/hubo/.cache/zoxide' # 可删除 zcompdump
 #==================================================
 #====================历史记录========================
 # https://z-shell.pages.dev/zh-Hans/docs/guides/customization
@@ -184,6 +179,11 @@ export GOPROXY=https://goproxy.cn
 source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 #===================================================
+#=====================zoxide=======================
+# 更智能的CD命令，可跳转目录
+export _ZO_DATA_DIR='/Users/hubo/.cache/zoxide' # 可删除 zcompdump
+eval "$(zoxide init zsh --cmd cd)"       # 在调用compinit后添加上述行
+#==================================================
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
@@ -200,10 +200,10 @@ alias rm='trash'
 alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
-alias ll='exa -l -a -h --icons --git --time-style long-iso --colour-scale --no-user'
+alias l='exa --long --all --git --icons --time-style long-iso --colour-scale --header --group'
+alias ll='exa --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --no-filesize --sort modified'
 alias vi='nvim'
 alias vim='nvim'
-alias mycli='mycli --myclirc ~/.config/mycli/myclirc'
 alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
