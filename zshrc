@@ -4,6 +4,7 @@ export LANG=zh_CN.UTF-8
 export LESSHISTFILE=~/.local/share/less/history
 export MYCLI_HISTFILE=~/.local/share/mycli/history
 export IPYTHONDIR=~/.local/share/ipython
+export SHELL_SESSIONS_DISABLE=1
 #===============================================
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -29,10 +30,13 @@ autoload -Uz compinit
 # zcompdump 存储路径配置
 compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
+zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab     # fzf 提供补全菜单
+
 zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
 
 # rm -f ~/.zcompdump; compinit
+zi ice lucid wait as'completion'
 zi light zsh-users/zsh-completions  # 自动补全
 
 zi ice depth=1
@@ -42,7 +46,7 @@ zi ice wait lucid atload'_zsh_autosuggest_start'
 zi light zsh-users/zsh-autosuggestions # 提示根据历史记录和补全提示您输入的命令
 bindkey ',' autosuggest-accept # , 补全
 
-zi ice wait lucid atinit='zpcompinit'
+zi ice wait lucid atinit='ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zi light zdharma/fast-syntax-highlighting # 高亮插件
 
 zi snippet OMZL::git.zsh  # git alias
