@@ -7,6 +7,12 @@ export IPYTHONDIR=~/.local/share/ipython
 export SHELL_SESSIONS_DISABLE=1
 export EDITOR="nvim"
 #===============================================
+#=====================按键=======================
+# option + f 光标右移一个单词
+# option + b 光标左移一个单词
+# option + d 删除光标右侧所有
+# control + w 删除左边一个单词
+#===============================================
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -45,7 +51,7 @@ zi light romkatv/powerlevel10k  # p10k 主题
 
 zi ice wait lucid atload'_zsh_autosuggest_start'
 zi light zsh-users/zsh-autosuggestions # 提示根据历史记录和补全提示您输入的命令
-bindkey ',' autosuggest-accept # , 补全
+bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
 
 zi ice wait lucid atinit='ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zi light zdharma/fast-syntax-highlighting # 高亮插件

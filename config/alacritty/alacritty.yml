@@ -496,6 +496,7 @@ key_bindings:
   - { key: Tab,      mods: Control,       chars: "\x60\x6e"} # 下个窗口
   - { key: Tab,      mods: Option,        chars: "\x60\x6f"} # 下个面板
   - { key: D,        mods: Command|Shift, chars: "\x60\x2d"} # 水平切分
+  - { key: Return,    mods: Command,      chars: "\x60\x7a"} # 当前pane全屏
   # - { key: Right,    mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF 右移一个单词
   # - { key: F,        mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF
   # - { key: Left,     mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB 左移一个单词
