@@ -28,7 +28,7 @@ window: # 重启生效
   # transparent: 标题栏、透明背景和标题栏按钮
   # buttonless: 标题栏、透明背景和无标题栏按钮
   decorations: buttonless #  窗口样式
-  opacity: 0.93  # 窗口透明度
+  opacity: 0.96  # 窗口透明度
 
   #   - Windowed
   #   - Maximized
@@ -56,25 +56,25 @@ font: # 字体设置
     style: Regular
 
   # Bold font face
-  # bold:
-  #   family: "Hack Nerd Font"
-  #   style: Bold
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
 
   # Italic font face
-  # italic:
-  #   family: "Hack Nerd Font"
-  #   style: Italic
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
 
   # Bold italic font face
-  # bold_italic:
-  #   family: "Hack Nerd Font"
-  #   style: Bold Italic
+  bold_italic:
+    family: Hack Nerd Font Mono
+    style: Bold Italic
 
   size: 12
   # 字间距设置
   offset:
     x: 0
-    y: 0
+    y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -86,7 +86,7 @@ font: # 字体设置
   # Thin stroke font rendering (macOS only)
   # 细线字体适用于视网膜屏幕
   use_thin_strokes: true
-  builtin_box_drawing: false # true 对方框图形字符使用内置字体
+  builtin_box_drawing: true # true 对方框图形字符使用内置字体
 
 draw_bold_text_with_bright_colors: true  # true 使用明亮的颜色变体绘制粗体文本。
 
@@ -222,16 +222,24 @@ hints:
   #       Move the vi mode cursor to the beginning of the hint.
 
   enabled:
-   - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
-             [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
-     command: open
-     post_processing: true
-     mouse:   # tmux 模式下按住 shift 可以点击
-       enabled: true
-       mods: None
-     binding:
-       key: U
-       mods: Control|Shift
+    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+               [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+      command: open
+      post_processing: true
+      mouse:
+        enabled: true
+        mods: Shift
+
+  #  - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+  #            [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+  #    command: open
+  #    post_processing: true
+  #    mouse:   # tmux 模式下按住 shift 可以点击
+  #      enabled: true
+  #      mods: None
+  #    binding:
+  #      key: U
+  #      mods: Control|Shift
 
 # Mouse bindings
 #
