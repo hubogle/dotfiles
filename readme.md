@@ -72,3 +72,4 @@
 * `Finder` 标题栏显示完整路径：`defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES;killall Finder`
 * 禁止生成 `DS_store` 文件，重启生效：`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE`
 * 所有显示器上显示cmd+应用程序切换器：`defaults write com.apple.Dock appswitcher-all-displays -bool true;killall Dock`
+* `hammerspoon` 路径配置：`defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
