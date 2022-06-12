@@ -37,26 +37,28 @@ autoload -Uz compinit
 # zcompdump 存储路径配置
 compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
-zi ice lucid wait has'fzf'
-zi light Aloxaf/fzf-tab     # fzf 提供补全菜单
+zi ice wait lucid has'fzf'
+zi light Aloxaf/fzf-tab               # fzf 提供补全菜单
 
-# zi light z-shell/H-S-MW     # 搜索历史命令，可以查看上下文
-zi light larkery/zsh-histdb   # histdb 记录历史 ~/.histdb
-zi light m42e/zsh-histdb-fzf  # fzf 调用 histdb
+# zi light z-shell/H-S-MW             # 搜索历史命令，可以查看上下文
+zi ice wait lucid
+zi light larkery/zsh-histdb           # histdb 记录历史 ~/.histdb
+zi ice wait lucid
+zi light m42e/zsh-histdb-fzf          # fzf 调用 histdb
 
 # rm -f ~/.zcompdump; compinit
 zi ice lucid wait as'completion'
-zi light zsh-users/zsh-completions  # 自动补全
+zi light zsh-users/zsh-completions    # 自动补全
 
 zi ice depth=1
-zi light romkatv/powerlevel10k  # p10k 主题
+zi light romkatv/powerlevel10k        # p10k 主题
 
-zi ice wait lucid atload'_zsh_autosuggest_start'
+zi ice wait lucid atload"!_zsh_autosuggest_start"
 zi light zsh-users/zsh-autosuggestions # 提示根据历史记录和补全提示您输入的命令
 bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
 
-zi ice wait lucid atinit='ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
-zi light zdharma/fast-syntax-highlighting # 高亮插件
+zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zi light z-shell/F-Sy-H # 高亮插件
 
 zi snippet OMZL::git.zsh  # git alias
 zi snippet OMZP::git  # git alias
