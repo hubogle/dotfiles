@@ -43,8 +43,6 @@ zi light Aloxaf/fzf-tab               # fzf 提供补全菜单
 # zi light z-shell/H-S-MW             # 搜索历史命令，可以查看上下文
 zi ice wait lucid
 zi light larkery/zsh-histdb           # histdb 记录历史 ~/.histdb
-zi ice wait lucid
-zi light m42e/zsh-histdb-fzf          # fzf 调用 histdb
 
 # rm -f ~/.zcompdump; compinit
 zi ice lucid wait as'completion'
@@ -202,10 +200,12 @@ export GOPROXY=https://goproxy.cn
 source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 export FZF_DEFAULT_OPTS="
-  --height 50%
+  --height 40%
   --reverse
   --border
   --ansi
+  --bind='ctrl-r:toggle-sort'
+  --bind='ctrl-d:execute(source ~/.zi/plugins/larkery---zsh-histdb/sqlite-history.zsh && yes | histdb --forget --exact --yes {} > /dev/null 2>&1)'
 "
 #===================================================
 #=====================zoxide=======================
@@ -241,6 +241,18 @@ if [[ -f "$HISTDB_FILE" ]]; then
   } # 查找在当前目录或任何子目录中发出的最常发出的命令
   ZSH_AUTOSUGGEST_STRATEGY=histdb_top
 fi
+histdb-fzf-widget() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
+  selected=( $(histdb --sep 999 | awk -F'999' '{ if (!seen[$4]++) {print $4} }' |
+    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m --tac" fzf) )
+  LBUFFER=$selected
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle     -N   histdb-fzf-widget
+bindkey '^R' histdb-fzf-widget
 #===================================================
 #===================ALIAS===========================
 alias ls='exa'
