@@ -38,8 +38,10 @@ if [ ! -d "${HOME}/.local/share/mycli" ]; then
 fi
 
 # histdb 命令历史记录位置
-if [ ! -d "${HOME}/.local/share/histdb" ]; then
-    mkdir -p ${HOME}/.local/share/histdb
+if [ ! -d "${HOME}/.local/share/histdb/.git" ]; then
+    echo "正在安装 histdb"
+    git clone https://github.com/hubogle/history.git ~/.local/share/histdbNew
+    rm -rf ~/.local/share/histdb && mv ~/.local/share/histdbNew ~/.local/share/histdb
 fi
 
 # im-select 脚本安装

@@ -213,8 +213,8 @@ export FZF_DEFAULT_OPTS="
 #===================================================
 #=====================zoxide=======================
 # 更智能的CD命令，可跳转目录
-export _ZO_DATA_DIR='/Users/hubo/.cache/zoxide' # 可删除 zcompdump
-eval "$(zoxide init zsh --cmd cd)"       # 在调用compinit后添加上述行
+export _ZO_DATA_DIR=$HOME/.local/share/histdb        # 可删除 zcompdump
+eval "$(zoxide init zsh --cmd cd)"                   # 在调用compinit后添加上述行
 #==================================================
 #===================NAVI============================
 eval "$(navi widget zsh)"
