@@ -188,16 +188,11 @@ function unproxy(){
     echo -e "关闭代理"
 }
 #proxy
-#===============================================
-#=======================pyEnv====================
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
+#=======================asdf=====================
+export ASDF_CONFIG_FILE=$HOME/.config/asdfrc
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
 #================================================
 #=======================goEnv====================
-export GOENV_ROOT="$HOME/.goenv"
-export GOENV_GOPATH_PREFIX="$GOENV_ROOT/go"
-export GOPATH="$GOENV_GOPATH_PREFIX/1.18.0" # 自定义版本路径
-export PATH="$GOPATH/bin:$GOENV_ROOT/shims:$PATH"
 export GO111MODULE=auto # on
 export GOPROXY=https://goproxy.cn
 #===================================================
@@ -213,7 +208,7 @@ export FZF_DEFAULT_OPTS="
 #===================================================
 #=====================zoxide=======================
 # 更智能的CD命令，可跳转目录
-export _ZO_DATA_DIR=$HOME/.local/share/histdb        # 可删除 zcompdump
+export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
 eval "$(zoxide init zsh --cmd cd)"                   # 在调用compinit后添加上述行
 #==================================================
 #===================NAVI============================
