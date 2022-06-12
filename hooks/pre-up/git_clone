@@ -37,6 +37,11 @@ if [ ! -d "${HOME}/.local/share/mycli" ]; then
     mkdir -p ${HOME}/.local/share/mycli
 fi
 
+# histdb 命令历史记录位置
+if [ ! -d "${HOME}/.local/share/histdb" ]; then
+    mkdir -p ${HOME}/.local/share/histdb
+fi
+
 # im-select 脚本安装
 if [ ! -f "/opt/homebrew/bin/im-select" ]; then
     echo "安装 im-select"

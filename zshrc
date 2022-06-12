@@ -40,7 +40,9 @@ compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab     # fzf 提供补全菜单
 
-zi light z-shell/H-S-MW  # 搜索历史命令，可以查看上下文
+# zi light z-shell/H-S-MW     # 搜索历史命令，可以查看上下文
+zi light larkery/zsh-histdb   # histdb 记录历史 ~/.histdb
+zi light m42e/zsh-histdb-fzf  # fzf 调用 histdb
 
 # rm -f ~/.zcompdump; compinit
 zi ice lucid wait as'completion'
@@ -62,7 +64,6 @@ zi snippet OMZP::git  # git alias
 #====================历史记录========================
 # https://z-shell.pages.dev/zh-Hans/docs/guides/customization
 export HISTTIMEFORMAT="%F %T "
-HISTFILE="$HOME/.zsh_history"   # zsh 历史文件地址
 export SAVEHIST=100000          # 默认保存 10000 $HISTSIZE
 export HISTSIZE=100000
 setopt HIST_IGNORE_ALL_DUPS     # 从历史记录中删除较旧的重复条目
@@ -203,6 +204,12 @@ export GOPROXY=https://goproxy.cn
 #========================fzf========================
 source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+export FZF_DEFAULT_OPTS="
+  --height 50%
+  --reverse
+  --border
+  --ansi
+"
 #===================================================
 #=====================zoxide=======================
 # 更智能的CD命令，可跳转目录
@@ -216,6 +223,27 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 #=====================RCM===========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
+#===================================================
+#===================histdb==========================
+export HISTDB_FILE=$HOME/.local/share/histdb/zsh-history.db
+export HISTFILE=$HOME/.local/share/zsh_history   # zsh 历史文件地址
+HISTDB_TABULATE_CMD=(sed -e $'s/\x1f/\t/g')
+autoload -Uz add-zsh-hook
+if [[ -f "$HISTDB_FILE" ]]; then
+  _zsh_autosuggest_strategy_histdb_top() {
+      local query="
+          select commands.argv from history
+          left join commands on history.command_id = commands.rowid
+          left join places on history.place_id = places.rowid
+          where commands.argv LIKE '$(sql_escape $1)%'
+          group by commands.argv, places.dir
+          order by places.dir != '$(sql_escape $PWD)', count(*) desc
+          limit 1
+      "
+      suggestion=$(_histdb_query "$query")
+  } # 查找在当前目录或任何子目录中发出的最常发出的命令
+  ZSH_AUTOSUGGEST_STRATEGY=histdb_top
+fi
 #===================================================
 #===================ALIAS===========================
 alias ls='exa'
