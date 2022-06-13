@@ -507,11 +507,12 @@ key_bindings:
   - { key: D,        mods: Command|Shift, chars: "\x60\x2d"} # 水平切分
   - { key: Tab,      mods: Option,       chars: "\x60\x6e"} # 下个窗口
   # - { key: Tab,      mods: Option,        chars: "\x60\x6f"} # 下个面板
-  - { key: Tab,      mods: Control,        chars: "\x60\x29"} # 下一个 Session
+  - { key: Tab,      mods: Control,       chars: "\x60\x29"} # 下一个 Session
   - { key: Return,   mods: Command,       chars: "\x60\x7a"} # 当前pane全屏
   - { key: X,        mods: Command,       chars: "\x60\x6b"} # 关闭 Session
   - { key: W,        mods: Command,       chars: "\x60\x78"} # 关闭 pane
   - { key: S,        mods: Command,       chars: "\x60\x53"} # 展开 choose-tree
+  - { key: S,        mods: Control,       chars: "\x60\x3e"} # 右键菜单栏
   - { key: Key0, mods: Command, chars: "\x60\x5b"} # vim 模式
   - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
   - { key: Key2, mods: Command, chars: "\x60\x32"}
