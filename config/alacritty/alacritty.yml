@@ -168,6 +168,12 @@ live_config_reload: true
 shell:
   # program: /opt/homebrew/bin/zsh
   program: /opt/homebrew/bin/tmux
+  args:
+    - new-session
+    - -A
+    - -D
+    - -s
+    - main
 
 # 启动目录
 #
@@ -483,27 +489,29 @@ hints:
 key_bindings:
   - { key: Back, action:  ReceiveChar} # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
   # 映射 tmux 按键，xxd -psd 获取按键码
+  # https://www.cnblogs.com/cane004/archive/2010/08/19/ASCII.html
   - { key: LBracket, mods: Command,       chars: "\x60\x70" } # Command + [ 上个窗口
   - { key: RBracket, mods: Command,       chars: "\x60\x6e" } # Command + ] 下个窗口
   - { Key: Left,     mods: Command,       chars: "\x60\x1b\x5b\x44"} # 选择左面板
   - { Key: Right,    mods: Command,       chars: "\x60\x1b\x5b\x43"}
   - { Key: Up,       mods: Command,       chars: "\x60\x1b\x5b\x41"}
   - { Key: Down,     mods: Command,       chars: "\x60\x1b\x5b\x42"}
+  - { key: Left,     mods: Command|Shift, chars: "\x60\x08"} # 左调整大小
+  - { key: Right,    mods: Command|Shift, chars: "\x60\x0c"}
+  - { key: Up,       mods: Command|Shift, chars: "\x60\x0b"}
+  - { key: Down,     mods: Command|Shift, chars: "\x60\x0a"}
   - { Key: T,        mods: Command,       chars: "\x60\x63"} # 新建 windows
-  - { key: W,        mods: Command,       chars: "\x60\x78"} # 关闭 windows
+  - { key: N,        mods: Command,       chars: "\x60\x61"} # 新建 Session
   - { key: R,        mods: Command,       chars: "\x60\x2c"} # 重命名 windows
   - { key: D,        mods: Command,       chars: "\x60\x7c"} # 垂直切分
-  - { key: Tab,      mods: Control,       chars: "\x60\x6e"} # 下个窗口
-  - { key: Tab,      mods: Option,        chars: "\x60\x6f"} # 下个面板
   - { key: D,        mods: Command|Shift, chars: "\x60\x2d"} # 水平切分
-  - { key: Return,    mods: Command,      chars: "\x60\x7a"} # 当前pane全屏
-  # - { key: Right,    mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF 右移一个单词
-  # - { key: F,        mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF
-  # - { key: Left,     mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB 左移一个单词
-  # - { key: B,        mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB
-  # - { key: D,        mods: Alt,           chars: "\x1bd"} # 删除后面一个单词
-  # - { key: V,        mods: Alt,           chars: "\x1bv"}
-  # - { key: W,        mods: Alt,           chars: "\x1bw"}
+  - { key: Tab,      mods: Option,       chars: "\x60\x6e"} # 下个窗口
+  # - { key: Tab,      mods: Option,        chars: "\x60\x6f"} # 下个面板
+  - { key: Tab,      mods: Control,        chars: "\x60\x29"} # 下一个 Session
+  - { key: Return,   mods: Command,       chars: "\x60\x7a"} # 当前pane全屏
+  - { key: X,        mods: Command,       chars: "\x60\x6b"} # 关闭 Session
+  - { key: W,        mods: Command,       chars: "\x60\x78"} # 关闭 pane
+  - { key: S,        mods: Command,       chars: "\x60\x53"} # 展开 choose-tree
   - { key: Key0, mods: Command, chars: "\x60\x5b"} # vim 模式
   - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
   - { key: Key2, mods: Command, chars: "\x60\x32"}
@@ -511,25 +519,36 @@ key_bindings:
   - { key: Key4, mods: Command, chars: "\x60\x34"}
   - { key: Key5, mods: Command, chars: "\x60\x35"}
   - { key: Key6, mods: Command, chars: "\x60\x36"}
+  - { key: Key7, mods: Command, chars: "\x06\x37"}
+  - { key: Key8, mods: Command, chars: "\x06\x38"}
+  - { key: Key9, mods: Command, chars: "\x06\x39"}
+  # - { key: Right,    mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF 右移一个单词
+  # - { key: F,        mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF
+  # - { key: Left,     mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB 左移一个单词
+  # - { key: B,        mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB
+  # - { key: D,        mods: Alt,           chars: "\x1bd"} # 删除后面一个单词
+  # - { key: V,        mods: Alt,           chars: "\x1bv"}
+  # - { key: W,        mods: Alt,           chars: "\x1bw"}
   # (macOS only)
-  - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
-  - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
-  - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
-  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
-  - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
-  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
-  - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
   - { key: V,              mods: Command,                    action: Paste                 }
   - { key: C,              mods: Command,                    action: Copy                  }
-  - { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
-  - { key: H,              mods: Command,                    action: Hide                  }
-  - { key: H,              mods: Command|Alt,                action: HideOtherApplications }
+  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
+  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
   - { key: M,              mods: Command,                    action: Minimize              }
   - { key: Q,              mods: Command,                    action: Quit                  }
-  - { key: N,              mods: Command,                    action: SpawnNewInstance      }
   - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
-  - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
-  - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+
+  # - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
+  # - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+  # - { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
+  # - { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
+  # - { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
+  # - { key: H,              mods: Command,                    action: Hide                  }
+  # - { key: H,              mods: Command|Alt,                action: HideOtherApplications }
+  # - { key: N,              mods: Command,                    action: SpawnNewInstance      }
+  # - { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
+  # - { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
+  # - { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
 
   # other
   # https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058
