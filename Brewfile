@@ -61,6 +61,5 @@ cask "visual-studio-code"
 cask "wechat"
 cask "wechattweak-cli"
 cask "wechatwork"
-mas "Anki 备忘录", id: 1503902660
 mas "Craft", id: 1487937127
 mas "Cubox", id: 1113361350
