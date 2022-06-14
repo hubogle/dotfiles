@@ -12,6 +12,8 @@ export EDITOR="nvim"
 # option + b 光标左移一个单词
 # option + d 删除光标右侧所有
 # control + w 删除左边一个单词
+# control + f 光标右移一个单词
+# control + b 光标左移一个单词
 #===============================================
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -124,11 +126,13 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'  # 虚线值的智能匹配，例如f-b匹配foo-bar
 
 #路径补全
 zstyle ':completion:*' expand 'yes'
 zstyle ':completion:*' squeeze-slashes 'yes'     # //扩展为/.
 zstyle ':completion::complete:*' '\\'
+zstyle ':completion:*' accept-exact-dirs true    # 如果目录存在，不要尝试父路径补全
 
 # 提示文件排序类型
 zstyle ':completion:*' sort false             # 关闭默认排序
@@ -141,6 +145,7 @@ zstyle ':completion:*' format '[%d]'          # 添加这个才会分组
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
+# zstyle ':completion:*:*:(vi|vim):*' ignored-patterns '*.(o|d)'  # 智能提示时忽略 o d 结尾文件
 
 # 分页期间的漂亮消息
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
@@ -254,6 +259,10 @@ histdb-fzf-widget() {
 }
 zle     -N   histdb-fzf-widget
 bindkey '^R' histdb-fzf-widget
+#===================================================
+#===================BindKey=========================
+bindkey '^f' vi-forward-word # 右移一个单词 [option]+[→] 和 [option]+[←]
+bindkey '^b' vi-backward-word
 #===================================================
 #===================ALIAS===========================
 alias ls='exa'

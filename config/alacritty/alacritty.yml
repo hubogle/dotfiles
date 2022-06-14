@@ -523,13 +523,6 @@ key_bindings:
   - { key: Key7, mods: Command, chars: "\x06\x37"}
   - { key: Key8, mods: Command, chars: "\x06\x38"}
   - { key: Key9, mods: Command, chars: "\x06\x39"}
-  # - { key: Right,    mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF 右移一个单词
-  # - { key: F,        mods: Alt,           chars: "\x1BF"} # Esc-F => \x1BF
-  # - { key: Left,     mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB 左移一个单词
-  # - { key: B,        mods: Alt,           chars: "\x1BB"} # Esc-B => \x1BB
-  # - { key: D,        mods: Alt,           chars: "\x1bd"} # 删除后面一个单词
-  # - { key: V,        mods: Alt,           chars: "\x1bv"}
-  # - { key: W,        mods: Alt,           chars: "\x1bw"}
   # (macOS only)
   - { key: V,              mods: Command,                    action: Paste                 }
   - { key: C,              mods: Command,                    action: Copy                  }
