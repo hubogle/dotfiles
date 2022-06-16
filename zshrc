@@ -97,12 +97,23 @@ setopt COMPLETE_IN_WORD         # 从一个词的两端完成的
 #======================================================
 #========================fzf-tab=======================
 # fzf-tab 预览调整 https://github.com/Aloxaf/fzf-tab/wiki/Preview
+# 分组调色 https://github.com/Aloxaf/fzf-tab/wiki/Configuration#group-colors
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'        # 来回切换分组展示
 zstyle ':fzf-tab:*' prefix ''                   # 取消展示的 .
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
 # zstyle ':fzf-tab:*' fzf-command fzf
+zstyle ':fzf-tab:*' fzf-flags '--color=hl:red'   # 输入中匹配字符的颜色
+zstyle ':fzf-tab:*' default-color $'\033[38;5;115m'   # 没有组显示颜色
+zstyle ':fzf-tab:*' single-group color          # 一组时显示颜色，默认配色
+zstyle ':fzf-tab:*' show-group full             # 分组描述显示配置
+FZF_TAB_GROUP_COLORS=(
+    $'\033[94m' $'\033[32m' $'\033[33m' $'\033[35m' $'\033[31m' $'\033[38;5;27m' $'\033[36m' \
+    $'\033[38;5;100m' $'\033[38;5;98m' $'\033[91m' $'\033[38;5;80m' $'\033[92m' \
+    $'\033[38;5;214m' $'\033[38;5;165m' $'\033[38;5;124m' $'\033[38;5;120m'
+)
+zstyle ':fzf-tab:*' group-colors $FZF_TAB_GROUP_COLORS  # 分组时配色
 #======================================================
 #========================zstyle=======================o=
 # 参考 https://github.com/sorin-ionescu/prezto/blob/master/modules/completion/init.zsh
