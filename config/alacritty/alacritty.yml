@@ -513,7 +513,6 @@ key_bindings:
   - { key: W,        mods: Command,       chars: "\x60\x78"} # 关闭 pane
   - { key: S,        mods: Command,       chars: "\x60\x53"} # 展开 choose-tree
   - { key: S,        mods: Control,       chars: "\x60\x3e"} # 右键菜单栏
-  - { key: Key0, mods: Command, chars: "\x60\x5b"} # vim 模式
   - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
   - { key: Key2, mods: Command, chars: "\x60\x32"}
   - { key: Key3, mods: Command, chars: "\x60\x33"}
@@ -526,6 +525,7 @@ key_bindings:
   # (macOS only)
   - { key: V,              mods: Command,                    action: Paste                 }
   - { key: C,              mods: Command,                    action: Copy                  }
+  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
   - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
   - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
   - { key: M,              mods: Command,                    action: Minimize              }

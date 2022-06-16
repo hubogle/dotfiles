@@ -11,7 +11,7 @@
 [Brew 官网](https://brew.sh/index_zh-cn)
 [Command Line Tools 安装](https://developer.apple.com/download/all/?q=Command)
 
-1. `Command Line` 安装后然后在系统软件更新检查。
+1. `Command Line` 安装后然后在系统软件更新检查，或 `xcode-select --install`
 2. 设置终端临时代理
 3. `brew` 安装 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 4. `brew` 安装 `brew install zsh git`
