@@ -45,8 +45,8 @@ if [ ! -d "${HOME}/.local/share/histdb/.git" ]; then
 fi
 
 # im-select 脚本安装
-if [ ! -f "/opt/homebrew/bin/im-select" ]; then
+if [ ! -f "${BREW_PATH}/im-select" ]; then
     echo "安装 im-select"
-    cp $DOTFILES_DIRS/config/im-select/im-select /opt/homebrew/bin/im-select
-    chmod +x /opt/homebrew/bin/im-select
+    cp $DOTFILES_DIRS/config/im-select/im-select $BREW_PATH/im-select
+    chmod +x $BREW_PATH/im-select
 fi

@@ -1,5 +1,14 @@
 export LC_ALL=zh_CN.UTF-8
 export LANG=zh_CN.UTF-8
+#====================PATH=======================
+if [[ `arch` == "arm64" ]]; then
+  export BREW_OPT="/opt/homebrew/opt"
+  export BREW_PATH="/opt/homebrew/bin"
+else
+  export BREW_OPT="/usr/local/opt"
+  export BREW_PATH="/usr/local/bin"
+fi
+export PATH="$BREW_PATH:$PATH"
 #=====================config====================
 export LESSHISTFILE=~/.local/share/less/history
 export MYCLI_HISTFILE=~/.local/share/mycli/history
@@ -25,7 +34,6 @@ fi
 #======================brew=======================
 alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanup --prune 1 && brew autoremove"
 export HOMEBREW_NO_AUTO_UPDATE=true     # 自动更新关闭
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 #=================================================
 #======================ZI========================
 #https://z-shell.pages.dev/zh-Hans/docs/getting_started/installation/
@@ -207,14 +215,14 @@ function unproxy(){
 #proxy
 #=======================asdf=====================
 export ASDF_CONFIG_FILE=$HOME/.config/asdfrc
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
+source $BREW_OPT/asdf/libexec/asdf.sh
 #================================================
 #=======================goEnv====================
 export GO111MODULE=auto # on
 export GOPROXY=https://goproxy.cn
 #===================================================
 #========================fzf========================
-source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null # 将 .fzf.zsh 内容抽离出来
+source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
 export FZF_DEFAULT_OPTS="
   --height 40%
