@@ -15,6 +15,7 @@ end
 -- osascript -e 'id of app "VimR"'
 -- 获取包名
 hs.hotkey.bind({"cmd","shift"}, "W", open("com.tencent.WeWorkMac"))
+hs.hotkey.bind({"cmd","alt"}, ",", open("com.apple.systempreferences"))
 hs.hotkey.bind({"alt"}, "E", open("com.apple.finder"))
 hs.hotkey.bind({"cmd"}, ".", open("io.alacritty"))
 hs.hotkey.bind({"alt"}, "C", open("com.google.Chrome"))
@@ -23,7 +24,7 @@ hs.hotkey.bind({"alt"}, "M", open("com.qvacua.VimR"))
 hs.hotkey.bind({"alt"}, "V", open("com.microsoft.VSCode"))
 hs.hotkey.bind({"alt"}, "T", open("ru.keepcoder.Telegram"))
 hs.hotkey.bind({"alt"}, "P", open("com.luckymarmot.Paw"))
-hs.hotkey.bind({"alt"}, "S", open("org.vim.MacVim"))
+hs.hotkey.bind({"alt"}, "S", open("com.sublimetext.4"))
 hs.hotkey.bind({"alt"}, "U", open("com.lukilabs.lukiapp"))
 hs.hotkey.bind({"alt"}, "W", open("com.tencent.xinWeChat"))
 
