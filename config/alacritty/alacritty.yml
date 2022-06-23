@@ -167,13 +167,18 @@ live_config_reload: true
 #   - (Windows) powershell
 shell:
   # program: /opt/homebrew/bin/zsh
-  program: /opt/homebrew/bin/tmux
+  # program: /usr/local/bin/tmux
+  # args:
+  #   - new-session
+  #   - -A
+  #   - -D
+  #   - -s
+  #   - main
+  program: /bin/zsh
   args:
-    - new-session
-    - -A
-    - -D
-    - -s
-    - main
+    - -l
+    - -c
+    - "tmux new-session -A -D -s main"
 
 # 启动目录
 #
