@@ -47,6 +47,10 @@ fi
 # im-select 脚本安装
 if [ ! -f "${BREW_PATH}/im-select" ]; then
     echo "安装 im-select"
-    cp $DOTFILES_DIRS/config/im-select/im-select $BREW_PATH/im-select
+    if [[ `arch` == "arm64" ]]; then
+        cp $DOTFILES_DIRS/config/im-select/apple/im-select $BREW_PATH/im-select
+    else
+        cp $DOTFILES_DIRS/config/im-select/intel/im-select $BREW_PATH/im-select
+    fi
     chmod +x $BREW_PATH/im-select
 fi

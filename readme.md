@@ -70,6 +70,7 @@
 ## MAC 设置
 
 [Mac 命令](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+[im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out)
 
 * `Finder` 标题栏显示完整路径：`defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES;killall Finder`
 * 禁止生成 `DS_store` 文件，重启生效：`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE`
