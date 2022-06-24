@@ -27,6 +27,25 @@
 [Panda](https://bear.app/cn/alpha/) `Makrdown` 编辑器
 
 ---
+
+## 系统重装
+
+1. `iCloud` 关闭照片同步，打开桌面和文稿文件夹
+2. 辅助功能触摸板打开三指拖拽
+
+### 图标排列
+
+```shell
+defaults write com.apple.dock springboard-columns -int 8
+
+defaults write com.apple.dock springboard-rows -int 7
+
+defaults write com.apple.dock ResetLaunchPad -bool TRUE # 重置Launchpad
+
+killall Dock
+```
+
+---
 ## MAC 设置
 [Mac 命令](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
 
