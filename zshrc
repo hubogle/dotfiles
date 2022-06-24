@@ -4,11 +4,13 @@ export LANG=zh_CN.UTF-8
 if [[ `arch` == "arm64" ]]; then
   export BREW_OPT="/opt/homebrew/opt"
   export BREW_PATH="/opt/homebrew/bin"
+  export BREW_SBIN="/opt/homebrew/sbin"
 else
   export BREW_OPT="/usr/local/opt"
   export BREW_PATH="/usr/local/bin"
+  export BREW_SBIN="/usr/local/sbin"
 fi
-export PATH="$BREW_PATH:$PATH"
+export PATH="$BREW_PATH:$BREW_SBIN:$PATH"
 #=====================config====================
 export LESSHISTFILE=~/.local/share/less/history
 export MYCLI_HISTFILE=~/.local/share/mycli/history
@@ -300,14 +302,4 @@ alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
 # hash -d dow="~/Downloads" # 路径别名
-#===================================================
-#====================sudo===========================
-##在命令前插入 sudo
-# sudo-command-line() {
-#     [[ -z $BUFFER ]] && zle up-history
-#     [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
-#     zle end-of-line                 #光标移动到行末
-# }
-# zle -N sudo-command-line
-# bindkey "\e\e" sudo-command-line    #定义快捷键为： [Esc] [Esc]
 #===================================================
