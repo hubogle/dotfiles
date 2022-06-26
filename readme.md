@@ -13,6 +13,7 @@
 3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
 4. 安装三方未知来源：`sudo spctl --master-disable`
 5. 设置主机名 `sudo scutil --set HostName "MacX"`
+6. `cp ~/Documents/File/dotfiles/zshrc ~/.zshrc`
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
 ---

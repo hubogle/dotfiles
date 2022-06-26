@@ -34,7 +34,7 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #================================================
 #======================brew=======================
-alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanup --prune 1 && brew autoremove"
+alias brewc="brew update && brew cleanup --prune 1 && brew autoremove"
 export HOMEBREW_NO_AUTO_UPDATE=true     # 自动更新关闭
 #=================================================
 #======================ZI========================

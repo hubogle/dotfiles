@@ -167,18 +167,18 @@ live_config_reload: true
 #   - (Windows) powershell
 shell:
   # program: /opt/homebrew/bin/zsh
-  # program: /usr/local/bin/tmux
-  # args:
-  #   - new-session
-  #   - -A
-  #   - -D
-  #   - -s
-  #   - main
-  program: /bin/zsh
+  program: /opt/homebrew/bin/tmux
   args:
-    - -l
-    - -c
-    - "tmux new-session -A -D -s main"
+    - new-session
+    - -A
+    - -D
+    - -s
+    - main
+  # program: /bin/zsh
+  # args:
+    # - -l
+    # - -c
+    # - "/opt/homebrew/bin/tmux new-session -A -D -s main"
 
 # 启动目录
 #
@@ -555,12 +555,12 @@ key_bindings:
   - { key: Down,     mods: Alt,     chars: "\x1b[1;5B"                   }
   - { key: Left,     mods: Alt,     chars: "\x1bb"                       }
   - { key: Right,    mods: Alt,     chars: "\x1bf"                       }
-  - { key: A,        mods: Alt,     chars: "\x1ba"                       }
-  - { key: B,        mods: Alt,     chars: "\x1bb"                       }
-  - { key: C,        mods: Alt,     chars: "\x1bc"                       }
-  - { key: D,        mods: Alt,     chars: "\x1bd"                       }
-  - { key: E,        mods: Alt,     chars: "\x1be"                       }
-  - { key: F,        mods: Alt,     chars: "\x1bf"                       }
+  # - { key: A,        mods: Alt,     chars: "\x1ba"                       }
+  # - { key: B,        mods: Alt,     chars: "\x1bb"                       }
+  # - { key: C,        mods: Alt,     chars: "\x1bc"                       }
+  # - { key: D,        mods: Alt,     chars: "\x1bd"                       }
+  # - { key: E,        mods: Alt,     chars: "\x1be"                       }
+  # - { key: F,        mods: Alt,     chars: "\x1bf"                       }
   - { key: G,        mods: Alt,     chars: "\x1bg"                       }
   - { key: H,        mods: Alt,     chars: "\x1bh"                       }
   - { key: I,        mods: Alt,     chars: "\x1bi"                       }
