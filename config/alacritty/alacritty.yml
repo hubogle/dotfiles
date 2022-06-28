@@ -501,6 +501,10 @@ key_bindings:
   - { Key: Right,    mods: Command,       chars: "\x60\x1b\x5b\x43"}
   - { Key: Up,       mods: Command,       chars: "\x60\x1b\x5b\x41"}
   - { Key: Down,     mods: Command,       chars: "\x60\x1b\x5b\x42"}
+  - { Key: L,        mods: Option,        chars: "\x60\x1b\x5b\x44"}
+  - { Key: H,        mods: Option,        chars: "\x60\x1b\x5b\x43"}
+  - { Key: J,        mods: Option,        chars: "\x60\x1b\x5b\x41"}
+  - { Key: K,        mods: Option,        chars: "\x60\x1b\x5b\x42"}
   - { key: Left,     mods: Command|Shift, chars: "\x60\x08"} # 左调整大小
   - { key: Right,    mods: Command|Shift, chars: "\x60\x0c"}
   - { key: Up,       mods: Command|Shift, chars: "\x60\x0b"}
@@ -555,12 +559,12 @@ key_bindings:
   - { key: Down,     mods: Alt,     chars: "\x1b[1;5B"                   }
   - { key: Left,     mods: Alt,     chars: "\x1bb"                       }
   - { key: Right,    mods: Alt,     chars: "\x1bf"                       }
-  # - { key: A,        mods: Alt,     chars: "\x1ba"                       }
-  # - { key: B,        mods: Alt,     chars: "\x1bb"                       }
-  # - { key: C,        mods: Alt,     chars: "\x1bc"                       }
-  # - { key: D,        mods: Alt,     chars: "\x1bd"                       }
-  # - { key: E,        mods: Alt,     chars: "\x1be"                       }
-  # - { key: F,        mods: Alt,     chars: "\x1bf"                       }
+  - { key: A,        mods: Alt,     chars: "\x1ba"                       }
+  - { key: B,        mods: Alt,     chars: "\x1bb"                       }
+  - { key: C,        mods: Alt,     chars: "\x1bc"                       }
+  - { key: D,        mods: Alt,     chars: "\x1bd"                       }
+  - { key: E,        mods: Alt,     chars: "\x1be"                       }
+  - { key: F,        mods: Alt,     chars: "\x1bf"                       }
   - { key: G,        mods: Alt,     chars: "\x1bg"                       }
   - { key: H,        mods: Alt,     chars: "\x1bh"                       }
   - { key: I,        mods: Alt,     chars: "\x1bi"                       }
