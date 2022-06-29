@@ -1,5 +1,3 @@
-// Settings in here override those in "Default/Preferences.sublime-settings",
-// and are overridden in turn by syntax-specific settings.
 {
 	//********* 系统配置 ***********
 	"http_proxy": "127.0.0.1:7890",
@@ -10,7 +8,7 @@
 	"default_encoding": "UTF-8",    // 默认编码格式
 	"show_encoding": true,		// 显示文件编码
 	"font_size": 12,	// 设置字体和大小
-	"font_face": "JetBrainsMono Nerd Font Mono",
+	"font_face": "Hack Nerd Font Mono",
 	"spell_check": false, // 是否打开拼写检查
     "line_padding_top": 1,	// 设置行间距
     "line_padding_bottom": 1,
@@ -52,4 +50,3 @@
 	"theme": "Adaptive.sublime-theme",
 	"find_selected_text": true, // 选中的文本按Ctrl + f时，自动复制到查找面板的文本框里
 }
-
