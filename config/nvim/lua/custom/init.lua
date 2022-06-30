@@ -10,9 +10,9 @@ opt.inccommand = "nosplit" -- 命令更改会在原位置显示，:%s/foo/bar/g
 opt.backspace = { "indent", "eol,start" } -- 使退格操作以一种合理的方式进行
 
 -- 显示设置
-opt.relativenumber = true   -- 相对坐标
+opt.relativenumber = true -- 相对坐标
 opt.scrolloff = 4 -- 光标上方和下方的最小行
-opt.wrap = true     -- 自动换行
+opt.wrap = true -- 自动换行
 opt.textwidth = 120 -- 配置完字符数后，换行
 
 -- 缩进设置

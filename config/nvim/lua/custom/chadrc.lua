@@ -11,14 +11,14 @@ local pluginConfs = require "custom.plugins.configs"
 M.ui = {
    theme = "onenord",
    -- transparency = true, -- 开启透明，行也透明
-   theme_toggle = {"onenord", "onenord_light"}, -- 主题切换
+   theme_toggle = { "onenord", "onenord_light" }, -- 主题切换
    hl_override = {
-      CursorLine = {   -- 光标行
+      CursorLine = { -- 光标行
          bg = "one_bg",
       },
       Normal = {}
       -- Normal = {
-         -- bg = "none" -- 背景色彩
+      -- bg = "none" -- 背景色彩
       --    fg = "none" -- 字体颜色
       -- },
    },

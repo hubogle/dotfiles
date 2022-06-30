@@ -1,37 +1,41 @@
 function open(appBundleID)
-    return function()
-        local app = hs.application.frontmostApplication()
-        if app ~= nil and app:bundleID() == appBundleID then
-            -- 不为空并且置顶，隐藏
-            app:hide()
-        else
-            -- 启动或激活
-            hs.application.launchOrFocusByBundleID(appBundleID)
-        end
-
+  return function()
+    local app = hs.application.frontmostApplication()
+    if app ~= nil and app:bundleID() == appBundleID then
+      -- 不为空并且置顶，隐藏
+      app:hide()
+    else
+      -- 启动或激活
+      hs.application.launchOrFocusByBundleID(appBundleID)
     end
+
+  end
 end
 
 -- osascript -e 'id of app "VimR"'
 -- 获取包名
-hs.hotkey.bind({"cmd","shift"}, "W", open("com.tencent.WeWorkMac"))
-hs.hotkey.bind({"cmd","alt"}, ",", open("com.apple.systempreferences"))
-hs.hotkey.bind({"alt"}, "E", open("com.apple.finder"))
-hs.hotkey.bind({"cmd"}, ".", open("io.alacritty"))
-hs.hotkey.bind({"alt"}, "C", open("com.google.Chrome"))
-hs.hotkey.bind({"alt"}, ".", open("com.apple.Terminal"))
-hs.hotkey.bind({"alt"}, "M", open("com.qvacua.VimR"))
-hs.hotkey.bind({"alt"}, "V", open("com.microsoft.VSCode"))
-hs.hotkey.bind({"alt"}, "T", open("ru.keepcoder.Telegram"))
-hs.hotkey.bind({"alt"}, "P", open("com.luckymarmot.Paw"))
-hs.hotkey.bind({"alt"}, "S", open("com.sublimetext.4"))
-hs.hotkey.bind({"alt"}, "U", open("com.lukilabs.lukiapp"))
-hs.hotkey.bind({"alt"}, "W", open("com.tencent.xinWeChat"))
+hs.hotkey.bind({ "cmd", "shift" }, "W", open("com.tencent.WeWorkMac"))
+hs.hotkey.bind({ "cmd", "alt" }, ",", open("com.apple.systempreferences"))
+hs.hotkey.bind({ "alt" }, "E", open("com.apple.finder"))
+hs.hotkey.bind({ "cmd" }, ".", open("io.alacritty"))
+hs.hotkey.bind({ "alt" }, "C", open("com.google.Chrome"))
+hs.hotkey.bind({ "alt" }, ".", open("com.apple.Terminal"))
+hs.hotkey.bind({ "alt" }, "M", open("com.qvacua.VimR"))
+hs.hotkey.bind({ "alt" }, "V", open("com.microsoft.VSCode"))
+hs.hotkey.bind({ "alt" }, "T", open("ru.keepcoder.Telegram"))
+hs.hotkey.bind({ "alt" }, "P", open("com.luckymarmot.Paw"))
+hs.hotkey.bind({ "alt" }, "S", open("com.sublimetext.4"))
+hs.hotkey.bind({ "alt" }, "U", open("com.lukilabs.lukiapp"))
+hs.hotkey.bind({ "alt" }, "W", open("com.tencent.xinWeChat"))
+
+hs.hotkey.bind({ "cmd" }, "M", function ()
+  hs.window.frontmostWindow():application():hide()
+end) -- cmd + m 隐藏窗口
 
 
 -- 当前目录打开终端
 function iterm()
-    hs.osascript.applescript(
+  hs.osascript.applescript(
     [[
         tell application "Finder"
           set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
@@ -50,12 +54,12 @@ function iterm()
           end try
         end tell
     ]]
-    )
-    hs.application.launchOrFocus("iTerm")
+  )
+  hs.application.launchOrFocus("iTerm")
 end
 
 function terminal()
-    hs.osascript.applescript(
+  hs.osascript.applescript(
     [[
         tell application "Finder"
           set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
@@ -84,8 +88,8 @@ function terminal()
           -- end tell
         end tell
     ]]
-    )
-    hs.application.launchOrFocus("Terminal")
+  )
+  hs.application.launchOrFocus("Terminal")
 end
 
-hs.hotkey.bind({"cmd", "alt"}, ".", terminal)
+hs.hotkey.bind({ "cmd", "alt" }, ".", terminal)

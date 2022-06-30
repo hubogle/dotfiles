@@ -54,3 +54,5 @@ killall Dock
 * 禁止生成 `DS_store` 文件，重启生效：`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE`
 * 所有显示器上显示cmd+应用程序切换器：`defaults write com.apple.Dock appswitcher-all-displays -bool true;killall Dock`
 * `hammerspoon` 路径配置：`defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
+* `Vscode VIM` 连点配置 `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
+* 全局连点配置 `defaults delete -g ApplePressAndHoldEnabled`
