@@ -22,17 +22,20 @@ local App2Ime = {
     ['/Applications/Visual Studio Code.app'] = 'English',
     ['/Applications/System Preferences.app'] = 'English',
     ['/Applications/Alacritty.app'] = 'English',
+    ['/Applications/Sublime Text.app'] = 'English',
 }
 local app = nil
 
 local AppNotHide = {
-    ['/Applications/Visual Studio Code.app'] = true,
-    ['/Applications/Alacritty.app'] = true,
-    ['/Applications/GoLand.app'] = true,
-    ['/Applications/PyCharm.app'] = true,
+    ['/Applications/WeChat.app'] = true,
+    ['/Applications/企业微信.app'] = true,
+    ['/Applications/Telegram.app'] = true,
 }
 -- 将 esc 映射为隐藏 App，当处于 vim 模式则隐藏，只能判断 App 是否支持 VIM
-local escKey = hs.hotkey.bind({}, "escape", function() app:hide() end)
+local escKey = hs.hotkey.bind({}, "escape", function()
+    app:hide()
+end
+):disable()
 
 local function Chinese()
     hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
@@ -43,6 +46,7 @@ local function English()
 end
 
 local function updateFocusAppInputMethod()
+    app = hs.window.frontmostWindow():application()
     local app_path = app:path()
     if App2Ime[app_path] == 'Chinese' then
         Chinese()
@@ -50,14 +54,13 @@ local function updateFocusAppInputMethod()
         English()
     end
     if AppNotHide[app_path] == true then
-        escKey:disable()
-    else
         escKey:enable()
+    else
+        escKey:disable()
     end
 end
 
 local function applicationWatcher(appName, eventType, appObject)
-    app = appObject
     if (eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then
         updateFocusAppInputMethod()
     end
