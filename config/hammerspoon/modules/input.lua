@@ -32,10 +32,10 @@ local AppNotHide = {
     ['/Applications/Telegram.app'] = true,
 }
 -- 将 esc 映射为隐藏 App，当处于 vim 模式则隐藏，只能判断 App 是否支持 VIM
-local escKey = hs.hotkey.bind({}, "escape", function()
-    app:hide()
-end
-):disable()
+-- local escKey = hs.hotkey.bind({}, "escape", function()
+--     app:hide()
+-- end
+-- ):disable()
 
 local function Chinese()
     hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
@@ -53,11 +53,11 @@ local function updateFocusAppInputMethod()
     else
         English()
     end
-    if AppNotHide[app_path] == true then
-        escKey:enable()
-    else
-        escKey:disable()
-    end
+    -- if AppNotHide[app_path] == true then
+    --     escKey:enable()
+    -- else
+    --     escKey:disable()
+    -- end
 end
 
 local function applicationWatcher(appName, eventType, appObject)

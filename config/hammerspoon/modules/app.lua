@@ -28,9 +28,9 @@ hs.hotkey.bind({ "alt" }, "S", open("com.sublimetext.4"))
 hs.hotkey.bind({ "alt" }, "U", open("com.lukilabs.lukiapp"))
 hs.hotkey.bind({ "alt" }, "W", open("com.tencent.xinWeChat"))
 
-hs.hotkey.bind({ "cmd" }, "M", function ()
-  hs.window.frontmostWindow():application():hide()
-end) -- cmd + m 隐藏窗口
+-- hs.hotkey.bind({ "cmd" }, "M", function ()
+--   hs.window.frontmostWindow():application():hide()
+-- end) -- cmd + m 隐藏窗口
 
 
 -- 当前目录打开终端
