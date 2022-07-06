@@ -24,45 +24,32 @@ local App2Ime = {
     ['/Applications/Alacritty.app'] = 'English',
     ['/Applications/Sublime Text.app'] = 'English',
 }
-local app = nil
 
-local AppNotHide = {
-    ['/Applications/WeChat.app'] = true,
-    ['/Applications/企业微信.app'] = true,
-    ['/Applications/Telegram.app'] = true,
-}
--- 将 esc 映射为隐藏 App，当处于 vim 模式则隐藏，只能判断 App 是否支持 VIM
--- local escKey = hs.hotkey.bind({}, "escape", function()
---     app:hide()
--- end
--- ):disable()
-
-local function Chinese()
+local function Chinese()    -- 中文
     hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
 end
 
-local function English()
+local function English()    -- 英文
     hs.keycodes.currentSourceID("com.apple.keylayout.ABC")
 end
 
-local function updateFocusAppInputMethod()
-    app = hs.window.frontmostWindow():application()
+local function updateFocusAppInputMethod(app)
+    -- app = hs.window.frontmostWindow():application()
+    local cur_input = hs.keycodes.currentSourceID()
     local app_path = app:path()
-    if App2Ime[app_path] == 'Chinese' then
+    local next_input = App2Ime[app_path]
+    if cur_input == next_input then
+        return
+    elseif next_input == "Chinese" then
         Chinese()
     else
         English()
     end
-    -- if AppNotHide[app_path] == true then
-    --     escKey:enable()
-    -- else
-    --     escKey:disable()
-    -- end
 end
 
 local function applicationWatcher(appName, eventType, appObject)
-    if (eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then
-        updateFocusAppInputMethod()
+    if (eventType == hs.application.watcher.activated or eventType == hs.application.watcher.launched) then -- 切换窗口或首次启动时
+        updateFocusAppInputMethod(appObject)
     end
 end
 
