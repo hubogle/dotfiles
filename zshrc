@@ -34,7 +34,7 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #================================================
 #======================brew=======================
-alias brewc="brew update && brew upgrade --formula && brew cleanup --prune 1 && brew autoremove"
+alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanup --prune 1 && brew autoremove"
 export HOMEBREW_NO_AUTO_UPDATE=true     # 自动更新关闭
 #=================================================
 #======================ZI========================
@@ -70,7 +70,7 @@ bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
 zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
 zi light z-shell/F-Sy-H # 高亮插件
 
-zi snippet OMZ::plugins/extract        # x 一键解压
+zi snippet OMZP::extract               # x 一键解压
 zi snippet OMZL::git.zsh               # git alias
 zi snippet OMZP::git                   # git alias
 #==================================================
