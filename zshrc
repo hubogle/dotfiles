@@ -35,7 +35,7 @@ fi
 #================================================
 #======================brew=======================
 alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanup --prune 1 && brew autoremove"
-export FPATH=$(brew --prefix)/opt/zsh/share/zsh/functions:$FPATH # 调整zsh函数优先提示路径
+#export FPATH=$(brew --prefix)/opt/zsh/share/zsh/functions:$FPATH # 调整zsh函数优先提示路径
 export HOMEBREW_NO_AUTO_UPDATE=true     # 自动更新关闭
 #=================================================
 #======================ZI========================
