@@ -52,22 +52,22 @@ font: # 字体设置
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
     style: Regular
 
   # Bold font face
   bold:
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: Hack Nerd Font Mono
+    family: Hack Nerd Font
     style: Bold Italic
 
   size: 12
@@ -85,7 +85,8 @@ font: # 字体设置
 
   # Thin stroke font rendering (macOS only)
   # 细线字体适用于视网膜屏幕
-  use_thin_strokes: true
+  # use_thin_strokes: true
+  # defaults write -g AppleFontSmoothing -int 0
   builtin_box_drawing: true # true 对方框图形字符使用内置字体
 
 draw_bold_text_with_bright_colors: true  # true 使用明亮的颜色变体绘制粗体文本。

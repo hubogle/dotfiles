@@ -17,7 +17,7 @@ end
 hs.hotkey.bind({ "cmd", "shift" }, "W", open("com.tencent.WeWorkMac"))
 hs.hotkey.bind({ "cmd", "alt" }, ",", open("com.apple.systempreferences"))
 hs.hotkey.bind({ "alt" }, "E", open("com.apple.finder"))
-hs.hotkey.bind({ "cmd" }, ".", open("io.alacritty"))
+hs.hotkey.bind({ "cmd" }, ".", open("org.alacritty"))
 hs.hotkey.bind({ "alt" }, "C", open("com.google.Chrome"))
 hs.hotkey.bind({ "alt" }, ".", open("com.apple.Terminal"))
 hs.hotkey.bind({ "alt" }, "M", open("com.qvacua.VimR"))
