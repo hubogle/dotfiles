@@ -39,3 +39,5 @@
 	ad = forgit add
 [core]
 	quotepath = false
+[pull]
+	rebase = true
