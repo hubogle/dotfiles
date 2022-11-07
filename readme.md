@@ -10,13 +10,18 @@
 
 1. [Command Line Tools](https://developer.apple.com/download/all/?q=Command) 官网安装，或命令安装 `xcode-select --install`
 2. [Brew 官网](https://brew.sh/index_zh-cn) `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
 4. 安装三方未知来源：`sudo spctl --master-disable`
 5. 设置主机名 `sudo scutil --set HostName "MacX"`
-6. `cp ~/Documents/File/dotfiles/zshrc ~/.zshrc`
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
 ---
+
+## 恢复文件以及配置
+1. `brew install rcm`
+2. 修改 `zshrc` 中的 `DOTFILES_DIRS` 路径。
+3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
+4. 执行 `rcup` 恢复配置文件。
+
 ## 插件依赖安装
 
 [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 切换输入法
