@@ -1,12 +1,6 @@
 # Dotfile 恢复指南
-## RCM 使用
 
-- `mkrc` – 将文件转换为由 `rcm` 管理的隐藏文件
-- `lsrc` – 列出由 `rcm` 管理的文件
-- `rcup` – 同步由 `rcm` 管理的隐藏文件
-- `rcdn` – 删除 `rcm`  管理的所有符号链接
----
-## brew 安装
+## 1.brew 安装
 
 1. [Command Line Tools](https://developer.apple.com/download/all/?q=Command) 官网安装，或命令安装 `xcode-select --install`
 2. [Brew 官网](https://brew.sh/index_zh-cn) `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -14,14 +8,28 @@
 5. 设置主机名 `sudo scutil --set HostName "MacX"`
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
----
 
-## 恢复文件以及配置
+## 2.修改自定义配置
+
+1. `config/git/config` 修改`git username` && `email`
+2. 修改`Brewfile`, 增删自定义插件及软件
+3. `hooks/pre-up/init` 注释 `histdb`相关命令 或 修改`histdb`相关配置
+   
+
+## 3.使用rcm恢复文件及配置
 1. `brew install rcm`
 2. 修改 `zshrc` 中的 `DOTFILES_DIRS` 路径。
 3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
 4. 执行 `rcup` 恢复配置文件。
 
+---
+
+## QA
+Q: tmux 插件下载失败
+A: prefix + r 或者 tmux source ~/.config/tmux/tmux.conf 重载配置
+   prefix + I 重新下载插件
+
+---
 ## 插件依赖安装
 
 [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 切换输入法
@@ -61,3 +69,11 @@ killall Dock
 * `hammerspoon` 路径配置：`defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
 * `Vscode VIM` 连点配置 `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
 * 全局连点配置 `defaults delete -g ApplePressAndHoldEnabled`
+
+## RCM 使用
+
+- `mkrc` – 将文件转换为由 `rcm` 管理的隐藏文件
+- `lsrc` – 列出由 `rcm` 管理的文件
+- `rcup` – 同步由 `rcm` 管理的隐藏文件
+- `rcdn` – 删除 `rcm`  管理的所有符号链接
+---
