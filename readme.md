@@ -14,7 +14,7 @@
 1. `config/git/config` 修改`git username` && `email`
 2. 修改`Brewfile`, 增删自定义插件及软件
 3. `hooks/pre-up/init` 注释 `histdb`相关命令 或 修改`histdb`相关配置
-   
+
 
 ## 3.使用rcm恢复文件及配置
 1. `brew install rcm`
@@ -69,6 +69,7 @@ killall Dock
 * `hammerspoon` 路径配置：`defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
 * `Vscode VIM` 连点配置 `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
 * 全局连点配置 `defaults delete -g ApplePressAndHoldEnabled`
+* `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 
 ## RCM 使用
 
