@@ -222,6 +222,8 @@ source $BREW_OPT/asdf/libexec/asdf.sh
 #=======================goEnv====================
 export GO111MODULE=on # auto
 export GOPROXY=https://goproxy.cn
+export GOPATH=$(go env GOPATH)
+export GOROOT=$(go env GOROOT)
 #===================================================
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
