@@ -47,7 +47,8 @@ autoload -Uz _zi
 # 初始化自动完成
 autoload -Uz compinit
 
-# zcompdump 存储路径配置
+# zcompdump 存储路径配置，如果失效的话则只执行 compinit
+# echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
 compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
 zi ice wait lucid has'fzf'
@@ -112,9 +113,9 @@ setopt COMPLETE_IN_WORD         # 从一个词的两端完成的
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'        # 来回切换分组展示
 zstyle ':fzf-tab:*' prefix ''                   # 取消展示的 .
+# zstyle ':fzf-tab:*' fzf-command fzf             # 默认使用 fzf
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
-# zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:*' fzf-flags '--color=hl:red'   # 输入中匹配字符的颜色
 zstyle ':fzf-tab:*' default-color $'\033[38;5;115m'   # 没有组显示颜色
 zstyle ':fzf-tab:*' single-group color          # 一组时显示颜色，默认配色
