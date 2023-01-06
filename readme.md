@@ -46,30 +46,8 @@ A: prefix + r 或者 tmux source ~/.config/tmux/tmux.conf 重载配置
 
 1. `iCloud` 关闭照片同步，打开桌面和文稿文件夹
 2. 辅助功能触摸板打开三指拖拽
-
-### 图标排列
-
-```shell
-defaults write com.apple.dock springboard-columns -int 8
-
-defaults write com.apple.dock springboard-rows -int 7
-
-defaults write com.apple.dock ResetLaunchPad -bool TRUE # 重置Launchpad
-
-killall Dock
-```
-
+3. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 ---
-## MAC 设置
-[Mac 命令](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
-
-* `Finder` 标题栏显示完整路径：`defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES;killall Finder`
-* 禁止生成 `DS_store` 文件，重启生效：`defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE`
-* 所有显示器上显示cmd+应用程序切换器：`defaults write com.apple.Dock appswitcher-all-displays -bool true;killall Dock`
-* `hammerspoon` 路径配置：`defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"`
-* `Vscode VIM` 连点配置 `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
-* 全局连点配置 `defaults delete -g ApplePressAndHoldEnabled`
-* `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 
 ## RCM 使用
 
