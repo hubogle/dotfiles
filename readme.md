@@ -78,3 +78,20 @@ killall Dock
 - `rcup` – 同步由 `rcm` 管理的隐藏文件
 - `rcdn` – 删除 `rcm`  管理的所有符号链接
 ---
+
+## zsh 命令技巧
+
+* `fc` 在编辑器中编辑上条命令，保存推出即执行
+
+* `control + r` 搜索历史命令
+* `control + a` 移到行首
+* `control + e` 移到行尾
+* `control + b` 移动到当前单词的词首
+* `control + f` 移动到当前单词的词尾
+* `control + d` 删除光标位置的字符（delete）
+* `control + w` 删除光标前面的单词
+* `control + y` 在光标位置粘贴文本
+* `control + k` 剪切光标位置到行尾的文本
+* `control + u` 剪切光标位置到行首的文本
+* `option + d` 剪切光标位置到词尾的文本
+* `option + Backspace` 剪切光标位置到词首的文本。

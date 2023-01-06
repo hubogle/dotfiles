@@ -18,14 +18,6 @@ export IPYTHONDIR=~/.local/share/ipython
 export SHELL_SESSIONS_DISABLE=1
 export EDITOR="nvim"
 #===============================================
-#=====================按键=======================
-# option + f 光标右移一个单词
-# option + b 光标左移一个单词
-# option + d 删除光标右侧所有
-# control + w 删除左边一个单词
-# control + f 光标右移一个单词
-# control + b 光标左移一个单词
-#===============================================
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
