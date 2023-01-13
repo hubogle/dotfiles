@@ -244,6 +244,31 @@ schemes:
       cyan:    '0xaaffe4'
       white:   '0xcbe3e7'
 
+  citylights: &citylights
+    primary:
+      background: '0x171d23'
+      foreground: '0xffffff'
+    cursor:
+      text:   '0xfafafa'
+      cursor: '0x008b94'
+    normal:
+      black:   '0x333f4a'
+      red:     '0xd95468'
+      green:   '0x8bd49c'
+      blue:    '0x539afc'
+      magenta: '0xb62d65'
+      cyan:    '0x70e1e8'
+      white:   '0xb7c5d3'
+    bright:
+      black:   '0x41505e'
+      red:     '0xd95468'
+      green:   '0x8bd49c'
+      yellow:  '0xebbf83'
+      blue:    '0x5ec4ff'
+      magenta: '0xe27e8d'
+      cyan:    '0x70e1e8'
+      white:   '0xffffff'
+
   Cobalt2: &Cobalt2
     primary:
       background: '0x122637'
@@ -427,6 +452,29 @@ schemes:
       magenta: '0xBF2E5D'
       cyan:    '0x49AEE6'
       white:   '0xFFFFFF'
+
+  gnome_terminal: &gnome_terminal
+    primary:
+      background: '0x1e1e1e'
+      foreground: '0xffffff'
+    normal:
+      black:      '0x171421'
+      red:        '0xc01c28'
+      green:      '0x26a269'
+      yellow:     '0xa2734c'
+      blue:       '0x12488b'
+      magenta:    '0xa347ba'
+      cyan:       '0x2aa1b3'
+      white:      '0xd0cfcc'
+    bright:
+      black:      '0x535c64'
+      red:        '0xf66151'
+      green:      '0x33d17a'
+      yellow:     '0xe9ad0c'
+      blue:       '0x2a7bde'
+      magenta:    '0xc061cb'
+      cyan:       '0x33c7de'
+      white:      '0xffffff'
 
   gotham: &gotham
     primary:
@@ -742,52 +790,49 @@ schemes:
 
   nord: &nord
     primary:
-      background: '#2e3440'
-      foreground: '#d8dee9'
-      dim_foreground: '#a5abb6'
-    cursor:
-      text: '#2e3440'
-      cursor: '#d8dee9'
-    vi_mode_cursor:
-      text: '#2e3440'
-      cursor: '#d8dee9'
-    selection:
-      text: CellForeground
-      background: '#4c566a'
-    search:
-      matches:
-        foreground: CellBackground
-        background: '#88c0d0'
-    footer_bar:
-        background: '#434c5e'
-        foreground: '#d8dee9'
+      background: '0x2E3440'
+      foreground: '0xD8DEE9'
     normal:
-      black: '#3b4252'
-      red: '#bf616a'
-      green: '#a3be8c'
-      yellow: '#ebcb8b'
-      blue: '#81a1c1'
-      magenta: '#b48ead'
-      cyan: '#88c0d0'
-      white: '#e5e9f0'
+      black:   '0x3B4252'
+      red:     '0xBF616A'
+      green:   '0xA3BE8C'
+      yellow:  '0xEBCB8B'
+      blue:    '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan:    '0x88C0D0'
+      white:   '0xE5E9F0'
     bright:
-      black: '#4c566a'
-      red: '#bf616a'
-      green: '#a3be8c'
-      yellow: '#ebcb8b'
-      blue: '#81a1c1'
-      magenta: '#b48ead'
-      cyan: '#8fbcbb'
-      white: '#eceff4'
-    dim:
-      black: '#373e4d'
-      red: '#94545d'
-      green: '#809575'
-      yellow: '#b29e75'
-      blue: '#68809a'
-      magenta: '#8c738c'
-      cyan: '#6d96a5'
-      white: '#aeb3bb'
+      black:   '0x4C566A'
+      red:     '0xBF616A'
+      green:   '0xA3BE8C'
+      yellow:  '0xEBCB8B'
+      blue:    '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan:    '0x8FBCBB'
+      white:   '0xECEFF4'
+
+  monokai_charcoal: &monokai_charcoal
+    primary:
+      background: '#000000'
+      foreground: '#FFFFFF'
+    normal:
+      black:   '#1a1a1a'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#fa8419'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#c4c5b5'
+    bright:
+      black:   '#625e4c'
+      red:     '#f4005f'
+      green:   '#98e024'
+      yellow:  '#e0d561'
+      blue:    '#9d65ff'
+      magenta: '#f4005f'
+      cyan:    '#58d1eb'
+      white:   '#f6f6ef'
 
   monokai_pro: &monokai_pro
     primary:
@@ -971,13 +1016,36 @@ schemes:
       cyan:    '0xa3f7ff'
       white:   '0xffffff'
 
+  papertheme: &papertheme
+    primary:
+      background: '#F2EEDE'
+      foreground: '#000000'
+    normal:
+      black:   '#000000'
+      red:     '#CC3E28'
+      green:   '#216609'
+      yellow:  '#B58900'
+      blue:    '#1E6FCC'
+      magenta: '#5C21A5'
+      cyan:    '#158C86'
+      white:   '#AAAAAA'
+    bright:
+      black:   '#555555'
+      red:     '#CC3E28'
+      green:   '#216609'
+      yellow:  '#B58900'
+      blue:    '#1E6FCC'
+      magenta: '#5C21A5'
+      cyan:    '#158C86'
+      white:   '#AAAAAA'
+
   papercolor_light: &papercolor_light
     primary:
       background: '0xeeeeee'
-      foreground: '0x878787'
+      foreground: '0x444444'
     cursor:
-      text: '0xeeeeee'
-      cursor: '0x878787'
+      text:   '0xeeeeee'
+      cursor: '0x444444'
     normal:
       black:   '0xeeeeee'
       red:     '0xaf0000'
@@ -1432,6 +1500,32 @@ schemes:
       cyan:    '0x54ced6'
       white:   '0x2a2a2a'
 
+  ubuntu: &ubuntu
+    primary:
+      background: '0x300a24'
+      foreground: '0xeeeeec'
+    cursor:
+      text: '0xbbbbbb'
+      cursor: '0xb4d5ff'
+    normal:
+      black:   '0x2e3436'
+      red:     '0xcc0000'
+      green:   '0x4e9a06'
+      yellow:  '0xc4a000'
+      blue:    '0x3465a4'
+      magenta: '0x75507b'
+      cyan:    '0x06989a'
+      white:   '0xd3d7cf'
+    bright:
+      black:   '0x555753'
+      red:     '0xef2929'
+      green:   '0x8ae234'
+      yellow:  '0xfce94f'
+      blue:    '0x729fcf'
+      magenta: '0xad7fa8'
+      cyan:    '0x34e2e2'
+      white:   '0xeeeeec'
+
   wombat: &wombat
     primary:
       background: '0x1f1f1f'
@@ -1477,5 +1571,52 @@ schemes:
       magenta: '0xff00ff'
       cyan:    '0x00ffff'
       white:   '0xffffff'
+
+  rose-pine: &rose-pine
+    primary:
+      background: "0x191724"
+      foreground: "0xe0def4"
+    normal:
+      black:    "0x26233a"
+      red:      "0xeb6f92"
+      green:    "0x31748f"
+      yellow:   "0xf6c177"
+      blue:     "0x9ccfd8"
+      magenta:  "0xc4a7e7"
+      cyan:     "0xebbcba"
+      white:    "0xe0def4"
+    bright:
+      black:    "0x6e6a86"
+      red:      "0xeb6f92"
+      green:    "0x31748f"
+      yellow:   "0xf6c177"
+      blue:     "0x9ccfd8"
+      magenta:  "0xc4a7e7"
+      cyan:     "0xebbcba"
+      white:    "0xe0def4"
+
+  zenburn: &zenburn
+    primary:
+      background: '0x3A3A3A'
+      foreground: '0xDCDCCC'
+    normal:
+      black:   '0x1E2320'
+      red:     '0xD78787'
+      green:   '0x60B48A'
+      yellow:  '0xDFAF8F'
+      blue:    '0x506070'
+      magenta: '0xDC8CC3'
+      cyan:    '0x8CD0D3'
+      white:   '0xDCDCCC'
+    bright:
+      black:   '0x709080'
+      red:     '0xDCA3A3'
+      green:   '0xC3BF9F'
+      yellow:  '0xF0DFAF'
+      blue:    '0x94BFF3'
+      magenta: '0xEC93D3'
+      cyan:    '0x93E0E3'
+      white:   '0xFFFFFF'
+
 
 colors: *nord
