@@ -36,6 +36,7 @@ autoload -Uz _zi
 # 初始化自动完成
 autoload -Uz compinit
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'  # 大小写模糊
 # zcompdump 存储路径配置，如果失效的话则只执行 compinit
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
 compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
