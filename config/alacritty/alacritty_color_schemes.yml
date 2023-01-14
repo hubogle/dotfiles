@@ -969,7 +969,6 @@ schemes:
       magenta: '0xbb006b'
       cyan: '0x433364'
       white: '0x5f5f5f'
-
   one_dark: &one_dark
     primary:
       background: '0x1e2127'
@@ -992,6 +991,28 @@ schemes:
       magenta: '0xc678dd'
       cyan:    '0x56b6c2'
       white:   '0xffffff'
+  one_dark_pro_flat: &one_dark_pro_flat
+    primary:
+      background: '0x282c34'
+      foreground: '0xabb2bf'
+    normal:
+      black:   '0x3f4451'
+      red:     '0xe05561'
+      green:   '0x8cc265'
+      yellow:  '0xd18f52'
+      blue:    '0x4aa5f0'
+      magenta: '0xc162de'
+      cyan:    '0x42b3c2'
+      white:   '0xd7dae0'
+    bright:
+      black:   '0x4f5666'
+      red:     '0xff616e'
+      green:   '0xa5e075'
+      yellow:  '0xf0a45d'
+      blue:    '0x4dc4ff'
+      magenta: '0xde73ff'
+      cyan:    '0x4cd1e0'
+      white:   '0xe6e6e6'
 
   palenight: &palenight
     primary:
@@ -1619,4 +1640,4 @@ schemes:
       white:   '0xFFFFFF'
 
 
-colors: *nord
+colors: *one_dark_pro_flat
