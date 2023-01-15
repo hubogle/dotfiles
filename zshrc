@@ -98,6 +98,11 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 HISTDB_TABULATE_CMD=(sed -e $'s/\x1f/\t/g')
 autoload -Uz add-zsh-hook
 if [[ -f "$HISTDB_FILE" ]]; then
+  _histdb_query () { # https://github.com/larkery/zsh-histdb/issues/27
+      sqlite3 "${HISTDB_FILE}" ".timeout 100
+  $@"
+      [[ "$?" -ne 0 ]] && echo "error in $@"
+  }
   _zsh_autosuggest_strategy_histdb_top() {
       local query="
           select commands.argv from history
@@ -121,7 +126,7 @@ histdb-fzf-widget() {
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   return $ret
-}
+} # 在 fzf 中选中命令命令 control + d 执行删除
 zle     -N   histdb-fzf-widget
 bindkey '^R' histdb-fzf-widget
 #===================BindKey=========================

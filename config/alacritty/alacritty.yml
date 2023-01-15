@@ -509,14 +509,15 @@ key_bindings:
   - { key: X,        mods: Command,       chars: "\x60\x26"} # 关闭 windows
 
   # 访问 pane
-  - { Key: L,        mods: Option,        chars: "\x60\x1b\x5b\x44"}
-  - { Key: H,        mods: Option,        chars: "\x60\x1b\x5b\x43"}
-  - { Key: J,        mods: Option,        chars: "\x60\x1b\x5b\x41"}
-  - { Key: K,        mods: Option,        chars: "\x60\x1b\x5b\x42"}
-  - { Key: Up,       mods: Command,       chars: "\x60\x1b\x5b\x41"}
-  - { Key: Down,     mods: Command,       chars: "\x60\x1b\x5b\x42"}
-  - { Key: Left,     mods: Command,       chars: "\x60\x1b\x5b\x44"} # 选择左面板
-  - { Key: Right,    mods: Command,       chars: "\x60\x1b\x5b\x43"}
+  - { Key: J,        mods: Option,        chars: "\x60\x6a"}
+  - { Key: K,        mods: Option,        chars: "\x60\x6b"}
+  - { Key: L,        mods: Option,        chars: "\x60\x6c"}
+  - { Key: H,        mods: Option,        chars: "\x60\x68"}
+
+  - { Key: Down,     mods: Command,       chars: "\x60\x6a"}
+  - { Key: Up,       mods: Command,       chars: "\x60\x6b"}
+  - { Key: Right,    mods: Command,       chars: "\x60\x6c"}
+  - { Key: Left,     mods: Command,       chars: "\x60\x68"}
 
   # 访问 windows
   - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
