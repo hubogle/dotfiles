@@ -24,7 +24,6 @@ zstyle ':completion:*' use-cache true                         # 对使用缓存�
 # zcompcache 存储路径配置
 zstyle ':completion:*' cache-path "$HOME/.cache/zi/zcompcache"
 zstyle ':completion:*' menu select                            # 允许您在菜单中选择
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'        # 虚线值的智能匹配，例如f-b匹配foo-bar
 zstyle ':completion:*' complete-options true                  # 自动完成cd而不是目录堆栈的选项
 zstyle ':completion:*' rehash true                            # 自动更新PATH条目
 zstyle ':completion:*' verbose yes                            # 详细的完成结果
@@ -38,7 +37,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'  # 虚线值的智能匹配，例如f-b匹配foo-bar
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'  # 大小写模糊，虚线值的智能匹配，例如f-b匹配foo-bar
 
 #路径补全
 zstyle ':completion:*' expand 'yes'
