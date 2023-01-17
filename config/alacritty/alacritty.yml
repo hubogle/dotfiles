@@ -496,8 +496,6 @@ hints:
 # 按键绑定
 key_bindings:
   - { key: Back, action:  ReceiveChar} # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
-  # 映射 tmux 按键，xxd -psd 获取按键码
-  # https://www.cnblogs.com/cane004/archive/2010/08/19/ASCII.html
   # 新建
   - { key: D,        mods: Command,       chars: "\x60\x7c"} # 垂直切分
   - { key: D,        mods: Command|Shift, chars: "\x60\x2d"} # 水平切分
@@ -520,38 +518,68 @@ key_bindings:
   - { Key: Left,     mods: Command,       chars: "\x60\x68"}
 
   # 访问 windows
-  - { key: Key1, mods: Command, chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
-  - { key: Key2, mods: Command, chars: "\x60\x32"}
-  - { key: Key3, mods: Command, chars: "\x60\x33"}
-  - { key: Key4, mods: Command, chars: "\x60\x34"}
-  - { key: Key5, mods: Command, chars: "\x60\x35"}
-  - { key: Key6, mods: Command, chars: "\x60\x36"}
-  - { key: Key7, mods: Command, chars: "\x06\x37"}
-  - { key: Key8, mods: Command, chars: "\x06\x38"}
-  - { key: Key9, mods: Command, chars: "\x06\x39"}
+  - { key: Key1,     mods: Command,       chars: "\x60\x31"} # Command + 1 tmux 第一个窗口
+  - { key: Key2,     mods: Command,       chars: "\x60\x32"}
+  - { key: Key3,     mods: Command,       chars: "\x60\x33"}
+  - { key: Key4,     mods: Command,       chars: "\x60\x34"}
+  - { key: Key5,     mods: Command,       chars: "\x60\x35"}
+  - { key: Key6,     mods: Command,       chars: "\x60\x36"}
+  - { key: Key7,     mods: Command,       chars: "\x06\x37"}
+  - { key: Key8,     mods: Command,       chars: "\x06\x38"}
+  - { key: Key9,     mods: Command,       chars: "\x06\x39"}
 
   # 切换 windows
   - { key: LBracket, mods: Command,       chars: "\x60\x70" } # Command + [ 上个窗口
   - { key: RBracket, mods: Command,       chars: "\x60\x6e" } # Command + ] 下个窗口
-  - { key: Tab,      mods: Option,       chars: "\x60\x6e"} # 下个窗口
-  - { key: Tab,      mods: Control,       chars: "\x60\x29"} # 下一个 Session
+  - { key: Tab,      mods: Option,        chars: "\x60\x6e"} # 下个窗口
+  - { key: Tab,      mods: Option|Shift,  chars: "\x60\x70"} # 下个窗口
 
   # 调整 pane 大小
   - { key: Left,     mods: Command|Shift, chars: "\x60\x08"} # 左调整大小
   - { key: Right,    mods: Command|Shift, chars: "\x60\x0c"}
   - { key: Up,       mods: Command|Shift, chars: "\x60\x0b"}
   - { key: Down,     mods: Command|Shift, chars: "\x60\x0a"}
-  - { key: H,     mods: Command|Shift, chars: "\x60\x08"} # 左调整大小
-  - { key: L,    mods: Command|Shift, chars: "\x60\x0c"}
+  - { key: H,        mods: Command|Shift, chars: "\x60\x08"} # 左调整大小
+  - { key: L,        mods: Command|Shift, chars: "\x60\x0c"}
   - { key: J,        mods: Command|Shift, chars: "\x60\x0b"}
   - { key: K,        mods: Command|Shift, chars: "\x60\x0a"}
 
   - { key: Comma,    mods: Command,       chars: "\x60\x2c"} # , 重命名 windows
   - { key: Return,   mods: Command,       chars: "\x60\x7a"} # 当前 pane 全屏
+  - { key: Z,        mods: Command,       chars: "\x60\x7a"} # 当前 pane 全屏
   - { key: Return,   mods: Command|Shift, chars: "\x60\x20"} # 切换 pane 布局
   - { key: I,        mods: Command,       chars: "\x60\x79"} # 同步输入
   - { key: S,        mods: Command,       chars: "\x60\x53"} # 展开 choose-tree
-  - { key: S,        mods: Control,       chars: "\x60\x3e"} # 右键菜单栏
+
+  # 服务器 tmux 快捷键
+  - { Key: D,        mods: Control,       chars: "\x02\x25"} # 左右拆分
+  - { Key: D,        mods: Control|Shift, chars: "\x02\x22"} # 上下拆分
+  - { Key: Comma,    mods: Control,       chars: "\x02\x2c"} # 重命名
+  - { Key: T,        mods: Control,       chars: "\x02\x63"} # 新建 windows
+  - { key: W,        mods: Control,       chars: "\x02\x78"} # 关闭 pane
+  - { key: LBracket, mods: Control,       chars: "\x02\x70"} # Control + [ 上个窗口
+  - { key: RBracket, mods: Control,       chars: "\x02\x6e"} # Control + ] 下个窗口
+  - { key: S,        mods: Control,       chars: "\x02\x73"} # 切换会话
+  - { key: Z,        mods: Control,       chars: "\x02\x7a"} # 当前 pane 全屏
+  - { key: Tab,      mods: Control,       chars: "\x02\x6e"} # 下一个 Session
+  - { key: Tab,      mods: Control|Shift, chars: "\x02\x70"} # 下一个 Session
+  - { Key: Down,     mods: Control|Shift, chars: "\x02\x1b\x5b\x42"}
+  - { Key: Up,       mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
+  - { Key: Right,    mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
+  - { Key: Left,     mods: Control|Shift, chars: "\x02\x1b\x5b\x44"}
+
+
+  - { key: Key0,     mods: Control,       chars: "\x02\x30"} # Control + 0 tmux 第一个窗口
+  - { key: Key1,     mods: Control,       chars: "\x02\x31"}
+  - { key: Key2,     mods: Control,       chars: "\x02\x32"}
+  - { key: Key3,     mods: Control,       chars: "\x02\x33"}
+  - { key: Key4,     mods: Control,       chars: "\x02\x34"}
+  - { key: Key5,     mods: Control,       chars: "\x02\x35"}
+  - { key: Key6,     mods: Control,       chars: "\x02\x36"}
+  - { key: Key7,     mods: Control,       chars: "\x02\x37"}
+  - { key: Key8,     mods: Control,       chars: "\x02\x38"}
+  - { key: Key9,     mods: Control,       chars: "\x02\x39"}
+
 
   # (macOS only)
   - { key: V,              mods: Command,                    action: Paste                 }

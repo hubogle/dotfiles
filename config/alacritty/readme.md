@@ -5,7 +5,7 @@
 绑定快捷键：`Command, Option` 或者 `Command + Shift` 作为修饰键，部分快捷键与 `iTerm2.app` 绑定对应。
 
 ### 按键映射
-
+[键盘按键代码](https://www.lizhanglong.com/Tools/KeyCode)
 终端输入 `xxd -psd` 属于映射的按键：
 ```shell
 ~ > xxd -psd
@@ -25,3 +25,9 @@ c
 * 关闭
     * 关闭 `Pane` `Command + W`
     * 关闭 `Windows` `Command + X`
+
+* 访问 `Pane`: `Command` + "方向键"
+* 访问 `Windows`: `Command` + "数字键"
+* 切换 `Windows`: `Command` + `[]`
+* 下个 `Windows`: `Option` + `Tab`
+* 调整大小: `Command` + `Shift` + "方向键"
