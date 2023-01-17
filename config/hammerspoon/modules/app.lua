@@ -14,7 +14,7 @@ end
 
 -- osascript -e 'id of app "VimR"'
 -- 获取包名
-hs.hotkey.bind({ "cmd", "shift" }, "W", open("com.tencent.WeWorkMac"))
+hs.hotkey.bind({ "alt", "shift" }, "W", open("com.tencent.WeWorkMac"))
 hs.hotkey.bind({ "cmd", "alt" }, ",", open("com.apple.systempreferences"))
 hs.hotkey.bind({ "alt" }, "E", open("com.apple.finder"))
 hs.hotkey.bind({ "cmd" }, ".", open("org.alacritty"))

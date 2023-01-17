@@ -24,10 +24,17 @@ c
 
 * 关闭
     * 关闭 `Pane` `Command + W`
-    * 关闭 `Windows` `Command + X`
+    * 关闭 `Windows` `Command + Shift + W`
 
 * 访问 `Pane`: `Command` + "方向键"
 * 访问 `Windows`: `Command` + "数字键"
 * 切换 `Windows`: `Command` + `[]`
 * 下个 `Windows`: `Option` + `Tab`
+* 上个 `Windows`: `Option` + `Shift` + `Tab`
 * 调整大小: `Command` + `Shift` + "方向键"
+* 缩放窗口 `Command` + `Z`
+* 调整窗口布局 `Command` + `Shift` + `Z`
+* 字体放大 `Command` + `+`
+* 字体缩小 `Command` + `-`
+* 字体重置 `Command` + `0`
+* 同步输入 `Command` + `I`
