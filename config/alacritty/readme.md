@@ -38,3 +38,4 @@ c
 * 字体缩小 `Command` + `-`
 * 字体重置 `Command` + `0`
 * 同步输入 `Command` + `I`
+* 最近访问窗口 `Command` + `E`

@@ -45,6 +45,8 @@ window: # 重启生效
 scrolling:
   history: 10000 # 回滚区最大行数
   multiplier: 3  # 滚动距离
+  # faux_multiplier: 0 # 假滚动, tmux 备用屏幕缓冲区激活时滚动，0 禁用
+  # auto_scroll: true #当新文本写入终端时滚动到底部。
 
 font: # 字体设置
   normal:
@@ -106,7 +108,7 @@ bell: # 每次收到BEL控制字符时，铃声就会响起。
   #   - Linear
   animation: EaseOutExpo # 视觉铃声响起时闪烁屏幕的动画效果。
 
-  duration: 0 # 视觉铃声闪烁的持续时间
+  duration: 2 # 视觉铃声闪烁的持续时间
   color: '#ffffff' # 视角动画颜色
 
   # Bell Command
@@ -501,6 +503,7 @@ key_bindings:
   - { key: D,        mods: Command|Shift, chars: "\x60%"}  # 水平切分
   - { Key: T,        mods: Command,       chars: "\x60c"}  # 新建 windows
   - { key: N,        mods: Command,       chars: "\x60\x61"} # 新建 Session
+  - { key: N,        mods: Command|Shift, command: { program: "/opt/homebrew/bin/alacritty", args: ["msg", "create-window", "-e", "/opt/homebrew/bin/zsh", "--login"] } }
 
   # 关闭
   - { key: W,        mods: Command,       chars: "\x60x"} # 关闭 pane
@@ -527,6 +530,7 @@ key_bindings:
   - { key: K,        mods: Command|Shift, chars: "\x60K"}
 
   # 访问 windows
+  - { key: E,        mods: Command,       chars: "\x60\x05"} # Command + e 上次访问
   - { key: Key1,     mods: Command,       chars: "\x601"} # Command + 1 tmux 第一个窗口
   - { key: Key2,     mods: Command,       chars: "\x602"}
   - { key: Key3,     mods: Command,       chars: "\x603"}
@@ -572,7 +576,6 @@ key_bindings:
   - { Key: Up,       mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
   - { Key: Right,    mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
   - { Key: Left,     mods: Control|Shift, chars: "\x02\x1b\x5b\x44"}
-
 
   - { key: Key0,     mods: Control,       chars: "\x020"} # Control + 0 tmux 第一个窗口
   - { key: Key1,     mods: Control,       chars: "\x021"}

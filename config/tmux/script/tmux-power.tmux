@@ -12,16 +12,6 @@ tmux_set() {
     tmux set-option -gq "$1" "$2"
 }
 
-# Options
-right_arrow_icon=''
-left_arrow_icon=''
-upload_speed_icon=''
-download_speed_icon=''
-show_upload_speed="$(tmux_get @tmux_power_show_upload_speed false)"
-show_download_speed="$(tmux_get @tmux_power_show_download_speed false)"
-show_web_reachable="$(tmux_get @tmux_power_show_web_reachable false)"
-prefix_highlight_pos=$(tmux_get @tmux_power_prefix_highlight_pos)
-# short for Theme-Colour
 TC=$(tmux_get '@tmux_power_theme' 'onedark')
 case $TC in
     'gold' )
@@ -80,20 +70,15 @@ onedark_comment_grey="#5c6370"
 FG="$onedark_white"  # 前景色
 BG="$onedark_black"  # 背景色
 
+
+right_arrow_icon=''
+left_arrow_icon=''
+
 #==========通用颜色配置=================
-tmux_set status-fg "$FG"    # 状态栏背景色
-tmux_set status-bg "$BG"    # 状态栏前景色
-tmux_set status-attr none
+tmux_set status-style "fg=$FG,bg=$BG" # 状态栏样式
 
 tmux_set message-style "fg=$FG,bg=$BG"          # 消息前景背景色
 tmux_set message-command-style "fg=$FG,bg=$BG"  # 设置状态行消息命令样式
-
-set -g window-style "fg=$onedark_comment_grey" # 设置窗口样式
-set -g window-active-style "fg=$onedark_white" # 设置活动窗口样式
-
-set -g window-status-style "bg=$onedark_black, fg=$onedark_white" # 设置窗口状态样式
-set -g window-status-activity-style "bg=$onedark_black, fg=$onedark_white" # 设置活动窗口状态样式
-tmux_set window-status-current-statys "fg=$TC,bg=$BG" # 设置当前活动窗口的状态栏样式
 
 tmux_set pane-border-style "fg=$FG,bg=$BG" # 设置面板默认分割线的颜色
 tmux_set pane-active-border-style "fg=$onedark_green,bg=$BG" # 设置活动面板分割线的颜色
@@ -103,48 +88,69 @@ tmux_set display-panes-active-colour "$onedark_yellow" # 设置活动窗格颜�
 
 tmux_set mode-style "bg=#202529,fg=#91A8BA" # 设置复制模式下的高亮颜色
 
-tmux_set window-status-format " #I:#W#F "
-tmux_set window-status-current-format "#[fg=$BG,bg=$G06]$right_arrow_icon#[fg=$TC,bold] #I:#W#F #[fg=$G06,bg=$BG,nobold]$right_arrow_icon"
+tmux_set window-status-separator ""
 
 tmux_set clock-mode-colour "$TC"        # 时钟模式
 tmux_set clock-mode-style 24
 
+#==================Windows状态栏=======
+StartFormat="#[fg=$BG,bg=$onedark_visual_grey,nobold,noitalics,nounderscore]$right_arrow_icon"
+EndFormat="$WSFormat#[fg=$onedark_visual_grey,bg=$BG,nobold,noitalics,nounderscore]$right_arrow_icon"
+
+WSFormat="$StartFormat #{?#{==:#{pane_current_command},ssh},#[fg=$onedark_red]#I #W  ,#[fg=$FG]#I #W }"
+WSFormat="$WSFormat#[fg=$onedark_red]#{?window_bell_flag, ,}"
+WSFormat="$WSFormat#[fg=$onedark_red]#{?window_activity_flag, ,}"
+WSFormat="$WSFormat#[fg=$onedark_green]#{?window_last_flag, ,}"
+WSFormat="$WSFormat#[fg=$onedark_green]#{?window_zoomed_flag, ,}$EndFormat"
+
+WSCFormat="#[fg=$BG,bg=cyan,nobold,noitalics,nounderscore]$right_arrow_icon"
+WSCFormat="$WSCFormat#[fg=$onedark_black] #I #W "
+WSCFormat="$WSCFormat#[fg=$onedark_green]#{?window_zoomed_flag, ,}"
+WSCFormat="$WSCFormat#[fg=$onedark_green]#{?#{==:#{pane_current_command},ssh}, ,}"
+WSCFormat="$WSCFormat#[fg=$onedark_green] "
+WSCFormat="$WSCFormat#[fg=cyan,bg=$BG,nobold,noitalics,nounderscore]$right_arrow_icon"
+
+tmux_set window-status-format "$WSFormat"
+tmux_set window-status-current-format "$WSCFormat"
+tmux_set window-status-bell-style 'blink' # sleep 2 && echo -e "\a"
+tmux_set window-status-activity-style 'blink' # ssh 警告
+
 #===========左状态栏===================
 #     
+# ' 
+# https://www.nerdfonts.com/cheat-sheet
+session_icon="﬿ "
 
-user_icon=''
-session_icon="'"
-LS="#[fg=$onedark_black,bg=$onedark_green,bold] $session_icon#S "
-tmux_set status-left "$LS"
+tmux_set status-left-length 100
+tmux_set status-left-style none
+# 展示 ssh 红色，yellow 命令模式, green 正常模式
+statusBase="#{?#{==:#{pane_current_command},ssh},#[bg=$onedark_red] #S $session_icon#[fg=$onedark_red]#[bg=$BG],#[bg=$onedark_green] #S $session_icon#[fg=$onedark_green]#[bg=$BG]}"
+tmux_set status-left "#[fg=$BG]#{?client_prefix,#[bg=$onedark_yellow] #S $session_icon#[fg=$onedark_yellow]#[bg=$BG],$statusBase}"
 
 #===========右状态栏===================
-# Right side of status bar
-# tmux_set status-right-bg "$BG"
-# tmux_set status-right-fg "G12"
-# tmux_set status-right-length 150
-
 time_icon=""
 date_icon="'"
 time_format='%T'
 date_format='%F'
+upload_speed_icon=''
+download_speed_icon=''
+tmux_set status-right-length 150
+tmux_set status-right-style none
 
-RS="#[fg=$G06]$left_arrow_icon#[fg=$TC,bg=$G06] $time_icon $time_format #[fg=$TC,bg=$G06]$left_arrow_icon#[fg=$G04,bg=$TC] $date_icon $date_format "
+tmux_set @IM "  #(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/PinyinKeyboard/ZH/')"
+tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
+GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
-if "$show_download_speed"; then
-    RS="#[fg=$G05,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G05] $download_speed_icon #{download_speed} $RS"
-fi
-if "$show_web_reachable"; then
-    RS=" #{web_reachable_status} $RS"
-fi
+viCopyStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$onedark_black]#[bg=$onedark_yellow] COPY #[fg=$BG]#[bg=$onedark_yellow]#[fg=$onedark_black]"
+syncStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$onedark_black]#[bg=$onedark_yellow] SYNC #[fg=$BG]#[bg=$onedark_yellow]#[fg=$onedark_black]"
+gitStatus="#[fg=cyan]#[bg=$BG]#[fg=$onedark_black]#[bg=cyan]  $GIT_BRANCH #[fg=$BG]#[bg=cyan]#[fg=$onedark_black]"
 
-RS="#{prefix_highlight}$RS"  # 高亮插件
+RS="#[fg=$onedark_green,bg=$onedark_black]#[fg=$onedark_black,bg=$onedark_green]#{E:@IM} "
+RS="#[fg=$FG,bg=$BG] $date_icon $date_format#[fg=$BG,bg=$BG]$RS"
+RS="#[fg=$FG,bg=$BG] $time_icon $time_format#[fg=$BG]$RS"
+RS="#[fg=$FG,bg=$BG] $download_speed_icon #{E:@download_speed} $RS" # 网络速度
+RS="#{?$GIT_BRANCH,$gitStatus,}$RS"
+RS="#{?pane_in_mode,$viCopyStatus,}$RS"
+RS="#{?synchronize-panes,$syncStatus,}$RS"
+
 tmux_set status-right "$RS"
-
-#===========配置高亮插件命令行===============
-# tmux-prefix-highlight
-tmux_set @prefix_highlight_fg "$BG"
-tmux_set @prefix_highlight_bg "$FG"
-tmux_set @prefix_highlight_show_copy_mode 'on'
-tmux_set @prefix_highlight_copy_mode_attr "fg=$TC,bg=$BG,bold"
-tmux_set @prefix_highlight_output_prefix "#[fg=$TC]#[bg=$BG]$left_arrow_icon#[bg=$TC]#[fg=$BG]"
-tmux_set @prefix_highlight_output_suffix "#[fg=$TC]#[bg=$BG]$right_arrow_icon"
