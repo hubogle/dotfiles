@@ -94,6 +94,8 @@ tmux_set clock-mode-colour "$TC"        # 时钟模式
 tmux_set clock-mode-style 24
 
 #==================Windows状态栏=======
+HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
+
 StartFormat="#[fg=$BG,bg=$onedark_visual_grey,nobold,noitalics,nounderscore]$right_arrow_icon"
 EndFormat="$WSFormat#[fg=$onedark_visual_grey,bg=$BG,nobold,noitalics,nounderscore]$right_arrow_icon"
 
@@ -104,9 +106,10 @@ WSFormat="$WSFormat#[fg=$onedark_green]#{?window_last_flag, ,}"
 WSFormat="$WSFormat#[fg=$onedark_green]#{?window_zoomed_flag, ,}$EndFormat"
 
 WSCFormat="#[fg=$BG,bg=cyan,nobold,noitalics,nounderscore]$right_arrow_icon"
-WSCFormat="$WSCFormat#[fg=$onedark_black] #I #W "
+# WSCFormat="$WSCFormat#[fg=$BG] #I #W "
+WSCFormat="$WSCFormat#{?#{==:#{pane_current_command},ssh},#[fg=$BG]#[bold] #I $HOST_NAME #[fg=$onedark_green] ,#[fg=$BG]#[bold] #I #W }"
+# WSCFormat="$WSCFormat#[fg=$onedark_green]#{?#{==:#{pane_current_command},ssh}, ,}"
 WSCFormat="$WSCFormat#[fg=$onedark_green]#{?window_zoomed_flag, ,}"
-WSCFormat="$WSCFormat#[fg=$onedark_green]#{?#{==:#{pane_current_command},ssh}, ,}"
 WSCFormat="$WSCFormat#[fg=$onedark_green] "
 WSCFormat="$WSCFormat#[fg=cyan,bg=$BG,nobold,noitalics,nounderscore]$right_arrow_icon"
 
@@ -137,15 +140,20 @@ download_speed_icon=''
 tmux_set status-right-length 150
 tmux_set status-right-style none
 
-tmux_set @IM "  #(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/PinyinKeyboard/ZH/')"
+# tmux_set @IM "  #(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/SCIM/ZH/')"
+
 tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
-viCopyStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$onedark_black]#[bg=$onedark_yellow] COPY #[fg=$BG]#[bg=$onedark_yellow]#[fg=$onedark_black]"
-syncStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$onedark_black]#[bg=$onedark_yellow] SYNC #[fg=$BG]#[bg=$onedark_yellow]#[fg=$onedark_black]"
-gitStatus="#[fg=cyan]#[bg=$BG]#[fg=$onedark_black]#[bg=cyan]  $GIT_BRANCH #[fg=$BG]#[bg=cyan]#[fg=$onedark_black]"
+viCopyStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$BG]#[bg=$onedark_yellow] COPY #[fg=$BG]#[bg=$onedark_yellow]#[fg=$BG]"
+syncStatus="#[fg=$onedark_yellow]#[bg=$BG]#[fg=$BG]#[bg=$onedark_yellow] SYNC #[fg=$BG]#[bg=$onedark_yellow]#[fg=$BG]"
+gitStatus="#[fg=cyan]#[bg=$BG]#[fg=$BG]#[bg=cyan]  $GIT_BRANCH #[fg=$BG]#[bg=cyan]#[fg=$BG]"
+sshStatus="#[fg=$onedark_red]#[bg=$BG]#[fg=$BG]#[bg=$onedark_red] $HOST_NAME "
+localStatus="#[fg=$onedark_green]#[bg=$BG]#[fg=$BG]#[bg=$onedark_green] #H "
 
-RS="#[fg=$onedark_green,bg=$onedark_black]#[fg=$onedark_black,bg=$onedark_green]#{E:@IM} "
+# RS="#[fg=$onedark_green,bg=$BG]#[fg=$BG,bg=$onedark_green]#{E:@IM} "
+
+RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,$localStatus}"
 RS="#[fg=$FG,bg=$BG] $date_icon $date_format#[fg=$BG,bg=$BG]$RS"
 RS="#[fg=$FG,bg=$BG] $time_icon $time_format#[fg=$BG]$RS"
 RS="#[fg=$FG,bg=$BG] $download_speed_icon #{E:@download_speed} $RS" # 网络速度
