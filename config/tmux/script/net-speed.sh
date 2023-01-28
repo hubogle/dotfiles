@@ -11,20 +11,6 @@ get_bytes() {
                 grep "$1" | awk '{print $2}'
 }
 
-set_tmux_option() {
-    local option="$1"
-    local value="$2"
-    tmux set-option -gq "$option" "$value"
-}
-
-get_tmux_option() {
-    local option=$1
-    local default_value=$2
-    local option_value="$(tmux show-option -gqv "$option")"
-
-    [[ -z "$option_value" ]] && echo $default_value || echo $option_value
-}
-
 # ref: https://unix.stackexchange.com/a/98790 @John
 bytestohuman() {
     local L_BYTES="${1:-0}"
@@ -44,15 +30,13 @@ bytestohuman() {
 # $1: rx_bytes/tx_bytes
 get_speed() {
     local pre cur diff speed pre_var
-    pre_var="@netspeed_$1"
+    pre=$(get_bytes "$1")
+    sleep 1
     cur=$(get_bytes "$1")
-    pre=$(get_tmux_option "$pre_var" "$cur") # 获取上次网络值
     diff=$((cur - pre))
     (( diff < 0 )) && diff=0
     speed=$(bytestohuman $diff)
-    # speed=$(numfmt --to=iec --padding=7 $diff)
     echo "${speed}/s"
-    set_tmux_option "$pre_var" "$cur" # 存储本次网络值
 }
 
 # $1: tx_bytes/rx_bytes

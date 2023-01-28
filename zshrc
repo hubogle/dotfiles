@@ -95,6 +95,12 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 #===================BindKey=========================
 bindkey '^f' vi-forward-word # 右移一个单词 [option]+[→] 和 [option]+[←]
 bindkey '^b' vi-backward-word
+#===================LSCOLOR=========================
+# 彩色补全菜单
+# https://github.com/trapd00r/LS_COLORS  LS_COLORS环境变量
+export CLICOLOR=1
+export LS_COLORS="$(vivid generate one-dark)"                 # vivid themes 预览
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 #===================ALIAS===========================
 alias ls='exa'
 alias cat='bat'

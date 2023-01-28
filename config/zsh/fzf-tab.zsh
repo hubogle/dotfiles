@@ -28,11 +28,6 @@ zstyle ':completion:*' complete-options true                  # 自动完成cd�
 zstyle ':completion:*' rehash true                            # 自动更新PATH条目
 zstyle ':completion:*' verbose yes                            # 详细的完成结果
 
-# 彩色补全菜单
-# https://github.com/trapd00r/LS_COLORS  LS_COLORS环境变量
-export LS_COLORS="$(vivid generate one-dark)"                 # vivid themes 预览
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
-
 #模糊匹配，错误校正
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only

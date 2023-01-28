@@ -28,7 +28,7 @@ window: # 重启生效
   # transparent: 标题栏、透明背景和标题栏按钮
   # buttonless: 标题栏、透明背景和无标题栏按钮
   decorations: buttonless #  窗口样式
-  opacity: 0.96  # 窗口透明度
+  opacity: 0.95  # 窗口透明度
 
   #   - Windowed
   #   - Maximized
@@ -559,8 +559,8 @@ key_bindings:
   - { key: S,        mods: Command,       chars: "\x60S"} # 展开 choose-tree
 
   # 服务器 tmux 快捷键
-  - { Key: D,        mods: Control,       chars: "\x02\""} # 左右拆分
-  - { Key: D,        mods: Control|Shift, chars: "\x02%"} # 上下拆分
+  - { Key: D,        mods: Option,        chars: "\x02\""} # 左右拆分
+  - { Key: D,        mods: Option|Shift,  chars: "\x02%"} # 上下拆分
   - { Key: Comma,    mods: Control,       chars: "\x02,"} # 重命名
   - { key: Period,   mods: Control|Shift, chars: "\x02."} # 修改当前窗口编号
   - { Key: T,        mods: Control,       chars: "\x02c"} # 新建 windows
