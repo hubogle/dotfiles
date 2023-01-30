@@ -131,3 +131,13 @@ function unproxy(){
     unset all_proxy
     echo -e "关闭代理"
 }
+
+ssh() {
+    if (ps -p $(ps -p $$ -o ppid=) -o comm=) | grep -qw tmux; then
+        tmux rename-window "$(echo $* | rev | cut -d ' ' -f1 | rev | cut -d . -f 1)"
+        command ssh "$@"
+        tmux set-window-option automatic-rename "on" 1>/dev/null
+    else
+        command ssh "$@"
+    fi
+}
