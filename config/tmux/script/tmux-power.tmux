@@ -33,6 +33,8 @@ left_arrow_icon=''
 
 # https://man7.org/linux/man-pages/man1/tmux.1.html
 #==========通用颜色配置=================
+# tmux_set popup-border-style "bg=$BG,fg=$BG" # popup 边缘背景色
+
 tmux_set status-style "fg=$FG,bg=$BG" # 状态栏样式
 
 tmux_set message-style "fg=$FG,bg=$BG"          # 消息前景背景色

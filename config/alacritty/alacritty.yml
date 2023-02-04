@@ -557,6 +557,7 @@ key_bindings:
   - { key: Z,        mods: Command|Shift, chars: "\x60 "} # 切换 pane 布局
   - { key: I,        mods: Command,       chars: "\x60y"} # 同步输入
   - { key: S,        mods: Command,       chars: "\x60S"} # 展开 choose-tree
+  - { key: G,        mods: Command,       chars: "\x60G"} # 展开 choose-tree
 
   # 服务器 tmux 快捷键
   - { Key: D,        mods: Option,        chars: "\x02\""} # 左右拆分

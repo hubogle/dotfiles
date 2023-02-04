@@ -17,9 +17,9 @@ ln -sfn $DOTFILES_DIRS/config/rime/opencc ~/Library/Rime/opencc
 
 # put this script in ~/Library/Rime
 
-cd ~/Library/Rime
-DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel" --quit
-DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/rime_dict_manager" -s
+# cd ~/Library/Rime
+# DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel" --quit
+# DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/rime_dict_manager" -s
 
 # sublime
 ln -sfn $DOTFILES_DIRS/config/sublime/config ~/Library/Application\ Support/Sublime\ Text/Packages/User/Preferences.sublime-settings
