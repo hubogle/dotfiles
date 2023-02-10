@@ -26,7 +26,7 @@ local App2Ime = {
 }
 
 local function Chinese()    -- 中文
-    hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Rime")
+    hs.keycodes.currentSourceID("im.rime.inputmethod.Squirrel.Hans")
 end
 
 local function English()    -- 英文
