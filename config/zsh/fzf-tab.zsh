@@ -26,12 +26,11 @@ zstyle ':completion:*' cache-path "$HOME/.cache/zi/zcompcache"
 zstyle ':completion:*' menu select                            # 允许您在菜单中选择
 zstyle ':completion:*' complete-options true                  # 自动完成cd而不是目录堆栈的选项
 zstyle ':completion:*' rehash true                            # 自动更新PATH条目
-zstyle ':completion:*' verbose yes                            # 详细的完成结果
 
 #模糊匹配，错误校正
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'  # 大小写模糊，虚线值的智能匹配，例如f-b匹配foo-bar
 
 #路径补全
@@ -44,17 +43,28 @@ zstyle ':completion:*' accept-exact-dirs true    # 如果目录存在，不要�
 zstyle ':completion:*' sort false             # 关闭默认排序
 zstyle ':completion:*' file-sort modification # 修改日期对完成列表进行排序
 
-#补全类型提示分组
-zstyle ':completion:*' group-name ''          # 按类别将结果分组
-zstyle ':completion:*' list-dirs-first true   # 将目录和文件分开
-zstyle ':completion:*' format '[%d]'          # 添加这个才会分组
+#漂亮的补全
+#https://wiki.zshell.dev/docs/guides/customization#pretty-completions
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
+
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+
+zstyle ':completion:*' group-name ''          # 按类别将结果分组
+zstyle ':completion:*' verbose yes            # 详细的完成结果
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+zstyle ':completion:*' list-dirs-first true   # 将目录和文件分开
+zstyle ':completion:*' format '[%d]'          # 添加这个才会分组
 # zstyle ':completion:*:*:(vi|vim):*' ignored-patterns '*.(o|d)'  # 智能提示时忽略 o d 结尾文件
 
 # 分页期间的漂亮消息
-zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+# zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 
 # scp file username@<TAB><TAB>:/<TAB>
