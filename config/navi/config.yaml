@@ -20,8 +20,8 @@ finder:
 
 cheats:
   paths:
-    - ~/Documents/File/cheats
-    # - ~/Library/Application Support/navi
+    # - ~/Documents/File/cheats
+    - ~/Library/Application Support/navi
 
 # search:
   # tags: git,!checkout # equivalent to the --tag-rules option

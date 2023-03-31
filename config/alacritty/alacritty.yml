@@ -556,8 +556,10 @@ key_bindings:
   - { key: Return,   mods: Command|Shift, chars: "\x60 "} # 切换 pane 布局
   - { key: Z,        mods: Command|Shift, chars: "\x60 "} # 切换 pane 布局
   - { key: I,        mods: Command,       chars: "\x60y"} # 同步输入
-  - { key: S,        mods: Command,       chars: "\x60S"} # 展开 choose-tree
-  - { key: G,        mods: Command,       chars: "\x60G"} # 展开 choose-tree
+  # - { key: S,        mods: Option,        chars: "\x60S"} # 展开 choose-tree
+  - { key: G,        mods: Command,       chars: "\x60G"} # open navi
+  - { key: T,        mods: Command|Shift, chars: "\x60C"}
+  - { key: S,        mods: Command,       chars: "\x1b:w\x0a"} # Type <escape>:w<enter> to save vim
 
   # 服务器 tmux 快捷键
   - { Key: D,        mods: Option,        chars: "\x02\""} # 左右拆分
