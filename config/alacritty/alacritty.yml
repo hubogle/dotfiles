@@ -1,4 +1,3 @@
-
 import:
   - ~/.config/alacritty/alacritty_color_schemes.yml
 
@@ -7,8 +6,7 @@ env: # 设置终端 256 色
   TERM: xterm-256color
 
 window: # 重启生效
-
-  dimensions:  # 默认初始化大小
+  dimensions: # 默认初始化大小
     columns: 120
     lines: 40
 
@@ -16,7 +14,7 @@ window: # 重启生效
   #  x: 0
   #  y: 0
 
-  padding:     # 窗口边缘空白
+  padding: # 窗口边缘空白
     x: 0
     y: 0
 
@@ -28,7 +26,7 @@ window: # 重启生效
   # transparent: 标题栏、透明背景和标题栏按钮
   # buttonless: 标题栏、透明背景和无标题栏按钮
   decorations: buttonless #  窗口样式
-  opacity: 0.95  # 窗口透明度
+  opacity: 0.95 # 窗口透明度
 
   #   - Windowed
   #   - Maximized
@@ -44,7 +42,7 @@ window: # 重启生效
 
 scrolling:
   history: 10000 # 回滚区最大行数
-  multiplier: 3  # 滚动距离
+  multiplier: 3 # 滚动距离
   # faux_multiplier: 0 # 假滚动, tmux 备用屏幕缓冲区激活时滚动，0 禁用
   # auto_scroll: true #当新文本写入终端时滚动到底部。
 
@@ -91,8 +89,7 @@ font: # 字体设置
   # defaults write -g AppleFontSmoothing -int 0
   builtin_box_drawing: true # true 对方框图形字符使用内置字体
 
-draw_bold_text_with_bright_colors: true  # true 使用明亮的颜色变体绘制粗体文本。
-
+draw_bold_text_with_bright_colors: true # true 使用明亮的颜色变体绘制粗体文本。
 
 bell: # 每次收到BEL控制字符时，铃声就会响起。
   # Values for `animation`:
@@ -109,7 +106,7 @@ bell: # 每次收到BEL控制字符时，铃声就会响起。
   animation: EaseOutExpo # 视觉铃声响起时闪烁屏幕的动画效果。
 
   duration: 2 # 视觉铃声闪烁的持续时间
-  color: '#ffffff' # 视角动画颜色
+  color: "#ffffff" # 视角动画颜色
 
   # Bell Command
   #
@@ -140,7 +137,7 @@ cursor:
     #   - Off: 默认情况下禁用闪烁
     #   - On: 默认情况下启用闪烁
     #   - Always: 强制光标始终闪烁
-    blinking: Always  # 光标闪烁状态
+    blinking: Always # 光标闪烁状态
 
   # Vi mode cursor style
   #
@@ -179,9 +176,9 @@ shell:
     - main
   # program: /bin/zsh
   # args:
-    # - -l
-    # - -c
-    # - "/opt/homebrew/bin/tmux new-session -A -D -s main"
+  # - -l
+  # - -c
+  # - "/opt/homebrew/bin/tmux new-session -A -D -s main"
 
 # 启动目录
 #
@@ -236,8 +233,9 @@ hints:
   #       Move the vi mode cursor to the beginning of the hint.
 
   enabled:
-    - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
-               [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+    - regex:
+        "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+        [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
       command: open
       post_processing: true
       mouse:
@@ -497,112 +495,119 @@ hints:
 
 # 按键绑定
 key_bindings:
-  - { key: Back, action:  ReceiveChar} # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
+  - { key: Back, action: ReceiveChar } # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
   # 新建
-  - { key: D,        mods: Command,       chars: "\x60\""} # 垂直切分
-  - { key: D,        mods: Command|Shift, chars: "\x60%"}  # 水平切分
-  - { Key: T,        mods: Command,       chars: "\x60c"}  # 新建 windows
-  - { key: N,        mods: Command,       chars: "\x60\x61"} # 新建 Session
-  - { key: N,        mods: Command|Shift, command: { program: "/opt/homebrew/bin/alacritty", args: ["msg", "create-window", "-e", "/opt/homebrew/bin/zsh", "--login"] } }
+  - { key: D, mods: Command, chars: "\x60\"" } # 垂直切分
+  - { key: D, mods: Command|Shift, chars: "\x60%" } # 水平切分
+  - { key: T, mods: Command, chars: "\x60c" } # 新建 windows
+  - { key: N, mods: Command, chars: "\x60\x61" } # 新建 Session
+  - {
+      key: N,
+      mods: Command|Shift,
+      command:
+        {
+          program: "/opt/homebrew/bin/alacritty",
+          args:
+            ["msg", "create-window", "-e", "/opt/homebrew/bin/zsh", "--login"],
+        },
+    }
 
   # 关闭
-  - { key: W,        mods: Command,       chars: "\x60x"} # 关闭 pane
-  - { key: W,        mods: Command|Shift, chars: "\x60&"} # 关闭 windows
+  - { key: W, mods: Command, chars: "\x60x" } # 关闭 pane
+  - { key: W, mods: Command|Shift, chars: "\x60&" } # 关闭 windows
 
   # 访问 pane
-  - { Key: J,        mods: Option,        chars: "\x60j"}
-  - { Key: K,        mods: Option,        chars: "\x60k"}
-  - { Key: L,        mods: Option,        chars: "\x60l"}
-  - { Key: H,        mods: Option,        chars: "\x60h"}
-  - { Key: Down,     mods: Command,       chars: "\x60j"}
-  - { Key: Up,       mods: Command,       chars: "\x60k"}
-  - { Key: Right,    mods: Command,       chars: "\x60l"}
-  - { Key: Left,     mods: Command,       chars: "\x60h"}
+  - { key: J, mods: Option, chars: "\x60j" }
+  - { key: K, mods: Option, chars: "\x60k" }
+  - { key: L, mods: Option, chars: "\x60l" }
+  - { key: H, mods: Option, chars: "\x60h" }
+  - { key: Down, mods: Command, chars: "\x60j" }
+  - { key: Up, mods: Command, chars: "\x60k" }
+  - { key: Right, mods: Command, chars: "\x60l" }
+  - { key: Left, mods: Command, chars: "\x60h" }
 
   # 调整 pane 大小
-  - { key: Left,     mods: Command|Shift, chars: "\x60H"} # 左调整大小
-  - { key: Right,    mods: Command|Shift, chars: "\x60L"}
-  - { key: Up,       mods: Command|Shift, chars: "\x60K"}
-  - { key: Down,     mods: Command|Shift, chars: "\x60J"}
-  - { key: H,        mods: Command|Shift, chars: "\x60H"} # 左调整大小
-  - { key: L,        mods: Command|Shift, chars: "\x60L"}
-  - { key: J,        mods: Command|Shift, chars: "\x60J"}
-  - { key: K,        mods: Command|Shift, chars: "\x60K"}
+  - { key: Left, mods: Command|Shift, chars: "\x60H" } # 左调整大小
+  - { key: Right, mods: Command|Shift, chars: "\x60L" }
+  - { key: Up, mods: Command|Shift, chars: "\x60K" }
+  - { key: Down, mods: Command|Shift, chars: "\x60J" }
+  - { key: H, mods: Command|Shift, chars: "\x60H" } # 左调整大小
+  - { key: L, mods: Command|Shift, chars: "\x60L" }
+  - { key: J, mods: Command|Shift, chars: "\x60J" }
+  - { key: K, mods: Command|Shift, chars: "\x60K" }
 
   # 访问 windows
-  - { key: E,        mods: Command,       chars: "\x60\x05"} # Command + e 上次访问
-  - { key: Key1,     mods: Command,       chars: "\x601"} # Command + 1 tmux 第一个窗口
-  - { key: Key2,     mods: Command,       chars: "\x602"}
-  - { key: Key3,     mods: Command,       chars: "\x603"}
-  - { key: Key4,     mods: Command,       chars: "\x604"}
-  - { key: Key5,     mods: Command,       chars: "\x605"}
-  - { key: Key6,     mods: Command,       chars: "\x606"}
-  - { key: Key7,     mods: Command,       chars: "\x067"}
-  - { key: Key8,     mods: Command,       chars: "\x068"}
-  - { key: Key9,     mods: Command,       chars: "\x069"}
+  - { key: E, mods: Command, chars: "\x60\x05" } # Command + e 上次访问
+  - { key: Key1, mods: Command, chars: "\x601" } # Command + 1 tmux 第一个窗口
+  - { key: Key2, mods: Command, chars: "\x602" }
+  - { key: Key3, mods: Command, chars: "\x603" }
+  - { key: Key4, mods: Command, chars: "\x604" }
+  - { key: Key5, mods: Command, chars: "\x605" }
+  - { key: Key6, mods: Command, chars: "\x606" }
+  - { key: Key7, mods: Command, chars: "\x067" }
+  - { key: Key8, mods: Command, chars: "\x068" }
+  - { key: Key9, mods: Command, chars: "\x069" }
 
   # 切换 windows
-  - { key: LBracket, mods: Command,       chars: "\x60p" } # Command + [ 上个窗口
-  - { key: RBracket, mods: Command,       chars: "\x60n" } # Command + ] 下个窗口
-  - { key: Tab,      mods: Option|Shift,  chars: "\x60p"} # 上个窗口
-  - { key: Tab,      mods: Option,        chars: "\x60n"} # 下个窗口
+  - { key: LBracket, mods: Command, chars: "\x60p" } # Command + [ 上个窗口
+  - { key: RBracket, mods: Command, chars: "\x60n" } # Command + ] 下个窗口
+  - { key: Tab, mods: Option|Shift, chars: "\x60p" } # 上个窗口
+  - { key: Tab, mods: Option, chars: "\x60n" } # 下个窗口
   # - { key: Grave,    mods: Option,        chars: "\x60n"} # 下个窗口
 
-
-  - { key: Comma,    mods: Command,       chars: "\x60,"} # , 重命名 windows
-  - { key: Period,   mods: Command|Shift, chars: "\x60."} # 修改当前窗口编号
-  - { key: Return,   mods: Command,       chars: "\x60z"} # 当前 pane 全屏
-  - { key: Z,        mods: Command,       chars: "\x60z"} # 当前 pane 全屏
-  - { key: Return,   mods: Command|Shift, chars: "\x60 "} # 切换 pane 布局
-  - { key: Z,        mods: Command|Shift, chars: "\x60 "} # 切换 pane 布局
-  - { key: I,        mods: Command,       chars: "\x60y"} # 同步输入
+  - { key: Comma, mods: Command, chars: "\x60," } # , 重命名 windows
+  - { key: Period, mods: Command|Shift, chars: "\x60." } # 修改当前窗口编号
+  - { key: Return, mods: Command, chars: "\x60z" } # 当前 pane 全屏
+  - { key: Z, mods: Command, chars: "\x60z" } # 当前 pane 全屏
+  - { key: Return, mods: Command|Shift, chars: "\x60 " } # 切换 pane 布局
+  - { key: Z, mods: Command|Shift, chars: "\x60 " } # 切换 pane 布局
+  - { key: I, mods: Command, chars: "\x60y" } # 同步输入
   # - { key: S,        mods: Option,        chars: "\x60S"} # 展开 choose-tree
-  - { key: G,        mods: Command,       chars: "\x60G"} # open navi
-  - { key: T,        mods: Command|Shift, chars: "\x60C"}
-  - { key: S,        mods: Command,       chars: "\x1b:w\x0a"} # Type <escape>:w<enter> to save vim
+  - { key: G, mods: Command, chars: "\x60G" } # open navi
+  - { key: T, mods: Command|Shift, chars: "\x60C" }
+  - { key: S, mods: Command, chars: "\x1b:w\x0a" } # Type <escape>:w<enter> to save vim
 
   # 服务器 tmux 快捷键
-  - { Key: D,        mods: Option,        chars: "\x02\""} # 左右拆分
-  - { Key: D,        mods: Option|Shift,  chars: "\x02%"} # 上下拆分
-  - { Key: Comma,    mods: Control,       chars: "\x02,"} # 重命名
-  - { key: Period,   mods: Control|Shift, chars: "\x02."} # 修改当前窗口编号
-  - { Key: T,        mods: Control,       chars: "\x02c"} # 新建 windows
-  - { key: W,        mods: Control,       chars: "\x02x"} # 关闭 pane
-  - { key: W,        mods: Control|Shift, chars: "\x02&"} # 关闭 windows
-  - { key: LBracket, mods: Control,       chars: "\x02p"} # Control + [ 上个窗口
-  - { key: RBracket, mods: Control,       chars: "\x02n"} # Control + ] 下个窗口
-  - { key: S,        mods: Control,       chars: "\x02s"} # 切换会话
-  - { key: Z,        mods: Control,       chars: "\x02z"} # 当前 pane 全屏
-  - { key: Tab,      mods: Control,       chars: "\x02n"} # 下一个 windows
-  - { key: Tab,      mods: Control|Shift, chars: "\x02p"}
-  - { Key: Down,     mods: Control|Shift, chars: "\x02\x1b\x5b\x42"}
-  - { Key: Up,       mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
-  - { Key: Right,    mods: Control|Shift, chars: "\x02\x1b\x5b\x43"}
-  - { Key: Left,     mods: Control|Shift, chars: "\x02\x1b\x5b\x44"}
+  - { key: D, mods: Option, chars: "\x02\"" } # 左右拆分
+  - { key: D, mods: Option|Shift, chars: "\x02%" } # 上下拆分
+  - { key: Comma, mods: Control, chars: "\x02," } # 重命名
+  - { key: Period, mods: Control|Shift, chars: "\x02." } # 修改当前窗口编号
+  - { key: T, mods: Control, chars: "\x02c" } # 新建 windows
+  - { key: W, mods: Control, chars: "\x02x" } # 关闭 pane
+  - { key: W, mods: Control|Shift, chars: "\x02&" } # 关闭 windows
+  - { key: LBracket, mods: Control, chars: "\x02p" } # Control + [ 上个窗口
+  - { key: RBracket, mods: Control, chars: "\x02n" } # Control + ] 下个窗口
+  - { key: S, mods: Control, chars: "\x02s" } # 切换会话
+  - { key: Z, mods: Control, chars: "\x02z" } # 当前 pane 全屏
+  - { key: Tab, mods: Control, chars: "\x02n" } # 下一个 windows
+  - { key: Tab, mods: Control|Shift, chars: "\x02p" }
+  - { key: Down, mods: Control|Shift, chars: "\x02\x1b\x5b\x42" }
+  - { key: Up, mods: Control|Shift, chars: "\x02\x1b\x5b\x43" }
+  - { key: Right, mods: Control|Shift, chars: "\x02\x1b\x5b\x43" }
+  - { key: Left, mods: Control|Shift, chars: "\x02\x1b\x5b\x44" }
 
-  - { key: Key0,     mods: Control,       chars: "\x020"} # Control + 0 tmux 第一个窗口
-  - { key: Key1,     mods: Control,       chars: "\x021"}
-  - { key: Key2,     mods: Control,       chars: "\x022"}
-  - { key: Key3,     mods: Control,       chars: "\x023"}
-  - { key: Key4,     mods: Control,       chars: "\x024"}
-  - { key: Key5,     mods: Control,       chars: "\x025"}
-  - { key: Key6,     mods: Control,       chars: "\x026"}
-  - { key: Key7,     mods: Control,       chars: "\x027"}
-  - { key: Key8,     mods: Control,       chars: "\x028"}
-  - { key: Key9,     mods: Control,       chars: "\x029"}
-
+  - { key: Key0, mods: Control, chars: "\x020" } # Control + 0 tmux 第一个窗口
+  - { key: Key1, mods: Control, chars: "\x021" }
+  - { key: Key2, mods: Control, chars: "\x022" }
+  - { key: Key3, mods: Control, chars: "\x023" }
+  - { key: Key4, mods: Control, chars: "\x024" }
+  - { key: Key5, mods: Control, chars: "\x025" }
+  - { key: Key6, mods: Control, chars: "\x026" }
+  - { key: Key7, mods: Control, chars: "\x027" }
+  - { key: Key8, mods: Control, chars: "\x028" }
+  - { key: Key9, mods: Control, chars: "\x029" }
 
   # (macOS only)
   #-----------改变字体--------------
-  - { key: Key0,           mods: Command,                    action: ResetFontSize         }
-  - { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
-  - { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
+  - { key: Key0, mods: Command, action: ResetFontSize }
+  - { key: Plus, mods: Command, action: IncreaseFontSize }
+  - { key: Minus, mods: Command, action: DecreaseFontSize }
 
-  - { key: V,              mods: Command,                    action: Paste                 }
-  - { key: C,              mods: Command,                    action: Copy                  }
-  - { key: M,              mods: Command,                    action: Minimize              }
-  - { key: Q,              mods: Command,                    action: Quit                  }
-  - { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
+  - { key: M, mods: Command, action: Minimize }
+  - { key: Q, mods: Command, action: Quit }
+  - { key: F, mods: Command|Control, action: ToggleFullscreen }
 
   # - { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   # - { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
@@ -618,7 +623,7 @@ key_bindings:
 
   # other
   # https://github.com/alacritty/alacritty/issues/62#issuecomment-347552058
-# Support Alt keys for macOS:
+  # Support Alt keys for macOS:
   # https://github.com/alexherbo2/alacritty-extended-keys/blob/master/keys.yml
 
   # Alt + <letter> ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -823,7 +828,6 @@ debug:
 
   # Print all received window events.
   print_events: false
-
 # Dracula theme for Alacritty
 # https://draculatheme.com/alacritty
 #
