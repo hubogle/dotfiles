@@ -13,14 +13,17 @@ tmux_set() {
 }
 # 使用该方法设置值，tmux 页面会被刷新，shift 选择文本时
 
-black="#282C34"
+# black="#282C34" # one_dark_pro_flat
+# white="#d7dae0" # one_dark_pro_flat
+
+black="#1E1E1E" # vscode 背景色
+white="#D4D4D4" # vscode 背景色
 red="#e05561" # e05561 ff616e
 green="#8cc265" # 8cc265 a5e075
 yellow="#d18f52" # d18f52 f0a45d
 blue="#4aa5f0" # 4aa5f0 4dc4ff
 magenta="#c162de" # c162de de73ff
 cyan="#42b3c2" # 42b3c2 4cd1e0
-white="#d7dae0" # d7dae0 e6e6e6
 visual_grey="#3e4452"
 comment_grey="#5c6370"
 

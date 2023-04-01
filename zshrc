@@ -78,14 +78,17 @@ export GOROOT=$(go env GOROOT)
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
+# https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS="
   --height 40%
   --reverse
-  --border
+  --border none
   --ansi
+  --color=gutter:#1E1E1E,bg+:#1E1E1E,fg:#42b3c2,fg+:#8cc265,hl+:#8cc265
   --bind='ctrl-r:toggle-sort'
   --bind='ctrl-d:execute(source ~/.zi/plugins/larkery---zsh-histdb/sqlite-history.zsh && yes | histdb --forget --exact --yes {} > /dev/null 2>&1)'
 "
+  # --color=gutter:#282c34,bg+:#3e4452,hl:#8cc265,border:#3e4452,fg:#42b3c2 # one_dark_pro_flat 配色
 #=====================zoxide=======================
 export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
 eval "$(zoxide init zsh --cmd cd)"                   # 在调用 compinit 后添加上述行
