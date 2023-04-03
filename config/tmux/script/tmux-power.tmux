@@ -112,9 +112,9 @@ tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 # tmux_set @cpu_usage "#(~/.config/tmux/script/cpu_percentage.sh)"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
-viStatus="#[fg=$yellow]#[bg=$BG]#[fg=$BG]#[bg=$yellow] VIM #[fg=$BG]#[bg=$yellow]#[fg=$BG]"
-syncStatus="#[fg=$yellow]#[bg=$BG]#[fg=$BG]#[bg=$yellow] SYNC #[fg=$BG]#[bg=$yellow]#[fg=$BG]"
-gitStatus="#[fg=$blue]#[bg=$BG]#[fg=$BG]#[bg=$blue]  $GIT_BRANCH #[fg=$BG]#[bg=$blue]#[fg=$BG]"
+viStatus="#[fg=$yellow]#[bg=$BG]#[fg=$BG]#[bg=$yellow]#[bold] VIM #[fg=$BG]#[bg=$yellow]#[fg=$BG]"
+syncStatus="#[fg=$yellow]#[bg=$BG]#[fg=$BG]#[bg=$yellow]#[bold] SYNC #[fg=$BG]#[bg=$yellow]#[fg=$BG]"
+gitStatus="#[fg=$blue]#[bg=$BG]#[fg=$BG]#[bg=$blue]#[bold]  $GIT_BRANCH #[fg=$BG]#[bg=$blue]#[fg=$BG]"
 sshStatus="#[fg=$red]#[bg=$BG]#[fg=$BG]#[bg=$red]#[bold] $HOST_NAME #[fg=$BG]#[bg=$red]#[fg=$BG]"
 localStatus="#[fg=$green]#[bg=$BG]#[fg=$BG]#[bg=$green]#[bold] #H "
 
@@ -123,9 +123,9 @@ localStatus="#[fg=$green]#[bg=$BG]#[fg=$BG]#[bg=$green]#[bold] #H "
 RS="#[fg=#aab2bf,bg=$BG] $date_icon$date_format "
 RS="#[fg=#aab2bf,bg=$BG] $time_icon $time_format $RS"
 # RS="#[fg=#aab2bf,bg=$BG] $cpu_low_icon #{E:@cpu_usage} $RS" # 网络速度
-RS="#[fg=#aab2bf,bg=$BG] $download_speed_icon #{E:@download_speed} $RS" # 网络速度
-RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,}$RS"
+RS="#[fg=#aab2bf,bg=$BG,nobold] $download_speed_icon #{E:@download_speed} $RS" # 网络速度
 RS="#{?$GIT_BRANCH,$gitStatus,}$RS"
+RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,}$RS"
 RS="#{?pane_in_mode,$viStatus,}$RS"
 RS="#{?synchronize-panes,$syncStatus,}$RS"
 
