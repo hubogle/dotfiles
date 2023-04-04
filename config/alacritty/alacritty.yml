@@ -43,9 +43,9 @@ window: # 重启生效
 
 scrolling:
   history: 10000 # 回滚区最大行数
-  multiplier: 3 # 滚动距离
-  # faux_multiplier: 0 # 假滚动, tmux 备用屏幕缓冲区激活时滚动，0 禁用
-  # auto_scroll: true #当新文本写入终端时滚动到底部。
+  multiplier: 0 # 滚动距离 # https://github.com/alacritty/alacritty/issues/2300
+  faux_multiplier: 0 # 假滚动, tmux 备用屏幕缓冲区激活时滚动，0 禁用
+  auto_scroll: true #当新文本写入终端时滚动到底部。
 
 font: # 字体设置
   normal:
@@ -199,7 +199,7 @@ mouse:
   #triple_click: { threshold: 300 }
 
   # 如果为“true”，则键入时光标将暂时隐藏
-  hide_when_typing: false
+  hide_when_typing: true
 
 # 正则表达式提示
 # 终端提示可用于在终端的可见部分查找文本
