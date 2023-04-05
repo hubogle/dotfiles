@@ -41,6 +41,20 @@ window: # 重启生效
   # Allow terminal applications to change Alacritty's window title.
   #dynamic_title: true
 
+  # 装饰主题变体，修改系统主题/GTK主题/Wayland客户端的装饰，默认值为自动选择。
+  # 可支持的值包括“Dark”，“Light”和“None”。将其设置为“None”以使用默认主题变体。
+  decorations_theme_variant: None
+
+  # 调整窗口大小时是否使用各个单元格的离散步长
+  resize_increments: true
+
+  # Make `Option` key behave as `Alt` (macOS only):
+  #   - OnlyLeft
+  #   - OnlyRight
+  #   - Both
+  #   - None (default)
+  option_as_alt: OnlyLeft
+
 scrolling:
   history: 10000 # 回滚区最大行数
   multiplier: 0 # 滚动距离 # https://github.com/alacritty/alacritty/issues/2300
@@ -124,7 +138,7 @@ bell: # 每次收到BEL控制字符时，铃声就会响起。
 
 selection:
   # 包含用作分隔符的所有字符
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t@="
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t.,;?-=_+*^%$#@!~/\\"
   save_to_clipboard: true # 选中文本复制
 
 cursor:
