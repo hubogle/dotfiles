@@ -138,7 +138,7 @@ bell: # 每次收到BEL控制字符时，铃声就会响起。
 
 selection:
   # 包含用作分隔符的所有字符
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t.,;?-=_+*^%$#@!~/\\"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t.,;?=+*^%$#@!~/\\"
   save_to_clipboard: true # 选中文本复制
 
 cursor:
