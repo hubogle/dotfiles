@@ -41,5 +41,7 @@
 	quotepath = false
 [pull]
 	rebase = true
+[push]
+	autoSetupRemot = true
 [sequence]
 	editor = code --wait
