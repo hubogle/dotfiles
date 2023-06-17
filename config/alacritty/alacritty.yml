@@ -213,7 +213,7 @@ mouse:
   #triple_click: { threshold: 300 }
 
   # 如果为“true”，则键入时光标将暂时隐藏
-  hide_when_typing: true
+  hide_when_typing: false
 
 # 正则表达式提示
 # 终端提示可用于在终端的可见部分查找文本

@@ -10,6 +10,12 @@
 
 `zi`插件、`NvChad`、`Tmux`插件、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
+## 软件升级
+
+1. `zi update --all` 更新 `zsh` 的插件和片段。
+2. `brew update && brew upgrade --formula` 升级 `brew` 安装的软件。
+3. `brew cu -af` 升级 `cask` 软件。
+
 ## RCM 使用
 
 - `mkrc` – 将文件转换为由 `rcm` 管理的隐藏文件

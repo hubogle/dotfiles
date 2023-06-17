@@ -91,7 +91,14 @@ export FZF_DEFAULT_OPTS="
   # --color=gutter:#282c34,bg+:#3e4452,hl:#8cc265,border:#3e4452,fg:#42b3c2 # one_dark_pro_flat 配色
 #=====================zoxide=======================
 export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
-eval "$(zoxide init zsh --cmd cd)"                   # 在调用 compinit 后添加上述行
+eval "$(zoxide init zsh --no-cmd)"                   # 在调用 compinit 后添加上述行
+
+# __zoxide_z_complete () {
+#   args=$(zoxide query -l)
+#   _arguments "1:profiles:($args)"
+# }
+
+# zstyle ':completion:*:__zoxide_z:*' sort false
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
