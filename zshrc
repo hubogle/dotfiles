@@ -57,9 +57,16 @@ bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
 zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
 zi light z-shell/F-Sy-H                # 高亮插件
 
+zi ice has'zoxide'
+zi light z-shell/zsh-zoxide
+
+# https://wiki.zshell.dev/docs/getting_started/migration
 zi snippet OMZP::extract               # x 一键解压
 zi snippet OMZL::git.zsh               # git alias
 zi snippet OMZP::git                   # git alias
+zi snippet OMZP::golang                # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/golang
+zi snippet OMZP::gitignore             # https://www.toptal.com/developers/gitignore
+zi snippet OMZP::cp                    # cpv 使用 rsync 带进度条
 
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
@@ -86,19 +93,12 @@ export FZF_DEFAULT_OPTS="
   --ansi
   --color=gutter:#1E1E1E,bg+:#1E1E1E,fg:#42b3c2,fg+:#8cc265,hl+:#8cc265
   --bind='ctrl-r:toggle-sort'
-  --bind='ctrl-d:execute(source ~/.zi/plugins/larkery---zsh-histdb/sqlite-history.zsh && yes | histdb --forget --exact --yes {} > /dev/null 2>&1)'
 "
   # --color=gutter:#282c34,bg+:#3e4452,hl:#8cc265,border:#3e4452,fg:#42b3c2 # one_dark_pro_flat 配色
 #=====================zoxide=======================
 export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
-eval "$(zoxide init zsh --no-cmd)"                   # 在调用 compinit 后添加上述行
-
-# __zoxide_z_complete () {
-#   args=$(zoxide query -l)
-#   _arguments "1:profiles:($args)"
-# }
-
-# zstyle ':completion:*:__zoxide_z:*' sort false
+export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
+eval "$(zoxide init zsh --cmd cd)"                   # 在调用 compinit 后添加上述行
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
@@ -151,3 +151,11 @@ ssh() {
         command ssh "$@"
     fi
 }
+
+# 使用 vim 编辑当前输入的命令
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line                  # control + x + control + e
+bindkey "^[m" copy-prev-shell-word                    # option + m 快速复制前面的单词
+bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark  C-x C-y
+bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls

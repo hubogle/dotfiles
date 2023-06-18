@@ -25,7 +25,7 @@ histdb-fzf-widget() {
   local selected num
   setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
   selected=( $(histdb --host --sep 999 | awk -F'999' '{ if (!seen[$5]++) {print $5} }' |
-    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m --tac" fzf) )
+    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --bind='ctrl-d:execute(source ~/.zi/plugins/larkery---zsh-histdb/sqlite-history.zsh && yes | histdb --forget --exact --yes {} > /dev/null 2>&1)' -n2..,.. --tiebreak=index $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m --tac" fzf) )
   LBUFFER=$selected
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
