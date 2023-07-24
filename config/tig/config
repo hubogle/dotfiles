@@ -3,3 +3,5 @@ set tab-size = 4
 set main-view-date = custom
 set main-view-date-format = "%Y-%m-%d %H:%M "
 set id-width = 8
+bind generic 9 !@sh -c "git rev-parse --short=8 %(commit) | pbcopy"
+

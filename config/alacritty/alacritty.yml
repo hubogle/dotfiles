@@ -601,6 +601,12 @@ key_bindings:
   - { key: Right, mods: Control|Shift, chars: "\x02\x1b\x5b\x43" }
   - { key: Left, mods: Control|Shift, chars: "\x02\x1b\x5b\x44" }
 
+  # Option 按键
+  - { key: Up,    mods: Option, chars: "\x1b[A"} # 向上翻滚命令
+  - { key: Down,  mods: Option, chars: "\x1b[B"} # 向下翻滚命令
+  - { key: Right, mods: Option, chars: "\x1BF" } # 向右移动一个单词
+  - { key: Left,  mods: Option, chars: "\x1BB" } # 向左移动一个单词
+
   - { key: Key0, mods: Control, chars: "\x020" } # Control + 0 tmux 第一个窗口
   - { key: Key1, mods: Control, chars: "\x021" }
   - { key: Key2, mods: Control, chars: "\x022" }
