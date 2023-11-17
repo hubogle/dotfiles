@@ -39,3 +39,6 @@ c
 * 字体重置 `Command` + `0`
 * 同步输入 `Command` + `I`
 * 最近访问窗口 `Command` + `E`
+* 删除整行 `Command` + `Delete`
+* 行首 `Command` + `Left`
+* 行尾 `Command` + `Right`

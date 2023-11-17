@@ -536,10 +536,6 @@ key_bindings:
   - { key: K, mods: Option, chars: "\x60k" }
   - { key: L, mods: Option, chars: "\x60l" }
   - { key: H, mods: Option, chars: "\x60h" }
-  - { key: Down, mods: Command, chars: "\x60j" }
-  - { key: Up, mods: Command, chars: "\x60k" }
-  - { key: Right, mods: Command, chars: "\x60l" }
-  - { key: Left, mods: Command, chars: "\x60h" }
 
   # 调整 pane 大小
   - { key: Left, mods: Command|Shift, chars: "\x60H" } # 左调整大小
@@ -600,6 +596,13 @@ key_bindings:
   - { key: Up, mods: Control|Shift, chars: "\x02\x1b\x5b\x43" }
   - { key: Right, mods: Control|Shift, chars: "\x02\x1b\x5b\x43" }
   - { key: Left, mods: Control|Shift, chars: "\x02\x1b\x5b\x44" }
+
+  # Command 按键
+  - { key: Back, mods: Command, chars: "\x15" } # Delete line
+  - { key: Left, mods: Command, chars: "\x01"} # Home
+  - { key: Right, mods: Command, chars: "\x05"} # End
+  - { key: Down, mods: Command, chars: "\x60j" }
+  - { key: Up, mods: Command, chars: "\x60k" }
 
   # Option 按键
   - { key: Up,    mods: Option, chars: "\x1b[A"} # 向上翻滚命令
