@@ -87,13 +87,15 @@ session_icon="'"
 
 tmux_set status-left-length 100
 tmux_set status-left-style none
-# 展示 ssh 红色，yellow 命令模式, green 正常模式
+# 展示 ssh 红色，yellow 命令模式, green 正常模式, tmux 嵌套蓝色
 
 LS="#[bg=$green] #S $session_icon#[fg=$green]#[bg=$BG]" # 正常模式
 LS="#{?#{==:#{pane_current_command},ssh},#[bg=$red] #S $session_icon#[fg=$red]#[bg=$BG],$LS}" # ssh 红色
 LS="#{?client_prefix,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=$BG],$LS}" # 命令模式 yellow
 LS="#{?synchronize-panes,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=$BG],$LS}" # sync 模式
-LS="#[fg=$BG,bold]#{?pane_in_mode,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=$BG],$LS}" # vi 模式
+LS="#{?pane_in_mode,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=$BG],$LS}" # vi 模式
+LS="#{?#{==:#{client_key_table},off},#[bg=$blue] #S $session_icon#[fg=$blue]#[bg=$BG],$LS}" # tmux 嵌套模式绿色
+LS="#[fg=$BG,bold]$LS"
 tmux_set status-left "$LS"
 
 #===========右状态栏===================
