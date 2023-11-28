@@ -42,3 +42,9 @@ c
 * 删除整行 `Command` + `Delete`
 * 行首 `Command` + `Left`
 * 行尾 `Command` + `Right`
+* 广播输入 `Command` + `Shift` + `I`
+* 输入 `tmux` 命令 `Command` + `I`
+* 向上搜索 `Command` + `F`
+* 向下搜索 `Command` + `Shift` + `F`
+* 输入 `tmux` 命令 `Command` + `I`
+* 同步 `panel` 输入 `Command` + `Shift` + `I`
