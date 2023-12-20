@@ -48,3 +48,17 @@ c
 * 向下搜索 `Command` + `Shift` + `F`
 * 输入 `tmux` 命令 `Command` + `I`
 * 同步 `panel` 输入 `Command` + `Shift` + `I`
+
+## 服务器配置
+
+链接服务器直接登录 `tmux`：`ssh tencent`
+使用其其它终端：`ssh -oRemoteCommand=none tencent`
+
+```
+Host tencent
+    HostName        127.0.0.1
+    User            root
+    IdentityFile    ~/.ssh/id_rsa
+    RequestTTY Yes
+    RemoteCommand tmux new-session -A -D -X -s main /bin/bash
+```
