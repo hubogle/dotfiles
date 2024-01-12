@@ -101,6 +101,7 @@ bindings = [
     { key = "M", mods = "Command", action = "Minimize" },
     { key = "Q", mods = "Command", action = "Quit" },
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
+    { key = "K", mods = "Command", chars = "clear \n" },                  # 清空历史
 
     { key = "Back", action = "ReceiveChar" },                  # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
     { key = "Back", mods = "Command", chars = "\u0015" },      # Delete line
