@@ -43,8 +43,8 @@ tmux_set status-style "fg=$FG,bg=$BG" # 状态栏样式
 tmux_set message-style "fg=$FG,bg=$BG"          # 消息前景背景色
 tmux_set message-command-style "fg=$FG,bg=$BG"  # 设置状态行消息命令样式
 
-tmux_set pane-border-style "fg=$FG,bg=$BG" # 设置面板默认分割线的颜色
-tmux_set pane-active-border-style "fg=$green,bg=$BG" # 设置活动面板分割线的颜色
+tmux_set pane-border-style "fg=$visual_grey" # 设置面板默认分割线的颜色
+tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的颜色
 
 tmux_set display-panes-colour "$blue"          # 设置窗格颜色
 tmux_set display-panes-active-colour "$yellow" # 设置活动窗格颜色
@@ -65,12 +65,12 @@ EndFormat="$WSFormat#[fg=$visual_grey,bg=$BG,nobold,noitalics,nounderscore]$righ
 WSFormat="$StartFormat #[fg=#aab2bf]#I #W #{?#{==:#{pane_current_command},ssh},#[fg=$magenta] ,}"
 WSFormat="$WSFormat#[fg=$red]#{?window_bell_flag, ,}"
 WSFormat="$WSFormat#[fg=$red]#{?window_activity_flag, ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
+WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}$EndFormat"
 
 WSCFormat="#[fg=$BG,bg=$blue,nobold,noitalics,nounderscore]$right_arrow_icon"
 WSCFormat="$WSCFormat#{?#{==:#{pane_current_command},ssh},#[fg=$BG]#[bold] #I #W #[fg=$magenta] ,#[fg=$BG]#[bold] #I #W }"
-WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
+WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
 WSCFormat="$WSCFormat#[fg=$green] "
 WSCFormat="$WSCFormat#[fg=$blue,bg=$BG,nobold,noitalics,nounderscore]$right_arrow_icon"
 

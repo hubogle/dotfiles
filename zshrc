@@ -159,3 +159,8 @@ bindkey '\C-x\C-e' edit-command-line                  # control + x + control + 
 bindkey "^[m" copy-prev-shell-word                    # option + m 快速复制前面的单词
 bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark  C-x C-y
 bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
+
+# vsocde shell integration
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+export VSCODE_SUGGEST=1
+export ITERM_SHELL_INTEGRATION_INSTALLED=Yes
