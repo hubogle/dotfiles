@@ -80,8 +80,9 @@ source $BREW_OPT/asdf/libexec/asdf.sh
 #=======================goEnv====================
 export GO111MODULE=on # auto
 export GOPROXY=https://goproxy.cn
-export GOPATH=$(go env GOPATH)
-export GOROOT=$(go env GOROOT)
+#export GOPATH=$(asdf where golang)/packages
+#export GOROOT=$(asdf where golang)/go
+alias go-reshim='asdf reshim golang && export GOROOT="$(asdf where golang)/go/"'
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
