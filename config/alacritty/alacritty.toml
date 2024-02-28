@@ -102,6 +102,8 @@ bindings = [
     { key = "Q", mods = "Command", action = "Quit" },
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
     { key = "K", mods = "Command", chars = "clear \n" },                  # 清空历史
+    # { key = "I", mods = "Command", chars = "\u001bi" },                   # 触发 aichat 输入
+    { key = "I", mods = "Command", chars = "\u0060I" }, # 触发 aichat 输入
 
     { key = "Back", action = "ReceiveChar" },                  # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
     { key = "Back", mods = "Command", chars = "\u0015" },      # Delete line
@@ -115,8 +117,8 @@ bindings = [
     { key = "Left", mods = "Option", chars = "\u001bB" },      # 向左移动一个单词
 
     # tmux 命令
-    { key = "S", mods = "Command", chars = "\u001b:w\u000a" },     # Type <escape>:w<enter> to save vim
-    { key = "I", mods = "Command", chars = "\u0060:" },            # 输入 tmux 命令
+    { key = "S", mods = "Command", chars = "\u001b:w\u000a" }, # Type <escape>:w<enter> to save vim
+    # { key = "I", mods = "Command", chars = "\u0060:" },            # 输入 tmux 命令
     { key = "I", mods = "Command|Shift", chars = "\u0060y" },      # 同步输入 tmux 命令
     { key = "Comma", mods = "Command", chars = "\u0060," },        # , 重命名 windows
     { key = "Period", mods = "Command|Shift", chars = "\u0060." }, # 修改当前窗口编号

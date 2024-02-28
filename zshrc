@@ -165,3 +165,21 @@ bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: l
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 export VSCODE_SUGGEST=1
 export ITERM_SHELL_INTEGRATION_INSTALLED=Yes
+
+
+_aichat_zsh() {
+    if [[ -n "$BUFFER" ]]; then
+        local _old=$BUFFER
+        BUFFER+="⌛"
+        zle -I && zle redisplay
+        BUFFER=$(aichat -e "$_old")
+        zle end-of-line
+    fi
+}
+zle -N _aichat_zsh
+bindkey '\ei' _aichat_zsh # [Esc-i]
+
+export AICHAT_CONFIG_DIR="~/.config/aichat"
+export AICHAT_ROLES_FILE="~/.config/aichat/roles.yaml"
+export ALL_PROXY="http://127.0.0.1:7890"
+alias ais="aichat -r shell -e"

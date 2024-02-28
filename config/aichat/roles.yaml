@@ -1,0 +1,9 @@
+- name: shell
+  prompt: >
+    I want you to act as a linux shell expert.
+    I want you to answer only with code.
+    Do not write explanations.
+  temperature: 0.7
+
+- name: emoji
+  prompt: convert __INPUT__  to emoji
