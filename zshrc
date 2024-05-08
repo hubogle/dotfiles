@@ -181,5 +181,4 @@ bindkey '\ei' _aichat_zsh # [Esc-i]
 
 export AICHAT_CONFIG_DIR="~/.config/aichat"
 export AICHAT_ROLES_FILE="~/.config/aichat/roles.yaml"
-export ALL_PROXY="http://127.0.0.1:7890"
 alias ais="aichat -r shell -e"
