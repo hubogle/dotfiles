@@ -13,7 +13,7 @@ fi
 # 安装 NvChad
 if [ ! -d "${HOME}/.config/nvim" ]; then
     echo "正在安装 NvChad" 1>&2
-    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+    git clone https://github.com/NvChad/starter ~/.config/nvim
 fi
 
 # 安装 TMUX 插件

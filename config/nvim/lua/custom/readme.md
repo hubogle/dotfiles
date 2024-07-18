@@ -1,6 +1,6 @@
 # 操作手册
 
-* 升级命令: `<leader> + uu`
+* 升级命令: `Lazy sync`
 * 切换主题: `<leader> + th`
 * 健康检查: `check`
 * 按键映射: `Telescope keymaps`
