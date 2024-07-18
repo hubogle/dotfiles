@@ -45,3 +45,5 @@
 	autoSetupRemot = true
 [sequence]
 	editor = code --wait
+[credential]
+	helper = store
