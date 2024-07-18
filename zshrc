@@ -112,16 +112,16 @@ export CLICOLOR=1
 export LS_COLORS="$(vivid generate one-dark)"                 # vivid themes 预览
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 #===================ALIAS===========================
-alias ls='exa'
+alias ls='eza'
 alias cat='bat'
 alias r='trash'
 alias rm='trash'
 alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
-alias l='exa --long --all --git --icons --time-style long-iso --colour-scale --header --group'
-alias ll='exa --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --sort modified'
-alias tree='exa --tree' # -L , --level=(depth)  递归的深度
+alias l='eza --long --all --git --icons --time-style long-iso --colour-scale --header --group'
+alias ll='eza --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --sort modified'
+alias tree='eza --tree' # -L , --level=(depth)  递归的深度
 alias vi='nvim'
 alias vim='nvim'
 alias top='btm'
