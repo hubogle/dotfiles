@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
+RIME_DIR=~/Library/Rime
 # 同步 rime 自定义词库
-ln -sfn $DOTFILES_DIRS/config/rime/rime.lua ~/Library/Rime/rime.lua
-ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.schema.yaml ~/Library/Rime/luna_pinyin_simp.schema.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/easy_en.schema.yaml ~/Library/Rime/easy_en.schema.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.custom.yaml ~/Library/Rime/luna_pinyin_simp.custom.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/default.custom.yaml ~/Library/Rime/default.custom.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/installation.yaml ~/Library/Rime/installation.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin.extended.dict.yaml ~/Library/Rime/luna_pinyin.extended.dict.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/squirrel.custom.yaml ~/Library/Rime/squirrel.custom.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/custom_phrase.txt ~/Library/Rime/custom_phrase.txt
-ln -sfn $DOTFILES_DIRS/config/rime/easy_en.dict.yaml ~/Library/Rime/easy_en.dict.yaml
-ln -sfn $DOTFILES_DIRS/config/rime/opencc ~/Library/Rime/opencc
+if [ -d "$RIME_DIR" ]; then
+  ln -sfn $DOTFILES_DIRS/config/rime/rime.lua $RIME_DIR/rime.lua
+  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.schema.yaml $RIME_DIR/luna_pinyin_simp.schema.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/easy_en.schema.yaml $RIME_DIR/easy_en.schema.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.custom.yaml $RIME_DIR/luna_pinyin_simp.custom.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/default.custom.yaml $RIME_DIR/default.custom.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/installation.yaml $RIME_DIR/installation.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin.extended.dict.yaml $RIME_DIR/luna_pinyin.extended.dict.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/squirrel.custom.yaml $RIME_DIR/squirrel.custom.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/custom_phrase.txt $RIME_DIR/custom_phrase.txt
+  ln -sfn $DOTFILES_DIRS/config/rime/easy_en.dict.yaml $RIME_DIR/easy_en.dict.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/opencc $RIME_DIR/opencc
+fi
 
-#!/usr/bin/env bash
 
 # put this script in ~/Library/Rime
 
