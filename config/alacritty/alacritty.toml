@@ -21,13 +21,13 @@ history = 10000 #  回滚区最大行数
 multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/2300
 
 [font]
-builtin_box_drawing = true                                                  # true 对方框图形字符使用内置字体
+builtin_box_drawing = true                                              # true 对方框图形字符使用内置字体
 size = 12
-offset = { x = 0, y = 0 }                                                   # 字体偏移量
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+offset = { x = 0, y = 0 }                                               # 字体偏移量
+normal = { family = "Hack Nerd Font Mono", style = "Regular" }
+bold = { family = "Hack Nerd Font Mono", style = "Bold" }
+italic = { family = "Hack Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "Hack Nerd Font Mono", style = "Bold Italic" }
 
 [colors]
 draw_bold_text_with_bright_colors = true                                                                                                                           # 使用明亮的颜色变体绘制粗体文本。

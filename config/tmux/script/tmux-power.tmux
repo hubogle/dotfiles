@@ -83,7 +83,7 @@ tmux_set window-status-activity-style 'blink' # ssh 警告
 #     
 # ' 
 # https://www.nerdfonts.com/cheat-sheet
-session_icon="'"
+session_icon=" "
 
 tmux_set status-left-length 100
 tmux_set status-left-style none
@@ -100,7 +100,7 @@ tmux_set status-left "$LS"
 
 #===========右状态栏===================
 time_icon=""
-date_icon="'"
+date_icon=" "
 time_format='%T'
 date_format='%F'
 upload_speed_icon=''
