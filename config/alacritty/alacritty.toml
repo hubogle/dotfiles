@@ -203,4 +203,7 @@ bindings = [
     { key = "Key8", mods = "Control", chars = "\u00028" },
     { key = "Key9", mods = "Control", chars = "\u00029" },
 
+    # 映射给 vim 使用
+    { key = "P", mods = "Command", chars = "\u0002p" },
+
 ]
