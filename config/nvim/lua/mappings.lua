@@ -1,6 +1,7 @@
 require("nvchad.mappings")
 
 -- add yours here
+-- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/mappings.lua
 
 local map = vim.keymap.set
 
@@ -19,6 +20,14 @@ map(
 )
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+-- 跳转缓存区编号 Option + 1
+-- Ctrl(Control) = C- | Alt(Option) = A-
+for i = 1, 9, 1 do
+	map("n", string.format("<C-%s>", i), function()
+		vim.api.nvim_set_current_buf(vim.t.bufs[i])
+	end)
+end
 
 -- format
 map("n", "<leader>fm", function()
