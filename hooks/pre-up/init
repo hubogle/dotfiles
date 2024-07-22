@@ -16,11 +16,6 @@ if [ ! -d "${HOME}/.config/nvim" ]; then
     git clone https://github.com/NvChad/starter ~/.config/nvim
 fi
 
-# 安装 TMUX 插件
-if [ ! -d "${HOME}/.config/tmux" ]; then
-    echo "正在安装 TMUX 插件" 1>&2
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-fi
 
 # tig 历史记录文件位置
 if [ ! -d "${HOME}/.local/share/tig" ]; then
