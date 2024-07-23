@@ -69,6 +69,30 @@ vim.cmd([[
 	augroup END
 ]])
 
+-- 最后一个窗口退出，关闭目录树
+vim.cmd([[ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nvimtree') | q | endif ]])
+
+-- 按 ESC 后切换英文输入法
+vim.cmd([[ autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC]])
+
+-- vim 打开项目时调整 windows name
+vim.api.nvim_create_autocmd("DirChanged", {
+	pattern = "*",
+	callback = function()
+		local cwd = vim.fn.getcwd()
+		local dir_name = vim.fn.fnamemodify(cwd, ":t")  -- 获取路径的最后一部分
+		vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
+	end,
+})
+
+-- vim 退出项目时调整 windows name
+vim.api.nvim_create_autocmd("VimLeave", {
+    pattern = "*",
+    callback = function()
+        vim.fn.system("tmux rename-window 'zsh'")
+    end,
+})
+
 vim.schedule(function()
 	require("mappings")
 end)

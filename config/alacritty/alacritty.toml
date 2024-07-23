@@ -7,11 +7,13 @@ print_events = false
 render_timer = false
 
 [env]
-TERM = "xterm-256color"
+TERM = "screen-256color"
 
 [shell]
-program = "/opt/homebrew/bin/zellij"
-args = ["attach", "--create", "main"]
+program = "/opt/homebrew/bin/tmux"
+args = ["new-session", "-A", "-D", "-s", "main"]
+# args = ["-c", "$(brew --prefix)/bin/bash --login"]
+# program = "sh"
 
 [mouse]
 hide_when_typing = false # 如果为“true”，则键入时光标将暂时隐藏
@@ -104,70 +106,56 @@ bindings = [
     { key = "M", mods = "Command", action = "Minimize" },
     { key = "Q", mods = "Command", action = "Quit" },
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
-    { key = "K", mods = "Command", chars = "clear \n" },                  # 清空历史
-    # { key = "I", mods = "Command", chars = "\u001bi" },                   # 触发 aichat 输入
-    { key = "I", mods = "Command", chars = "\u0060I" }, # 触发 aichat 输入
+    { key = "K", mods = "Command", chars = "reset \n" },                  # 清空历史
 
     { key = "Back", action = "ReceiveChar" },              # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
     { key = "Back", mods = "Command", chars = "\u0015" },  # Delete line
     { key = "Right", mods = "Option", chars = "\u001bF" }, # 向右移动一个单词
     { key = "Left", mods = "Option", chars = "\u001bB" },  # 向左移动一个单词
 
-    # Zellij TAB
-    # https://github.com/zellij-org/zellij/blob/main/zellij-utils/assets/config/default.kdl
-    { key = "Key1", mods = "Command", chars = "\u00141\u001b" }, # Command + 1 tmux 第一个窗口
-    { key = "Key2", mods = "Command", chars = "\u00142\u001b" },
-    { key = "Key3", mods = "Command", chars = "\u00143\u001b" },
-    { key = "Key4", mods = "Command", chars = "\u00144\u001b" },
-    { key = "Key5", mods = "Command", chars = "\u00145\u001b" },
-    { key = "Key6", mods = "Command", chars = "\u00146\u001b" },
-    { key = "Key7", mods = "Command", chars = "\u00147\u001b" },
-    { key = "Key8", mods = "Command", chars = "\u00148\u001b" },
-    { key = "Key9", mods = "Command", chars = "\u00149\u001b" },
+    # tmux windows
+    { key = "E", mods = "Command", chars = "\u0060\u0005" }, # Command + e 上次访问
+    { key = "Key1", mods = "Command", chars = "\u00601" },   # Command + 1 tmux 第一个窗口
+    { key = "Key2", mods = "Command", chars = "\u00602" },
+    { key = "Key3", mods = "Command", chars = "\u00603" },
+    { key = "Key4", mods = "Command", chars = "\u00604" },
+    { key = "Key5", mods = "Command", chars = "\u00605" },
+    { key = "Key6", mods = "Command", chars = "\u00606" },
+    { key = "Key7", mods = "Command", chars = "\u00607" },
+    { key = "Key8", mods = "Command", chars = "\u00608" },
+    { key = "Key9", mods = "Command", chars = "\u00609" },
 
-    { key = "T", mods = "Command", chars = "\u0014n\u001b" }, # 新建 tab
-    { key = "Comma", mods = "Command", chars = "\u0014r" },   # , 重命名 tab
+    # tmux windows 访问
+    { key = "LBracket", mods = "Command", chars = "\u0060p" }, # Command + [ 上个窗口
+    { key = "RBracket", mods = "Command", chars = "\u0060n" }, # Command + ] 下个窗口
+    { key = "Tab", mods = "Option|Shift", chars = "\u0060p" }, # 上个窗口
+    { key = "Tab", mods = "Option", chars = "\u0060n" },       # 下个窗口
 
-    { key = "LBracket", mods = "Command", chars = "\u0014h\u0014" }, # Command + [ 上个窗口
-    { key = "RBracket", mods = "Command", chars = "\u0014l\u0014" }, # Command + ] 下个窗口
-    { key = "Tab", mods = "Option|Shift", chars = "\u0014h\u0014" }, # 上个窗口
-    { key = "Tab", mods = "Option", chars = "\u0014l\u0014" },       # 下个窗口
+    # tmux windwos 修改
+    { key = "T", mods = "Command", chars = "\u0060c" },            # 新建 tab
+    { key = "W", mods = "Command|Shift", chars = "\u0060&" },      # 关闭 windows
+    { key = "Comma", mods = "Command", chars = "\u0060," },        # , 重命名 windows
+    { key = "Period", mods = "Command|Shift", chars = "\u0060." }, # 修改当前窗口编号
 
-    # Zellij pane
-    { key = "D", mods = "Command", chars = "\u0010d" },       # 水平切分
-    { key = "D", mods = "Command|Shift", chars = "\u0010r" }, # 垂直切分
-    { key = "Return", mods = "Option", chars = "\u0010f" },   # 当前 pane 全屏
-    { key = "W", mods = "Command", chars = "\u0010x" },       # 关闭 pane
+    # tmux panel
+    { key = "D", mods = "Command|Shift", chars = "\u0060%" },      # 垂直切分
+    { key = "D", mods = "Command", chars = "\u0060\"" },           # 水平切分
+    { key = "Return", mods = "Option", chars = "\u0060z" },        # 当前 pane 全屏
+    { key = "Return", mods = "Command|Shift", chars = "\u0060 " }, # 切换 pane 布局
+    { key = "W", mods = "Command", chars = "\u0060x" },            # 关闭 pane
 
-    # Zellij
-    { key = "F", mods = "Command", chars = "\u0013s" },
+    { key = "J", mods = "Option", chars = "\u0060j" },
+    { key = "K", mods = "Option", chars = "\u0060k" },
+    { key = "L", mods = "Option", chars = "\u0060l" },
+    { key = "H", mods = "Option", chars = "\u0060h" },
 
-    # tmux 命令
-    # # { key = "I", mods = "Command", chars = "\u0060:" },            # 输入 tmux 命令
-    # { key = "I", mods = "Command|Shift", chars = "\u0060y" },      # 同步输入 tmux 命令
+    # tmux session
+    { key = "H", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
-    # { key = "G", mods = "Command", chars = "\u0060G" },            # open navi
-    # { key = "T", mods = "Command|Shift", chars = "\u0060C" },
-
-    # tmux 服务器快捷键
-    # { key = "D", mods = "Option", chars = "\u0002\"" },                            # 左右拆分
-    # { key = "D", mods = "Option|Shift", chars = "\u0002%" },                       # 上下拆分
-    # { key = "Comma", mods = "Control", chars = "\u0002," },                        # 重命名
-    # { key = "Period", mods = "Control|Shift", chars = "\u0002." },                 # 修改当前窗口编号
-    # { key = "T", mods = "Control", chars = "\u0002c" },                            # 新建 windows
-    # { key = "W", mods = "Control", chars = "\u0002x" },                            # 关闭 pane
-    # { key = "W", mods = "Control|Shift", chars = "\u0002&" },                      # 关闭 windows
-    # { key = "LBracket", mods = "Control", chars = "\u0002p" },                     # Control + [ 上个窗口
-    # { key = "RBracket", mods = "Control", chars = "\u0002n" },                     # Control + ] 下个窗口
-    # { key = "S", mods = "Control", chars = "\u0002s" },                            # 切换会话
-    # { key = "Z", mods = "Control", chars = "\u0002z" },                            # 当前 pane 全屏
-    # { key = "Tab", mods = "Control", chars = "\u0002n" },                          # 下一个 windows
-    # { key = "Tab", mods = "Control|Shift", chars = "\u0002p" },
-    # { key = "Down", mods = "Control|Shift", chars = "\u0002\u001b\u005b\u0042" },
-    # { key = "Up", mods = "Control|Shift", chars = "\u0002\u001b\u005b\u0043" },
-    # { key = "Right", mods = "Control|Shift", chars = "\u0002\u001b\u005b\u0043" },
-    # { key = "Left", mods = "Control|Shift", chars = "\u0002\u001b\u005b\u0044" },
-    # { key = "Key0", mods = "Control", chars = "\u00020" },                         # Control + 0 tmux 第一个窗口
+    # tmux other
+    { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
+    { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
+    { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
 
     # vim 提供模拟 ctrl(control) + number 命令
     { key = "Key1", mods = "Control", chars = "\u001b[49;5u" },
@@ -182,5 +170,10 @@ bindings = [
 
     # 映射给 vim 使用
     { key = "P", mods = "Command", chars = "\u0002p" },
-    { key = "S", mods = "Command", chars = "\u001b:w\u000a" }, # Type <escape>:w<enter> to save vim
+    { key = "S", mods = "Command", chars = "\u001b:w\u000a" },  # Type <escape>:w<enter> to save vim
+    { key = "D", mods = "Option", chars = "\u001b:vsp\u000a" }, # Type <escape>:w<enter> to save vim
+
+    { key = "Escape", mods = "Command", command = { program = "/opt/homebrew/bin/im-select", args = [
+        "com.apple.keylayout.ABC",
+    ] } }, # command + esc 切换 abc
 ]

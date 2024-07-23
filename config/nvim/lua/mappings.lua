@@ -11,12 +11,12 @@ map("n", "q", function()
 	require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
 
-map("n", "<C-b>p", ":Telescope oldfiles<CR>", { noremap = true, silent = true, desc = "Open recently opened files" })
+map("n", "<C-b>p", ":Telescope buffers<CR>", { noremap = true, silent = true, desc = "Open buffers opened files" })
 map(
 	"i",
 	"<C-b>p",
-	"<ESC>:Telescope oldfiles<CR>",
-	{ noremap = true, silent = true, desc = "Open recently opened files" }
+	"<ESC>:Telescope buffers<CR>",
+	{ noremap = true, silent = true, desc = "Open buffers opened files" }
 )
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
