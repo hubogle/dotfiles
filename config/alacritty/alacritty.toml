@@ -115,18 +115,18 @@ bindings = [
 
     # Zellij TAB
     # https://github.com/zellij-org/zellij/blob/main/zellij-utils/assets/config/default.kdl
-    { key = "Key1", mods = "Command", chars = "\u00141" }, # Command + 1 tmux 第一个窗口
-    { key = "Key2", mods = "Command", chars = "\u00142" },
-    { key = "Key3", mods = "Command", chars = "\u00143" },
-    { key = "Key4", mods = "Command", chars = "\u00144" },
-    { key = "Key5", mods = "Command", chars = "\u00145" },
-    { key = "Key6", mods = "Command", chars = "\u00146" },
-    { key = "Key7", mods = "Command", chars = "\u00147" },
-    { key = "Key8", mods = "Command", chars = "\u00148" },
-    { key = "Key9", mods = "Command", chars = "\u00149" },
+    { key = "Key1", mods = "Command", chars = "\u00141\u001b" }, # Command + 1 tmux 第一个窗口
+    { key = "Key2", mods = "Command", chars = "\u00142\u001b" },
+    { key = "Key3", mods = "Command", chars = "\u00143\u001b" },
+    { key = "Key4", mods = "Command", chars = "\u00144\u001b" },
+    { key = "Key5", mods = "Command", chars = "\u00145\u001b" },
+    { key = "Key6", mods = "Command", chars = "\u00146\u001b" },
+    { key = "Key7", mods = "Command", chars = "\u00147\u001b" },
+    { key = "Key8", mods = "Command", chars = "\u00148\u001b" },
+    { key = "Key9", mods = "Command", chars = "\u00149\u001b" },
 
-    { key = "T", mods = "Command", chars = "\u0014n" },     # 新建 tab
-    { key = "Comma", mods = "Command", chars = "\u0014r" }, # , 重命名 tab
+    { key = "T", mods = "Command", chars = "\u0014n\u001b" }, # 新建 tab
+    { key = "Comma", mods = "Command", chars = "\u0014r" },   # , 重命名 tab
 
     { key = "LBracket", mods = "Command", chars = "\u0014h\u0014" }, # Command + [ 上个窗口
     { key = "RBracket", mods = "Command", chars = "\u0014l\u0014" }, # Command + ] 下个窗口

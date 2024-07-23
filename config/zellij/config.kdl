@@ -3,7 +3,14 @@ keybinds clear-defaults=true {
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-        bind "Ctrl k" { SwitchToMode "Normal"; }
+        // bind "Ctrl k" { SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Normal"; }
+        bind "Alt f" {
+            LaunchPlugin "filepicker" {
+                floating true // uncomment this to have the filepicker opened in a floating window
+                close_on_selection true // comment this out to have the filepicker remain open even after selecting a file
+            };
+        }
     }
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -199,6 +206,7 @@ mouse_mode true                    // 鼠标模式
 copy_command "pbcopy"              // osx
 copy_clipboard "system"            // 拷贝到系统还是缓冲区 system (default)、primary
 copy_on_select true                // 释放鼠标时启用或禁用自动复制（和清除）选择
+scrollback_editor "/opt/homebrew/bin/nvim"// Default: $EDITOR or $VISUAL
 
 // layout_dir "/path/to/my/layout_dir"  // 布局的文件夹
 // theme_dir "/path/to/my/theme_dir"    // 主题的文件夹
@@ -207,17 +215,17 @@ copy_on_select true                // 释放鼠标时启用或禁用自动复制
 // https://github.com/zellij-org/zellij/tree/main/zellij-utils/assets/themes
 themes {
     dracula {
-        fg 248 248 242
-        bg 40 42 54
-        black 0 0 0
-        red 255 85 85
-        green 80 250 123
-        yellow 241 250 140
-        blue 98 114 164
-        magenta 255 121 198
-        cyan 139 233 253
-        white 255 255 255
-        orange 255 184 108
+        bg "#acb0be" // Surface2
+        fg "#acb0be" // Surface2
+        red "#d20f39"
+        green "#40a02b"
+        blue "#1e66f5"
+        yellow "#df8e1d"
+        magenta "#ea76cb" // Pink
+        orange "#fe640b" // Peach
+        cyan "#04a5e5" // Sky
+        black "#dce0e8" // Crust
+        white "#4c4f69" // Text
     }
 }
 
