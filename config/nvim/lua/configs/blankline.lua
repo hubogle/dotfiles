@@ -23,6 +23,13 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 end)
 
 vim.g.rainbow_delimiters = { highlight = highlight }
-require("ibl").setup { scope = { highlight = highlight } }
+require("ibl").setup { scope = {
+    highlight = highlight,
+    enabled            = true,   -- 'true': Highlight only the intended indentation and the current scope by an underline.
+    show_start         = false,  -- Shows an underline on the first line of the scope.
+    show_end           = false,  -- Shows an underline on the last line of the scope.
+    show_exact_scope   = false,
+    injected_languages = true,
+} }
 
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

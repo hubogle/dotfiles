@@ -13,18 +13,17 @@ get_bytes() {
 
 # ref: https://unix.stackexchange.com/a/98790 @John
 bytestohuman() {
-    local L_BYTES="${1:-0}"
-    local L_BASE="${2:-1024}"
-    (awk -v bytes="${L_BYTES}" -v base="${L_BASE}" 'function human(x, base) {
-         if(base!=1024)base=1000
-         s="BKMGTEPYZ"
-         while (x>=base && length(s)>1)
-               {x/=base; s=substr(s,2)}
-         s=substr(s,1,1)
-         xf=((s=="B")?"%4d": (x > 99 ? "%4d" : "%4.1f"))
-         return sprintf( (xf "%s\n"), x, s)
-      }
-      BEGIN{print human(bytes, base)}')
+    local bytes="${1:-0}"
+    local base="${2:-1024}"
+    awk -v bytes="$bytes" -v base="$base" '
+    function human(x) {
+        s="BKMGTPEZY"; i=0
+        while (x >= base && i < length(s)) {x /= base; i++}
+        fmt = (i == 0 ? "%d%c" : "%4.1f%c")
+        printf(fmt, x, substr(s, i+1, 1))
+    }
+    BEGIN { human(bytes) }
+    '
 }
 
 # $1: rx_bytes/tx_bytes
@@ -36,7 +35,7 @@ get_speed() {
     diff=$((cur - pre))
     (( diff < 0 )) && diff=0
     speed=$(bytestohuman $diff)
-    echo "${speed}/s"
+    echo "${speed}"
 }
 
 # $1: tx_bytes/rx_bytes

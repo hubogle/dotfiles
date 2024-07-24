@@ -1,5 +1,7 @@
 live_config_reload = true # 热更新配置
 
+import = ["~/.config/alacritty/themes/nord_dark.toml"]
+
 [debug]
 log_level = "Warn"
 persistent_logging = false
@@ -32,12 +34,7 @@ italic = { family = "Hack Nerd Font Mono", style = "Italic" }
 bold_italic = { family = "Hack Nerd Font Mono", style = "Bold Italic" }
 
 [colors]
-draw_bold_text_with_bright_colors = true                                                                                                                           # 使用明亮的颜色变体绘制粗体文本。
-primary = { background = "#1E1E1E", foreground = "#D4D4D4" }
-normal = { black = "#000000", red = "#cd3131", green = "#0dbc79", yellow = "#e5e510", blue = "#2472c8", magenta = "#bc3fbc", cyan = "#11a8cd", white = "#e5e5e5" }
-cursor = { text = "#1d1f21", cursor = "#cccccc" }
-bright = { black = "#666666", red = "#f14c4c", green = "#23d18b", yellow = "#f5f543", blue = "#3b8eea", magenta = "#d670d6", cyan = "#29b8db", white = "#e5e5e5" }
-
+draw_bold_text_with_bright_colors = true # 使用明亮的颜色变体绘制粗体文本。
 
 [bell]
 animation = "EaseOutExpo" # 视觉铃声响起时闪烁屏幕的动画效果
@@ -153,6 +150,7 @@ bindings = [
     { key = "H", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
     # tmux other
+    { key = ";", mods = "Command", chars = "\u0060:" },       # 输入命令
     { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi

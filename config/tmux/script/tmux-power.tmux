@@ -59,22 +59,23 @@ tmux_set window-status-separator ""
 tmux_set clock-mode-colour "$TC"        # 时钟模式
 tmux_set clock-mode-style 24
 
+# nobold 禁用粗体，noitalics 禁止倾斜文字 nounderscore 禁用下划线
 #==================Windows状态栏=======
 HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
-WSFormat="#[fg=$visual_grey,noitalics,nounderscore]$right_arrow_icon_inverse"
+WSFormat="#[fg=$visual_grey,bg=default]$right_arrow_icon_inverse"
 WSFormat="$WSFormat#[fg=#aab2bf,bg=$visual_grey] #I #W #{?#{==:#{pane_current_command},ssh},#[fg=$magenta] ,}"
 WSFormat="$WSFormat#[fg=$red]#{?window_bell_flag, ,}"
 WSFormat="$WSFormat#[fg=$red]#{?window_activity_flag, ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}$EndFormat"
-WSFormat="$WSFormat#[fg=$visual_grey,bg=default,noitalics,nounderscore]$right_arrow_icon"
+WSFormat="$WSFormat#[fg=$visual_grey,bg=default]$right_arrow_icon"
 
-WSCFormat="#[fg=$blue,noitalics,nounderscore]$right_arrow_icon_inverse"
-WSCFormat="$WSCFormat#{?#{==:#{pane_current_command},ssh},#[fg=$BG]#[bg=$blue]#[bold] #I #W #[fg=$magenta] ,#[fg=$BG,bg=$blue,bold] #I #W }"
+WSCFormat="#[fg=$blue,bg=default]$right_arrow_icon_inverse"
+WSCFormat="$WSCFormat#[fg=$black,bg=$blue,bold] #I #W #{?#{==:#{pane_current_command},ssh},#[fg=$magenta] ,}"
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
 WSCFormat="$WSCFormat#[fg=$green] "
-WSCFormat="$WSCFormat#[fg=$blue,bg=default,noitalics,nounderscore]$right_arrow_icon"
+WSCFormat="$WSCFormat#[fg=$blue,bg=default]$right_arrow_icon"
 
 tmux_set window-status-format "$WSFormat"
 tmux_set window-status-current-format "$WSCFormat"
@@ -92,23 +93,19 @@ tmux_set status-left-style none
 # 展示 ssh 红色，yellow 命令模式, green 正常模式, tmux 嵌套蓝色
 
 # 初始化 LS 变量
-LS="#[bg=$green] #S $session_icon#[fg=$green]#[bg=default]$right_arrow_icon"  # 默认绿色背景，之后回归默认背景
+LS="#[bg=$green] #S $session_icon#[fg=$green,bg=default]$right_arrow_icon"  # 默认绿色背景，之后回归默认背景
 LS="#{?#{==:#{pane_current_command},ssh},#[bg=$red] #S $session_icon#[fg=$red]#[bg=default]$right_arrow_icon,$LS}" # SSH 红色，之后回归默认背景
 LS="#{?client_prefix,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"                # 命令模式黄色，之后回归默认背景
 LS="#{?synchronize-panes,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"          # 同步窗格黄色，之后回归默认背景
 LS="#{?pane_in_mode,#[bg=$yellow] #S $session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"                # Vi 模式黄色，之后回归默认背景
 LS="#{?#{==:#{client_key_table},off},#[bg=$blue] #S $session_icon#[fg=$blue]#[bg=default]$right_arrow_icon,$LS}"  # tmux 嵌套模式蓝色，之后回归默认背景
-LS="#[fg=$BG,bold]$LS"
+LS="#[fg=$black,bold]$LS"
 tmux_set status-left "$LS"
 
 #===========右状态栏===================
 time_icon=""
-date_icon=" "
 time_format='%T'
-date_format='%F'
-upload_speed_icon=''
 download_speed_icon=''
-cpu_low_icon='='
 tmux_set status-right-length 150
 tmux_set status-right-style none
 
@@ -117,22 +114,18 @@ tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 # tmux_set @cpu_usage "#(~/.config/tmux/script/cpu_percentage.sh)"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
-#gitStatus="#[fg=$blue]#[bg=$BG]#[fg=$BG]#[bg=$blue]#[bold]  $GIT_BRANCH #[fg=$BG]#[bg=$blue]#[fg=$BG]"
-gitStatus="#[fg=$blue]#[fg=$BG]#[bg=$blue]#[bold]  $GIT_BRANCH #[bg=$blue]#[bg=default]"
-sshStatus="#[fg=$red]#[fg=$BG]#[bg=$red]#[bold] $HOST_NAME #[bg=$red]#[bg=default]"
-viStatus="#[fg=$yellow]#[fg=$BG]#[bg=$yellow]#[bold] VIM #[bg=$yellow]#[bg=default]"
-syncStatus="#[fg=$yellow]#[fg=$BG]#[bg=$yellow]#[bold] SYNC #[bg=$]#[bg=default]"
+gitStatus="#[fg=$blue]$left_arrow_icon#[fg=$BG]#[bg=$blue]#[nobold]  $GIT_BRANCH #[fg=$blue]#[bg=default]$left_arrow_icon_inverse"
+sshStatus="#[fg=$red]$left_arrow_icon#[fg=$BG]#[bg=$red]#[nobold] $HOST_NAME #[fg=$red]#[bg=default]$left_arrow_icon_inverse"
+viStatus="#[fg=$yellow]$left_arrow_icon#[fg=$BG]#[bg=$yellow]#[bold] VIM #[fg=$yellow]#[bg=default]#[nobold]$left_arrow_icon_inverse"
+syncStatus="#[fg=$yellow]$left_arrow_icon#[fg=$BG]#[bg=$yellow]#[bold] SYNC #[fg=$yellow]#[bg=default]#[nobold]$left_arrow_icon_inverse"
 
-# localStatus="#[fg=$green]#[bg=$BG]#[fg=$BG]#[bg=$green]#[bold] #H "
-# RS="#[fg=$green,bg=$BG]#[fg=$BG,bg=$green]#{E:@IM} "
-# RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,$localStatus}"
-# RS="#[fg=#aab2bf,nobold]#{E:@IM} "
-#RS="#[fg={?#{==:@IM,ZH},$red,#aab2bf},nobold]#{E:@IM} "
-RS="#{?#{==:#{E:@IM},ZH},#[fg=$red] ZH,#[fg=#aab2bf] US} "
-RS="#[fg=#aab2bf] $date_icon$date_format $RS"
-RS="#[fg=#aab2bf] $time_icon $time_format $RS"
-# RS="#[fg=#aab2bf,bg=$BG] $cpu_low_icon #{E:@cpu_usage} $RS" # 网络速度
-RS="#[fg=#aab2bf,nobold] $download_speed_icon #{E:@download_speed} $RS" # 网络速度
+
+inputStatus="#{?#{==:#{E:@IM},ZH},#[fg=$red]$left_arrow_icon#[fg=#aab2bf]#[bg=$red]  #[bold]ZH ,#[fg=$visual_grey]$left_arrow_icon#[fg=#aab2bf]#[bg=$visual_grey]  US }"
+timeStatus="#[fg=$visual_grey]$left_arrow_icon#[bg=$visual_grey]#[fg=#aab2bf] $time_icon $time_format #[fg=$visual_grey]#[bg=default]#[nobold]$left_arrow_icon_inverse"
+speedStatus="#[fg=$visual_grey]$left_arrow_icon#[bg=$visual_grey]#[fg=#aab2bf] $download_speed_icon#{E:@download_speed} #[fg=$visual_grey]#[bg=default]#[nobold]$left_arrow_icon_inverse"
+
+
+RS="$speedStatus$timeStatus$inputStatus"
 RS="#{?$GIT_BRANCH,$gitStatus,}$RS"
 RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,}$RS"
 RS="#{?pane_in_mode,$viStatus,}$RS"
