@@ -127,7 +127,7 @@ alias vim='nvim'
 alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
-alias brewc="brew update && brew upgrade --formula && mas upgrade && brew cleanup --prune 1 && brew autoremove"
+alias brewc="brew update && brew upgrade --formula && brew cleanup --prune 1 && brew autoremove" # mas upgrade
 #======================proxy=====================
 function proxy() {
     export no_proxy="localhost,127.0.0.1"
@@ -143,10 +143,13 @@ function unproxy(){
 }
 
 ssh() {
-    if (ps -p $(ps -p $$ -o ppid=) -o comm=) | grep -qw tmux; then
-        tmux rename-window "$(echo $* | rev | cut -d ' ' -f1 | rev | cut -d . -f 1)"
+    if [[ $(ps -p $(ps -p $$ -o ppid=) -o comm=) =~ tmux ]]; then
+        local ssh_command="$@"
+        local target_host=$(echo "$ssh_command" | awk -F'@' '{if (NF>1) print $2; else print $1}' | awk '{print $1}')
+        tmux rename-window "$target_host"
         command ssh "$@"
-        tmux set-window-option automatic-rename "on" 1>/dev/null
+        tmux rename-window "zsh"  # SSH 退出后恢复原窗口标题
+        [ $? -ne 0 ] && printf '\e[?1000l'
     else
         command ssh "$@"
     fi
