@@ -1,10 +1,10 @@
 local config = {
-  theme = 'hyper',
+  theme = "hyper",
   config = {
     packages = { enable = false },
-    project = { enable = true, limit = 10},
+    project = { enable = true, limit = 10 },
     week_header = {
-     enable = true,
+      enable = true,
     },
     shortcut = {
       -- { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
@@ -40,4 +40,4 @@ local config = {
   },
 }
 
-require('dashboard').setup(config)
+require("dashboard").setup(config)

@@ -5,8 +5,8 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
-	local repo = "https://github.com/folke/lazy.nvim.git"
-	vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system({ "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath })
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -15,17 +15,17 @@ local lazy_config = require("configs.lazy")
 
 -- load plugins
 require("lazy").setup({
-	{
-		"NvChad/NvChad",
-		lazy = false,
-		branch = "v2.5",
-		import = "nvchad.plugins",
-		config = function()
-			require("options")
-		end,
-	},
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require("options")
+    end,
+  },
 
-	{ import = "plugins" },
+  { import = "plugins" },
 }, lazy_config)
 
 -- load theme
@@ -38,26 +38,26 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- 恢复文件打开时的光标位置
 autocmd("BufReadPost", {
-	pattern = "*",
-	callback = function()
-		local line = vim.fn.line("'\"")
-		if
-			line > 1
-			and line <= vim.fn.line("$")
-			and vim.bo.filetype ~= "commit"
-			and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
-		then
-			vim.cmd('normal! g`"')
-		end
-	end,
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line("'\"")
+    if
+      line > 1
+      and line <= vim.fn.line("$")
+      and vim.bo.filetype ~= "commit"
+      and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
+    then
+      vim.cmd('normal! g`"')
+    end
+  end,
 })
 
 -- conform 保存格式化文件
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
-	end,
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
 })
 
 -- 自动切换行号模式
@@ -77,22 +77,42 @@ vim.cmd([[ autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.
 
 -- vim 打开项目时调整 windows name
 vim.api.nvim_create_autocmd("DirChanged", {
-	pattern = "*",
-	callback = function()
-		local cwd = vim.fn.getcwd()
-		local dir_name = vim.fn.fnamemodify(cwd, ":t")  -- 获取路径的最后一部分
-		vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
-	end,
+  pattern = "*",
+  callback = function()
+    local cwd = vim.fn.getcwd()
+    local dir_name = vim.fn.fnamemodify(cwd, ":t") -- 获取路径的最后一部分
+    vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
+  end,
 })
 
 -- vim 退出项目时调整 windows name
 vim.api.nvim_create_autocmd("VimLeave", {
-    pattern = "*",
-    callback = function()
-        vim.fn.system("tmux rename-window 'zsh'")
-    end,
+  pattern = "*",
+  callback = function()
+    vim.fn.system("tmux rename-window 'zsh'")
+  end,
+})
+
+-- 针对 Go 文件的自动命令
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = false -- 使用实际的 tab 而不是空格
+  end,
+})
+
+-- 针对 Lua 文件的自动命令
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true -- 将 tab 转换为两个空格
+  end,
 })
 
 vim.schedule(function()
-	require("mappings")
+  require("mappings")
 end)

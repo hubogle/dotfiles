@@ -5,9 +5,9 @@ require("nvchad.options")
 local o = vim.o
 
 -- 设置显示 tab 和空格字符
-o.list = true
--- eol:↵：表示行尾符的显示方式
-o.listchars = "tab:» ,lead: ,trail:·,space: ,extends:>,precedes:<"
+-- o.list = true
+-- tab:» ,eol:↵：表示行尾符的显示方式
+-- o.listchars = "tab:» ,lead: ,trail:·,space: ,extends:>,precedes:<"
 
 -- 行号显示
 o.number = true -- 显示行号

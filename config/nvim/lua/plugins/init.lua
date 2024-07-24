@@ -3,7 +3,7 @@ return {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     config = function()
-      require "configs.conform"
+      require("configs.conform")
     end,
   },
 
@@ -12,7 +12,7 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       -- require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
+      require("configs.lspconfig")
     end,
   },
   --
@@ -31,9 +31,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css",
-        "go", "gomod", "gosum",
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "go",
         "python",
         "rust",
       },
@@ -46,7 +49,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- require("nvchad.configs.blankline").defaults()
-      require "configs.blankline"
+      require("configs.blankline")
     end,
   },
 
@@ -55,17 +58,17 @@ return {
     "stevearc/conform.nvim",
     lazy = true,
     config = function()
-      require "configs.conform"
+      require("configs.conform")
     end,
   },
 
   -- dashboard
   {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
     config = function()
-      require "configs.dashboard"
+      require("configs.dashboard")
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
-  }
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
 }
