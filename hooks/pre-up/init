@@ -54,3 +54,9 @@ if [ ! -f "${BREW_PATH}/im-select" ]; then
     fi
     chmod +x $BREW_PATH/im-select
 fi
+
+# alacritty themes
+if [ ! -d "${HOME}/.config/alacritty/themes" ]; then
+    echo "安装 alacritty theme"
+    git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+fi

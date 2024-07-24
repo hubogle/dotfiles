@@ -1,6 +1,6 @@
 live_config_reload = true # 热更新配置
 
-import = ["~/.config/alacritty/themes/nord_dark.toml"]
+import = ["~/.config/alacritty/themes/themes/google.toml"]
 
 [debug]
 log_level = "Warn"
