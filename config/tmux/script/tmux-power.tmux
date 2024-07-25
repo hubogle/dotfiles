@@ -13,9 +13,9 @@ tmux_set() {
 # 使用该方法设置值，tmux 页面会被刷新，shift 选择文本时
 
 # list color
-for i in {0..255}; do
-    printf '\x1b[38;5;%dmcolour%d\x1b[0m ' $i $i
-done
+# for i in {0..255}; do
+#     printf '\x1b[38;5;%dmcolour%d\x1b[0m ' $i $i
+# done
 
 black="#1E1E1E"
 white="#D4D4D4" # vscode 背景色
@@ -81,7 +81,7 @@ tmux_set window-status-activity-style 'blink' # ssh 警告
 #     
 # ' 
 # https://www.nerdfonts.com/cheat-sheet
-session_icon=" "
+session_icon=" "
 
 tmux_set status-left-length 100
 tmux_set status-left-style none

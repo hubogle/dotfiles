@@ -39,6 +39,9 @@ return {
         "go",
         "python",
         "rust",
+        "markdown",
+        "dockerfile",
+        "sql",
       },
     },
   },
@@ -70,5 +73,23 @@ return {
       require("configs.dashboard")
     end,
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
+
+  -- https://github.com/kdheepak/lazygit.nvim
+  -- git 功能插件
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- order to load the plugin when the command is run for the first time
   },
 }

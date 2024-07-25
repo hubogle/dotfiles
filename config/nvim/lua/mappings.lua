@@ -5,6 +5,8 @@ require("nvchad.mappings")
 
 local map = vim.keymap.set
 
+map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "q", function()
