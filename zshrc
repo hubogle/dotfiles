@@ -12,14 +12,17 @@ else
 fi
 export PATH="$BREW_PATH:$BREW_SBIN:$PATH"
 #=====================config====================
-export LESSHISTFILE=$HOME/.local/share/less/history
-export MYCLI_HISTFILE=$HOME/.local/share/mycli/history
-export IPYTHONDIR=$HOME/.local/share/ipython
-export HISTDB_FILE=$HOME/.local/share/histdb/zsh-history.db
-export HISTFILE=$HOME/.local/share/zsh_history   # zsh 历史文件地址
+export EDITOR="$BREW_PATH/nvim"
+export VISUAL="$BREW_PATH/nvim"
+export XDG_CONFIG_HOME="$HOME/.config"
 export SHELL_SESSIONS_DISABLE=1
-export EDITOR="nvim"
+export LESSHISTFILE=$HOME/.local/share/less/history
+export HISTFILE=$HOME/.local/share/zsh_history   # zsh 历史文件地址
+#=====================other config==============
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
+export IPYTHONDIR=$HOME/.local/share/ipython
+export MYCLI_HISTFILE=$HOME/.local/share/mycli/history
+export HISTDB_FILE=$HOME/.local/share/histdb/zsh-history.db
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
