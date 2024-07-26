@@ -8,7 +8,6 @@ function open(appBundleID)
       -- 启动或激活
       hs.application.launchOrFocusByBundleID(appBundleID)
     end
-
   end
 end
 
@@ -27,16 +26,15 @@ hs.hotkey.bind({ "alt" }, "T", open("ru.keepcoder.Telegram"))
 hs.hotkey.bind({ "alt" }, "Y", open("com.lukilabs.lukiapp"))
 hs.hotkey.bind({ "alt" }, "U", open("com.linnk.Linnk"))
 hs.hotkey.bind({ "alt" }, "P", open("com.luckymarmot.Paw"))
+hs.hotkey.bind({ "alt" }, "G", open("com.openai.chat"))
 
 -- hs.hotkey.bind({ "cmd" }, "M", function ()
 --   hs.window.frontmostWindow():application():hide()
 -- end) -- cmd + m 隐藏窗口
 
-
 -- 当前目录打开终端
 function iterm()
-  hs.osascript.applescript(
-    [[
+  hs.osascript.applescript([[
         tell application "Finder"
           set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
         end tell
@@ -53,14 +51,12 @@ function iterm()
             create window with profile "Default" command cd_cmd
           end try
         end tell
-    ]]
-  )
+    ]])
   hs.application.launchOrFocus("iTerm")
 end
 
 function terminal()
-  hs.osascript.applescript(
-    [[
+  hs.osascript.applescript([[
         tell application "Finder"
           set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
         end tell
@@ -87,8 +83,7 @@ function terminal()
           --   write text "cd " & dir_path & ";clear;"
           -- end tell
         end tell
-    ]]
-  )
+    ]])
   hs.application.launchOrFocus("Terminal")
 end
 
