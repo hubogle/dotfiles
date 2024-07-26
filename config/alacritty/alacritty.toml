@@ -114,8 +114,8 @@ bindings = [
     { key = "Left", mods = "Option", chars = "\u001bB" },  # 向左移动一个单词
 
     # tmux windows
-    { key = "E", mods = "Command", chars = "\u0060\u0005" }, # Command + e 上次访问
-    { key = "Key1", mods = "Command", chars = "\u00601" },   # Command + 1 tmux 第一个窗口
+    { key = "L", mods = "Command", chars = "\u0060l" },    # Command + l 上次访问
+    { key = "Key1", mods = "Command", chars = "\u00601" }, # Command + 1 tmux 第一个窗口
     { key = "Key2", mods = "Command", chars = "\u00602" },
     { key = "Key3", mods = "Command", chars = "\u00603" },
     { key = "Key4", mods = "Command", chars = "\u00604" },
@@ -126,8 +126,6 @@ bindings = [
     { key = "Key9", mods = "Command", chars = "\u00609" },
 
     # tmux windows 访问
-    { key = "LBracket", mods = "Command", chars = "\u0060p" }, # Command + [ 上个窗口
-    { key = "RBracket", mods = "Command", chars = "\u0060n" }, # Command + ] 下个窗口
     { key = "Tab", mods = "Option|Shift", chars = "\u0060p" }, # 上个窗口
     { key = "Tab", mods = "Option", chars = "\u0060n" },       # 下个窗口
 
@@ -138,25 +136,33 @@ bindings = [
     { key = "Period", mods = "Command|Shift", chars = "\u0060." }, # 修改当前窗口编号
 
     # tmux panel
-    { key = "D", mods = "Command|Shift", chars = "\u0060%" },      # 垂直切分
-    { key = "D", mods = "Command", chars = "\u0060\"" },           # 水平切分
-    { key = "Return", mods = "Option", chars = "\u0060z" },        # 当前 pane 全屏
-    { key = "Return", mods = "Command|Shift", chars = "\u0060 " }, # 切换 pane 布局
-    { key = "W", mods = "Command", chars = "\u0060x" },            # 关闭 pane
+    { key = "D", mods = "Command|Shift", chars = "\u0060%" },     # 垂直切分
+    { key = "D", mods = "Command", chars = "\u0060\"" },          # 水平切分
+    { key = "Return", mods = "Option", chars = "\u0060z" },       # 当前 pane 全屏
+    { key = "Return", mods = "Option|Shift", chars = "\u0060!" }, # 当前 pane 变为 windows
+    { key = "W", mods = "Command", chars = "\u0060x" },           # 关闭 pane
+    { key = ";", mods = "Command", chars = "\u0060;" },           # 移到上一个活跃
 
-    { key = "J", mods = "Option", chars = "\u0060j" },
-    { key = "K", mods = "Option", chars = "\u0060k" },
-    { key = "L", mods = "Option", chars = "\u0060l" },
-    { key = "H", mods = "Option", chars = "\u0060h" },
+    { key = "LBracket", mods = "Command", chars = "\u0060{" }, # Command + [ 上个 panel 交换
+    { key = "RBracket", mods = "Command", chars = "\u0060}" }, # Command + ] 下个 panel 交换
+
+    { key = "J", mods = "Option", chars = "\u0060\u001b\u005b\u0041" },
+    { key = "K", mods = "Option", chars = "\u0060\u001b\u005b\u0042" },
+    { key = "L", mods = "Option", chars = "\u0060\u001b\u005b\u0043" },
+    { key = "H", mods = "Option", chars = "\u0060\u001b\u005b\u0044" },
+    { key = "Up", mods = "Command", chars = "\u0060\u001b\u005b\u0041" },
+    { key = "Down", mods = "Command", chars = "\u0060\u001b\u005b\u0042" },
+    { key = "Right", mods = "Command", chars = "\u0060\u001b\u005b\u0043" },
+    { key = "Left", mods = "Command", chars = "\u0060\u001b\u005b\u0044" },
 
     # tmux session
-    { key = "H", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
+    { key = "N", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
     # tmux other
-    { key = ";", mods = "Command", chars = "\u0060:" },       # 输入命令
     { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
+    { key = "O", mods = "Command", chars = "\u0060O" },       # open popup
 
     # vim 提供模拟 ctrl(control) + number 命令
     { key = "Key1", mods = "Control", chars = "\u001b[49;5u" },

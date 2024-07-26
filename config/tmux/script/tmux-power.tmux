@@ -69,7 +69,7 @@ WSFormat="$WSFormat#[fg=$grey,bg=default]$right_arrow_icon"
 WSCFormat="#[fg=$blue,bg=default]$right_arrow_icon_inverse"
 WSCFormat="$WSCFormat#[fg=$black,bg=$blue,bold] #I #W #[nobold]#{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
-WSCFormat="$WSCFormat#[fg=$green] "
+WSCFormat="$WSCFormat#{?#{==:#{E:@IM},ZH},#[fg=$red] ,#[fg=$green] }"
 WSCFormat="$WSCFormat#[fg=$blue,bg=default]$right_arrow_icon"
 
 tmux_set window-status-format "$WSFormat"
@@ -115,12 +115,12 @@ viStatus="#[fg=$yellow]$left_arrow_icon#[fg=$black]#[bg=$yellow]#[bold] VIM #[fg
 syncStatus="#[fg=$yellow]$left_arrow_icon#[fg=$black]#[bg=$yellow]#[bold] SYNC #[fg=$yellow]#[bg=default]#[nobold]$left_arrow_icon_inverse"
 
 
-inputStatus="#{?#{==:#{E:@IM},ZH},#[fg=$red]$left_arrow_icon#[fg=$black]#[bg=$red]  #[bold]ZH ,#[fg=$grey]$left_arrow_icon#[fg=$font_color]#[bg=$grey]  US }"
+# inputStatus="#{?#{==:#{E:@IM},ZH},#[fg=$red]$left_arrow_icon#[fg=$black]#[bg=$red]  #[bold]ZH ,#[fg=$grey]$left_arrow_icon#[fg=$font_color]#[bg=$grey]  US }"
 timeStatus="#[fg=$grey]$left_arrow_icon#[bg=$grey]#[fg=$font_color] $time_icon $time_format #[fg=$grey]#[bg=default]$left_arrow_icon_inverse"
 speedStatus="#[fg=$grey]$left_arrow_icon#[bg=$grey]#[fg=$font_color] $download_speed_icon#{E:@download_speed} #[fg=$grey]#[bg=default]$left_arrow_icon_inverse"
 
 
-RS="$speedStatus$timeStatus$inputStatus"
+RS="$speedStatus$timeStatus"
 RS="#{?$GIT_BRANCH,$gitStatus,}$RS"
 RS="#{?#{==:#{pane_current_command},ssh},$sshStatus,}$RS"
 RS="#{?pane_in_mode,$viStatus,}$RS"
