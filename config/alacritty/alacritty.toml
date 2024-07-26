@@ -159,6 +159,7 @@ bindings = [
     { key = "N", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
     # tmux other
+    { key = "Y", mods = "Command", chars = "\u0060Y" },       # 触发 aichat 输入
     { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi

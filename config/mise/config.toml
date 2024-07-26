@@ -3,3 +3,4 @@
 # you can set these with `mise use -g`
 python = ['3.10']
 golang = ['1.21.0']
+rust = 'latest'

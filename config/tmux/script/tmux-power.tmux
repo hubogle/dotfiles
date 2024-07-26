@@ -116,7 +116,7 @@ syncStatus="#[fg=$yellow]$left_arrow_icon#[fg=$black]#[bg=$yellow]#[bold] SYNC #
 
 
 # inputStatus="#{?#{==:#{E:@IM},ZH},#[fg=$red]$left_arrow_icon#[fg=$black]#[bg=$red]  #[bold]ZH ,#[fg=$grey]$left_arrow_icon#[fg=$font_color]#[bg=$grey]  US }"
-timeStatus="#[fg=$grey]$left_arrow_icon#[bg=$grey]#[fg=$font_color] $time_icon $time_format #[fg=$grey]#[bg=default]$left_arrow_icon_inverse"
+timeStatus="#[fg=$grey]$left_arrow_icon#[bg=$grey]#[fg=$font_color] $time_icon $time_format "
 speedStatus="#[fg=$grey]$left_arrow_icon#[bg=$grey]#[fg=$font_color] $download_speed_icon#{E:@download_speed} #[fg=$grey]#[bg=default]$left_arrow_icon_inverse"
 
 

@@ -49,6 +49,9 @@
 3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
 4. 执行 `rcup` 恢复配置文件。
 
+## 4.开发语言版本管理
+统一管理开发语言的版本[mise](https://mise.jdx.dev/)。
+
 ---
 
 ## QA
@@ -64,9 +67,6 @@
 2. 辅助功能触摸板打开三指拖拽
 3. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 ---
-
-## 软件推荐
-[Panda](https://bear.app/cn/alpha/) `Makrdown` 编辑器
 
 ---
 

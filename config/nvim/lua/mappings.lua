@@ -35,3 +35,11 @@ end
 map("n", "<leader>fm", function()
 	require("conform").format()
 end)
+
+-- 设置可视模式下的 y 键映射
+vim.keymap.set('v', 'y', function()
+    vim.cmd("normal! y")
+    local content = vim.fn.getreg('"')
+    -- 使用 echo 命令传递内容到 tmux load-buffer
+    vim.fn.system("echo -n " .. vim.fn.shellescape(content) .. " | tmux load-buffer -")
+end, {noremap = true, silent = true})
