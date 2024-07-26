@@ -93,26 +93,6 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 
--- 针对 Go 文件的自动命令
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
-  callback = function()
-    vim.opt_local.tabstop = 4
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.expandtab = false -- 使用实际的 tab 而不是空格
-  end,
-})
-
--- 针对 Lua 文件的自动命令
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
-  callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.expandtab = true -- 将 tab 转换为两个空格
-  end,
-})
-
 vim.schedule(function()
   require("mappings")
 end)

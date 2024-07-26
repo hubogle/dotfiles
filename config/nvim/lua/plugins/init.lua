@@ -42,6 +42,8 @@ return {
         "markdown",
         "dockerfile",
         "sql",
+        "yaml",
+        "toml",
       },
     },
   },
