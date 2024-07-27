@@ -60,22 +60,22 @@ HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
 WSFormat="#[fg=$grey,bg=default]$right_arrow_icon_inverse"
 WSFormat="$WSFormat#[fg=$font_color,bg=$grey] #I #W #{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
-WSFormat="$WSFormat#[fg=$red]#{?window_bell_flag, ,}"
-WSFormat="$WSFormat#[fg=$red]#{?window_activity_flag, ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
+WSFormat="$WSFormat#[fg=$red]#{?window_bell_flag, ,}"
+WSFormat="$WSFormat#[fg=$green]#{?window_activity_flag,󰂚 ,}"
+WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}$EndFormat"
 WSFormat="$WSFormat#[fg=$grey,bg=default]$right_arrow_icon"
 
 WSCFormat="#[fg=$blue,bg=default]$right_arrow_icon_inverse"
 WSCFormat="$WSCFormat#[fg=$black,bg=$blue,bold] #I #W #[nobold]#{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
-WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag,▣ ,}"
+WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSCFormat="$WSCFormat#{?#{==:#{E:@IM},ZH},#[fg=$red] ,#[fg=$green] }"
 WSCFormat="$WSCFormat#[fg=$blue,bg=default]$right_arrow_icon"
 
 tmux_set window-status-format "$WSFormat"
 tmux_set window-status-current-format "$WSCFormat"
-tmux_set window-status-bell-style 'blink' # sleep 2 && echo -e "\a"
-tmux_set window-status-activity-style 'blink' # ssh 警告
+tmux_set window-status-bell-style 'blink' # sleep 5 && tmux display-message done
+tmux_set window-status-activity-style 'blink' # ssh 警告 sleep 2 && echo -e "\a"
 
 #===========左状态栏===================
 #     
