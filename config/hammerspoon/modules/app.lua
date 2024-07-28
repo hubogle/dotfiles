@@ -32,59 +32,35 @@ hs.hotkey.bind({ "alt" }, "G", open("com.openai.chat"))
 --   hs.window.frontmostWindow():application():hide()
 -- end) -- cmd + m 隐藏窗口
 
--- 当前目录打开终端
-function iterm()
-  hs.osascript.applescript([[
-        tell application "Finder"
-          set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
-        end tell
-        -- 待执行命令
-        set cd_cmd to "cd " & dir_path
-        -- 打开 iterm
-        tell application "iTerm"
-          activate
-          try
-            tell current session of first window
-              write text cd_cmd
-            end tell
-          on error
-            create window with profile "Default" command cd_cmd
-          end try
-        end tell
-    ]])
-  hs.application.launchOrFocus("iTerm")
+function alacritty_with_tmux_main()
+  local applescript = [[
+    tell application "Finder"
+      try
+        if exists window 1 then
+          set currentPath to (POSIX path of (target of window 1 as alias))
+        else
+          set currentPath to (POSIX path of (path to desktop folder as alias))
+        end if
+      on error
+        set currentPath to (POSIX path of (path to desktop folder as alias))
+      end try
+    end tell
+  ]]
+
+  local success, result, error = hs.osascript.applescript(applescript)
+  if success then
+    local dirPath = result
+    local _, status, _, rc = hs.execute("tmux has-session -t main 2>/dev/null", true)
+    if not status then
+      hs.execute("tmux new-session -d -s main -c ~", true)
+      hs.execute("tmux send-keys -t main:1 'cd \"" .. dirPath .. "\" && clear' C-m", true)
+    else
+      hs.execute('tmux new-window -t main -c "' .. dirPath .. '"', true)
+    end
+    hs.application.launchOrFocus("Alacritty")
+  else
+    hs.alert.show("Failed to get path from Finder: " .. tostring(error))
+  end
 end
 
-function terminal()
-  hs.osascript.applescript([[
-        tell application "Finder"
-          set dir_path to quoted form of (POSIX path of (folder of the front window as alias))
-        end tell
-        -- 待执行命令
-        -- 打开 iterm
-        tell application "Terminal"
-          activate
-          set cd_cmd to "cd " & dir_path
-          try
-            set sesh to current session of current terminal
-          on error
-            set currentWindow to (create window with default profile)
-          end try
-          -- try
-          --   set sesh to current session of current terminal
-          -- on error
-          --   set term to (make new terminal)
-          --   tell term
-          --     launch session "Default"
-          --     set sesh to current session
-          --   end tell
-          -- end try
-          -- tell sesh
-          --   write text "cd " & dir_path & ";clear;"
-          -- end tell
-        end tell
-    ]])
-  hs.application.launchOrFocus("Terminal")
-end
-
-hs.hotkey.bind({ "cmd", "alt" }, ".", terminal)
+hs.hotkey.bind({ "cmd", "alt" }, ".", alacritty_with_tmux_main)
