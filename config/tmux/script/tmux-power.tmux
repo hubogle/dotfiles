@@ -135,7 +135,7 @@ timeStatus="#[fg=$blue]$left_separator#[bg=$blue]#[fg=$bg]$time_icon $time_forma
 speedStatus="#[fg=$cyan]$left_separator#[bg=$cyan]#[fg=$bg]$download_speed_icon#{E:@download_speed}#[fg=$cyan]#[bg=default]$right_separator"
 
 RS="$speedStatus $timeStatus"
-RS="#{?$GIT_BRANCH,$gitStatus , }$RS"
+RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
 RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
 RS="#{?pane_in_mode,$viStatus ,}$RS"
 RS="#{?synchronize-panes,$syncStatus ,}$RS"
