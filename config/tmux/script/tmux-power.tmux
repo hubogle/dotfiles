@@ -82,7 +82,7 @@ WSFormat="$WSFormat#[fg=$gray,bg=default]$right_separator "
 WSCFormat="#[fg=$orange,bg=default]$left_separator#[fg=$bg,bg=$orange,bold]#I#[nobold]#[fg=$orange]$middle_separator"
 WSCFormat="$WSCFormat#[fg=$fg,bg=$bg] #W #{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
-WSCFormat="$WSCFormat#[fg=$green] "
+WSCFormat="$WSCFormat#[fg=$green]󰓏 "
 WSCFormat="$WSCFormat#[fg=$bg,bg=default]$right_separator "
 
 tmux_set window-status-format "$WSFormat"

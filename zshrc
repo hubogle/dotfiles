@@ -187,3 +187,23 @@ bindkey '\ei' _aichat_zsh # [Esc-i]
 export AICHAT_CONFIG_DIR="~/.config/aichat"
 export AICHAT_ROLES_FILE="~/.config/aichat/roles.yaml"
 alias ais="aichat -r shell -e"
+
+# https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
+update_terminfo () {
+    local x ncdir terms
+    ncdir="/opt/homebrew/opt/ncurses"
+    terms=(alacritty-direct alacritty tmux tmux-256color)
+
+    mkdir -p ~/.terminfo && cd ~/.terminfo
+
+    if [ -d $ncdir ] ; then
+        # sed : fix color for htop
+        for x in $terms ; do
+            $ncdir/bin/infocmp -x -A $ncdir/share/terminfo $x > ${x}.src &&
+            sed -i '' 's|pairs#0x10000|pairs#32767|' ${x}.src &&
+            /usr/bin/tic -x ${x}.src &&
+            rm -f ${x}.src
+        done
+    fi
+    cd - > /dev/null
+}

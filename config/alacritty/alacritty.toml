@@ -12,7 +12,7 @@ print_events = false
 render_timer = false
 
 [env]
-TERM = "tmux-256color"
+TERM = "alacritty"
 
 [shell]
 program = "/opt/homebrew/bin/tmux"
