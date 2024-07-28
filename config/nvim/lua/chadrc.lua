@@ -5,18 +5,22 @@
 local M = {}
 
 M.ui = {
-  theme = "onedark",
   nvdash = {
     load_on_startup = false,
   },
   statusline = {
     theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
-    -- default/round/block/arrow separators work only for default statusline theme
-    -- round and block will work for minimal theme only
-    separator_style = "round",
-    order = nil,
-    modules = nil,
   },
+
+  tabufline = {
+    order = { "treeOffset", "buffers", "tabs", "btns" },
+  },
+}
+
+M.base46 = {
+  theme = "onedark",
+  transparency = true,
+  theme_toggle = { "onedark", "penumbra_dark" },
 }
 
 return M
