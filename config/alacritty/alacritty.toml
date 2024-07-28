@@ -89,8 +89,8 @@ lines = 40
 
 # 窗口边缘空白
 [window.padding]
-x = 0
-y = 0
+x = 5
+y = 5
 
 # https://alacritty.org/config-alacritty-bindings.html
 # xxd -psd
