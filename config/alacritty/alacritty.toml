@@ -146,8 +146,8 @@ bindings = [
     { key = "LBracket", mods = "Command", chars = "\u0060{" }, # Command + [ 上个 panel 交换
     { key = "RBracket", mods = "Command", chars = "\u0060}" }, # Command + ] 下个 panel 交换
 
-    { key = "J", mods = "Option", chars = "\u0060\u001b\u005b\u0041" },
-    { key = "K", mods = "Option", chars = "\u0060\u001b\u005b\u0042" },
+    { key = "K", mods = "Option", chars = "\u0060\u001b\u005b\u0041" },
+    { key = "J", mods = "Option", chars = "\u0060\u001b\u005b\u0042" },
     { key = "L", mods = "Option", chars = "\u0060\u001b\u005b\u0043" },
     { key = "H", mods = "Option", chars = "\u0060\u001b\u005b\u0044" },
     { key = "Up", mods = "Command", chars = "\u0060\u001b\u005b\u0041" },
