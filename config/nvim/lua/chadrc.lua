@@ -19,6 +19,11 @@ M.ui = {
 
 M.base46 = {
   theme = "onedark",
+  hl_override = {
+    CursorLine = {
+      bg = "#363a4f",
+    },
+  },
   transparency = true,
   theme_toggle = { "onedark", "penumbra_dark" },
 }
