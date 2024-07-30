@@ -1,0 +1,94 @@
+
+# https://alacritty.org/config-alacritty-bindings.html
+# xxd -psd
+# \x14 来表示按键操作（如 Ctrl+T) 表示 \u00141
+[keyboard]
+bindings = [
+    # MacOs only
+    { key = "Key0", mods = "Command", action = "ResetFontSize" },
+    { key = "Plus", mods = "Command", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Command", action = "DecreaseFontSize" },
+    { key = "V", mods = "Command", action = "Paste" },
+    { key = "C", mods = "Command", action = "Copy" },
+    { key = "M", mods = "Command", action = "Minimize" },
+    { key = "Q", mods = "Command", action = "Quit" },
+    { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
+    { key = "K", mods = "Command", chars = "reset \n" },                  # 清空历史
+
+    { key = "Back", action = "ReceiveChar" },              # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
+    { key = "Back", mods = "Command", chars = "\u0015" },  # Delete line
+    { key = "Right", mods = "Option", chars = "\u001bF" }, # 向右移动一个单词
+    { key = "Left", mods = "Option", chars = "\u001bB" },  # 向左移动一个单词
+
+    # tmux windows
+    { key = "L", mods = "Command", chars = "\u0060l" },    # Command + l 上次访问
+    { key = "Key1", mods = "Command", chars = "\u00601" }, # Command + 1 tmux 第一个窗口
+    { key = "Key2", mods = "Command", chars = "\u00602" },
+    { key = "Key3", mods = "Command", chars = "\u00603" },
+    { key = "Key4", mods = "Command", chars = "\u00604" },
+    { key = "Key5", mods = "Command", chars = "\u00605" },
+    { key = "Key6", mods = "Command", chars = "\u00606" },
+    { key = "Key7", mods = "Command", chars = "\u00607" },
+    { key = "Key8", mods = "Command", chars = "\u00608" },
+    { key = "Key9", mods = "Command", chars = "\u00609" },
+
+    # tmux windows 访问
+    { key = "Tab", mods = "Option|Shift", chars = "\u0060p" }, # 上个窗口
+    { key = "Tab", mods = "Option", chars = "\u0060n" },       # 下个窗口
+
+    # tmux windwos 修改
+    { key = "T", mods = "Command", chars = "\u0060c" },            # 新建 tab
+    { key = "W", mods = "Command|Shift", chars = "\u0060&" },      # 关闭 windows
+    { key = "Comma", mods = "Command", chars = "\u0060," },        # , 重命名 windows
+    { key = "Period", mods = "Command|Shift", chars = "\u0060." }, # 修改当前窗口编号
+
+    # tmux panel
+    { key = "D", mods = "Command|Shift", chars = "\u0060%" },     # 垂直切分
+    { key = "D", mods = "Command", chars = "\u0060\"" },          # 水平切分
+    { key = "Return", mods = "Option", chars = "\u0060z" },       # 当前 pane 全屏
+    { key = "Return", mods = "Option|Shift", chars = "\u0060!" }, # 当前 pane 变为 windows
+    { key = "W", mods = "Command", chars = "\u0060x" },           # 关闭 pane
+    { key = ";", mods = "Command", chars = "\u0060;" },           # 移到上一个活跃
+
+    { key = "LBracket", mods = "Command", chars = "\u0060{" }, # Command + [ 上个 panel 交换
+    { key = "RBracket", mods = "Command", chars = "\u0060}" }, # Command + ] 下个 panel 交换
+
+    { key = "K", mods = "Option", chars = "\u0060\u001b\u005b\u0041" },
+    { key = "J", mods = "Option", chars = "\u0060\u001b\u005b\u0042" },
+    { key = "L", mods = "Option", chars = "\u0060\u001b\u005b\u0043" },
+    { key = "H", mods = "Option", chars = "\u0060\u001b\u005b\u0044" },
+    { key = "Up", mods = "Command", chars = "\u0060\u001b\u005b\u0041" },
+    { key = "Down", mods = "Command", chars = "\u0060\u001b\u005b\u0042" },
+    { key = "Right", mods = "Command", chars = "\u0060\u001b\u005b\u0043" },
+    { key = "Left", mods = "Command", chars = "\u0060\u001b\u005b\u0044" },
+
+    # tmux session
+    { key = "N", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
+
+    # tmux other
+    { key = "Y", mods = "Command", chars = "\u0060Y" },       # 触发 aichat 输入
+    { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
+    { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
+    { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
+    { key = "O", mods = "Command", chars = "\u0060O" },       # open popup
+
+    # vim 提供模拟 ctrl(control) + number 命令
+    { key = "Key1", mods = "Control", chars = "\u001b[49;5u" },
+    { key = "Key2", mods = "Control", chars = "\u001b[50;5u" },
+    { key = "Key3", mods = "Control", chars = "\u001b[51;5u" },
+    { key = "Key4", mods = "Control", chars = "\u001b[52;5u" },
+    { key = "Key5", mods = "Control", chars = "\u001b[53;5u" },
+    { key = "Key6", mods = "Control", chars = "\u001b[54;5u" },
+    { key = "Key7", mods = "Control", chars = "\u001b[55;5u" },
+    { key = "Key8", mods = "Control", chars = "\u001b[56;5u" },
+    { key = "Key9", mods = "Control", chars = "\u001b[57;5u" },
+
+    # 映射给 vim 使用
+    { key = "P", mods = "Command", chars = "\u0002p" },
+    { key = "S", mods = "Command", chars = "\u001b:w\u000a" },  # Type <escape>:w<enter> to save vim
+    { key = "D", mods = "Option", chars = "\u001b:vsp\u000a" }, # Type <escape>:w<enter> to save vim
+
+    { key = "Escape", mods = "Command", command = { program = "/opt/homebrew/bin/im-select", args = [
+        "com.apple.keylayout.ABC",
+    ] } }, # command + esc 切换 abc
+]

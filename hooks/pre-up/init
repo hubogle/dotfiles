@@ -11,18 +11,6 @@ if [ ! -d "${HOME}/.zi" ]; then
 fi
 
 # 安装 NvChad
-folders=(
-    "${HOME}/.config/nvim"
-    "${HOME}/.local/state/nvim"
-    "${HOME}/.local/share/nvim"
-)
-
-for folder in "${folders[@]}"; do
-    if [ -d "$folder" ]; then
-        echo "删除 $folder" 1>&2
-        rm -rf "$folder"
-    fi
-done
 if [ ! -d "${HOME}/.config/nvim" ]; then
     echo "正在安装 NvChad" 1>&2
     git clone https://github.com/NvChad/starter ~/.config/nvim

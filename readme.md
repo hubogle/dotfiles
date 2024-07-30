@@ -53,6 +53,15 @@
 ## 4.开发语言版本管理
 统一管理开发语言的版本[mise](https://mise.jdx.dev/)。
 
+## 5.Nvchad 安装
+[NvChad](https://nvchad.com/docs/quickstart/install) 安装之前卸载。
+
+```shell
+rm -rf ~/.config/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.local/share/nvim
+```
+
 ---
 
 ## QA

@@ -146,16 +146,21 @@ function unproxy(){
 }
 
 ssh() {
+    local original_term=$TERM
+    TERM='xterm-256color'  # Set TERM for SSH sessions
+
     if [[ $(ps -p $(ps -p $$ -o ppid=) -o comm=) =~ tmux ]]; then
         local ssh_command="$@"
         local target_host=$(echo "$ssh_command" | awk -F'@' '{if (NF>1) print $2; else print $1}' | awk '{print $1}')
         tmux rename-window "$target_host"
         command ssh "$@"
-        tmux rename-window "zsh"  # SSH 退出后恢复原窗口标题
+        tmux rename-window "zsh"  # Reset window name after SSH
         [ $? -ne 0 ] && printf '\e[?1000l'
     else
         command ssh "$@"
     fi
+
+    TERM=$original_term  # Restore original TERM after SSH
 }
 
 # 使用 vim 编辑当前输入的命令
