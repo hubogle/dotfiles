@@ -55,8 +55,6 @@
 ---
 
 ## QA
-* Q: tmux 插件下载失败，或未生效
-* A: 手动删除 `.config/tmux/plugins` 目录下除 `tpm` 的所有目录，重新下载插件。
 * Q: 判断终端和 `tmux` 是否为 `256` 色彩
 * A: `curl https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash`
 ---
