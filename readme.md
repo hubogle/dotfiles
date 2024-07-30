@@ -2,13 +2,14 @@
 
 1. `zsh` 采用 `P10k` + [zi](https://wiki.zshell.dev/zh-Hans/)
 2. `vim` 采用 `neovim` + [NvChad](https://nvchad.com)
+3. `alacritty` + `tmux` 终端输入管理。
+4. 通过 `hammerspoon` + [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 实现 `App` 输入法自动切换。
 5. `histdb` 同步不同设备的 `zsh` 历史命令 [zsh-histdb](https://github.com/larkery/zsh-histdb)
-3. 通过 `hammerspoon` + [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 实现 `App` 输入法自动切换。
-4. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
-5. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
-6. `osx.sh` 文件为系统相关配置。
+6. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
+7. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
+8. `osx.sh` 文件为系统相关配置。
 
-`zi`插件、`NvChad`、`Tmux`插件、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
+`zi`插件、`NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
 ## 软件升级
 
@@ -27,7 +28,7 @@
 ## 1.brew 安装
 
 1. [Command Line Tools](https://developer.apple.com/download/all/?q=Command) 官网安装，或命令安装 `xcode-select --install`
-2. [Brew 官网](https://brew.sh/index_zh-cn) 安装命令 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+2. [Brew 官网](https://brew.sh/) 安装命令 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 3. 安装三方未知来源：`sudo spctl --master-disable`
 
 * 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
