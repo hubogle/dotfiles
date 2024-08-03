@@ -1,71 +1,25 @@
 patch:
   schema_list:
-    - schema: luna_pinyin_simp # 朙月拼音
+    - schema: rime_mint
 
-  menu/page_size: 9 # 候选词个数
-
-  # 若 caps 切换大小写无效, 打开 Mac 系统偏好设置 > 键盘 > 输入法 > 取消勾选[使用大写锁定键切换“美国”输入模式]
-  # `inline_ascii` 在输入框内插入英文
-  # `commit_text` 候选文字上屏并切换至英文
-  # `commit_code` 输入拼音上屏并切换至英文
-  # `clear` 清除拼音并切换至英文
-  # `noop` 屏蔽此按键
-  ascii_composer/good_old_caps_lock: true # 若为 true， Caps 只切换大小写
-  ascii_composer/switch_key:
-    Caps_Lock: noop # Caps 键
-    Shift_L: noop # 左 Shift，切换中英文
-    Shift_R: commit_code # 右 Shift，切换中英文
-    Control_L: noop # 左 Control，屏蔽该切换键
-    Control_R: noop # 右 Control，屏蔽该切换键
-
-  switcher/caption: "【方案选择】"
-  switcher/hotkeys:
-
-  # 匹配 patterns 时，自动英文
-  recognizer:
-    patterns:
-      email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
-      uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
-      url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
-
-  # accept，实际接受的按键
-  # send，输出效果
-  # toggle，切换开关
-  # when，作用范围
-  # 按住 control + 符号就是小写
-  key_binder/bindings: # 若开启, 去掉前面#
-    # 我的自定义
-    - { when: paging, accept: Return, send: space}           # 空格选择第一个
-    - { when: has_menu, accept: Return, send: Return}        # 回车打印英文
-    - { when: composing, accept: Tab, send: Right }          # tab 选择下一个
-    - { when: composing, accept: Shift+Tab, send: Left }     # shift + tab 选择上一个
-    - { when: composing, accept: Control+a, send: Home }           # "Control+a" 光标移至首
-    - { when: composing, accept: Control+e, send: End }            # "Control+e" 光标移至尾
-    - { when: composing, accept: Control+b, send: Left }           # "Control+b" 移动光标
-    - { when: composing, accept: Control+f, send: Right }          # "Control+f" 向右选择候选词
-    # - { when: composing, accept: period, send: Return, toggle: ascii_mode}        # . 操作方式
-    # 翻页
-    #- { when: has_menu, accept: Tab, send: Page_Down }            # "tab" 键翻页, 和 "tab" 键分词只能二选一
-    # - { when: composing, accept: Tab, send: Shift+Right } # "tab" 键分词
-    - { when: paging, accept: minus, send: Page_Up } # "-" 上一页
-    - { when: has_menu, accept: equal, send: Page_Down } # "=" 下一页
-    # - { when: paging, accept: comma, send: Page_Up } # "," 上一页
-    # - { when: has_menu, accept: period, send: Page_Down } # "." 下一页
-    - { when: paging, accept: bracketleft, send: Page_Up } # "[" 上一页
-    - { when: has_menu, accept: bracketright, send: Page_Down } # "]" 下一页
-    # 快捷键
-    #- { when: has_menu, accept: semicolon, send: 2 }              # ":" (分号)选择第 2 个候选词
-    #- { when: has_menu, accept: apostrophe, send: 3 }             # "'" (引号)选择第 3 个候选词
-    #- { when: composing, accept: Shift+Tab, send: Shift+Left }    # "Shift+Tab" 键向左选拼音分词
-    #- { when: composing, accept: Control+a, send: Home }          # "Control+a" 光标移至首
-    #- { when: composing, accept: Control+e, send: End }           # "Control+e" 光标移至尾
-    #- { when: composing, accept: Control+g, send: Escape }        # "Control+g" 清码
-    #- { when: composing, accept: Return, send: Escape }           # "Return" 回车清码
-    #- { when: always, accept: Control+Shift+1, select: .next }             # 切换输入方案
-    #- { when: always, accept: Control+Shift+2, toggle: ascii_mode }        # 中/英文切换
-    #- { when: always, accept: Control+Shift+3, toggle: full_shape }        # 全角/半角切换
-    - { when: always, accept: Control+Shift+4, toggle: simplification } # 繁简体切换
-    #- { when: always, accept: Control+Shift+5, toggle: extended_charset }  # 通用/增广切换（显示生僻字）
-    #- { when: composing, accept: Control+b, send: Left }           # "Control+b" 移动光标
-    #- { when: composing, accept: Control+f, send: Right }          # "Control+f" 向右选择候选词
-    #- { when: composing, accept: Control+h, send: BackSpace }      # "Control+h" 删除输入码
+  # ascii_mode、inline、no_inline、vim_mode 等等设定，可参考 /Library/Input Methods/Squirrel.app/Contents/SharedSupport/squirrel.yaml
+  # 中西文切换
+  #
+  # 【good_old_caps_lock】 CapsLock 切换到大写或切换中英。
+  # （macOS 偏好设置的优先级更高，如果勾选【使用大写锁定键切换“ABC”输入法】则始终会切换输入法）
+  #
+  # 切换中英：
+  # 不同的选项表示：打字打到一半时按下了 CapsLock、Shift、Control 后：
+  # commit_code  上屏原始的编码，然后切换到英文
+  # commit_text  上屏拼出的词句，然后切换到英文
+  # clear        清除未上屏内容，然后切换到英文
+  # inline_ascii 无输入时，切换中英；有输入时，切换到临时英文模式，按回车上屏后回到中文状态
+  # noop         屏蔽快捷键，不切换中英，但不要屏蔽 CapsLock
+  ascii_composer:
+    good_old_caps_lock: true  # 若为 true， Caps 只切换大小写
+    switch_key:
+      Caps_Lock: noop # Caps 键
+      Shift_L: noop # 左 Shift，切换中英文
+      Shift_R: commit_code # 右 Shift，切换中英文
+      Control_L: noop # 左 Control，屏蔽该切换键
+      Control_R: noop # 右 Control，屏蔽该切换键

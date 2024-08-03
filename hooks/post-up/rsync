@@ -3,17 +3,16 @@
 RIME_DIR=~/Library/Rime
 # 同步 rime 自定义词库
 if [ -d "$RIME_DIR" ]; then
-  ln -sfn $DOTFILES_DIRS/config/rime/rime.lua $RIME_DIR/rime.lua
-  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.schema.yaml $RIME_DIR/luna_pinyin_simp.schema.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/easy_en.schema.yaml $RIME_DIR/easy_en.schema.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin_simp.custom.yaml $RIME_DIR/luna_pinyin_simp.custom.yaml
   ln -sfn $DOTFILES_DIRS/config/rime/default.custom.yaml $RIME_DIR/default.custom.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/installation.yaml $RIME_DIR/installation.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/luna_pinyin.extended.dict.yaml $RIME_DIR/luna_pinyin.extended.dict.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/default.yaml $RIME_DIR/default.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/melt_eng.dict.yaml $RIME_DIR/melt_eng.dict.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/melt_eng.schema.yaml $RIME_DIR/melt_eng.schema.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.custom.yaml $RIME_DIR/rime_mint.custom.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.dict.yaml $RIME_DIR/rime_mint.dict.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.schema.yaml $RIME_DIR/rime_mint.schema.yaml
   ln -sfn $DOTFILES_DIRS/config/rime/squirrel.custom.yaml $RIME_DIR/squirrel.custom.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/custom_phrase.txt $RIME_DIR/custom_phrase.txt
-  ln -sfn $DOTFILES_DIRS/config/rime/easy_en.dict.yaml $RIME_DIR/easy_en.dict.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/opencc $RIME_DIR/opencc
+  ln -sfn $DOTFILES_DIRS/config/rime/squirrel.yaml $RIME_DIR/squirrel.yaml
+  ln -sfn $DOTFILES_DIRS/config/rime/lua $RIME_DIR/lua
 fi
 
 
