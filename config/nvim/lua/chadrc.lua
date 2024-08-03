@@ -5,22 +5,22 @@
 local M = {}
 
 M.ui = {
-  nvdash = {
-    load_on_startup = false,
-  },
-  statusline = {
-    theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
-  },
+	nvdash = {
+		load_on_startup = false,
+	},
+	statusline = {
+		theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
+	},
 
-  tabufline = {
-    order = { "treeOffset", "buffers", "tabs", "btns" },
-  },
+	tabufline = {
+		order = { "treeOffset", "buffers", "tabs", "btns" },
+	},
 }
 
 M.base46 = {
-  theme = "onedark",
-  transparency = true,
-  theme_toggle = { "onedark", "penumbra_dark" },
+	theme = "onedark",
+	transparency = false,
+	theme_toggle = { "onedark", "penumbra_dark" },
 }
 
 return M

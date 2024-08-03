@@ -14,12 +14,7 @@ map("n", "q", function()
 end, { desc = "buffer close" })
 
 map("n", "<C-b>p", ":Telescope buffers<CR>", { noremap = true, silent = true, desc = "Open buffers opened files" })
-map(
-	"i",
-	"<C-b>p",
-	"<ESC>:Telescope buffers<CR>",
-	{ noremap = true, silent = true, desc = "Open buffers opened files" }
-)
+map("i", "<C-b>p", "<ESC>:Telescope buffers<CR>", { noremap = true, silent = true, desc = "Open buffers opened files" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -37,15 +32,15 @@ map("n", "<leader>fm", function()
 end)
 
 -- 设置可视模式下的 y 键映射
-vim.keymap.set('v', 'y', function()
-    vim.cmd("normal! y")
-    local content = vim.fn.getreg('"')
-    -- 使用 echo 命令传递内容到 tmux load-buffer
-    vim.fn.system("echo -n " .. vim.fn.shellescape(content) .. " | tmux load-buffer -")
-end, {noremap = true, silent = true})
+vim.keymap.set("v", "y", function()
+	vim.cmd("normal! y")
+	local content = vim.fn.getreg('"')
+	-- 使用 echo 命令传递内容到 tmux load-buffer
+	vim.fn.system("echo -n " .. vim.fn.shellescape(content) .. " | tmux load-buffer -")
+end, { noremap = true, silent = true })
 
 -- esc 退出 terminal
 map("t", "<ESC>", function()
-  local win = vim.api.nvim_get_current_win()
-  vim.api.nvim_win_close(win, true)
+	local win = vim.api.nvim_get_current_win()
+	vim.api.nvim_win_close(win, true)
 end, { desc = "terminal close term in terminal mode" })

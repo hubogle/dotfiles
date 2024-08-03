@@ -87,6 +87,7 @@ bindings = [
     { key = "P", mods = "Command", chars = "\u0002p" },
     { key = "S", mods = "Command", chars = "\u001b:w\u000a" },  # Type <escape>:w<enter> to save vim
     { key = "D", mods = "Option", chars = "\u001b:vsp\u000a" }, # Type <escape>:w<enter> to save vim
+    { key = "I", mods = "Control", chars = "\u001b[105;6u" },   # 导航到跳转列表中的下一个位置
 
     { key = "Escape", mods = "Command", command = { program = "/opt/homebrew/bin/im-select", args = [
         "com.apple.keylayout.ABC",
