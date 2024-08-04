@@ -1,5 +1,6 @@
 export LC_ALL=zh_CN.UTF-8
 export LANG=zh_CN.UTF-8
+# zmodload zsh/zprof # zprof | head -n 20; zmodload -u zsh/zprof
 #====================PATH=======================
 if [[ `arch` == "arm64" ]]; then
   export BREW_OPT="/opt/homebrew/opt"
@@ -27,53 +28,54 @@ export HISTDB_FILE=$HOME/.local/share/histdb/zsh-history.db
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #======================ZI========================
 source "${HOME}/.zi/bin/zi.zsh"
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
-autoload -Uz compinit                 # 初始化自动完成
+setopt prompt_subst             # 每次绘制提示时启用提示内的参数替换。
 
-# zcompdump 存储路径配置，如果失效的话则只执行 compinit
+zi wait lucid for \
+  OMZL::git.zsh \
+  OMZP::git \
+  OMZP::extract
+
+zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
+zi light romkatv/powerlevel10k
+
+zi wait lucid light-mode for \
+  Aloxaf/fzf-tab \
+  z-shell/zsh-zoxide \
+  z-shell/H-S-MW
+  # larkery/zsh-histdb
+
+# https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
+# z-shell/H-S-MW             # 搜索历史命令，可以查看上下文
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
-compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
+# compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
-zi ice wait lucid has'fzf'
-zi light Aloxaf/fzf-tab               # fzf 提供补全菜单
+zi wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+    z-shell/F-Sy-H \
+  atload"_zsh_autosuggest_start; \
+        ZSH_AUTOSUGGEST_STRATEGY=(history completion) \
+        ZSH_AUTOSUGGEST_MANUAL_REBIND=0 \
+        ZSH_AUTOSUGGEST_HISTORY_IGNORE=' *' \
+        bindkey '^p' history-search-backward; \
+        bindkey '^o' history-search-forward; \
+        bindkey '\t\t' autosuggest-accept; \
+        bindkey '^e' autosuggest-execute; \
+        bindkey '^a' autosuggest-toggle; \
+        bindkey '^s' autosuggest-clear" \
+    zsh-users/zsh-autosuggestions \
+  blockf atpull'zi creinstall -q .' \
+    zsh-users/zsh-completions
 
-# zi light z-shell/H-S-MW             # 搜索历史命令，可以查看上下文
-zi ice wait lucid
-zi light larkery/zsh-histdb           # histdb 记录历史 ~/.histdb
-
-# rm -f ~/.zcompdump; compinit
-zi ice lucid wait as'completion'
-zi light zsh-users/zsh-completions    # 自动补全
-
-zi ice depth=1
-zi light romkatv/powerlevel10k        # p10k 主题
-
-zi ice wait lucid atload"!_zsh_autosuggest_start"
-zi light zsh-users/zsh-autosuggestions # 提示根据历史记录和补全提示您输入的命令
-bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
-
-zi ice wait lucid atinit"ZI[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zi light z-shell/F-Sy-H                # 高亮插件
-
-zi ice has'zoxide'
-zi light z-shell/zsh-zoxide
-
-# https://wiki.zshell.dev/docs/getting_started/migration
-zi snippet OMZP::extract               # x 一键解压
-zi snippet OMZL::git.zsh               # git alias
-zi snippet OMZP::git                   # git alias
-zi snippet OMZP::golang                # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/golang
-zi snippet OMZP::gitignore             # https://www.toptal.com/developers/gitignore
-zi snippet OMZP::cp                    # cpv 使用 rsync 带进度条
+# bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
 
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
-source ~/.config/zsh/histdb.zsh
+# source ~/.config/zsh/histdb.zsh
 #=====================RCM===========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
@@ -87,17 +89,17 @@ export GOPATH=$(mise where go)/packages
 export GOROOT=$(mise where go)
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
-# export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
-# https://github.com/junegunn/fzf/wiki/Color-schemes
+# https://vitormv.github.io/fzf-themes/
+# # https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS="
   --height 40%
   --reverse
   --border none
   --ansi
-  --color=gutter:#1E1E1E,bg+:#1E1E1E,fg:#42b3c2,fg+:#8cc265,hl+:#8cc265
-  --bind='ctrl-r:toggle-sort'
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  --preview 'bat --style=numbers --color=always --line-range :500 {}'
 "
-  # --color=gutter:#282c34,bg+:#3e4452,hl:#8cc265,border:#3e4452,fg:#42b3c2 # one_dark_pro_flat 配色
 #=====================zoxide=======================
 export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS

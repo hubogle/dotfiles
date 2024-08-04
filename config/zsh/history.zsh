@@ -26,7 +26,6 @@ setopt bang_hist                # Treat the '!' character, especially during Exp
 setopt multios                  # Implicit tees or cats when multiple redirections are attempted.
 setopt no_beep                  # 不要在错误时发出哔哔声
 setopt PUSHD_IGNORE_DUPS        # 不要将同一目录的多个副本推送到目录堆栈上
-setopt prompt_subst             # 每次绘制提示时启用提示内的参数替换。
 setopt pushd_ignore_dups        # Don't push multiple copies directory onto the directory stack.
 setopt pushd_minus              # 交换了 cd +1 和 cd -1 的含义；我们希望他们的意思与他们的意思相反。
 # setopt GLOB_COMPLETE          # Show autocompletion menu with globs

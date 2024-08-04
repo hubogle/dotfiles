@@ -4,12 +4,6 @@
 # -f 判断文件
 # -x 判断是否有可执行权限
 
-# 安装 ZI
-if [ ! -d "${HOME}/.zi" ]; then
-    echo "正在安装 ZI 插件" 1>&2
-    git clone https://github.com/z-shell/zi.git ~/.zi/bin
-fi
-
 # 安装 NvChad
 if [ ! -d "${HOME}/.config/nvim" ]; then
     echo "正在安装 NvChad" 1>&2

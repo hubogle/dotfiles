@@ -9,7 +9,7 @@
 7. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
 8. `osx.sh` 文件为系统相关配置。
 
-`zi`插件、`NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
+`NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
 ## 软件升级
 
@@ -61,6 +61,13 @@ rm -rf ~/.config/nvim
 rm -rf ~/.local/state/nvim
 rm -rf ~/.local/share/nvim
 ```
+## 6. zi 手动安装
+[ZI 官网](https://wiki.zshell.dev/zh-Hans/)
+
+安装命令 `sh -c "$(curl -fsSL get.zshell.dev)" --`
+执行以下命令：
+* `exec zsh -il`
+* `zi self-update`
 
 ---
 
