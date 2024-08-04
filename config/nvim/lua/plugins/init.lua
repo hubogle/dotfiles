@@ -94,4 +94,12 @@ return {
 		},
 		-- order to load the plugin when the command is run for the first time
 	},
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		config = function()
+			require("configs.outline")
+		end,
+	},
 }

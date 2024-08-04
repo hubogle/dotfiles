@@ -44,3 +44,6 @@ map("t", "<ESC>", function()
 	local win = vim.api.nvim_get_current_win()
 	vim.api.nvim_win_close(win, true)
 end, { desc = "terminal close term in terminal mode" })
+
+-- 大纲展示
+map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
