@@ -81,10 +81,10 @@ mods = "Shift"
 decorations = "buttonless"         #  窗口样式
 decorations_theme_variant = "None" # 可支持的值包括“Dark”，“Light”和“None”。将其设置为“None”以使用默认主题变体。
 dynamic_padding = true             # 在终端内容周围均匀分布其他填充
-opacity = 0.97                     # 窗口透明度
+opacity = 0.95                     # 窗口透明度
 option_as_alt = "OnlyLeft"         # Make `Option` key behave as `Alt` (macOS only):
 resize_increments = true           # 调整窗口大小时是否使用各个单元格的离散步长
-blur = false                       # 背景毛玻璃
+blur = true                        # 背景毛玻璃
 
 # 默认初始化大小
 [window.dimensions]

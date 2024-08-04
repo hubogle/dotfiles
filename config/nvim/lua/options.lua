@@ -31,9 +31,9 @@ o.splitbelow = true -- 设置新分屏在当前窗口的下方
 o.splitright = true -- 设置新分屏在当前窗口的右侧
 
 -- 光标
-o.cursorline = true -- 启用光标行
--- o.cursorcolumn = true -- 启用光标列
-o.cursorlineopt = "both" -- 光标行突出显示
+--o.cursorline = true -- 启用光标行
+--orcolumn = true -- 启用光标列
+--o.cursorlineopt = "number" -- 光标行突出显示
 
 -- setting
 o.encoding = "utf-8"

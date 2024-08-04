@@ -18,8 +18,8 @@ M.ui = {
 }
 
 M.base46 = {
-	theme = "onedark",
-	transparency = false,
+	theme = "onenord",
+	transparency = true,
 	theme_toggle = { "onedark", "penumbra_dark" },
 }
 

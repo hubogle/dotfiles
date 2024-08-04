@@ -13,17 +13,20 @@ else
 fi
 export PATH="$BREW_PATH:$BREW_SBIN:$PATH"
 #=====================config====================
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
 export EDITOR="$BREW_PATH/nvim"
 export VISUAL="$BREW_PATH/nvim"
-export XDG_CONFIG_HOME="$HOME/.config"
 export SHELL_SESSIONS_DISABLE=1
-export LESSHISTFILE=$HOME/.local/share/less/history
-export HISTFILE=$HOME/.local/share/zsh_history   # zsh 历史文件地址
+export LESSHISTFILE=$XDG_DATA_HOME/less/history
+export HISTFILE=$XDG_DATA_HOME/zsh_history   # zsh 历史文件地址
 #=====================other config==============
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
-export IPYTHONDIR=$HOME/.local/share/ipython
-export MYCLI_HISTFILE=$HOME/.local/share/mycli/history
-export HISTDB_FILE=$HOME/.local/share/histdb/zsh-history.db
+export IPYTHONDIR=$XDG_DATA_HOME/ipython
+export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
+export HISTDB_FILE=$XDG_DATA_HOME/histdb/zsh-history.db
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -63,7 +66,7 @@ zi wait lucid light-mode for \
         ZSH_AUTOSUGGEST_HISTORY_IGNORE=' *' \
         bindkey '^p' history-search-backward; \
         bindkey '^o' history-search-forward; \
-        bindkey '\t\t' autosuggest-accept; \
+        bindkey '^[[Z' autosuggest-accept; \
         bindkey '^e' autosuggest-execute; \
         bindkey '^a' autosuggest-toggle; \
         bindkey '^s' autosuggest-clear" \
