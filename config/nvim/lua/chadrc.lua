@@ -5,8 +5,34 @@
 local M = {}
 
 M.ui = {
+	cmp = {
+        icons = true,
+        lspkind_text = true,
+        style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+    },
 	nvdash = {
-		load_on_startup = false,
+		load_on_startup = true,
+        header = {
+          "           ▄ ▄                   ",
+          "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+          "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+          "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+          "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+          "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+          "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+          "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+          "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+        },
+
+        buttons = {
+          { "  Recent Project", "Spc f p", "Telescope neovim-project history" },
+          { "  Find Project", "Spc f p", "Telescope neovim-project discover" },
+          { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
+          { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
+          { "  Bookmarks", "Spc m a", "Telescope marks" },
+          { "  Themes", "Spc t h", "Telescope themes" },
+          { "  Mappings", "Spc c h", "NvCheatsheet" },
+        },
 	},
 	statusline = {
 		theme = "vscode_colored", -- default/vscode/vscode_colored/minimal

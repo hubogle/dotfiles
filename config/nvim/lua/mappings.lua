@@ -47,3 +47,6 @@ end, { desc = "terminal close term in terminal mode" })
 
 -- 大纲展示
 map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+
+map("n", "<leader>fp", "<cmd>Telescope neovim-project discover<CR>", { desc = "Find project" })
+map("n", "<leader>fr", "<cmd>Telescope neovim-project history<CR>", { desc = "Recent project" })

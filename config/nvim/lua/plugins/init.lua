@@ -68,14 +68,14 @@ return {
 	},
 
 	-- dashboard
-	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-		config = function()
-			require("configs.dashboard")
-		end,
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
-	},
+	-- {
+	-- 	"nvimdev/dashboard-nvim",
+	-- 	event = "VimEnter",
+	-- 	config = function()
+	-- 		require("configs.dashboard")
+	-- 	end,
+	-- 	dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	-- },
 
 	-- https://github.com/kdheepak/lazygit.nvim
 	-- git 功能插件
@@ -94,12 +94,29 @@ return {
 		},
 		-- order to load the plugin when the command is run for the first time
 	},
+	-- 方法大纲
 	{
 		"hedyhli/outline.nvim",
-		lazy = true,
 		cmd = { "Outline", "OutlineOpen" },
 		config = function()
 			require("configs.outline")
 		end,
+	},
+	-- 最近项目
+	{
+		"coffebar/neovim-project",
+		config = function()
+			require("configs.project")
+		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "Shatur/neovim-session-manager" },
+		},
+	},
+	-- 目录树
+	{
+		"nvim-tree/nvim-tree.lua",
+		lazy = false,
 	},
 }
