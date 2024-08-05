@@ -50,3 +50,8 @@ map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 
 map("n", "<leader>fp", "<cmd>Telescope neovim-project discover<CR>", { desc = "Find project" })
 map("n", "<leader>fr", "<cmd>Telescope neovim-project history<CR>", { desc = "Recent project" })
+
+-- 浮动 term
+map({ "n", "t" }, "<A-i>", function()
+  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+end, { desc = "Terminal Toggle Floating term" })
