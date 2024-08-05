@@ -41,6 +41,7 @@ return {
 				"rust",
 				"markdown",
 				"dockerfile",
+				"gitignore",
 				"sql",
 				"yaml",
 				"toml",
