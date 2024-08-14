@@ -1,5 +1,6 @@
 live_config_reload = false # 热更新配置
 
+# https://alacritty.org/config-alacritty.html
 # https://github.com/alacritty/alacritty-theme
 # https://unpkg.com/browse/alacritty-themes@latest/themes/
 
@@ -33,7 +34,7 @@ multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/230
 [font]
 builtin_box_drawing = true                                              # true 对方框图形字符使用内置字体
 size = 12
-offset = { x = 0, y = 0 }                                               # 字体偏移量
+offset = { x = 1, y = 1 }                                               # 字体偏移量
 normal = { family = "Hack Nerd Font Mono", style = "Regular" }
 bold = { family = "Hack Nerd Font Mono", style = "Bold" }
 italic = { family = "Hack Nerd Font Mono", style = "Italic" }
@@ -52,17 +53,15 @@ duration = 2              # 视觉铃声闪烁的持续时间
 save_to_clipboard = true                                        # 选中文本复制
 semantic_escape_chars = ''',│`|:"' ()[]{}<>	.,;?=+*^%$#@!~/\'''
 
-[cursor.style]
+[cursor]
 #   - ▇ Block
-#   - _ Underline
-#   - | Beam
-shape = "Block"
-# Values for `blinking`:
-#   - Never: 防止光标闪烁
-#   - Off: 默认情况下禁用闪烁
-#   - On: 默认情况下启用闪烁
 #   - Always: 强制光标始终闪烁
-blinking = "Always"
+style = { shape = "Block", blinking = "Always"}
+blink_interval = 550               # 闪烁间隔 毫秒
+blink_timeout = 5                  # 光标停止闪烁 秒
+unfocused_hollow = true            # 当窗口未聚焦时，光标将呈现为空心框
+thickness = 0.2                    # vim insert 模式光标相对于单元格宽度的粗细
+
 
 [[hints.enabled]]
 command = "open"
@@ -85,13 +84,5 @@ opacity = 0.95                     # 窗口透明度
 option_as_alt = "OnlyLeft"         # Make `Option` key behave as `Alt` (macOS only):
 resize_increments = true           # 调整窗口大小时是否使用各个单元格的离散步长
 blur = true                        # 背景毛玻璃
-
-# 默认初始化大小
-[window.dimensions]
-columns = 120
-lines = 40
-
-# 窗口边缘空白
-[window.padding]
-x = 5
-y = 5
+dimensions = {columns = 120, lines = 40} # 默认初始化大小
+padding = {x = 5, y = 5}                 # 窗口边缘空白
