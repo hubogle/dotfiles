@@ -43,8 +43,7 @@ zi wait lucid for \
   OMZP::git \
   OMZP::extract
 
-zi ice depth'1' atload"[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" nocd
-zi light romkatv/powerlevel10k
+zi light-mode for @sindresorhus/pure
 
 zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
@@ -79,6 +78,11 @@ zi wait lucid light-mode for \
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
 # source ~/.config/zsh/histdb.zsh
+
+#====================pure=======================
+print() {
+  [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
+} # 单行提示
 #=====================RCM===========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
