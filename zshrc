@@ -121,10 +121,10 @@ bindkey '^b' vi-backward-word
 # 彩色补全菜单
 # https://github.com/trapd00r/LS_COLORS  LS_COLORS环境变量
 export CLICOLOR=1
-export LS_COLORS="$(vivid generate one-dark)"                 # vivid themes 预览
+export LS_COLORS="$(vivid generate ayu)"                 # vivid themes 预览
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 #===================ALIAS===========================
-alias ls='eza'
+alias ls='eza --classify=auto --color=always'
 alias cat='bat'
 alias r='trash'
 alias rm='trash'
@@ -132,7 +132,7 @@ alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
 alias l='eza --long --all --git --icons --time-style long-iso --colour-scale --header --group'
-alias ll='eza --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --sort modified'
+alias ll='eza --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --sort modified --reverse'
 alias tree='eza --tree' # -L , --level=(depth)  递归的深度
 alias vi='nvim'
 alias vim='nvim'

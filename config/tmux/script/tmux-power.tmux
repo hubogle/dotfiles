@@ -18,22 +18,18 @@ tmux_set() {
 # done
 
 red="colour196"
-green="#8cc265"
+green="colour76"
+blue="colour68"
+orange="colour215"
+yellow="colour222"
+black="colour232"
+gray="colour240"
+cyan="colour44"
+pink="colour212"
 
 # https://github.com/catppuccin/tmux
 bg="#24273a"
 fg="#cad3f5"
-gray="#363a4f"
-yellow="#eed49f"
-magenta="#c6a0f6"
-orange="#f5a97f"
-blue="#8aadf4"
-black="#1e2030"
-cyan="#91d7e3"
-# red="#ed8796"
-# green="#a6da95"
-pink="#f5bde6"
-# black4="#5b6078"
 
 
 right_arrow_icon='' # e0b0
@@ -51,8 +47,8 @@ middle_separator="█"
 
 tmux_set status-style "fg=$fg" # 状态栏样式
 
-tmux_set message-style "fg=$cyan"          # 消息前景背景色
-tmux_set message-command-style "fg=$cyan"  # 设置状态行消息命令样式
+tmux_set message-style "fg=$black"          # 消息前景背景色
+tmux_set message-command-style "fg=$black"  # 设置状态行消息命令样式
 
 tmux_set pane-border-style "fg=$gray" # 设置面板默认分割线的颜色
 tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的颜色
