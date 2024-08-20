@@ -11,7 +11,7 @@ else
   export BREW_PATH="/usr/local/bin"
   export BREW_SBIN="/usr/local/sbin"
 fi
-export PATH="$BREW_PATH:$BREW_SBIN:$PATH"
+export PATH="$BREW_PATH:$PATH"
 #=====================config====================
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_CONFIG_HOME=$HOME/.config
@@ -89,11 +89,6 @@ export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise=====================
 export MISE_DATA_DIR=$HOME/.mise
 eval "$(mise activate zsh --shims)"
-#=======================goEnv====================
-export GO111MODULE=on # auto
-export GOPROXY=https://goproxy.cn
-export GOPATH=$(mise where go)/packages
-export GOROOT=$(mise where go)
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # https://vitormv.github.io/fzf-themes/
@@ -171,6 +166,7 @@ ssh() {
 
     TERM=$original_term  # Restore original TERM after SSH
 }
+
 
 # 使用 vim 编辑当前输入的命令
 autoload -U edit-command-line

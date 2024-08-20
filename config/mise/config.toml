@@ -16,3 +16,6 @@ always_keep_install = true  # deleted on failure by default
 
 # configure messages displayed when entering directories with config files
 status = { missing_tools = "if_other_versions_installed", show_env = true, show_tools = true }
+
+# https://mise.jdx.dev/lang/go.html
+go_set_gopath = true
