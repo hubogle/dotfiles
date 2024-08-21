@@ -66,8 +66,6 @@ zi wait lucid light-mode for \
         bindkey '^p' history-search-backward; \
         bindkey '^o' history-search-forward; \
         bindkey '^[[Z' autosuggest-accept; \
-        bindkey '^e' autosuggest-execute; \
-        bindkey '^a' autosuggest-toggle; \
         bindkey '^s' autosuggest-clear" \
     zsh-users/zsh-autosuggestions \
   blockf atpull'zi creinstall -q .' \
