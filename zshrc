@@ -26,10 +26,6 @@ export HISTFILE=$XDG_DATA_HOME/zsh_history   # zsh 历史文件地址
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
 export IPYTHONDIR=$XDG_DATA_HOME/ipython
 export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
-#=====================P10k======================
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 #======================ZI========================
 source "${HOME}/.zi/bin/zi.zsh"
 autoload -Uz _zi
@@ -46,12 +42,9 @@ zi light-mode for @sindresorhus/pure
 
 zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
-  z-shell/zsh-zoxide \
-  z-shell/H-S-MW
-  # larkery/zsh-histdb
+  z-shell/zsh-zoxide
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
-# z-shell/H-S-MW             # 搜索历史命令，可以查看上下文
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
 # compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
@@ -70,11 +63,10 @@ zi wait lucid light-mode for \
   blockf atpull'zi creinstall -q .' \
     zsh-users/zsh-completions
 
-# bindkey '^[[Z' autosuggest-accept      # shift + tab  | 补全历史命令
+zi load atuinsh/atuin
 
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
-# source ~/.config/zsh/histdb.zsh
 
 #====================pure=======================
 print() {
@@ -90,6 +82,7 @@ eval "$(mise activate zsh --shims)"
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # https://vitormv.github.io/fzf-themes/
 # # https://github.com/junegunn/fzf/wiki/Color-schemes
+export BAT_THEME="TwoDark"
 export FZF_DEFAULT_OPTS="
   --height 40%
   --reverse
