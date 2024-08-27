@@ -15,8 +15,8 @@ persistent_logging = false
 print_events = false
 render_timer = false
 
-# [env]
-# TERM = "alacritty"
+[env]
+TERM = "tmux-256color"
 
 [shell]
 program = "/opt/homebrew/bin/tmux"

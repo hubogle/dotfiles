@@ -19,11 +19,11 @@ tmux_set() {
 
 red="colour196"
 green="colour76"
-blue="colour68"
+blue="colour12"
 orange="colour215"
 yellow="colour222"
 black="colour232"
-gray="colour240"
+gray="colour241"
 cyan="colour44"
 pink="colour212"
 
@@ -47,8 +47,8 @@ middle_separator="█"
 
 tmux_set status-style "fg=$fg" # 状态栏样式
 
-tmux_set message-style "fg=$black"          # 消息前景背景色
-tmux_set message-command-style "fg=$black"  # 设置状态行消息命令样式
+tmux_set message-style "fg=$red"          # 消息前景背景色
+tmux_set message-command-style "fg=$red"  # 设置状态行消息命令样式
 
 tmux_set pane-border-style "fg=$gray" # 设置面板默认分割线的颜色
 tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的颜色
@@ -56,7 +56,7 @@ tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的�
 tmux_set display-panes-colour "fg=$blue"          # 设置窗格颜色
 tmux_set display-panes-active-colour "fg=$yellow" # 设置活动窗格颜色
 
-tmux_set mode-style "bg=$gray,fg=$pink" # 设置复制模式下的高亮颜色
+tmux_set mode-style "bg=$blue" # 设置复制模式下的高亮颜色
 
 tmux_set window-status-separator ""
 
