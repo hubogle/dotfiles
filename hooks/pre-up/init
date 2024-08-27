@@ -31,13 +31,6 @@ if [ ! -d "${HOME}/.local/share/mycli" ]; then
     mkdir -p ${HOME}/.local/share/mycli
 fi
 
-# histdb 命令历史记录位置
-if [ ! -d "${HOME}/.local/share/histdb/.git" ]; then
-    echo "正在安装 histdb"
-    git clone https://github.com/hubogle/histdb.git ~/.local/share/histdbNew
-    rm -rf ~/.local/share/histdb && mv ~/.local/share/histdbNew ~/.local/share/histdb
-fi
-
 # im-select 脚本安装
 if [ ! -f "${BREW_PATH}/im-select" ]; then
     echo "安装 im-select"

@@ -26,7 +26,6 @@ export HISTFILE=$XDG_DATA_HOME/zsh_history   # zsh 历史文件地址
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
 export IPYTHONDIR=$XDG_DATA_HOME/ipython
 export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
-export HISTDB_FILE=$XDG_DATA_HOME/histdb/zsh-history.db
 #=====================P10k======================
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
