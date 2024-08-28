@@ -5,10 +5,10 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'        # 来回切换分组展示
 zstyle ':fzf-tab:*' prefix ''                   # 取消展示的 .
 # zstyle ':fzf-tab:*' fzf-command fzf             # 默认使用 fzf
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup  # 使用 tmux 弹出窗口
 zstyle ':fzf-tab:complete:cd:*' popup-pad 30 10
-zstyle ':fzf-tab:*' fzf-flags --border=none --color 'gutter:#282c34,bg:-1,hl:#8cc265,border:#282c34,fg:#42b3c2'
-zstyle ':fzf-tab:*' default-color $'\033[38;5;117m'  # 没有组显示颜色
+# zstyle ':fzf-tab:*' fzf-flags --border=none --color 'gutter:#282c34,bg:-1,hl:#8cc265,border:#282c34,fg:#42b3c2'
+# zstyle ':fzf-tab:*' default-color $'\033[38;5;117m'  # 没有组显示颜色
 zstyle ':fzf-tab:*' single-group color          # 一组时显示颜色，默认配色
 zstyle ':fzf-tab:*' show-group full             # 分组描述显示配置
 FZF_TAB_GROUP_COLORS=(

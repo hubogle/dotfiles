@@ -81,21 +81,15 @@ eval "$(mise activate zsh --shims)"
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # https://vitormv.github.io/fzf-themes/
-# # https://github.com/junegunn/fzf/wiki/Color-schemes
+# https://github.com/junegunn/fzf/wiki/Color-schemes
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=dark
+--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
+'
 export BAT_THEME="TwoDark"
-export FZF_DEFAULT_OPTS="
-  --height 40%
-  --reverse
-  --border none
-  --ansi
-  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-  --preview 'bat --style=numbers --color=always --line-range :500 {}'
-"
 #=====================zoxide=======================
-export _ZO_DATA_DIR=$HOME/.cache/zoxide              # 可删除 zcompdump
-export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
-eval "$(zoxide init zsh --cmd cd)"                   # 在调用 compinit 后添加上述行
+export _ZO_CMD_PREFIX="cd"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
