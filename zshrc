@@ -42,7 +42,8 @@ zi light-mode for @sindresorhus/pure
 
 zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
-  z-shell/zsh-zoxide
+  z-shell/zsh-zoxide \
+  atuinsh/atuin
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
@@ -63,21 +64,31 @@ zi wait lucid light-mode for \
   blockf atpull'zi creinstall -q .' \
     zsh-users/zsh-completions
 
-zi load atuinsh/atuin
+autoload -U edit-command-line
+zle -N edit-command-line
 
+source ~/.config/zsh/func.zsh
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
-
 #====================pure=======================
 print() {
   [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
 } # 单行提示
-#=====================RCM===========================
+#=====================RCM==========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
-#=======================mise=====================
+#=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
-eval "$(mise activate zsh --shims)"
+export PATH="$MISE_DATA_DIR:$PATH"
+#===================NAVI============================
+eval "$(navi widget zsh)"
+export NAVI_CONFIG=$HOME/.config/navi/config.yaml
+#===================vivid===========================
+export LS_COLORS="$(vivid generate ayu)"                 # vivid themes 预览
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
+#=====================other=========================
+export _ZO_CMD_PREFIX="cd"           # zoxide 配置前缀
+export BAT_THEME="TwoDark"           # bat 主题
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # https://vitormv.github.io/fzf-themes/
@@ -87,21 +98,6 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
 '
-export BAT_THEME="TwoDark"
-#=====================zoxide=======================
-export _ZO_CMD_PREFIX="cd"
-#===================NAVI============================
-eval "$(navi widget zsh)"
-export NAVI_CONFIG=$HOME/.config/navi/config.yaml
-#===================BindKey=========================
-bindkey '^f' vi-forward-word # 右移一个单词 [option]+[→] 和 [option]+[←]
-bindkey '^b' vi-backward-word
-#===================LSCOLOR=========================
-# 彩色补全菜单
-# https://github.com/trapd00r/LS_COLORS  LS_COLORS环境变量
-export CLICOLOR=1
-export LS_COLORS="$(vivid generate ayu)"                 # vivid themes 预览
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 #===================ALIAS===========================
 alias ls='eza --classify=auto --color=always'
 alias cat='bat'
@@ -119,85 +115,11 @@ alias top='btm'
 alias q='exit'
 alias lip="curl cip.cc; curl ifconfig.me"
 alias brewc="brew update && brew upgrade --formula && brew cleanup --prune 1 && brew autoremove" # mas upgrade
-#======================proxy=====================
-function proxy() {
-    export no_proxy="localhost,127.0.0.1"
-    export http_proxy=http://127.0.0.1:7890
-    export https_proxy=http://127.0.0.1:7890
-    export all_proxy=socks5://127.0.0.1:7891
-}
-function unproxy(){
-    unset http_proxy
-    unset https_proxy
-    unset all_proxy
-    echo -e "关闭代理"
-}
-
-ssh() {
-    local original_term=$TERM
-    TERM='xterm-256color'  # Set TERM for SSH sessions
-
-    if [[ $(ps -p $(ps -p $$ -o ppid=) -o comm=) =~ tmux ]]; then
-        local ssh_command="$@"
-        local target_host=$(echo "$ssh_command" | awk -F'@' '{if (NF>1) print $2; else print $1}' | awk '{print $1}')
-        tmux rename-window "$target_host"
-        command ssh "$@"
-        tmux rename-window "zsh"  # Reset window name after SSH
-        [ $? -ne 0 ] && printf '\e[?1000l'
-    else
-        command ssh "$@"
-    fi
-
-    TERM=$original_term  # Restore original TERM after SSH
-}
-
-
+#===================BindKey=========================
+bindkey '^f' vi-forward-word # 右移一个单词 [option]+[→] 和 [option]+[←]
+bindkey '^b' vi-backward-word
 # 使用 vim 编辑当前输入的命令
-autoload -U edit-command-line
-zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line                  # control + x + control + e
 bindkey "^[m" copy-prev-shell-word                    # option + m 快速复制前面的单词
 bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark  C-x C-y
 bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
-
-# vsocde shell integration
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
-export VSCODE_SUGGEST=1
-export ITERM_SHELL_INTEGRATION_INSTALLED=Yes
-
-
-_aichat_zsh() {
-    if [[ -n "$BUFFER" ]]; then
-        local _old=$BUFFER
-        BUFFER+="⌛"
-        zle -I && zle redisplay
-        BUFFER=$(aichat -e "$_old")
-        zle end-of-line
-    fi
-}
-zle -N _aichat_zsh
-bindkey '\ei' _aichat_zsh # [Esc-i]
-
-export AICHAT_CONFIG_DIR="~/.config/aichat"
-export AICHAT_ROLES_FILE="~/.config/aichat/roles.yaml"
-alias ais="aichat -r shell -e"
-
-# https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
-update_terminfo () {
-    local x ncdir terms
-    ncdir="/opt/homebrew/opt/ncurses"
-    terms=(alacritty-direct alacritty tmux tmux-256color)
-
-    mkdir -p ~/.terminfo && cd ~/.terminfo
-
-    if [ -d $ncdir ] ; then
-        # sed : fix color for htop
-        for x in $terms ; do
-            $ncdir/bin/infocmp -x -A $ncdir/share/terminfo $x > ${x}.src &&
-            sed -i '' 's|pairs#0x10000|pairs#32767|' ${x}.src &&
-            /usr/bin/tic -x ${x}.src &&
-            rm -f ${x}.src
-        done
-    fi
-    cd - > /dev/null
-}
