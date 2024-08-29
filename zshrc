@@ -42,7 +42,6 @@ zi light-mode for @sindresorhus/pure
 
 zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
-  z-shell/zsh-zoxide \
   atuinsh/atuin
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
@@ -67,6 +66,12 @@ zi wait lucid light-mode for \
 autoload -U edit-command-line
 zle -N edit-command-line
 
+# https://github.com/ajeetdsouza/zoxide
+zi wait lucid light-mode for \
+  atinit'export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide' \
+  atload'eval "$(zoxide init zsh --cmd cd --hook pwd)"' \
+  ajeetdsouza/zoxide
+
 source ~/.config/zsh/func.zsh
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
@@ -79,7 +84,7 @@ export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
-export PATH="$MISE_DATA_DIR:$PATH"
+export PATH="$MISE_DATA_DIR/shims:$PATH"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
@@ -87,17 +92,26 @@ export NAVI_CONFIG=$HOME/.config/navi/config.yaml
 export LS_COLORS="$(vivid generate ayu)"                 # vivid themes 预览
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}         # 颜色补全
 #=====================other=========================
-export _ZO_CMD_PREFIX="cd"           # zoxide 配置前缀
 export BAT_THEME="TwoDark"           # bat 主题
 #========================fzf========================
 source $BREW_OPT/fzf/shell/completion.zsh 2> /dev/null # 将 .fzf.zsh 内容抽离出来
 # https://vitormv.github.io/fzf-themes/
 # https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--ansi
+--cycle
+--multi
+--info=inline
+--pointer='▶'
+--marker='✓'
+--border none
 --color=dark
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
-'
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7'
+export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS'
+--no-sort
+--height 20%
+--reverse'
 #===================ALIAS===========================
 alias ls='eza --classify=auto --color=always'
 alias cat='bat'
