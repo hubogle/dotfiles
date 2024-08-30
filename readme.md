@@ -1,13 +1,12 @@
 # Dotfile 恢复指南
 
-1. `zsh` 采用 `P10k` + [zi](https://wiki.zshell.dev/zh-Hans/)
+1. `zsh` 采用 [zi](https://wiki.zshell.dev/zh-Hans/)
 2. `vim` 采用 `neovim` + [NvChad](https://nvchad.com)
 3. `alacritty` + `tmux` 终端输入管理。
 4. 通过 `hammerspoon` + [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 实现 `App` 输入法自动切换。
-5. `histdb` 同步不同设备的 `zsh` 历史命令 [zsh-histdb](https://github.com/larkery/zsh-histdb)
-6. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
-7. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
-8. `osx.sh` 文件为系统相关配置。
+5. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
+6. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
+7. `osx.sh` 文件为系统相关配置。
 
 `NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
@@ -37,10 +36,8 @@
 
 恢复软件及配置前，需要自定义配置。
 
-1. `hooks/pre-up/init` 注释 `histdb`相关命令 或 修改`histdb`相关配置。
-2. 自行注释 `hooks/post-up/rsync` 里的命令。
-3. 修改`Brewfile`, 增删自定义插件及软件
-4. `config/git/config` 修改`git username` && `email`
+1. 自行注释 `hooks/post-up/rsync` 里的命令。
+2. 修改`Brewfile`, 增删自定义插件及软件。
 ---
 
 

@@ -6,7 +6,7 @@ live_config_reload = false # 热更新配置
 
 import = [
   # "~/.config/alacritty/themes/themes/alabaster.toml",
-  "~/.config/alacritty/themes/themes/nord.toml",
+  "~/.config/alacritty/themes/themes/nord.toml", # choice theme by import
   "~/.config/alacritty/keybindings.toml",
 ]
 
