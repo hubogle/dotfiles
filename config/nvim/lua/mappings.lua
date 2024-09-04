@@ -40,10 +40,10 @@ vim.keymap.set("v", "y", function()
 end, { noremap = true, silent = true })
 
 -- esc 退出 terminal
-map("t", "<ESC>", function()
-	local win = vim.api.nvim_get_current_win()
-	vim.api.nvim_win_close(win, true)
-end, { desc = "terminal close term in terminal mode" })
+-- map("t", "<ESC>", function()
+-- 	local win = vim.api.nvim_get_current_win()
+-- 	vim.api.nvim_win_close(win, true)
+-- end, { desc = "terminal close term in terminal mode" })
 
 -- 大纲展示
 map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
@@ -53,5 +53,5 @@ map("n", "<leader>fr", "<cmd>Telescope neovim-project history<CR>", { desc = "Re
 
 -- 浮动 term
 map({ "n", "t" }, "<A-i>", function()
-  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+	require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "Terminal Toggle Floating term" })
