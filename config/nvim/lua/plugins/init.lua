@@ -120,4 +120,15 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
 	},
+
+	-- markdown
+	{
+		-- Make sure to set this up properly if you have lazy=true
+		"MeanderingProgrammer/render-markdown.nvim",
+		config = function()
+			require("configs.markdown")
+		end,
+		dependencies = { "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+		ft = { "markdown", "Avante" },
+	},
 }
