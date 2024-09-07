@@ -44,14 +44,19 @@ M.ui = {
 }
 
 M.base46 = {
-	theme = "onenord",
+	theme = "tokyodark",
 	transparency = true,
-	theme_toggle = { "onenord_light", "onenord" },
+	theme_toggle = { "onenord_light", "tokyodark" },
 	hl_override = {
 		CursorLine = {
 			bg = "statusline_bg",
 		},
 	},
+  integrations = {
+    "blankline",
+    "cmp",
+    "git",
+  }
 }
 
 return M

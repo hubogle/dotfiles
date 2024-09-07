@@ -36,19 +36,19 @@ return {
 		end,
 	},
 
+	-- indent lines
+	-- {
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	config = function()
+	-- 		require("configs.blankline")
+	-- 	end,
+	-- },
+
 	-- 目录树
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
-	},
-
-	-- indent lines
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("configs.blankline")
-		end,
 	},
 
 	-- https://github.com/kdheepak/lazygit.nvim
