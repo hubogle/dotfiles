@@ -49,7 +49,7 @@ M.base46 = {
 	theme_toggle = { "onenord_light", "onenord" },
 	hl_override = {
 		CursorLine = {
-			bg = "black2",
+			bg = "statusline_bg",
 		},
 	},
 }

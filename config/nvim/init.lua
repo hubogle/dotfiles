@@ -60,14 +60,30 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- 自动切换行号模式
-vim.cmd([[
-	augroup numbertoggle
-		autocmd!
-		autocmd InsertEnter * set relativenumber
-		autocmd InsertLeave * set norelativenumber
-	augroup END
-]])
+-- 创建自动命令组
+vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+
+-- 进入插入模式时的自动命令
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = "numbertoggle",
+	pattern = "*",
+	callback = function()
+		if vim.wo.number then
+			vim.cmd("set relativenumber")
+		end
+	end,
+})
+
+-- 离开插入模式时的自动命令
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = "numbertoggle",
+	pattern = "*",
+	callback = function()
+		if vim.wo.number then
+			vim.cmd("set norelativenumber")
+		end
+	end,
+})
 
 -- 最后一个窗口退出，关闭目录树
 vim.cmd([[ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'nvimtree') | q | endif ]])
