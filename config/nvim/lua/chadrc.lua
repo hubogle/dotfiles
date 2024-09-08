@@ -10,6 +10,9 @@ M.ui = {
 		lspkind_text = true,
 		style = "default", -- default/flat_light/flat_dark/atom/atom_colored
 	},
+
+	telescope = { style = "borderless" }, -- borderless / bordered
+
 	nvdash = {
 		load_on_startup = true,
 		header = {
@@ -34,12 +37,24 @@ M.ui = {
 			{ "  Mappings", "Spc c h", "NvCheatsheet" },
 		},
 	},
+
 	statusline = {
 		theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
+		separator_style = "default",
+		order = nil,
+		modules = nil,
 	},
 
 	tabufline = {
+		enabled = true,
+		lazyload = true,
 		order = { "treeOffset", "buffers", "tabs", "btns" },
+		modules = nil,
+	},
+
+	lsp = {
+		signature = true,
+		semantic_tokens = true,
 	},
 }
 
@@ -52,11 +67,18 @@ M.base46 = {
 			bg = "statusline_bg",
 		},
 	},
-  integrations = {
-    "blankline",
-    "cmp",
-    "git",
-  }
+	integrations = {
+		"blankline",
+		"cmp",
+		"git",
+		"lsp",
+		"mason",
+		"nvimtree",
+		"statusline",
+		"telescope",
+		"treesitter",
+		"whichkey",
+	},
 }
 
 return M
