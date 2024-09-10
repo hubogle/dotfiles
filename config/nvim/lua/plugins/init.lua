@@ -101,12 +101,15 @@ return {
 	},
 
 	{
-		"rcarriga/nvim-notify",
-		lazy = false,
+		"folke/noice.nvim",
+		event = "VeryLazy",
 		config = function()
-			require("notify").setup({ background_colour = "#000000" })
-			vim.notify = require("notify")
+			require("configs.noice")
 		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
 	},
 
 	-- git blame 提示
