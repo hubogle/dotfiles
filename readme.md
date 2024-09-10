@@ -85,16 +85,27 @@ rm -rf ~/.local/share/nvim
 ## zsh 命令技巧
 
 * `fc` 在编辑器中编辑上条命令，保存推出即执行
-
-* `control + r` 搜索历史命令
-* `control + a` 移到行首
-* `control + e` 移到行尾
-* `control + b` 移动到当前单词的词首
-* `control + f` 移动到当前单词的词尾
-* `control + d` 删除光标位置的字符（delete）
-* `control + w` 删除光标前面的单词
-* `control + y` 在光标位置粘贴文本
-* `control + k` 剪切光标位置到行尾的文本
-* `control + u` 剪切光标位置到行首的文本
 * `option + d` 剪切光标位置到词尾的文本
 * `option + Backspace` 剪切光标位置到词首的文本。
+
+## 移动光标快捷键
+
+* `Control + a` 移到行首
+* `Control + e` 移到行尾
+* `Control + p` 上移一行
+* `Control + e` 下移一行
+* `Control + b` 移动到当前单词的词首
+* `Control + f` 移动到当前单词的词尾
+* `Control + l` 清屏操作
+* `Control + r` 查找历史
+* `Control + y` 在光标位置粘贴文本
+
+## 文字删除快捷键
+
+* `Control + h` 删除光标前一个字符
+* `Control + d` 删除光标后面的一个字符
+* `Control + w` 删除光标前面的一个单词
+* `Control + u` 删除这条命令所有的单词
+* `Control + k` 删除从光标开始到一行结尾的所有字符
+* `Control + q` 删除当前命令并在下次使用时再次显示
+

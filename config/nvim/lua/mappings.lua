@@ -13,8 +13,10 @@ map("n", "q", function()
 	require("nvchad.tabufline").close_buffer()
 end, { desc = "buffer close" })
 
-map("n", "<C-b>p", ":Telescope buffers<CR>", { noremap = true, silent = true, desc = "Open buffers opened files" })
-map("i", "<C-b>p", "<ESC>:Telescope buffers<CR>", { noremap = true, silent = true, desc = "Open buffers opened files" })
+map({"i", "n"}, "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
+map({"i", "n"}, "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify"})
+map({"i", "n"}, "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
+map({"i", "n"}, "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -47,9 +49,6 @@ end, { noremap = true, silent = true })
 
 -- 大纲展示
 map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
-
-map("n", "<leader>fp", "<cmd>Telescope neovim-project discover<CR>", { desc = "Find project" })
-map("n", "<leader>fr", "<cmd>Telescope neovim-project history<CR>", { desc = "Recent project" })
 
 -- 浮动 term
 map({ "n", "t" }, "<A-i>", function()
