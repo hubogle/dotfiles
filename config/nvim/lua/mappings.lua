@@ -9,9 +9,6 @@ map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
-map("n", "q", function()
-	require("nvchad.tabufline").close_buffer()
-end, { desc = "buffer close" })
 
 map({"i", "n"}, "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
 map({"i", "n"}, "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify"})

@@ -104,8 +104,31 @@ return {
 		"rcarriga/nvim-notify",
 		lazy = false,
 		config = function()
-			require("notify").setup({background_colour = "#000000"})
+			require("notify").setup({ background_colour = "#000000" })
 			vim.notify = require("notify")
+		end,
+	},
+
+	-- git blame 提示
+	{
+		"f-person/git-blame.nvim",
+		event = "VeryLazy",
+		opts = {
+			enabled = true,
+			message_template = " <summary> • <date> • <author> • <<sha>>",
+			date_format = "%m/%d/%y %H:%M",
+			virtual_text_column = 1,
+		},
+	},
+
+	-- 预览引用
+	{
+		"rmagatti/goto-preview",
+		event = "BufEnter",
+		config = function()
+			require("goto-preview").setup({
+				default_mappings = true,
+			})
 		end,
 	},
 }
