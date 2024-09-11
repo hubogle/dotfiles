@@ -29,3 +29,44 @@ end
 -- 最大化：⌃ + ⌥ + return
 -- 全屏 / 非全屏：⌃ + ⌥ + ⌘ + return
 -- 回到初始状态：⌃ + ⌥ + delete
+
+local function pressFn(mods, key)
+    if key == nil then
+        key = mods
+        mods = {}
+    end
+    return function() hs.eventtap.keyStroke(mods, key, 1000) end
+end
+
+-- 为不同的按键绑定创建快捷方式
+local hotkeys = {
+    hs.hotkey.new({'ctrl'}, 'h', pressFn('left'), nil, pressFn('left')),
+    hs.hotkey.new({'ctrl'}, 'j', pressFn('down'), nil, pressFn('down')),
+    hs.hotkey.new({'ctrl'}, 'k', pressFn('up'), nil, pressFn('up')),
+    hs.hotkey.new({'ctrl'}, 'l', pressFn('right'), nil, pressFn('right'))
+}
+
+local function enableHotkeys()
+    for _, hk in ipairs(hotkeys) do
+        hk:enable()
+    end
+end
+
+local function disableHotkeys()
+    for _, hk in ipairs(hotkeys) do
+        hk:disable()
+    end
+end
+
+-- 创建一个应用程序观察者
+appWatcher = hs.application.watcher.new(function(appName, eventType, app)
+    if appName == "Alacritty" then
+        if eventType == hs.application.watcher.activated then
+            disableHotkeys()
+        elseif eventType == hs.application.watcher.deactivated then
+            enableHotkeys()
+        end
+    end
+end)
+
+appWatcher:start()
