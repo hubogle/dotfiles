@@ -71,6 +71,7 @@ bindings = [
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
     { key = "O", mods = "Command", chars = "\u0060O" },       # open popup
+    { key = "F", mods = "Command", chars = "\u0060[/" },      # 进入 tmux 的 vim 搜索
 
     # vim 提供模拟 ctrl(control) + number 命令
     { key = "Key1", mods = "Control", chars = "\u001b[49;5u" },

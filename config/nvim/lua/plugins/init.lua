@@ -48,7 +48,7 @@ return {
 	-- 目录树
 	{
 		"nvim-tree/nvim-tree.lua",
-		lazy = false,
+		-- lazy = false,
 	},
 
 	-- https://github.com/kdheepak/lazygit.nvim
@@ -133,5 +133,12 @@ return {
 				default_mappings = true,
 			})
 		end,
+	},
+
+	-- 展示标签
+	{
+		"chentoast/marks.nvim",
+		event = "VeryLazy",
+		opts = {},
 	},
 }
