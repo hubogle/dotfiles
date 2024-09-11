@@ -36,80 +36,20 @@ return {
 		end,
 	},
 
-	-- indent lines
-	-- {
-	-- 	"lukas-reineke/indent-blankline.nvim",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- 	config = function()
-	-- 		require("configs.blankline")
-	-- 	end,
-	-- },
-
-	-- 目录树
+	-- 展示标签
 	{
-		"nvim-tree/nvim-tree.lua",
-		-- lazy = false,
-	},
-
-	-- https://github.com/kdheepak/lazygit.nvim
-	-- git 功能插件
-	{
-		"kdheepak/lazygit.nvim",
-		cmd = {
-			"LazyGit",
-			"LazyGitConfig",
-			"LazyGitCurrentFile",
-			"LazyGitFilter",
-			"LazyGitFilterCurrentFile",
-		},
-		-- optional for floating window border decoration
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		-- order to load the plugin when the command is run for the first time
-	},
-	-- 方法大纲
-	{
-		"hedyhli/outline.nvim",
-		cmd = { "Outline", "OutlineOpen" },
-		config = function()
-			require("configs.outline")
-		end,
-	},
-	-- 最近项目
-	{
-		"coffebar/neovim-project",
-		config = function()
-			require("configs.project")
-		end,
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope.nvim" },
-			{ "Shatur/neovim-session-manager" },
-		},
-	},
-
-	-- markdown
-	{
-		-- Make sure to set this up properly if you have lazy=true
-		"MeanderingProgrammer/render-markdown.nvim",
-		config = function()
-			require("configs.markdown")
-		end,
-		dependencies = { "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-		ft = { "markdown", "Avante" },
-	},
-
-	{
-		"folke/noice.nvim",
+		"chentoast/marks.nvim",
 		event = "VeryLazy",
+		opts = {},
+	},
+
+	-- 高亮缩进
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("configs.noice")
+			require("configs.hlchunk")
 		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
 	},
 
 	-- git blame 提示
@@ -124,6 +64,51 @@ return {
 		},
 	},
 
+	-- markdown
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		config = function()
+			require("configs.markdown")
+		end,
+		dependencies = { "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+		ft = { "markdown", "Avante" },
+	},
+
+	-- 方法大纲
+	{
+		"hedyhli/outline.nvim",
+		cmd = { "Outline", "OutlineOpen" },
+		config = function()
+			require("configs.outline")
+		end,
+	},
+
+	-- 最近项目
+	{
+		"coffebar/neovim-project",
+		config = function()
+			require("configs.project")
+		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "Shatur/neovim-session-manager" },
+		},
+	},
+
+	-- 消息通知
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("configs.noice")
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
+
 	-- 预览引用
 	{
 		"rmagatti/goto-preview",
@@ -133,12 +118,5 @@ return {
 				default_mappings = true,
 			})
 		end,
-	},
-
-	-- 展示标签
-	{
-		"chentoast/marks.nvim",
-		event = "VeryLazy",
-		opts = {},
 	},
 }
