@@ -28,6 +28,14 @@ return {
 		end,
 	},
 
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "User FilePost",
+		config = function()
+			require("configs.gitsigns")
+		end,
+	},
+
 	-- 语法高亮
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -50,18 +58,6 @@ return {
 		config = function()
 			require("configs.hlchunk")
 		end,
-	},
-
-	-- git blame 提示
-	{
-		"f-person/git-blame.nvim",
-		event = "VeryLazy",
-		opts = {
-			enabled = true,
-			message_template = " <summary> • <date> • <author> • <<sha>>",
-			date_format = "%m/%d/%y %H:%M",
-			virtual_text_column = 1,
-		},
 	},
 
 	-- markdown
