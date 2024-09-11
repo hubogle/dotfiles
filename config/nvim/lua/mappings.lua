@@ -8,12 +8,11 @@ local map = vim.keymap.set
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
 
-map({"i", "n"}, "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
-map({"i", "n"}, "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify"})
-map({"i", "n"}, "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
-map({"i", "n"}, "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
+map("n", "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
+map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify"})
+map("n", "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
+map("n", "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
