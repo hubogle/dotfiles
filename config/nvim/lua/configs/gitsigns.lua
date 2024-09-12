@@ -64,7 +64,7 @@ opts.on_attach = function(bufnr)
 	map("n", "<leader>gD", function()
 		gitsigns.diffthis("~")
 	end, { desc = "Diff current file with last commit" })
-	map("n", "<leader>gt", gitsigns.toggle_deleted, { desc = "Toggle visibility of deleted lines" })
+	map("n", "<leader>gv", gitsigns.toggle_deleted, { desc = "Toggle visibility of deleted lines" })
 
 	-- Text object for selecting hunks
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select inner hunk" })

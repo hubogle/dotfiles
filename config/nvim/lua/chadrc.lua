@@ -64,19 +64,22 @@ M.base46 = {
 	theme_toggle = { "onenord_light", "tokyodark" },
 	hl_override = {
 		CursorLine = {
-			bg = "statusline_bg",
+			bg = { "statusline_bg", 10 },
 		},
 	},
+	-- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations
 	integrations = {
 		"blankline",
 		"cmp",
 		"git",
 		"lsp",
 		"mason",
+		"notify",
 		"nvimtree",
 		"statusline",
 		"telescope",
 		"treesitter",
+		"trouble",
 		"whichkey",
 	},
 }

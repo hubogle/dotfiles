@@ -20,14 +20,6 @@ return {
 		end,
 	},
 
-	-- formatting , linting
-	{
-		"stevearc/conform.nvim",
-		config = function()
-			require("configs.conform")
-		end,
-	},
-
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "User FilePost",
@@ -36,7 +28,6 @@ return {
 		end,
 	},
 
-	-- 语法高亮
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
@@ -44,7 +35,23 @@ return {
 		end,
 	},
 
-	-- 展示标签
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "User FilePost",
+		config = function()
+			require("configs.blankline")
+		end,
+	},
+
+	{
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		config = function()
+			dofile(vim.g.base46_cache .. "trouble")
+			require("trouble").setup()
+		end,
+	},
+
 	{
 		"chentoast/marks.nvim",
 		event = "VeryLazy",
@@ -60,13 +67,12 @@ return {
 		end,
 	},
 
-	-- markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		config = function()
 			require("configs.markdown")
 		end,
-		dependencies = { "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+		dependencies = { "echasnovski/mini.nvim" },
 		ft = { "markdown", "Avante" },
 	},
 

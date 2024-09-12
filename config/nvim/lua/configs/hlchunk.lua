@@ -6,7 +6,7 @@ local options = {
 		style = "#00ffff",
 	},
 	indent = {
-		enable = true,
+		enable = false,
 		chars = {
 			"│",
 			"¦",
