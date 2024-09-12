@@ -76,15 +76,6 @@ return {
 		ft = { "markdown", "Avante" },
 	},
 
-	-- 方法大纲
-	{
-		"hedyhli/outline.nvim",
-		cmd = { "Outline", "OutlineOpen" },
-		config = function()
-			require("configs.outline")
-		end,
-	},
-
 	-- 最近项目
 	{
 		"coffebar/neovim-project",

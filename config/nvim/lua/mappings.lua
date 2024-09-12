@@ -11,6 +11,22 @@ map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
 map("n", "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
 map("n", "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
 
+-- trouble
+map("n", "<leader>ex", "<cmd> Trouble diagnostics toggle filter.buf=0 <cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>eX", "<cmd> Trouble diagnostics toggle <cr>", { desc = "Diagnostics (Trouble)" })
+map("n", "<leader>el", "<cmd> Trouble loclist toggle <cr>", { desc = "Location List (Trouble)" })
+map("n", "<leader>eq", "<cmd> Trouble qflist toggle <cr>", { desc = "Quickfix List (Trouble)" })
+
+-- 显示工作区中的符号列表，如函数、变量
+map("n", "<leader>cs", "<cmd> Trouble symbols toggle focus=false <cr>", { desc = "Symbols (Trouble)" })
+-- 显示语言服务器协议（LSP）提供的代码定义、引用等信息
+map(
+	"n",
+	"<leader>cl",
+	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	{ desc = "LSP Definitions / references / ... (Trouble)" }
+)
+
 -- 跳转缓存区编号 Option + 1
 -- Ctrl(Control) = C- | Alt(Option) = A-
 for i = 1, 9, 1 do
