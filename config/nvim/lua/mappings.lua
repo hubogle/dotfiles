@@ -5,16 +5,11 @@ require("nvchad.mappings")
 
 local map = vim.keymap.set
 
-map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "LazyGit" })
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
-
 map("n", "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
-map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify"})
+map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
 map("n", "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
 map("n", "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
-
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- 跳转缓存区编号 Option + 1
 -- Ctrl(Control) = C- | Alt(Option) = A-

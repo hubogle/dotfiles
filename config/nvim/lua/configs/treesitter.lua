@@ -16,6 +16,8 @@ options = {
 		"sql",
 		"yaml",
 		"toml",
+		"regex",
+		"bash",
 	},
 
 	indent = {
