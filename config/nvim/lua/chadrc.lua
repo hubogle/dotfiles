@@ -39,17 +39,33 @@ M.ui = {
 	},
 
 	statusline = {
+		order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "codeium", "diagnostics", "lsp", "cursor", "cwd" },
 		theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
 		separator_style = "default",
-		order = nil,
-		modules = nil,
+		modules = {
+			cursor = function()
+				return "%#StText# %l:%c "
+			end,
+
+			codeium = function()
+				return "%3{codeium#GetStatusString()}"
+				-- return vim.fn["codeium#GetStatusString"]()
+			end,
+		},
 	},
 
 	tabufline = {
 		enabled = true,
 		lazyload = true,
 		order = { "treeOffset", "buffers", "tabs", "btns" },
-		modules = nil,
+		modules = {
+			btns = function()
+				local btn = require("nvchad.tabufline.utils").btn
+				local g = vim.g
+				local toggle_theme = btn(g.toggle_theme_icon, "ThemeToggleBtn", "Toggle_theme")
+				return toggle_theme
+			end,
+		},
 	},
 
 	lsp = {

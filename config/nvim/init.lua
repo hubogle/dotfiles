@@ -52,14 +52,6 @@ autocmd("BufReadPost", {
 	end,
 })
 
--- conform 保存格式化文件
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		require("conform").format({ bufnr = args.buf })
-	end,
-})
-
 -- 创建自动命令组
 vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 
@@ -108,12 +100,12 @@ vim.api.nvim_create_autocmd("VimLeave", {
 
 -- 最后一个窗口关闭 https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
 vim.api.nvim_create_autocmd("BufEnter", {
-  nested = true,
-  callback = function()
-    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-      vim.cmd "quit"
-    end
-  end
+	nested = true,
+	callback = function()
+		if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+			vim.cmd("quit")
+		end
+	end,
 })
 
 vim.schedule(function()
