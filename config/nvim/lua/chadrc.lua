@@ -80,7 +80,10 @@ M.base46 = {
 	theme_toggle = { "onenord_light", "tokyodark" },
 	hl_override = {
 		CursorLine = {
-			bg = { "statusline_bg", 10 },
+			bg = { "line", 6 },
+		},
+		Visual = {
+			bg = { "line", 6 },
 		},
 	},
 	-- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations

@@ -20,4 +20,4 @@ local options = {
 	},
 }
 
-require("hlchunk").setup(options)
+return options

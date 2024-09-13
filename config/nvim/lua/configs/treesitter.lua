@@ -64,4 +64,4 @@ options = {
 	},
 }
 
-require("nvim-treesitter.configs").setup(options)
+return options

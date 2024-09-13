@@ -70,4 +70,4 @@ opts.on_attach = function(bufnr)
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select inner hunk" })
 end
 
-require("gitsigns").setup(opts)
+return opts

@@ -9,4 +9,4 @@ local options = {
 	dashboard_mode = true,
 }
 
-require("neovim-project").setup(options)
+return options

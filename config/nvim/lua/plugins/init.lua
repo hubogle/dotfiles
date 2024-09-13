@@ -1,37 +1,30 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		config = function()
-			require("configs.conform")
-		end,
+		event = { "BufWritePre" },
+		opts = require("configs.conform"),
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		opts = require("configs.telescope"),
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = require("configs.treesitter"),
+	},
+
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "User FilePost",
+		opts = require("configs.gitsigns"),
 	},
 
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("configs.lspconfig")
-		end,
-	},
-
-	{
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			require("configs.telescope")
-		end,
-	},
-
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "User FilePost",
-		config = function()
-			require("configs.gitsigns")
-		end,
-	},
-
-	{
-		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("configs.treesitter")
 		end,
 	},
 
@@ -62,16 +55,12 @@ return {
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("configs.hlchunk")
-		end,
+		opts = require("configs.hlchunk"),
 	},
 
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		config = function()
-			require("configs.markdown")
-		end,
+		opts = { file_types = { "markdown", "Avante" } },
 		dependencies = { "echasnovski/mini.nvim" },
 		ft = { "markdown", "Avante" },
 	},
@@ -79,9 +68,7 @@ return {
 	-- 最近项目
 	{
 		"coffebar/neovim-project",
-		config = function()
-			require("configs.project")
-		end,
+		opts = require("configs.project"),
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope.nvim" },

@@ -12,10 +12,17 @@ local options = {
 		-- css = { "prettier" },
 		-- html = { "prettier" },
 	},
-	-- format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
+
+	-- format_on_save = {
+	-- 	async = true, -- This isn't going to do anything. format_on_save is necessarily sync
+	-- 	-- If you want async formatting, use format_after_save
+	-- 	timeout_ms = 10000,
+	-- 	lsp_fallback = true,
+	-- },
+
 	format_after_save = {
-		lsp_fallback = true,
+		lsp_format = "fallback",
 	},
 }
 
-require("conform").setup(options)
+return options

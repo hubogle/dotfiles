@@ -35,7 +35,6 @@ for i = 1, 9, 1 do
 	end)
 end
 
--- format
 map("n", "<leader>fm", function()
 	require("conform").format()
 end)
@@ -44,18 +43,8 @@ end)
 vim.keymap.set("v", "y", function()
 	vim.cmd("normal! y")
 	local content = vim.fn.getreg('"')
-	-- 使用 echo 命令传递内容到 tmux load-buffer
 	vim.fn.system("echo -n " .. vim.fn.shellescape(content) .. " | tmux load-buffer -")
 end, { noremap = true, silent = true })
-
--- esc 退出 terminal
--- map("t", "<ESC>", function()
--- 	local win = vim.api.nvim_get_current_win()
--- 	vim.api.nvim_win_close(win, true)
--- end, { desc = "terminal close term in terminal mode" })
-
--- 大纲展示
-map("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
 
 -- 浮动 term
 map({ "n", "t" }, "<A-i>", function()
