@@ -67,12 +67,9 @@ M.ui = {
 			end,
 		},
 	},
-
-	lsp = {
-		signature = true,
-		semantic_tokens = true,
-	},
 }
+
+M.lsp = { signature = false }
 
 M.base46 = {
 	theme = "tokyodark",
