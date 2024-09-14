@@ -50,3 +50,22 @@ end, { noremap = true, silent = true })
 map({ "n", "t" }, "<A-i>", function()
 	require("nvchad.term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "Terminal Toggle Floating term" })
+
+-- 仅当使用 leader + d 或者 leader + D 才与系统粘贴板交互
+map("n", "<leader>d", '"+d', { noremap = true, silent = true })
+map("n", "<leader>D", '"+D', { noremap = true, silent = true })
+map("n", "d", '"_d', { noremap = true, silent = true })
+map("n", "D", '"_D', { noremap = true, silent = true })
+
+-- noice
+map({ "n", "i", "s" }, "<c-f>", function()
+	if not require("noice.lsp").scroll(4) then
+		return "<c-f>"
+	end
+end, { silent = true, expr = true })
+
+map({ "n", "i", "s" }, "<c-b>", function()
+	if not require("noice.lsp").scroll(-4) then
+		return "<c-b>"
+	end
+end, { silent = true, expr = true })
