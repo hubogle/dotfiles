@@ -6,14 +6,14 @@ opts.current_line_blame = true
 opts.current_line_blame_opts = {
 	virt_text = true,
 	virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-	delay = 500,
+	delay = 300,
 	ignore_whitespace = false,
-	virt_text_priority = 100,
+	virt_text_priority = 5000, -- https://github.com/lewis6991/gitsigns.nvim/issues/605
 	use_focus = true,
 }
 opts.numhl = true -- Toggle with `:Gitsigns toggle_numhl`
 opts.linehl = false -- Toggle with `:Gitsigns toggle_linehl`
-opts.current_line_blame_formatter = "<author>, <author_time:%R> - <summary>"
+opts.current_line_blame_formatter = "     <author>, <author_time:%R> - <summary> • <abbrev_sha>"
 opts.on_attach = function(bufnr)
 	local gitsigns = require("gitsigns")
 

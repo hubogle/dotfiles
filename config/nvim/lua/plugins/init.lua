@@ -46,6 +46,12 @@ return {
 	},
 
 	{
+		"karb94/neoscroll.nvim",
+		lazy = false,
+		opts = require("configs.neoscroll"),
+	},
+
+	{
 		"chentoast/marks.nvim",
 		event = "VeryLazy",
 		opts = {},

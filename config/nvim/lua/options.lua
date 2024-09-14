@@ -44,4 +44,5 @@ o.undofile = true -- 启用持久撤销
 o.wrap = true -- 文本自动换行
 o.breakindent = true -- 自动换行的行会保持一定的缩进
 o.linebreak = true -- 在单词之间而非单词中间进行换行
+o.eventignore = "FocusLost" -- 当 Neovim 失去焦点时触发
 o.termguicolors = true

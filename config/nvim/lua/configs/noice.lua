@@ -1,9 +1,9 @@
 local options = {
 	lsp = {
 		signature = {
-			enabled = true,
+			enabled = false,
 		},
-		hover = {
+		hover = { -- Shift + K show hover
 			enabled = true,
 		},
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
