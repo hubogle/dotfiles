@@ -72,9 +72,9 @@ M.ui = {
 M.lsp = { signature = false }
 
 M.base46 = {
-	theme = "tokyodark",
+	theme = "tokyonight",
 	transparency = true,
-	theme_toggle = { "onenord_light", "tokyodark" },
+	theme_toggle = { "tokyonight", "onenord_light" },
 	hl_override = {
 		CursorLine = {
 			bg = { "line", 6 },
