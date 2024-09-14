@@ -47,7 +47,7 @@ return {
 
 	{
 		"karb94/neoscroll.nvim",
-		lazy = false,
+		event = { "BufReadPre", "BufNewFile" },
 		opts = require("configs.neoscroll"),
 	},
 

@@ -31,17 +31,6 @@ if [ ! -d "${HOME}/.local/share/mycli" ]; then
     mkdir -p ${HOME}/.local/share/mycli
 fi
 
-# im-select 脚本安装
-if [ ! -f "${BREW_PATH}/im-select" ]; then
-    echo "安装 im-select"
-    if [[ `arch` == "arm64" ]]; then
-        cp $DOTFILES_DIRS/config/im-select/apple/im-select $BREW_PATH/im-select
-    else
-        cp $DOTFILES_DIRS/config/im-select/intel/im-select $BREW_PATH/im-select
-    fi
-    chmod +x $BREW_PATH/im-select
-fi
-
 # alacritty themes
 if [ ! -d "${HOME}/.config/alacritty/themes" ]; then
     echo "安装 alacritty theme"

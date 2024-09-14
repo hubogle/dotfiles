@@ -52,33 +52,41 @@ autocmd("BufReadPost", {
 	end,
 })
 
--- 创建自动命令组
-vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+-- 定义 macism 命令的路径和输入法标识符
+local macism_cmd = "/opt/homebrew/bin/macism"
+local english_input = "com.apple.keylayout.ABC"
+local current_input_method = vim.fn.system(macism_cmd):gsub("\n", "")
+
+vim.api.nvim_create_augroup("autocmd_esc", { clear = true })
 
 -- 进入插入模式时的自动命令
 vim.api.nvim_create_autocmd("InsertEnter", {
-	group = "numbertoggle",
+	group = "autocmd_esc",
 	pattern = "*",
 	callback = function()
 		if vim.wo.number then
 			vim.cmd("set relativenumber")
+		end
+		if current_input_method ~= english_input then
+			vim.fn.system(macism_cmd .. " " .. current_input_method)
 		end
 	end,
 })
 
 -- 离开插入模式时的自动命令
 vim.api.nvim_create_autocmd("InsertLeave", {
-	group = "numbertoggle",
+	group = "autocmd_esc",
 	pattern = "*",
 	callback = function()
+		current_input_method = vim.fn.system(macism_cmd):gsub("\n", "")
+		if current_input_method ~= english_input then
+			vim.fn.system(macism_cmd .. " " .. english_input)
+		end
 		if vim.wo.number then
 			vim.cmd("set norelativenumber")
 		end
 	end,
 })
-
--- 按 ESC 后切换英文输入法
-vim.cmd([[ autocmd InsertLeave * :silent !/opt/homebrew/bin/im-select com.apple.keylayout.ABC]])
 
 -- vim 打开项目时调整 windows name
 vim.api.nvim_create_autocmd("DirChanged", {

@@ -1,4 +1,4 @@
-require("notify").setup({ background_colour = "#000000" })
+require("notify").setup({ background_colour = "#000000", render = "compact", stages = "slide", timeout = 2000 })
 -- See: https://github.com/NvChad/NvChad/issues/1656
 vim.notify = require("noice").notify
 

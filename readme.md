@@ -3,12 +3,12 @@
 1. `zsh` 采用 [zi](https://wiki.zshell.dev/zh-Hans/)
 2. `vim` 采用 `neovim` + [NvChad](https://nvchad.com)
 3. `alacritty` + `tmux` 终端输入管理。
-4. 通过 `hammerspoon` + [im-select](https://github.com/daipeihust/im-select/tree/master/im-select-mac/out) 实现 `App` 输入法自动切换。
+4. 通过 `hammerspoon` + [macism](https://github.com/laishulu/macism) 实现 `App` 输入法自动切换。
 5. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
 6. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
 7. `osx.sh` 文件为系统相关配置。
 
-`NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
+`NvChad`、`macism`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
 ## 软件升级
 
@@ -108,4 +108,3 @@ rm -rf ~/.local/share/nvim
 * `Control + u` 删除这条命令所有的单词
 * `Control + k` 删除从光标开始到一行结尾的所有字符
 * `Control + q` 删除当前命令并在下次使用时再次显示
-
