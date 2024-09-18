@@ -116,6 +116,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+-- dropbar plugin
+vim.ui.select = require("dropbar.utils.menu").select
+
 vim.schedule(function()
 	require("mappings")
 end)

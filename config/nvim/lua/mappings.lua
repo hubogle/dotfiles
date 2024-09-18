@@ -86,3 +86,8 @@ end, { noremap = true, expr = true })
 map({ "i" }, "<c-p>", function()
 	vim.fn["codeium#CycleCompletions"](-1)
 end, { noremap = true, expr = true })
+
+-- dropbar
+map("n", "<leader>bs", function()
+	require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
+end)

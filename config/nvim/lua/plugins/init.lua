@@ -112,4 +112,8 @@ return {
 		"Exafunction/codeium.vim",
 		event = "BufEnter",
 	},
+
+	{
+		"Bekaboo/dropbar.nvim",
+	},
 }
