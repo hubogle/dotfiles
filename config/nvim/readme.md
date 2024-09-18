@@ -79,7 +79,12 @@
 
 `Codeium Auth` 授权登录
 
-* `ctrl + a` 代码补全
-* `ctrl + x` 取消代码补全
+* `ctrl + e` 取消 `cmp` 代码补全
+* `ctrl + x` 取消 `codeium` 代码补全
 * `ctrl + n` 下一个代码补全
 * `ctrl + p` 上一个代码补全
+
+## mark
+
+* `'` 打开或关闭标记
+* `m` 展示当前文件的标记

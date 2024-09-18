@@ -52,9 +52,9 @@ return {
 	},
 
 	{
-		"chentoast/marks.nvim",
-		event = "VeryLazy",
-		opts = {},
+		"otavioschwanck/arrow.nvim",
+		lazy = false,
+		opts = require("configs.arrow"),
 	},
 
 	-- 高亮缩进
@@ -65,10 +65,11 @@ return {
 	},
 
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		opts = { file_types = { "markdown", "Avante" } },
-		dependencies = { "echasnovski/mini.nvim" },
-		ft = { "markdown", "Avante" },
+		"OXY2DEV/markview.nvim",
+		ft = "markdown",
+		config = function()
+			require("configs.markview")
+		end,
 	},
 
 	-- 最近项目
@@ -110,19 +111,5 @@ return {
 	{
 		"Exafunction/codeium.vim",
 		event = "BufEnter",
-		config = function()
-			vim.keymap.set("i", "<c-a>", function()
-				return vim.fn["codeium#Accept"]()
-			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-x>", function()
-				return vim.fn["codeium#Clear"]()
-			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-n>", function()
-				return vim.fn["codeium#CycleCompletions"](1)
-			end, { expr = true, silent = true })
-			vim.keymap.set("i", "<c-p>", function()
-				return vim.fn["codeium#CycleCompletions"](-1)
-			end, { expr = true, silent = true })
-		end,
 	},
 }
