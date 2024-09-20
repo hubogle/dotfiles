@@ -91,3 +91,6 @@ end, { noremap = true, expr = true })
 map("n", "<leader>bs", function()
 	require("dropbar.api").pick(vim.v.count ~= 0 and vim.v.count)
 end)
+
+-- arrow
+map("n", "'", require("arrow.buffer_ui").openMenu, { noremap = true, silent = true, nowait = true })

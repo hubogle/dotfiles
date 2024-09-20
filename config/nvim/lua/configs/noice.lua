@@ -2,6 +2,53 @@ require("notify").setup({ background_colour = "#000000", render = "compact", sta
 -- See: https://github.com/NvChad/NvChad/issues/1656
 vim.notify = require("noice").notify
 
+local filter_notify = {
+	"written",
+	"fewer lines",
+	"line less;",
+	"Already at",
+	"lines yanked",
+	"more line",
+	"change;",
+	"E486",
+	"No results",
+	"Nothing currently selected",
+	"changes;",
+	"No information available",
+	"has already been sent, please wait",
+	"is not supported by any of the servers",
+	"hover is not supported",
+	"response of request method",
+	"not found:",
+	"No buffers found with",
+	"no client attached",
+	"E21",
+	"E382",
+	"E553",
+	"Cursor position outside buffer",
+	"telescope.builtin.lsp_definitions",
+	"telescope.builtin.diagnostics",
+	"No signature help",
+	"E42",
+	"[LSP] Format",
+	-- HACK: Plenary causes issues.  Look into this.
+	"Invalid window id: 1001",
+	-- This breaks noice.
+	-- "[some_value]"
+}
+
+local function routes_config()
+	local routes = {}
+	for _, msg in ipairs(filter_notify) do
+		local route = {
+			filter = { find = msg },
+			opts = { skip = true },
+		}
+		table.insert(routes, route)
+	end
+	return routes
+end
+
 local options = {
 	lsp = {
 		signature = {
@@ -26,21 +73,7 @@ local options = {
 		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
 
-	routes = {
-		{
-			filter = {
-				event = "msg_show",
-				any = {
-					{ find = "%d+L, %d+B" },
-					{ find = "; after #%d+" },
-					{ find = "; before #%d+" },
-					{ find = "%d fewer lines" },
-					{ find = "%d more lines" },
-				},
-			},
-			opts = { skip = true },
-		}, -- hide "written" message
-	},
+	routes = routes_config(),
 
 	views = {
 		cmdline_popup = {
