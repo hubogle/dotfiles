@@ -29,6 +29,7 @@ M.ui = {
 
 		buttons = {
 			{ "  Recent Project", "Spc f p", "Telescope neovim-project history" },
+			{ "  New File", "Spc n f", "lua vim.cmd('enew')" },
 			{ "  Find Project", "Spc f p", "Telescope neovim-project discover" },
 			{ "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
 			{ "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
@@ -57,7 +58,7 @@ M.ui = {
 	tabufline = {
 		enabled = true,
 		lazyload = true,
-		order = { "treeOffset", "buffers", "tabs", "btns" },
+		order = { "treeOffset", "buffers", "tabs" },
 		modules = {
 			btns = function()
 				local btn = require("nvchad.tabufline.utils").btn
