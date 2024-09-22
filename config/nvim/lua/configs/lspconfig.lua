@@ -22,3 +22,16 @@ end
 --   on_init = nvlsp.on_init,
 --   capabilities = nvlsp.capabilities,
 -- }
+
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true, -- never show signs
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+	},
+})

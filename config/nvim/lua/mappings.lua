@@ -4,6 +4,8 @@ require("nvchad.mappings")
 -- https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/mappings.lua
 
 local map = vim.keymap.set
+map("n", "H", "^")
+map("n", "L", "$")
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })

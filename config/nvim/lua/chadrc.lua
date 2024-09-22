@@ -83,6 +83,14 @@ M.base46 = {
 			bg = { "line", 6 },
 		},
 	},
+	hl_add = {
+		DiagnosticUnderlineError = {
+			undercurl = true,
+		},
+		DiagnosticUnderlineWarn = {
+			undercurl = true,
+		},
+	},
 	-- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations
 	integrations = {
 		"blankline",

@@ -119,6 +119,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- dropbar plugin
 vim.ui.select = require("dropbar.utils.menu").select
 
+vim.cmd([[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]])
+
 vim.schedule(function()
 	require("mappings")
 end)
