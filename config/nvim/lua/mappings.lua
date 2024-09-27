@@ -77,17 +77,17 @@ end, { silent = true, expr = true })
 -- 	vim.fn["codeium#Accept"]()
 -- end, { noremap = true, expr = true })
 
-map({ "i" }, "<c-x>", function()
-	vim.fn["codeium#Clear"]()
-end, { noremap = true, expr = true })
-
-map({ "i" }, "<c-n>", function()
-	vim.fn["codeium#CycleCompletions"](1)
-end, { noremap = true, expr = true })
-
-map({ "i" }, "<c-p>", function()
-	vim.fn["codeium#CycleCompletions"](-1)
-end, { noremap = true, expr = true })
+-- map({ "i" }, "<c-x>", function()
+-- 	vim.fn["codeium#Clear"]()
+-- end, { noremap = true, expr = true })
+--
+-- map({ "i" }, "<c-n>", function()
+-- 	vim.fn["codeium#CycleCompletions"](1)
+-- end, { noremap = true, expr = true })
+--
+-- map({ "i" }, "<c-p>", function()
+-- 	vim.fn["codeium#CycleCompletions"](-1)
+-- end, { noremap = true, expr = true })
 
 -- dropbar
 map("n", "<leader>bs", function()

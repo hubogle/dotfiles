@@ -40,7 +40,7 @@ M.ui = {
 	},
 
 	statusline = {
-		order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "codeium", "diagnostics", "lsp", "cursor", "cwd" },
+		order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
 		theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
 		separator_style = "default",
 		modules = {

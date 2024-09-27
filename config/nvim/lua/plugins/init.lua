@@ -108,12 +108,33 @@ return {
 	},
 
 	-- 代码补全
-	{
-		"Exafunction/codeium.vim",
-		event = "BufEnter",
-	},
+	-- {
+	-- 	"Exafunction/codeium.vim",
+	-- 	event = "BufEnter",
+	-- },
 
 	{
 		"Bekaboo/dropbar.nvim",
+	},
+
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = {
+			panel = {
+				auto_refresh = true,
+				layout = {
+					position = "right",
+					ratio = 0.3,
+				},
+			},
+			suggestion = {
+				auto_trigger = true,
+				keymap = {
+					accept = "<C-l>",
+				},
+			},
+		},
 	},
 }
