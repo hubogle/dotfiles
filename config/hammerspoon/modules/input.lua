@@ -38,3 +38,34 @@ end
 
 appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
+
+
+-- shift 单击轻按切换输入法
+send_space = false
+last_mods = {}
+
+shift_key_timer = hs.timer.delayed.new(0.3, function()
+	send_space = false
+end)
+
+shift_handler = function(evt)
+	local new_mods = evt:getFlags()
+	if last_mods["shift"] == new_mods["shift"] then
+		return false
+	end
+	if not last_mods["shift"] then
+		last_mods = new_mods
+		send_space = true
+		shift_key_timer:start()
+	else
+		if send_space then
+			hs.eventtap.keyStroke({ "ctrl", "alt" }, "space")
+		end
+		last_mods = new_mods
+		shift_key_timer:stop()
+	end
+	return false
+end
+
+shift_tap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, shift_handler)
+shift_tap:start()
