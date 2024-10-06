@@ -49,6 +49,7 @@ local options = {
 					{ find = "No information available" },
 					{ find = "No references found" },
 					{ find = "No lines in buffer" },
+					{ find = "NotSignedIn"},
 				},
 			},
 			opts = { skip = true },

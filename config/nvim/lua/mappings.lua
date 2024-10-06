@@ -13,6 +13,18 @@ map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
 map("n", "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
 map("n", "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
 
+-- navhad menu
+map("n", "<C-t>", function()
+	require("menu").open("default", { border = false })
+end, {})
+
+map("n", "<RightMouse>", function()
+	vim.cmd.exec('"normal! \\<RightMouse>"')
+
+	local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+	require("menu").open(options, { mouse = true })
+end, {})
+
 -- trouble
 map("n", "<leader>ex", "<cmd> Trouble diagnostics toggle filter.buf=0 <cr>", { desc = "Buffer Diagnostics (Trouble)" })
 map("n", "<leader>eX", "<cmd> Trouble diagnostics toggle <cr>", { desc = "Diagnostics (Trouble)" })

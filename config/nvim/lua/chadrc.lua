@@ -1,43 +1,22 @@
 -- This file needs to have same structure as nvconfig.lua
--- https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua
+-- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
+-- Please read that file to know all available options :(
 
 ---@type ChadrcConfig
 local M = {}
 
 M.ui = {
 	cmp = {
-		icons = true,
+		icons_left = true, -- only for non-atom styles!
 		lspkind_text = true,
 		style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+		format_colors = {
+			tailwind = false, -- will work for css lsp too
+			icon = "󱓻",
+		},
 	},
 
 	telescope = { style = "borderless" }, -- borderless / bordered
-
-	nvdash = {
-		load_on_startup = true,
-		header = {
-			"           ▄ ▄                   ",
-			"       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-			"       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-			"    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-			"  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-			"  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-			"▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-			"█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-			"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
-		},
-
-		buttons = {
-			{ "  Recent Project", "Spc f p", "Telescope neovim-project history" },
-			{ "  New File", "Spc n f", "lua vim.cmd('enew')" },
-			{ "  Find Project", "Spc f p", "Telescope neovim-project discover" },
-			{ "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
-			{ "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
-			{ "  Bookmarks", "Spc m a", "Telescope marks" },
-			{ "  Themes", "Spc t h", "Telescope themes" },
-			{ "  Mappings", "Spc c h", "NvCheatsheet" },
-		},
-	},
 
 	statusline = {
 		order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
@@ -70,12 +49,61 @@ M.ui = {
 	},
 }
 
+M.nvdash = {
+	load_on_startup = true,
+	header = {
+		"                            ",
+		"     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+		"   ▄▀███▄     ▄██ █████▀    ",
+		"   ██▄▀███▄   ███           ",
+		"   ███  ▀███▄ ███           ",
+		"   ███    ▀██ ███           ",
+		"   ███      ▀ ███           ",
+		"   ▀██ █████▄▀█▀▄██████▄    ",
+		"     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+		"                            ",
+		"     Powered By  eovim    ",
+		"                            ",
+	},
+
+	buttons = {
+		{ txt = "  Recent Project", keys = "Spc f p", cmd = "Telescope neovim-project history" },
+		{ txt = "  New File", keys = "Spc n f", cmd = "lua vim.cmd('enew')" },
+		{ txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+		{ txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
+		{ txt = "󰈭  Find Word", keys = "Spc f w", cmd = "Telescope live_grep" },
+		{ txt = "󱥚  Themes", keys = "Spc t h", cmd = ":lua require('nvchad.themes').open()" },
+		{ txt = "  Mappings", keys = "Spc c h", cmd = "NvCheatsheet" },
+
+		{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+
+		{
+			txt = function()
+				local stats = require("lazy").stats()
+				local ms = math.floor(stats.startuptime) .. " ms"
+				return "  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms
+			end,
+			hl = "NvDashLazy",
+			no_gap = true,
+		},
+
+		{ txt = "─", hl = "NvDashLazy", no_gap = true, rep = true },
+	},
+}
+
 M.lsp = { signature = false }
 
+M.colorify = {
+	enabled = true,
+	mode = "virtual", -- fg, bg, virtual
+	virt_text = "󱓻 ",
+	highlight = { hex = true, lspvars = true },
+}
+
 M.base46 = {
-	theme = "tokyonight",
+	theme = "onenord",
 	transparency = true,
-	theme_toggle = { "tokyonight", "onenord_light" },
+	theme_toggle = { "onenord", "onenord_light" },
 	hl_override = {
 		CursorLine = {
 			bg = { "line", 6 },
