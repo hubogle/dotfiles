@@ -1,25 +1,11 @@
 return {
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		opts = require("configs.conform"),
-	},
+	{ "stevearc/conform.nvim", event = { "BufWritePre" }, opts = require("configs.conform") },
 
-	{
-		"nvim-telescope/telescope.nvim",
-		opts = require("configs.telescope"),
-	},
+	{ "nvim-telescope/telescope.nvim", opts = require("configs.telescope") },
 
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = require("configs.treesitter"),
-	},
+	{ "nvim-treesitter/nvim-treesitter", opts = require("configs.treesitter") },
 
-	{
-		"lewis6991/gitsigns.nvim",
-		event = "User FilePost",
-		opts = require("configs.gitsigns"),
-	},
+	{ "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require("configs.gitsigns") },
 
 	{
 		"neovim/nvim-lspconfig",
@@ -36,6 +22,8 @@ return {
 		end,
 	},
 
+	----------------------------------- other -------------------------------------------------------------
+
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
@@ -45,24 +33,15 @@ return {
 		end,
 	},
 
-	{
-		"karb94/neoscroll.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = require("configs.neoscroll"),
-	},
+	{ "karb94/neoscroll.nvim", event = { "BufReadPre", "BufNewFile" }, opts = require("configs.neoscroll") },
 
-	{
-		"otavioschwanck/arrow.nvim",
-		lazy = false,
-		opts = require("configs.arrow"),
-	},
+	{ "otavioschwanck/arrow.nvim", lazy = false, opts = require("configs.arrow") }, -- mark
 
-	-- 高亮缩进
-	{
-		"shellRaining/hlchunk.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = require("configs.hlchunk"),
-	},
+	{ "shellRaining/hlchunk.nvim", event = { "BufReadPre", "BufNewFile" }, opts = require("configs.hlchunk") },
+
+	{ "Bekaboo/dropbar.nvim" }, -- bar
+
+	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require("configs.copilot") },
 
 	{
 		"OXY2DEV/markview.nvim",
@@ -72,7 +51,6 @@ return {
 		end,
 	},
 
-	-- 最近项目
 	{
 		"coffebar/neovim-project",
 		opts = require("configs.project"),
@@ -105,36 +83,5 @@ return {
 				default_mappings = true,
 			})
 		end,
-	},
-
-	-- 代码补全
-	-- {
-	-- 	"Exafunction/codeium.vim",
-	-- 	event = "BufEnter",
-	-- },
-
-	{
-		"Bekaboo/dropbar.nvim",
-	},
-
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		opts = {
-			panel = {
-				auto_refresh = true,
-				layout = {
-					position = "right",
-					ratio = 0.3,
-				},
-			},
-			suggestion = {
-				auto_trigger = true,
-				keymap = {
-					accept = "<C-l>",
-				},
-			},
-		},
 	},
 }
