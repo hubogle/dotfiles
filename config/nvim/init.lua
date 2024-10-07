@@ -87,19 +87,23 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 })
 
 -- vim 打开项目时调整 windows name
-vim.api.nvim_create_autocmd("DirChanged", {
-	pattern = "*",
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PersistedTelescopeLoadPre",
 	callback = function()
-		local cwd = vim.fn.getcwd()
-		local dir_name = vim.fn.fnamemodify(cwd, ":t") -- 获取路径的最后一部分
+		local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t") -- 获取路径的最后一部分
 		vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
 	end,
 })
 
 -- vim 退出项目时调整 windows name
-vim.api.nvim_create_autocmd("VimLeave", {
-	pattern = "*",
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PersistedSavePre",
 	callback = function()
+		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+			if vim.bo[buf].filetype == "codecompanion" then
+				vim.api.nvim_buf_delete(buf, { force = true })
+			end
+		end
 		vim.fn.system("tmux rename-window 'zsh'")
 	end,
 })

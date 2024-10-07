@@ -43,22 +43,14 @@ return {
 
 	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require("configs.copilot") },
 
+	{ "olimorris/persisted.nvim", opts = require("configs.persisted") }, -- open project
+
 	{
 		"OXY2DEV/markview.nvim",
 		ft = "markdown",
 		config = function()
 			require("configs.markview")
 		end,
-	},
-
-	{
-		"coffebar/neovim-project",
-		opts = require("configs.project"),
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope.nvim" },
-			{ "Shatur/neovim-session-manager" },
-		},
 	},
 
 	-- 消息通知

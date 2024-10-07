@@ -10,8 +10,7 @@ map("n", "L", "$")
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened files" })
 map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
-map("n", "<leader>fp", "<cmd> Telescope neovim-project discover <cr>", { desc = "Find project" })
-map("n", "<leader>fr", "<cmd> Telescope neovim-project history <cr>", { desc = "Recent project" })
+map("n", "<leader>fp", "<cmd> Telescope persisted <cr>", { desc = "Find project" })
 
 -- navhad menu
 map("n", "<C-t>", function()
@@ -83,23 +82,6 @@ map({ "n", "i", "s" }, "<c-b>", function()
 		return "<c-b>"
 	end
 end, { silent = true, expr = true })
-
--- codeium
--- map({ "i" }, "<c-y>", function()
--- 	vim.fn["codeium#Accept"]()
--- end, { noremap = true, expr = true })
-
--- map({ "i" }, "<c-x>", function()
--- 	vim.fn["codeium#Clear"]()
--- end, { noremap = true, expr = true })
---
--- map({ "i" }, "<c-n>", function()
--- 	vim.fn["codeium#CycleCompletions"](1)
--- end, { noremap = true, expr = true })
---
--- map({ "i" }, "<c-p>", function()
--- 	vim.fn["codeium#CycleCompletions"](-1)
--- end, { noremap = true, expr = true })
 
 -- dropbar
 map("n", "<leader>bs", function()

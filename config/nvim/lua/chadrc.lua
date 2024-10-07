@@ -67,7 +67,7 @@ M.nvdash = {
 	},
 
 	buttons = {
-		{ txt = "  Recent Project", keys = "Spc f p", cmd = "Telescope neovim-project history" },
+		{ txt = "  Recent Project", keys = "Spc f p", cmd = "Telescope persisted" },
 		{ txt = "  New File", keys = "Spc n f", cmd = "lua vim.cmd('enew')" },
 		{ txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
 		{ txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
@@ -118,6 +118,9 @@ M.base46 = {
 		},
 		DiagnosticUnderlineWarn = {
 			undercurl = true,
+		},
+		GitSignsCurrentLineBlame = {
+			bg = { "line", 6 },
 		},
 	},
 	-- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations
