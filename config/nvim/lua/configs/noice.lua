@@ -50,6 +50,7 @@ local options = {
                     { find = "No references found" },
                     { find = "No lines in buffer" },
                     { find = "NotSignedIn" },
+                    { find = "buffers deleted" },
                 },
             },
             opts = { skip = true },

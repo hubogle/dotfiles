@@ -87,6 +87,18 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end,
 })
 
+-- vim 退出时保存会话
+vim.api.nvim_create_autocmd("User", {
+    pattern = "PersistedTelescopeLoadPre",
+    callback = function()
+        local session = vim.g.persisted_loaded_session
+        if session ~= nil then
+            require("persisted").save { session = session }
+            vim.api.nvim_command "%bd!"
+        end
+    end,
+})
+
 -- vim 打开项目时调整 windows name
 vim.api.nvim_create_autocmd("User", {
     pattern = "PersistedTelescopeLoadPost",
