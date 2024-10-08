@@ -3,11 +3,7 @@ return {
 
     { "nvim-telescope/telescope.nvim", opts = require "configs.telescope" },
 
-    {
-        "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = require "configs.treesitter",
-    },
+    { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" }, opts = require "configs.treesitter" },
 
     { "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require "configs.gitsigns" },
 
@@ -50,6 +46,8 @@ return {
 
     { "rmagatti/goto-preview", event = "BufEnter", opts = require "configs.goto-preview" }, -- preview
 
+    { "sindrets/diffview.nvim", event = { "BufReadPre", "BufNewFile" } },
+
     {
         "OXY2DEV/markview.nvim",
         ft = "markdown",
@@ -58,7 +56,6 @@ return {
         end,
     },
 
-    -- 消息通知
     {
         "folke/noice.nvim",
         event = "VeryLazy",
@@ -69,10 +66,5 @@ return {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         },
-    },
-
-    {
-        "sindrets/diffview.nvim",
-        event = { "BufReadPre", "BufNewFile" },
     },
 }
