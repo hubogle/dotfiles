@@ -23,7 +23,8 @@ local opts = {
 
 	allowed_dirs = {}, -- Table of dirs that the plugin will start and autoload from
 	ignored_dirs = {
-		{ vim.fn.hostname(), exact = true },
+		-- { vim.fn.hostname(), exact = true },
+		{ "~", exact = true },
 		{ "/", exact = true },
 		{ "/tmp", exact = true },
 	}, -- Table of dirs that are ignored for starting and autoloading

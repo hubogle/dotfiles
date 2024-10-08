@@ -9,7 +9,7 @@ local opts = {
 	suggestion = {
 		auto_trigger = true,
 		keymap = {
-			accept = "<C-l>",
+			accept = "<C-e>",
 		},
 	},
 }

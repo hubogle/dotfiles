@@ -3,7 +3,7 @@ return {
 
 	{ "nvim-telescope/telescope.nvim", opts = require("configs.telescope") },
 
-	{ "nvim-treesitter/nvim-treesitter", opts = require("configs.treesitter") },
+	{ "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" }, opts = require("configs.treesitter") },
 
 	{ "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require("configs.gitsigns") },
 
@@ -28,7 +28,6 @@ return {
 		"folke/trouble.nvim",
 		cmd = "Trouble",
 		config = function()
-			dofile(vim.g.base46_cache .. "trouble")
 			require("trouble").setup()
 		end,
 	},
@@ -44,6 +43,8 @@ return {
 	{ "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require("configs.copilot") },
 
 	{ "olimorris/persisted.nvim", opts = require("configs.persisted") }, -- open project
+
+	{ "rmagatti/goto-preview", event = "BufEnter", opts = require("configs.goto-preview") }, -- preview
 
 	{
 		"OXY2DEV/markview.nvim",
@@ -66,14 +67,8 @@ return {
 		},
 	},
 
-	-- 预览引用
 	{
-		"rmagatti/goto-preview",
-		event = "BufEnter",
-		config = function()
-			require("goto-preview").setup({
-				default_mappings = true,
-			})
-		end,
+		"sindrets/diffview.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 }

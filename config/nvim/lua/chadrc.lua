@@ -26,11 +26,6 @@ M.ui = {
 			cursor = function()
 				return "%#StText# %l:%c "
 			end,
-
-			codeium = function()
-				return "%3{codeium#GetStatusString()}"
-				-- return vim.fn["codeium#GetStatusString"]()
-			end,
 		},
 	},
 

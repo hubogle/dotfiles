@@ -28,6 +28,7 @@ require("lazy").setup({
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
+dofile(vim.g.base46_cache .. "trouble")
 
 require("options")
 require("nvchad.autocmds")
@@ -88,9 +89,12 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 -- vim 打开项目时调整 windows name
 vim.api.nvim_create_autocmd("User", {
-	pattern = "PersistedTelescopeLoadPre",
+	pattern = "PersistedTelescopeLoadPost",
 	callback = function()
-		local dir_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t") -- 获取路径的最后一部分
+		local actions_state = require("telescope.actions.state")
+		local session = actions_state.get_selected_entry()
+		local dir_path = session.dir_path
+		local dir_name = dir_path:match("([^/]+)$")
 		vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
 	end,
 })
