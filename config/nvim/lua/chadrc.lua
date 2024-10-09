@@ -19,7 +19,7 @@ M.ui = {
     telescope = { style = "borderless" }, -- borderless / bordered
 
     statusline = {
-        order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cursor", "cwd" },
+        order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "cursor", "diagnostics", "lsp", "cwd" },
         theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
         separator_style = "default",
         modules = {
@@ -101,10 +101,10 @@ M.base46 = {
     theme_toggle = { "onenord", "onenord_light" },
     hl_override = {
         CursorLine = {
-            bg = { "line", 6 },
+            bg = { "line", 3 },
         },
         Visual = {
-            bg = { "line", 6 },
+            bg = { "line", 3 },
         },
     },
     hl_add = {
@@ -115,7 +115,7 @@ M.base46 = {
             undercurl = true,
         },
         GitSignsCurrentLineBlame = {
-            bg = { "line", 6 },
+            fg = "light_grey",
         },
     },
     -- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations

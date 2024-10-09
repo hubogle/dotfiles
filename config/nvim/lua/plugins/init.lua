@@ -36,8 +36,6 @@ return {
 
     { "otavioschwanck/arrow.nvim", lazy = false, opts = require "configs.arrow" }, -- mark
 
-    { "shellRaining/hlchunk.nvim", event = { "BufReadPre", "BufNewFile" }, opts = require "configs.hlchunk" },
-
     { "Bekaboo/dropbar.nvim" }, -- bar
 
     { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require "configs.copilot" },
