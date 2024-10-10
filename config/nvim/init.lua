@@ -140,6 +140,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
+-- 对文件读取后和进入缓冲区时都触发, 判断文件是否可以修改
+-- 判断是否在预览 .mise 文件夹下的源码，设置为只读模式
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
+    pattern = "*",
+    callback = function()
+        local path = vim.fn.expand "%:p"
+        if path:match "/.mise" then
+            vim.bo.modifiable = false
+            -- vim.bo.readonly = true
+        else
+            vim.bo.modifiable = true
+            -- vim.bo.readonly = false
+        end
+    end,
+})
+
 -- dropbar plugin
 vim.ui.select = require("dropbar.utils.menu").select
 
