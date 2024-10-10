@@ -5,9 +5,14 @@ require "nvchad.options"
 local o = vim.o
 
 -- 设置显示 tab 和空格字符
--- o.list = true
+o.list = true
 -- tab:» ,eol:↵：表示行尾符的显示方式
 -- o.listchars = "tab:» ,lead: ,trail:·,space: ,extends:>,precedes:<"
+o.listchars = "trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂"
+o.showbreak = "↪ " -- 换行处的显示字符
+
+-- vim.opt.listchars:append "space:⋅"
+-- vim.opt.listchars:append "eol:↴"
 
 -- 行号显示
 o.number = true -- 显示行号
@@ -16,6 +21,8 @@ o.number = true -- 显示行号
 -- Indenting
 o.expandtab = false -- 将制表符（Tab）转换为空格
 o.shiftwidth = 4 -- 自动缩进时使用的空格数量
+o.shiftround = true --
+o.autoindent = true -- 启用自动缩进，新行的缩进将复制前一行的缩进
 o.smartindent = true -- 智能缩进
 o.tabstop = 4 -- 设置 Tab 字符的宽度为 4 个空格
 o.softtabstop = 4 -- 设置软 Tab 的宽度为 4 个空格
@@ -33,6 +40,7 @@ o.splitright = true -- 设置新分屏在当前窗口的右侧
 -- 光标
 o.cursorline = true -- 启用光标行
 o.cursorlineopt = "both" -- 光标行突出显示
+o.scrolloff = 3 -- 当光标移动至窗口边缘时最低可见
 
 -- setting
 o.encoding = "utf-8"

@@ -52,7 +52,7 @@ autocmd("BufReadPost", {
 })
 
 -- 定义 macism 命令的路径和输入法标识符
-local macism_cmd = "/opt/homebrew/bin/imacism"
+local macism_cmd = "/opt/homebrew/bin/macism"
 local english_input = "com.apple.keylayout.ABC"
 local current_input_method = vim.fn.system(macism_cmd):gsub("\n", "")
 

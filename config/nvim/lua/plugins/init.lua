@@ -42,7 +42,7 @@ return {
 
     { "karb94/neoscroll.nvim", event = { "BufReadPre", "BufNewFile" }, opts = require "configs.neoscroll" },
 
-    { "otavioschwanck/arrow.nvim", lazy = false, opts = require "configs.arrow" }, -- mark
+    { "otavioschwanck/arrow.nvim", opts = require "configs.arrow" }, -- mark
 
     { "Bekaboo/dropbar.nvim" }, -- bar
 
@@ -50,7 +50,7 @@ return {
 
     { "olimorris/persisted.nvim", opts = require "configs.persisted" }, -- open project
 
-    { "rmagatti/goto-preview", event = "BufEnter", opts = require "configs.goto-preview" }, -- preview
+    { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
 
     { "sindrets/diffview.nvim", event = { "BufReadPre", "BufNewFile" } },
 
