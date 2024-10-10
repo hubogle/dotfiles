@@ -3,9 +3,10 @@
 dofile(vim.g.base46_cache .. "blankline")
 
 local opts = {
+    indent = { char = "│", highlight = "IblChar" },
     scope = {
         enabled = true,
-        char = "▎",
+        char = "│",
         show_start = false,
         show_end = false,
         show_exact_scope = true,

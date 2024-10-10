@@ -13,8 +13,9 @@ map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
 map("n", "<leader>fp", "<cmd> Telescope persisted <cr>", { desc = "Find project" })
 
 -- navhad menu
+local menu = require "configs.menu"
 map("n", "<C-t>", function()
-    require("menu").open("default", { border = false })
+    require("menu").open(menu, { border = false })
 end, {})
 
 map("n", "<RightMouse>", function()

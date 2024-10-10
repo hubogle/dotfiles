@@ -8,6 +8,14 @@ return {
     { "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require "configs.gitsigns" },
 
     {
+        "nvim-tree/nvim-tree.lua",
+        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+        opts = function()
+            return require "configs.nvimtree"
+        end,
+    },
+
+    {
         "neovim/nvim-lspconfig",
         config = function()
             require "configs.lspconfig"

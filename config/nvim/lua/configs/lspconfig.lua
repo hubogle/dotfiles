@@ -1,4 +1,5 @@
 -- load defaults i.e lua_lsp
+dofile(vim.g.base46_cache .. "lsp")
 require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
