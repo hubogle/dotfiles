@@ -94,7 +94,7 @@ vim.api.nvim_create_autocmd("User", {
         local session = vim.g.persisted_loaded_session
         if session ~= nil then
             require("persisted").save { session = session }
-            vim.api.nvim_command "%bd!"
+            vim.api.nvim_input "<ESC>:%bd!<CR>"
         end
     end,
 })
