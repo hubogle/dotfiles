@@ -1,13 +1,13 @@
 local opts = {
     panel = {
-        auto_refresh = true,
+        auto_refresh = false,
         layout = {
             position = "right",
             ratio = 0.3,
         },
     },
     suggestion = {
-        auto_trigger = true,
+        auto_trigger = false,
         keymap = {
             accept = "<C-e>",
         },
