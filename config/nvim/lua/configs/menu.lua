@@ -7,6 +7,42 @@ return {
     },
 
     {
+        name = "  Trouble Actions",
+        hl = "Exblue",
+        items = {
+            {
+                name = "Symbols (Trouble)",
+                cmd = "Trouble symbols toggle focus=false",
+                rtxt = "<leader>cs",
+            },
+
+            {
+                name = "LSP Definitions / references (Trouble)",
+                cmd = "Trouble lsp toggle focus=false",
+                rtxt = "<leader>cl",
+            },
+
+            {
+                name = "Buffer Diagnostics (Trouble)",
+                cmd = "Trouble diagnostics toggle filter.buf=0",
+                rtxt = "<leader>ex",
+            },
+
+            {
+                name = "Location List (Trouble)",
+                cmd = "Trouble loclist toggle",
+                rtxt = "<leader>el",
+            },
+        },
+    },
+
+    {
+        name = "  Lsp Actions",
+        hl = "Exblue",
+        items = "lsp",
+    },
+
+    {
         name = "Format Buffer",
         cmd = function()
             local ok, conform = pcall(require, "conform")
@@ -25,16 +61,6 @@ return {
         cmd = vim.lsp.buf.code_action,
         rtxt = "<leader>ca",
     },
-
-    { name = "separator" },
-
-    {
-        name = "  Lsp Actions",
-        hl = "Exblue",
-        items = "lsp",
-    },
-
-    { name = "separator" },
 
     {
         name = "Edit Config",

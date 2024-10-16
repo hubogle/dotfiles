@@ -40,7 +40,7 @@ o.splitright = true -- 设置新分屏在当前窗口的右侧
 -- 光标
 o.cursorline = true -- 启用光标行
 o.cursorlineopt = "both" -- 光标行突出显示
-o.scrolloff = 3 -- 当光标移动至窗口边缘时最低可见
+o.scrolloff = 10 -- 当光标移动至窗口边缘时最低可见
 
 -- setting
 o.encoding = "utf-8"

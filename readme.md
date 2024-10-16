@@ -82,6 +82,8 @@ rm -rf ~/.local/share/nvim
 
 ---
 
+[cheatsheet](https://github.com/skywind3000/awesome-cheatsheets/tree/master?tab=readme-ov-file)
+
 ## zsh 命令技巧
 
 * `fc` 在编辑器中编辑上条命令，保存推出即执行

@@ -19,7 +19,7 @@ M.ui = {
     telescope = { style = "borderless" }, -- borderless / bordered
 
     statusline = {
-        order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "cursor", "diagnostics", "lsp", "cwd" },
+        order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd" },
         theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
         separator_style = "default",
         modules = {
