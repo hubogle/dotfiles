@@ -35,31 +35,14 @@ require "nvchad.autocmds"
 
 local autocmd = vim.api.nvim_create_autocmd
 
--- 恢复文件打开时的光标位置
-autocmd("BufReadPost", {
-    pattern = "*",
-    callback = function()
-        local line = vim.fn.line "'\""
-        if
-            line > 1
-            and line <= vim.fn.line "$"
-            and vim.bo.filetype ~= "commit"
-            and vim.fn.index({ "xxd", "gitrebase" }, vim.bo.filetype) == -1
-        then
-            vim.cmd 'normal! g`"'
-        end
-    end,
-})
-
 -- 定义 macism 命令的路径和输入法标识符
 local macism_cmd = "/opt/homebrew/bin/macism"
 local english_input = "com.apple.keylayout.ABC"
 local current_input_method = vim.fn.system(macism_cmd):gsub("\n", "")
 
-vim.api.nvim_create_augroup("autocmd_esc", { clear = true })
-
 -- 进入插入模式时的自动命令
-vim.api.nvim_create_autocmd("InsertEnter", {
+vim.api.nvim_create_augroup("autocmd_esc", { clear = true })
+autocmd("InsertEnter", {
     group = "autocmd_esc",
     pattern = "*",
     callback = function()
@@ -73,7 +56,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 })
 
 -- 离开插入模式时的自动命令
-vim.api.nvim_create_autocmd("InsertLeave", {
+autocmd("InsertLeave", {
     group = "autocmd_esc",
     pattern = "*",
     callback = function()
@@ -87,20 +70,8 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     end,
 })
 
--- vim 退出时保存会话
-vim.api.nvim_create_autocmd("User", {
-    pattern = "PersistedTelescopeLoadPre",
-    callback = function()
-        local session = vim.g.persisted_loaded_session
-        if session ~= nil then
-            require("persisted").save { session = session }
-            vim.api.nvim_input "<ESC>:%bd!<CR>"
-        end
-    end,
-})
-
 -- vim 打开项目时调整 windows name
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
     pattern = "PersistedTelescopeLoadPost",
     callback = function()
         local actions_state = require "telescope.actions.state"
@@ -111,8 +82,20 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
--- vim 退出项目时调整 windows name
-vim.api.nvim_create_autocmd("User", {
+-- vim 恢复项目
+autocmd("User", {
+    pattern = "PersistedTelescopeLoadPre",
+    callback = function()
+        local session = vim.g.persisted_loaded_session
+        if session ~= nil then
+            require("persisted").save { session = session }
+            vim.api.nvim_input "<ESC>:%bd!<CR>"
+        end
+    end,
+})
+
+-- vim 退出项目
+autocmd("User", {
     pattern = "PersistedSavePre",
     callback = function()
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -120,29 +103,31 @@ vim.api.nvim_create_autocmd("User", {
                 vim.api.nvim_buf_delete(buf, { force = true })
             end
         end
+    end,
+})
+
+-- vim 退出
+autocmd("VimLeavePre", {
+    callback = function()
+        require("persisted").save()
         vim.fn.system "tmux rename-window 'zsh'"
     end,
 })
 
 -- 最后一个窗口关闭 https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
-vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
-    pattern = "NvimTree_*",
+autocmd({ "QuitPre" }, {
     callback = function()
-        local layout = vim.api.nvim_call_function("winlayout", {})
-        if
-            layout[1] == "leaf"
-            and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
-            and layout[3] == nil
-        then
-            vim.cmd "confirm quit"
+        local buf = vim.api.nvim_get_current_buf()
+        local buftype = vim.api.nvim_buf_get_option(buf, "buftype")
+        if buftype ~= "terminal" then
+            vim.cmd "NvimTreeClose"
         end
     end,
 })
 
 -- 对文件读取后和进入缓冲区时都触发, 判断文件是否可以修改
 -- 判断是否在预览 .mise 文件夹下的源码，设置为只读模式
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufEnter" }, {
+autocmd({ "BufReadPost", "BufEnter" }, {
     pattern = "*",
     callback = function()
         local path = vim.fn.expand "%:p"
