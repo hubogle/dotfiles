@@ -5,6 +5,10 @@
 ---@type ChadrcConfig
 local M = {}
 
+local stbufnr = function()
+    return vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+end
+
 M.ui = {
     cmp = {
         icons_left = true, -- only for non-atom styles!
@@ -19,12 +23,36 @@ M.ui = {
     telescope = { style = "borderless" }, -- borderless / bordered
 
     statusline = {
-        order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd" },
+        order = { "mode", "file", "git_branch", "git_changes", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd" },
         theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
         separator_style = "default",
         modules = {
-            cursor = function()
-                return "%#StText# %l:%c "
+            git_branch = function()
+                if not vim.b[stbufnr()].gitsigns_head or vim.b[stbufnr()].gitsigns_git_status then
+                    return ""
+                end
+                local git_status = vim.b[stbufnr()].gitsigns_status_dict
+                local branch_name = " " .. git_status.head
+                return " %#St_gitHead#" .. branch_name .. "%#StText#"
+            end,
+
+            git_changes = function()
+                if not vim.b[stbufnr()].gitsigns_head or vim.b[stbufnr()].gitsigns_git_status then
+                    return ""
+                end
+
+                local git_status = vim.b[stbufnr()].gitsigns_status_dict
+
+                local added = (git_status.added and git_status.added ~= 0)
+                        and ("%#St_gitAdded#  " .. git_status.added)
+                    or ""
+                local changed = (git_status.changed and git_status.changed ~= 0)
+                        and ("%#St_gitChanged#  " .. git_status.changed)
+                    or ""
+                local removed = (git_status.removed and git_status.removed ~= 0)
+                        and ("%#St_gitRemoved#  " .. git_status.removed)
+                    or ""
+                return "" .. added .. changed .. removed
             end,
         },
     },
@@ -118,6 +146,10 @@ M.base46 = {
         GitSignsCurrentLineBlame = {
             fg = "light_grey",
         },
+        St_gitAdded = { fg = "green", bg = "statusline_bg" },
+        St_gitChanged = { fg = "yellow", bg = "statusline_bg" },
+        St_gitRemoved = { fg = "red", bg = "statusline_bg" },
+        -- St_gitHead = { fg = "nord_blue", bg = "statusline_bg" },
     },
     -- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations
     integrations = {
