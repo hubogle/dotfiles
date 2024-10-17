@@ -106,6 +106,7 @@ M.base46 = {
         Visual = {
             bg = { "line", 3 },
         },
+        DiffDelete = { bg = "none", fg = "grey" },
     },
     hl_add = {
         DiagnosticUnderlineError = {

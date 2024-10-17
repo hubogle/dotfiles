@@ -91,3 +91,8 @@ end)
 
 -- arrow
 map("n", "'", require("arrow.buffer_ui").openMenu, { noremap = true, silent = true, nowait = true })
+
+-- terminal
+map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+map("t", "<C-e>", "<Right>", { desc = "move to command line end in normal mode" })
+map("t", "<C-n>", "<Down>", { desc = "move to next line in normal mode" })

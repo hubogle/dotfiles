@@ -7,6 +7,56 @@ return {
     },
 
     {
+        name = "  Git Actions",
+        hl = "Exblue",
+        items = {
+            {
+                name = "Git Stage Hunk",
+                cmd = "Gitsigns stage_hunk",
+                rtxt = "<leader>gs",
+            },
+            {
+                name = "Git Undo Stage Hunk",
+                cmd = "Gitsigns un_stage_hunk",
+                rtxt = "<leader>gu",
+            },
+            {
+                name = "Git Reset Hunk",
+                cmd = "Gitsigns reset_hunk",
+                rtxt = "<leader>gr",
+            },
+            {
+                name = "Git Diff",
+                cmd = "Gitsigns diffthis",
+                rtxt = "<leader>gd",
+            },
+            {
+                name = "Git Blame",
+                cmd = "Gitsigns blame",
+            },
+            {
+                name = "Git Blame Currend",
+                cmd = "Gitsigns blame_line",
+            },
+            {
+                name = "Git Toggle Deleted",
+                cmd = "Gitsigns toggle_deleted",
+                rtxt = "<leader>gv",
+            },
+            {
+                name = "Git Next Hunk",
+                cmd = "Gitsigns next_hunk",
+                rtxt = "]c",
+            },
+            {
+                name = "Git Prev Hunk",
+                cmd = "Gitsigns prev_hunk",
+                rtxt = "[c",
+            },
+        },
+    },
+
+    {
         name = "  Trouble Actions",
         hl = "Exblue",
         items = {
