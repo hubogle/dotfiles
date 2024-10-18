@@ -67,14 +67,22 @@ return {
 
     { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
 
-    { "sindrets/diffview.nvim", event = { "BufReadPre", "BufNewFile" } },
-
     {
         "OXY2DEV/markview.nvim",
         ft = "markdown",
         config = function()
             require "configs.markview"
         end,
+    },
+
+    {
+        "kdheepak/lazygit.nvim",
+        cmd = {
+            "LazyGit",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
     },
 
     {
