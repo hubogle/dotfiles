@@ -23,7 +23,19 @@ M.ui = {
     telescope = { style = "borderless" }, -- borderless / bordered
 
     statusline = {
-        order = { "mode", "file", "git_branch", "git_changes", "%=", "lsp_msg", "%=", "diagnostics", "lsp", "cwd" },
+        order = {
+            "mode",
+            "file",
+            "arrow",
+            "git_branch",
+            "git_changes",
+            "%=",
+            "lsp_msg",
+            "%=",
+            "diagnostics",
+            "lsp",
+            "cwd",
+        },
         theme = "vscode_colored", -- default/vscode/vscode_colored/minimal
         separator_style = "default",
         modules = {
@@ -33,7 +45,7 @@ M.ui = {
                 end
                 local git_status = vim.b[stbufnr()].gitsigns_status_dict
                 local branch_name = " " .. git_status.head
-                return " %#St_gitHead#" .. branch_name .. "%#StText#"
+                return " %#St_gitHead#" .. branch_name .. "%#StText# "
             end,
 
             git_changes = function()
@@ -53,6 +65,15 @@ M.ui = {
                         and ("%#St_gitRemoved#  " .. git_status.removed)
                     or ""
                 return "" .. added .. changed .. removed
+            end,
+
+            arrow = function()
+                local statusline = require "arrow.statusline"
+                local text_icon = statusline.text_for_statusline_with_icons()
+                if text_icon ~= "" then
+                    return " " .. text_icon .. " "
+                end
+                return ""
             end,
         },
     },

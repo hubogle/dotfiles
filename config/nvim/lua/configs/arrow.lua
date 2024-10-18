@@ -1,7 +1,7 @@
 local opts = {
     show_icons = true,
-    leader_key = "'", -- Recommended to be a single key
-    buffer_leader_key = "m", -- Per Buffer Mappings
+    leader_key = "m", -- Recommended to be a single key
+    buffer_leader_key = "M", -- Per Buffer Mappings
     always_show_path = false,
     separate_by_branch = false, -- Bookmarks will be separated by git branch
     hide_handbook = false, -- set to true to hide the shortcuts on menu.
