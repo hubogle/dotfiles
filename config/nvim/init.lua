@@ -99,46 +99,11 @@ autocmd("User", {
     pattern = "PersistedSavePre",
     callback = function()
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-            if vim.bo[buf].filetype == "NvimTree" then
+            if vim.bo[buf].filetype == "neo-tree" then
                 vim.api.nvim_buf_delete(buf, { force = true })
             end
         end
-    end,
-})
-
--- vim 退出
-autocmd("VimLeavePre", {
-    callback = function()
-        require("persisted").save()
-        if vim.env.TMUX then
-            local actions_state = require "telescope.actions.state"
-            local session = actions_state.get_selected_entry()
-            local dir_path = session.dir_path
-            local dir_name = dir_path:match "([^/]+)$"
-            local current_window_name = vim.fn.system("tmux display-message -p '#W'"):gsub("\n", "")
-            if dir_name == current_window_name then
-                vim.fn.system "tmux rename-window 'zsh'"
-            end
-        end
-    end,
-})
-
--- 最后一个窗口关闭 https://github.com/nvim-tree/nvim-tree.lua/wiki/Auto-Close
-autocmd("QuitPre", {
-    callback = function()
-        local invalid_win = {}
-        local wins = vim.api.nvim_list_wins()
-        for _, w in ipairs(wins) do
-            local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
-            if bufname:match "NvimTree_" ~= nil then
-                table.insert(invalid_win, w)
-            end
-        end
-        if #invalid_win == #wins - 1 then
-            for _, w in ipairs(invalid_win) do
-                vim.api.nvim_win_close(w, true)
-            end
-        end
+        vim.fn.system "tmux rename-window 'zsh'"
     end,
 })
 

@@ -15,7 +15,12 @@ map("n", "<leader>fp", "<cmd> Telescope persisted <cr>", { desc = "Find project"
 -- navhad menu
 local menu = require "configs.menu"
 map("n", "<C-t>", function()
-    require("menu").open(menu, { border = false })
+    local filetype = vim.bo.filetype
+    if filetype == "neo-tree" then
+        -- require("menu").open(items, { border = false })
+    else
+        require("menu").open(menu, { border = false })
+    end
 end, {})
 
 map("n", "<RightMouse>", function()
@@ -99,3 +104,6 @@ map("t", "<C-n>", "<Down>", { desc = "move to next line in normal mode" })
 
 -- lazygit
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+
+-- neo-tree
+map("n", "<leader>e", "<cmd> Neotree source=last reveal=true position=left toggle<cr>", { desc = "Open Neotree" })

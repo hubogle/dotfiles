@@ -16,14 +16,6 @@ return {
     },
 
     {
-        "nvim-tree/nvim-tree.lua",
-        cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-        opts = function()
-            return require "configs.nvimtree"
-        end,
-    },
-
-    {
         "neovim/nvim-lspconfig",
         config = function()
             require "configs.lspconfig"
@@ -38,6 +30,7 @@ return {
         end,
     },
 
+    { "nvim-tree/nvim-tree.lua", enabled = false },
     ----------------------------------- other -------------------------------------------------------------
 
     {
@@ -45,6 +38,15 @@ return {
         cmd = "Trouble",
         config = function()
             require("trouble").setup()
+        end,
+    },
+
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        cmd = { "Neotree" },
+        branch = "v3.x",
+        config = function()
+            require "configs.neo-tree"
         end,
     },
 

@@ -41,7 +41,7 @@ opts.on_attach = function(bufnr)
     end)
 
     -- Stage, reset, and navigate hunks
-    map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage current hunk" })
+    map("n", "<leader>ga", gitsigns.stage_hunk, { desc = "Stage current hunk" })
     map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
     map("v", "<leader>gs", function()
         gitsigns.stage_hunk { vim.fn.line ".", vim.fn.line "v" }
@@ -50,7 +50,7 @@ opts.on_attach = function(bufnr)
         gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
     end, { desc = "Reset selected hunk" })
     map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset entire buffer" })
-    map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage entire buffer" })
+    map("n", "<leader>gA", gitsigns.stage_buffer, { desc = "Stage entire buffer" })
 
     -- Undo staging, preview hunks, and blame
     map("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo last hunk stage" })

@@ -5,8 +5,20 @@
 ---@type ChadrcConfig
 local M = {}
 
+local strep = string.rep
+local api = vim.api
+
 local stbufnr = function()
-    return vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+    return api.nvim_win_get_buf(vim.g.statusline_winid or 0)
+end
+
+local function getNvimTreeWidth()
+    for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
+        if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
+            return api.nvim_win_get_width(win) + 1
+        end
+    end
+    return 0
 end
 
 M.ui = {
@@ -81,13 +93,10 @@ M.ui = {
     tabufline = {
         enabled = true,
         lazyload = true,
-        order = { "treeOffset", "buffers", "tabs" },
+        order = { "treeOffset", "buffers", "tabs", "btns" },
         modules = {
-            btns = function()
-                local btn = require("nvchad.tabufline.utils").btn
-                local g = vim.g
-                local toggle_theme = btn(g.toggle_theme_icon, "ThemeToggleBtn", "Toggle_theme")
-                return toggle_theme
+            treeOffset = function()
+                return "%#TbBufOn#" .. strep(" ", getNvimTreeWidth())
             end,
         },
     },
