@@ -106,4 +106,5 @@ map("t", "<C-n>", "<Down>", { desc = "move to next line in normal mode" })
 map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- neo-tree
+vim.api.nvim_del_keymap("n", "<C-n>") -- clear default
 map("n", "<leader>e", "<cmd> Neotree source=last reveal=true position=left toggle<cr>", { desc = "Open Neotree" })

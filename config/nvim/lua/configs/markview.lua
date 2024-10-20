@@ -67,5 +67,3 @@ markview.setup {
     },
     tables = {},
 }
-
-return opts

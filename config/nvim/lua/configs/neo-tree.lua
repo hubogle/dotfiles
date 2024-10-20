@@ -32,7 +32,19 @@ local opts = {
         mappings = {
             ["<s-Tab>"] = "prev_source",
             ["<Tab>"] = "next_source",
+            ["Y"] = {
+                function(state)
+                    local node = state.tree:get_node()
+                    local path = node:get_id()
+                    vim.fn.setreg("+", path, "c")
+                end,
+                desc = "Copy Path to Clipboard",
+            },
+            ["P"] = { "toggle_preview", config = { use_float = false } },
         },
+    },
+    filesystem = {
+        use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
     },
 
     buffers = {
@@ -45,10 +57,10 @@ local opts = {
     default_component_configs = {
         diagnostics = {
             symbols = {
-                hint = "H",
-                info = "I",
+                hint = "󰌵",
+                info = " ",
                 warn = "!",
-                error = "X",
+                error = " ",
             },
             highlights = {
                 hint = "DiagnosticSignHint",

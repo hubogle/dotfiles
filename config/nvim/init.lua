@@ -79,6 +79,7 @@ autocmd("User", {
         local dir_path = session.dir_path
         local dir_name = dir_path:match "([^/]+)$"
         vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
+        vim.cmd "stopinsert"
     end,
 })
 
@@ -98,10 +99,14 @@ autocmd("User", {
 autocmd("User", {
     pattern = "PersistedSavePre",
     callback = function()
+        local current_buf = vim.api.nvim_get_current_buf()
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             if vim.bo[buf].filetype == "neo-tree" then
-                vim.api.nvim_buf_delete(buf, { force = true })
+                vim.cmd "Neotree close"
             end
+        end
+        if vim.api.nvim_buf_is_valid(current_buf) then
+            vim.api.nvim_set_current_buf(current_buf)
         end
         vim.fn.system "tmux rename-window 'zsh'"
     end,
@@ -123,10 +128,15 @@ autocmd({ "BufReadPost", "BufEnter" }, {
     end,
 })
 
+-- 自动显示诊断浮动窗口
+autocmd({ "CursorHold", "CursorMoved" }, {
+    callback = function()
+        vim.diagnostic.open_float(nil, { focus = false })
+    end,
+})
+
 -- dropbar plugin
 vim.ui.select = require("dropbar.utils.menu").select
-
-vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, max_width=80})]]
 
 vim.schedule(function()
     require "mappings"

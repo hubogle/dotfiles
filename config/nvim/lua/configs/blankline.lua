@@ -3,7 +3,7 @@
 dofile(vim.g.base46_cache .. "blankline")
 
 local opts = {
-    indent = { char = "│", highlight = "IblChar" },
+    indent = { char = "│", tab_char = "│", highlight = "IblChar" },
     scope = {
         enabled = true,
         char = "│",
@@ -17,7 +17,21 @@ local opts = {
 
     exclude = {
         buftypes = { "terminal" },
-        filetypes = { "dashboard", "NvimTree", "packer", "lsp-installer" },
+        filetypes = {
+            "help",
+            "alpha",
+            "dashboard",
+            "neo-tree",
+            "NvimTree",
+            "Trouble",
+            "trouble",
+            "lazy",
+            "mason",
+            "notify",
+            "toggleterm",
+            "lazyterm",
+            "lsp-installer",
+        },
     },
 }
 

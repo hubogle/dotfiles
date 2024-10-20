@@ -26,7 +26,11 @@ end
 
 vim.diagnostic.config {
     virtual_text = false,
-    signs = true, -- never show signs
+    -- signs = false, -- never show signs
+    signs = {
+        --support diagnostic severity / diagnostic type name
+        text = { ["ERROR"] = " ", ["WARN"] = "!", ["INFO"] = " ", ["HINT"] = "󰌵" },
+    },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
