@@ -1,6 +1,5 @@
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 -- local opts = require "neo-tree.defaults"
-
 local opts = {
     sources = {
         "filesystem",
@@ -17,7 +16,7 @@ local opts = {
     retain_hidden_root_indent = true, -- IF the root node is hidden, keep the indentation anyhow.
 
     source_selector = {
-        winbar = true, -- toggle to show selector on winbar
+        winbar = false, -- toggle to show selector on winbar
         show_scrolled_off_parent_node = true, -- this will replace the tabs with the parent path
         -- of the top visible node when scrolled down.
         separator = { left = " ", right = " " },
@@ -54,7 +53,14 @@ local opts = {
     document_symbols = {
         follow_cursor = true,
     },
+
     default_component_configs = {
+        container = {
+            enable_character_fade = true,
+            width = "100%",
+            right_padding = 0,
+        },
+
         diagnostics = {
             symbols = {
                 hint = "󰌵",
@@ -68,6 +74,11 @@ local opts = {
                 warn = "DiagnosticSignWarn",
                 error = "DiagnosticSignError",
             },
+        },
+
+        indent = {
+            indent_size = 2,
+            padding = 0,
         },
     },
 }

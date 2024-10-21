@@ -12,15 +12,6 @@ local stbufnr = function()
     return api.nvim_win_get_buf(vim.g.statusline_winid or 0)
 end
 
-local function getNvimTreeWidth()
-    for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
-        if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
-            return api.nvim_win_get_width(win) + 1
-        end
-    end
-    return 0
-end
-
 M.ui = {
     cmp = {
         icons_left = true, -- only for non-atom styles!
@@ -93,10 +84,26 @@ M.ui = {
     tabufline = {
         enabled = true,
         lazyload = true,
-        order = { "treeOffset", "buffers", "tabs", "btns" },
+        order = { "neoTree", "buffers", "tabs", "btns" },
         modules = {
-            treeOffset = function()
-                return "%#TbBufOn#" .. strep(" ", getNvimTreeWidth())
+            neoTree = function()
+                for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
+                    if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
+                        local selector_value = require("neo-tree.ui.selector").get()
+
+                        if selector_value ~= nil then
+                            vim.b[api.nvim_win_get_buf(win)].last_selector_value = selector_value
+                            return selector_value
+                        end
+
+                        local last_selector_value = vim.b[api.nvim_win_get_buf(win)].last_selector_value
+                        if last_selector_value ~= nil then
+                            return last_selector_value
+                        end
+                    end
+                end
+
+                return ""
             end,
         },
     },
