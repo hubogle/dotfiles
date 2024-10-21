@@ -7,6 +7,12 @@ return {
     },
 
     {
+        name = "Open Neotree",
+        cmd = "Neotree reveal=true position=left",
+        rtxt = "o",
+    },
+
+    {
         name = "  Git Actions",
         hl = "Exblue",
         items = {

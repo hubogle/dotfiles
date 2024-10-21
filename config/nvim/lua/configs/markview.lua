@@ -39,7 +39,7 @@ markview.setup {
     -- Max file size that is rendered entirely
     max_file_length = 1000,
     -- Modes where preview is shown
-    modes = { "n", "no", "i", "c" },
+    modes = { "n", "no", "c" },
     -- Lines from the cursor to draw when the
     -- file is too big
     render_distance = 100,
