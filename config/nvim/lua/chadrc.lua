@@ -5,7 +5,6 @@
 ---@type ChadrcConfig
 local M = {}
 
-local strep = string.rep
 local api = vim.api
 
 local stbufnr = function()
