@@ -108,7 +108,16 @@ autocmd("User", {
         if vim.api.nvim_buf_is_valid(current_buf) then
             vim.api.nvim_set_current_buf(current_buf)
         end
-        vim.fn.system "tmux rename-window 'zsh'"
+
+        local current_window_name = vim.fn.system("tmux display-message -p '#W'"):gsub("%s+", "")
+        local actions_state = require "telescope.actions.state"
+        local session = actions_state.get_selected_entry()
+        local dir_path = session.dir_path
+        local dir_name = dir_path:match "([^/]+)$"
+
+        if vim.fn.shellescape(current_window_name) == vim.fn.shellescape(dir_name) then
+            vim.fn.system "tmux rename-window 'zsh'"
+        end
     end,
 })
 

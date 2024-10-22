@@ -107,4 +107,4 @@ map("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 
 -- neo-tree
 vim.api.nvim_del_keymap("n", "<C-n>") -- clear default
-map("n", "<leader>e", "<cmd> Neotree source=last reveal=true position=left toggle<cr>", { desc = "Open Neotree" })
+map("n", "<leader>e", "<cmd> Neotree source=last reveal=true position=left<cr>", { desc = "Open Neotree" })
