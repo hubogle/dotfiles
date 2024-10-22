@@ -3,11 +3,13 @@
 local options = {
     formatters_by_ft = {
         lua = { "stylua" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        yaml = { "prettier" },
         python = { "isort", "black" },
         go = { "gofumpt" },
-        bash = { "beautysh" },
         sql = { "sqlfluff" },
-        json = { "prettier" },
+        bash = { "beautysh" },
         ["*"] = { "trim_whitespace" },
         -- css = { "prettier" },
         -- html = { "prettier" },

@@ -61,21 +61,6 @@ local opts = {
             right_padding = 0,
         },
 
-        diagnostics = {
-            symbols = {
-                hint = "󰌵",
-                info = " ",
-                warn = "!",
-                error = " ",
-            },
-            highlights = {
-                hint = "DiagnosticSignHint",
-                info = "DiagnosticSignInfo",
-                warn = "DiagnosticSignWarn",
-                error = "DiagnosticSignError",
-            },
-        },
-
         indent = {
             indent_size = 2,
             padding = 0,

@@ -5,7 +5,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "gopls", "pylsp", "lua_ls", "bashls" }
+local servers = { "gopls", "pylsp", "lua_ls", "bashls", "yamlls", "jsonls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -54,13 +54,10 @@ lspconfig["lua_ls"].setup {
     },
 }
 
+local x = vim.diagnostic.severity
 vim.diagnostic.config {
     virtual_text = false,
-    -- signs = false, -- never show signs
-    signs = {
-        --support diagnostic severity / diagnostic type name
-        text = { ["ERROR"] = " ", ["WARN"] = "!", ["INFO"] = " ", ["HINT"] = "󰌵" },
-    },
+    signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
