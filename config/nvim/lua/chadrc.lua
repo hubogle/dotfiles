@@ -173,15 +173,9 @@ M.base46 = {
         DiffDelete = { bg = "none", fg = "grey" },
     },
     hl_add = {
-        DiagnosticUnderlineError = {
-            undercurl = true,
-        },
-        DiagnosticUnderlineWarn = {
-            undercurl = true,
-        },
-        GitSignsCurrentLineBlame = {
-            fg = "light_grey",
-        },
+        DiagnosticUnderlineError = { undercurl = true, sp = "yellow" },
+        DiagnosticUnderlineWarn = { undercurl = true, sp = "red" },
+        GitSignsCurrentLineBlame = { fg = "light_grey" },
         St_gitAdded = { fg = "green", bg = "statusline_bg" },
         St_gitChanged = { fg = "yellow", bg = "statusline_bg" },
         St_gitRemoved = { fg = "red", bg = "statusline_bg" },
