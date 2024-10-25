@@ -1,13 +1,14 @@
+[general]
 live_config_reload = false # 热更新配置
+ipc_socket = true
 
 # https://alacritty.org/config-alacritty.html
 # https://github.com/alacritty/alacritty-theme
 # https://unpkg.com/browse/alacritty-themes@latest/themes/
-
 import = [
-  # "~/.config/alacritty/themes/themes/ashes_light.toml", # choice theme by import
-  "~/.config/alacritty/theme.toml",
-  "~/.config/alacritty/keybindings.toml",
+	# "~/.config/alacritty/themes/themes/ayu_light.toml", # choice theme by import
+	"~/.config/alacritty/theme.toml",
+	"~/.config/alacritty/keybindings.toml",
 ]
 
 [debug]
@@ -19,14 +20,21 @@ render_timer = false
 [env]
 TERM = "tmux-256color"
 
-[shell]
-program = "/opt/homebrew/bin/tmux"
-args = ["new-session", "-A", "-D", "-s", "main"]
-# args = ["-c", "$(brew --prefix)/bin/bash --login"]
-# program = "sh"
+[terminal]
+shell = { program = "/opt/homebrew/bin/tmux", args = [
+	"new-session",
+	"-A",
+	"-D",
+	"-s",
+	"main",
+] }
+osc52 = "CopyPaste"
 
 [mouse]
-hide_when_typing = false # 如果为“true”，则键入时光标将暂时隐藏
+hide_when_typing = true # 如果为“true”，则键入时光标将暂时隐藏
+bindings = [
+	{ mouse = "Right", mods = "Control", action = "Paste" },
+]
 
 [scrolling]
 history = 10000 #  回滚区最大行数
@@ -36,18 +44,20 @@ multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/230
 builtin_box_drawing = true                                                  # true 对方框图形字符使用内置字体
 size = 13
 offset = { x = 0, y = 1 }                                                   # 字体偏移量
+# defaults write org.alacritty AppleFontSmoothing -int 0
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
-italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
-bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+bold = { style = "Bold" }
+italic = { style = "Italic" }
+bold_italic = { style = "Bold Italic" }
 
 [colors]
-draw_bold_text_with_bright_colors = true # 使用明亮的颜色变体绘制粗体文本。
+draw_bold_text_with_bright_colors = false # 使用明亮的颜色变体绘制粗体文本。
 
 [bell]
 animation = "EaseOutExpo" # 视觉铃声响起时闪烁屏幕的动画效果
 color = "#ffffff"         # 视角动画颜色
 duration = 2              # 视觉铃声闪烁的持续时间
+command = "None"
 
 # 包含用作分隔符的所有字符
 [selection]
@@ -63,27 +73,43 @@ blink_timeout = 5                                # 光标停止闪烁 秒
 unfocused_hollow = true                          # 当窗口未聚焦时，光标将呈现为空心框
 thickness = 0.2                                  # vim insert 模式光标相对于单元格宽度的粗细
 
+[hints]
+alphabet = "jfkdls;ahgurieowpq"
+# enabled = [
+# 	{ regex = "[0-9a-fA-F]{12}", action = "Copy", mouse = { enabled = true }, binding = { key = "K", mods = "Control|Command" } },
+# ]
 
 [[hints.enabled]]
 command = "open"
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+hyperlinks = true
 post_processing = true
-regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+mouse = { enabled = true }
+binding = { key = "U", mods = "Control|Command" }
 
-[hints.enabled.mouse]
-enabled = true
-mods = "Shift"
+[[hints.enabled]]
+regex = "[0-9a-fA-F]{12}"
+action = "Copy"
+mouse = { enabled = true }
+binding = { key = "I", mods = "Control|Command" }
+
+[[hints.enabled]]
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+action = "Copy"
+binding = { key = "O", mods = "Control|Command" }
+
 
 [window]
+dimensions = { columns = 120, lines = 40 } # 默认初始化大小
+padding = { x = 0, y = 0 }                 # 窗口边缘空白
+dynamic_padding = false                    # 在终端内容周围均匀分布其他填充
 # full: 边框和标题栏
 # none: 无边框或标题栏
 # transparent: 标题栏、透明背景和标题栏按钮
 # buttonless: 标题栏、透明背景和无标题栏按钮
-decorations = "buttonless"                 #  窗口样式
-decorations_theme_variant = "None"         # 可支持的值包括“Dark”，“Light”和“None”。将其设置为“None”以使用默认主题变体。
-dynamic_padding = true                     # 在终端内容周围均匀分布其他填充
-opacity = 0.95                             # 窗口透明度
-option_as_alt = "OnlyLeft"                 # Make `Option` key behave as `Alt` (macOS only):
-resize_increments = true                   # 调整窗口大小时是否使用各个单元格的离散步长
-blur = true                                # 背景毛玻璃
-dimensions = { columns = 120, lines = 40 } # 默认初始化大小
-padding = { x = 0, y = 0 }                 # 窗口边缘空白
+decorations = "buttonless"         #  窗口样式
+opacity = 0.95                     # 窗口透明度
+blur = true                        # 背景毛玻璃
+decorations_theme_variant = "None" # 可支持的值包括“Dark”，“Light”和“None”。将其设置为“None”以使用默认主题变体。
+resize_increments = true           # 调整窗口大小时是否使用各个单元格的离散步长
+option_as_alt = "OnlyLeft"         # 使Option键的行为与Alt相同

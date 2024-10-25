@@ -15,6 +15,10 @@ c
 `63` 代表 `c`，`0a` 代表回车，对应的 `hex` 为 `\0x63` 和 `\0x0a`。
 
 ## 按键绑定
+* 按键匹配
+    * `Control|Command + U` 快速打开 `url`
+    * `Control|Command + O` 快速拷贝 `url`
+    * `Control|Command + I` 快速 `commit id`
 
 * 新建
     * 垂直切分 `Command + D`

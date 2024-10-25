@@ -13,13 +13,14 @@ local opts = {
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 
     hide_root_node = true, -- Hide the root node.
-    retain_hidden_root_indent = true, -- IF the root node is hidden, keep the indentation anyhow.
+    retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow.
 
     source_selector = {
         winbar = false, -- toggle to show selector on winbar
-        show_scrolled_off_parent_node = true, -- this will replace the tabs with the parent path
+        show_scrolled_off_parent_node = false, -- this will replace the tabs with the parent path
         -- of the top visible node when scrolled down.
-        separator = { left = " ", right = " " },
+        padding = { left = 0, right = 0 },
+        separator = " ",
         highlight_tab = "TbBufOff",
         highlight_tab_active = "TbBufOn",
         highlight_background = "TbBufOff",
@@ -28,6 +29,7 @@ local opts = {
     },
 
     window = {
+        width = 35,
         mappings = {
             ["<s-Tab>"] = "prev_source",
             ["<Tab>"] = "next_source",
