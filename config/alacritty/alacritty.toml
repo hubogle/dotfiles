@@ -45,7 +45,7 @@ builtin_box_drawing = true                                                  # tr
 size = 13
 offset = { x = 0, y = 1 }                                                   # 字体偏移量
 # defaults write org.alacritty AppleFontSmoothing -int 0
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
