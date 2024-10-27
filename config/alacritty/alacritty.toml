@@ -6,9 +6,9 @@ ipc_socket = true
 # https://github.com/alacritty/alacritty-theme
 # https://unpkg.com/browse/alacritty-themes@latest/themes/
 import = [
-	# "~/.config/alacritty/themes/themes/ayu_light.toml", # choice theme by import
-	"~/.config/alacritty/theme.toml",
-	"~/.config/alacritty/keybindings.toml",
+	# "themes/themes/ayu_dark.toml", # choice theme by import
+	"theme.toml",
+	"keybindings.toml",
 ]
 
 [debug]

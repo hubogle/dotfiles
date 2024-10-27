@@ -161,7 +161,7 @@ M.colorify = {
 
 M.base46 = {
     theme = "onenord",
-    transparency = true,
+    transparency = false,
     theme_toggle = { "onenord", "onenord_light" },
     hl_override = {
         CursorLine = {
@@ -176,10 +176,6 @@ M.base46 = {
         DiagnosticUnderlineError = { undercurl = true, sp = "yellow" },
         DiagnosticUnderlineWarn = { undercurl = true, sp = "red" },
         GitSignsCurrentLineBlame = { fg = "light_grey" },
-        St_gitAdded = { fg = "green", bg = "statusline_bg" },
-        St_gitChanged = { fg = "yellow", bg = "statusline_bg" },
-        St_gitRemoved = { fg = "red", bg = "statusline_bg" },
-        -- St_gitHead = { fg = "nord_blue", bg = "statusline_bg" },
     },
     -- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations
     integrations = {
@@ -197,5 +193,14 @@ M.base46 = {
         "whichkey",
     },
 }
+
+local function updateBackgroundColors(transparency)
+    local bg_value = transparency and "none" or "statusline_bg"
+    M.base46.hl_add.St_gitAdded = { fg = "green", bg = bg_value }
+    M.base46.hl_add.St_gitChanged = { fg = "yellow", bg = bg_value }
+    M.base46.hl_add.St_gitRemoved = { fg = "red", bg = bg_value }
+end
+
+updateBackgroundColors(M.base46.transparency)
 
 return M
