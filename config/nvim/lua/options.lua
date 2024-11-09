@@ -55,3 +55,6 @@ o.linebreak = true -- 在单词之间而非单词中间进行换行
 o.eventignore = "FocusLost" -- 当 Neovim 失去焦点时触发
 o.termguicolors = true
 o.updatetime = 500
+
+o.endofline = false -- 保存时是否要加上一个末尾换行符
+o.fixendofline = false -- 保存时是否自动根据 endofline 选项修复末尾的换行符
