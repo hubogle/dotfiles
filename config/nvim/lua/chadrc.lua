@@ -35,6 +35,7 @@ M.ui = {
             "lsp_msg",
             "%=",
             "diagnostics",
+            "codeium",
             "lsp",
             "cwd",
         },
@@ -76,6 +77,10 @@ M.ui = {
                     return " " .. text_icon .. " "
                 end
                 return ""
+            end,
+
+            codeium = function()
+                return "%3{codeium#GetStatusString()} "
             end,
         },
     },

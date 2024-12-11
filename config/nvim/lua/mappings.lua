@@ -113,3 +113,20 @@ map("n", "<leader>e", "<cmd> Neotree source=last reveal=true position=left<cr>",
 map("n", "<Leader>tn", "<CMD>tabnew<CR>", { desc = "Open new tab", noremap = true, silent = true })
 map("n", "<Leader>to", "<CMD>tabonly<CR>", { desc = "Close other tabs", noremap = true, silent = true })
 map("n", "<Leader>tc", "<CMD>tabclose<CR>", { desc = "Close tab", noremap = true, silent = true })
+
+-- codeium
+-- map({ "i" }, "<c-y>", function()
+-- 	vim.fn["codeium#Accept"]()
+-- end, { noremap = true, expr = true })
+
+map({ "i" }, "<c-x>", function()
+    vim.fn["codeium#Clear"]()
+end, { noremap = true, expr = true })
+
+map({ "i" }, "<c-n>", function()
+    vim.fn["codeium#CycleCompletions"](1)
+end, { noremap = true, expr = true })
+
+map({ "i" }, "<c-p>", function()
+    vim.fn["codeium#CycleCompletions"](-1)
+end, { noremap = true, expr = true })
