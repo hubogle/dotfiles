@@ -7,13 +7,13 @@ return {
 
     { "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require "configs.gitsigns" },
 
-    {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        opts = function()
-            return require "configs.cmp"
-        end,
-    },
+    -- {
+    --     "hrsh7th/nvim-cmp",
+    --     event = "InsertEnter",
+    --     opts = function()
+    --         return require "configs.cmp"
+    --     end,
+    -- },
 
     {
         "neovim/nvim-lspconfig",
@@ -56,18 +56,20 @@ return {
 
     { "Bekaboo/dropbar.nvim" }, -- bar
 
-    { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require "configs.copilot" },
-
-    {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
+    -- { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require "configs.copilot" },
+    --
+    -- {
+    --     "zbirenbaum/copilot-cmp",
+    --     config = function()
+    --         require("copilot_cmp").setup()
+    --     end,
+    -- },
 
     { "olimorris/persisted.nvim", opts = require "configs.persisted" }, -- open project
 
     { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
+
+    { "Exafunction/codeium.vim", event = "BufEnter" },
 
     {
         "OXY2DEV/markview.nvim",

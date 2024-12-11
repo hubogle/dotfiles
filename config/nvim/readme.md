@@ -92,3 +92,14 @@
 * `ZZ` 关闭并保存
 * `ZP` 关闭不保存
 * `gc` 上一个选择块
+
+## codeium
+
+`Codeium Auth` 授权登录
+
+* `tab` 插入代码补全
+* `ctrl + x` 取消 `codeium` 代码补全
+* `ctrl + n` 下一个代码补全
+* `ctrl + p` 上一个代码补全
+* `ctrl + k` 接受建议话
+* `ctrl + l` 接受建议行
