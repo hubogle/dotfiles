@@ -123,10 +123,9 @@ sshStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] $HOST_NAME#[fg=$re
 viStatus="#[fg=$green]$left_separator#[fg=$black]#[bg=$green]  #[fg=$green]#[bg=default]#[nobold]$right_separator"
 syncStatus="#[fg=$yellow]$left_separator#[fg=$black]#[bg=$yellow]  #[fg=$yellow]#[bg=default]#[nobold]$right_separator"
 prefixStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰘳 #[fg=$red]#[bg=default]$right_separator"
-inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
+# inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
 
 
-# inputStatus="#{?#{==:#{E:@IM},ZH},#[fg=$red]$left_arrow_icon#[fg=$black]#[bg=$red]  #[bold]ZH ,#[fg=$gray]$left_arrow_icon#[fg=$font_color]#[bg=$gray]  US }"
 timeStatus="#[fg=$blue]$left_separator#[bg=$blue]#[fg=$bg]$time_icon $time_format#[fg=$blue]#[bg=default]$right_separator"
 speedStatus="#[fg=$cyan]$left_separator#[bg=$cyan]#[fg=$bg]$download_speed_icon#{E:@download_speed}#[fg=$cyan]#[bg=default]$right_separator"
 
@@ -135,7 +134,7 @@ RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
 RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
 RS="#{?pane_in_mode,$viStatus ,}$RS"
 RS="#{?synchronize-panes,$syncStatus ,}$RS"
-RS="#{?#{==:#{E:@IM},ZH},$inputStatus ,}$RS"
+# RS="#{?#{==:#{E:@IM},ZH},$inputStatus ,}$RS"
 RS="#{?client_prefix,$prefixStatus ,}$RS"
 
 tmux_set status-right "$RS"

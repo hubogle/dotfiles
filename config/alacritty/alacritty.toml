@@ -28,22 +28,20 @@ shell = { program = "/opt/homebrew/bin/tmux", args = [
 	"-s",
 	"main",
 ] }
-osc52 = "CopyPaste"
+osc52 = "OnlyCopy"
 
 [mouse]
-hide_when_typing = true # 如果为“true”，则键入时光标将暂时隐藏
-bindings = [
-	{ mouse = "Right", mods = "Control", action = "Paste" },
-]
+hide_when_typing = true                                              # 如果为“true”，则键入时光标将暂时隐藏
+bindings = [{ mouse = "Right", mods = "Control", action = "Paste" }]
 
 [scrolling]
 history = 10000 #  回滚区最大行数
 multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/2300
 
 [font]
-builtin_box_drawing = true                                                  # true 对方框图形字符使用内置字体
+builtin_box_drawing = true # true 对方框图形字符使用内置字体
 size = 13
-offset = { x = 0, y = 1 }                                                   # 字体偏移量
+offset = { x = 0, y = 1 }  # 字体偏移量
 # defaults write org.alacritty AppleFontSmoothing -int 0
 normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
 bold = { style = "Bold" }
@@ -56,7 +54,7 @@ draw_bold_text_with_bright_colors = false # 使用明亮的颜色变体绘制粗
 [bell]
 animation = "EaseOutExpo" # 视觉铃声响起时闪烁屏幕的动画效果
 color = "#ffffff"         # 视角动画颜色
-duration = 2              # 视觉铃声闪烁的持续时间
+duration = 1              # 视觉铃声闪烁的持续时间
 command = "None"
 
 # 包含用作分隔符的所有字符
@@ -88,7 +86,8 @@ mouse = { enabled = true }
 binding = { key = "U", mods = "Control|Command" }
 
 [[hints.enabled]]
-regex = "[0-9a-fA-F]{12}"
+# regex = "[0-9a-fA-F]{12}"
+regex = "[\\w\\.\\-\\/]{7,}"
 action = "Copy"
 mouse = { enabled = true }
 binding = { key = "I", mods = "Control|Command" }
