@@ -17,29 +17,30 @@ tmux_set() {
 #     printf '\x1b[38;5;%dmcolour%d\x1b[0m ' $i $i
 # done
 
-red="colour196"
-green="colour76"
-blue="colour12"
-orange="colour215"
-yellow="colour222"
-black="colour232"
-gray="colour241"
-cyan="colour44"
-pink="colour212"
+bg="#1A1B26"
+fg="#a9b1d6"
+black="#414868"
+blue="#7aa2f7"
+cyan="#7dcfff"
+green="#73daca"
+magenta="#bb9af7"
+red="#f7768e"
+white="#c0caf5"
+yellow="#e0af68"
 
-# https://github.com/catppuccin/tmux
-bg="#24273a"
-fg="#cad3f5"
+bblack="#2A2F41"
+bblue="#7aa2f7"
+bcyan="#7dcfff"
+bgreen="#41a6b5"
+bmagenta="#bb9af7"
+bred="#ff9e64"
+bwhite="#787c99"
+byellow="#e0af68"
 
-
-right_arrow_icon='' # e0b0
-right_arrow_icon_inverse='' # e0d7
-left_arrow_icon='' # e0b2
-left_arrow_icon_inverse='' # e0d6
-
-left_separator="" # e0b6
-right_separator="" # e0b4
-middle_separator="█"
+ghgreen="#3fb950"
+ghmagenta="#A371F7"
+ghred="#d73a4a"
+ghyellow="#d29922"
 
 # https://man7.org/linux/man-pages/man1/tmux.1.html
 #==========通用颜色配置=================
@@ -63,26 +64,38 @@ tmux_set window-status-separator ""
 tmux_set clock-mode-colour "$TC"        # 时钟模式
 tmux_set clock-mode-style 24
 
-# nobold 禁用粗体，noitalics 禁止倾斜文字 nounderscore 禁用下划线
-#==================Windows状态栏=======
-HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
+right_icon='' # e0b0
+right_icon_inverse='' # e0d7
+left_icon='' # e0b2
+left_icon_inverse='' # e0d6
 
-WSFormat="#[fg=$blue,bg=default]$left_separator#[fg=$bg,bg=$blue,bold]#I#[nobold]#[fg=$blue]$middle_separator"
-WSFormat="$WSFormat#[fg=$fg,bg=$gray] #W #{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_bell_flag,󰂠 ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_activity_flag,󰂚 ,}"
+left_separator="" # e0b6
+right_separator="" # e0b4
+middle_separator="█"
+
+# nobold 禁用粗体，noitalics 禁止倾斜文字 nounderscore 禁用下划线 nodim 禁用暗淡
+#==================Windows状态栏=======
+iconFormat="#{?#{==:#{pane_current_command},ssh},#[fg=$red] , }"
+iconFormat="#{?#{==:#{pane_current_command},nvim},#[fg=$ghgreen]󰕷 ,$iconFormat}"
+
+WSFormat="#[fg=$black,bg=default]$right_icon_inverse"
+WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat #[fg=$bwhite]#W "
+WSFormat="$WSFormat#[fg=$yellow]#{?window_bell_flag,󰂠 ,}"
+WSFormat="$WSFormat#[fg=$yellow]#{?window_activity_flag,󰂚 ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}"
-WSFormat="$WSFormat#[fg=$gray,bg=default]$right_separator "
+WSFormat="$WSFormat#[fg=$black,bg=default]$right_icon"
 
-WSCFormat="#[fg=$orange,bg=default]$left_separator#[fg=$bg,bg=$orange,bold]#I#[nobold]#[fg=$orange]$middle_separator"
-WSCFormat="$WSCFormat#[fg=$fg,bg=$bg] #W #{?#{==:#{pane_current_command},ssh},#[fg=magenta] ,}"
+
+WSCFormat="#[fg=$bblack,bg=default]$right_icon_inverse"
+WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat #[fg=$white]#W "
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSCFormat="$WSCFormat#[fg=$green] "
-WSCFormat="$WSCFormat#[fg=$bg,bg=default]$right_separator "
+WSCFormat="$WSCFormat#[fg=$bblack,bg=default]$right_icon"
 
 tmux_set window-status-format "$WSFormat"
 tmux_set window-status-current-format "$WSCFormat"
+
 tmux_set window-status-bell-style 'blink' # sleep 5 && tmux display-message done
 tmux_set window-status-activity-style 'blink' # ssh 警告 sleep 2 && echo -e "\a"
 
@@ -90,21 +103,18 @@ tmux_set window-status-activity-style 'blink' # ssh 警告 sleep 2 && echo -e "\
 #     
 # ' 
 # https://www.nerdfonts.com/cheat-sheet
-session_icon=" "
+session_icon=""
 
 tmux_set status-left-length 0
 tmux_set status-left-style none
-# 展示 ssh 红色，$yellow 命令模式, $green 正常模式, tmux 嵌套蓝色
 
-# 初始化 LS 变量
-# LS="#[bg=$green]#[bold] #S #[nobold]$session_icon#[fg=$green,bg=default]$right_arrow_icon"  # 默认绿色背景，之后回归默认背景
-# LS="#{?#{==:#{pane_current_command},ssh},#[bg=$red]#[bold] #S #[nobold]$session_icon#[fg=$red]#[bg=default]$right_arrow_icon,$LS}" # SSH 红色，之后回归默认背景
-# LS="#{?client_prefix,#[bg=$yellow]#[bold] #S #[nobold]$session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"                # 命令模式黄色，之后回归默认背景
-# LS="#{?synchronize-panes,#[bg=$yellow]#[bold] #S #[nobold]$session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"          # 同步窗格黄色，之后回归默认背景
-# LS="#{?pane_in_mode,#[bg=$yellow]#[bold] #S #[nobold]$session_icon#[fg=$yellow]#[bg=default]$right_arrow_icon,$LS}"                # Vi 模式黄色，之后回归默认背景
-# LS="#{?#{==:#{client_key_table},off},#[bg=$blue]#[bold] #S #[nobold]$session_icon#[fg=$blue]#[bg=default]$right_arrow_icon,$LS}"  # tmux 嵌套模式蓝色，之后回归默认背景
-# LS="#[fg=$black]$LS"
-tmux_set status-left ""
+LS="#{?#{==:#{pane_current_command},ssh},#[fg=$red]󰅡 ,󰤂 }" # SSH
+LS="#{?client_prefix,#[fg=$yellow]󰠠 ,$LS}"                 # 命令模式
+LS="#{?synchronize-panes,#[fg=$magenta]󱍸 ,$LS}"            # 同步窗格
+LS="#{?pane_in_mode,#[fg=$green]󰗦 ,$LS}"                   # Vi 模式
+LS="#[fg=$bblack,bg=$blue,bold,nodim] $LS#[fg=$bblack,bg=$blue,bold,nodim]#S #[fg=$blue,bg=default]$right_icon"
+
+tmux_set status-left "$LS"
 
 #===========右状态栏===================
 time_icon=""
@@ -117,12 +127,13 @@ tmux_set @IM "#(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirre
 tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 # tmux_set @cpu_usage "#(~/.config/tmux/script/cpu_percentage.sh)"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
+HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
 gitStatus="#[fg=$blue]$left_separator#[fg=$black]#[bg=$blue] $GIT_BRANCH#[fg=$blue]#[bg=default]$right_separator"
 sshStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] $HOST_NAME#[fg=$red]#[bg=default]$right_separator"
 viStatus="#[fg=$green]$left_separator#[fg=$black]#[bg=$green]  #[fg=$green]#[bg=default]#[nobold]$right_separator"
 syncStatus="#[fg=$yellow]$left_separator#[fg=$black]#[bg=$yellow]  #[fg=$yellow]#[bg=default]#[nobold]$right_separator"
-prefixStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰘳 #[fg=$red]#[bg=default]$right_separator"
+prefixStatus="#[fg=$yellow]$left_separator#[fg=$black]#[bg=$yellow] 󰘳 #[fg=$yellow]#[bg=default]$right_separator"
 # inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
 
 
@@ -131,7 +142,7 @@ speedStatus="#[fg=$cyan]$left_separator#[bg=$cyan]#[fg=$bg]$download_speed_icon#
 
 RS="$speedStatus $timeStatus"
 RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
-RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
+# RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
 RS="#{?pane_in_mode,$viStatus ,}$RS"
 RS="#{?synchronize-panes,$syncStatus ,}$RS"
 # RS="#{?#{==:#{E:@IM},ZH},$inputStatus ,}$RS"
