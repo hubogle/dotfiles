@@ -104,11 +104,14 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --info=inline-right
 --pointer='▶'
 --marker='✓'
---border none
+--border=rounded
 --color=dark
+--padding=0
+--color=gutter:-1
+--color=pointer:#ff87d7
 --color=fg:-1,bg:-1,hl:#5fff87
 --color=fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7
+--color=info:#af87ff,prompt:#5fff87
 --color=marker:#ff87d7,spinner:#ff87d7,header:#6272a4
 '
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS'
