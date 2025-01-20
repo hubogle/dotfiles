@@ -49,7 +49,7 @@ zi wait lucid light-mode for \
 # compinit -d ~/.cache/zi/zcompdump-$ZSH_VERSION
 
 zi wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
+  atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     z-shell/F-Sy-H \
   atload"_zsh_autosuggest_start; \
         ZSH_AUTOSUGGEST_STRATEGY=(history completion) \
@@ -66,12 +66,6 @@ zi wait lucid light-mode for \
 autoload -U edit-command-line
 zle -N edit-command-line
 
-# https://github.com/ajeetdsouza/zoxide
-zi wait lucid light-mode for \
-  atinit'export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide' \
-  atload'eval "$(zoxide init zsh --cmd cd --hook pwd)"' \
-  ajeetdsouza/zoxide
-
 source ~/.config/zsh/func.zsh
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
@@ -85,6 +79,10 @@ export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
+#===================ZOXIDE============================
+# https://github.com/ajeetdsouza/zoxide
+export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide
+eval "$(zoxide init zsh --cmd cd --hook pwd)"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
