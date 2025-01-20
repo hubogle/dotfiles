@@ -114,6 +114,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS'
 --no-sort
+--border=none
 --height 20%
 --reverse'
 #===================ALIAS===========================
