@@ -76,9 +76,11 @@ autocmd("User", {
     callback = function()
         local actions_state = require "telescope.actions.state"
         local session = actions_state.get_selected_entry()
-        local dir_path = session.dir_path
-        local dir_name = dir_path:match "([^/]+)$"
-        vim.fn.system("tmux rename-window " .. vim.fn.shellescape(dir_name))
+        local dir_name = session.dir_path:match "([^/]+)$"
+        local window_id = vim.fn.system "tmux display-message -p '#{window_id}'"
+        local cmd =
+            string.format("tmux rename-window -t %s %s", window_id:gsub("%s+", ""), vim.fn.shellescape(dir_name))
+        vim.fn.system(cmd)
         vim.cmd "stopinsert"
     end,
 })
@@ -109,15 +111,11 @@ autocmd("User", {
             vim.api.nvim_set_current_buf(current_buf)
         end
 
-        local current_window_name = vim.fn.system("tmux display-message -p '#W'"):gsub("%s+", "")
-        local actions_state = require "telescope.actions.state"
-        local session = actions_state.get_selected_entry()
-        local dir_path = session.dir_path
-        local dir_name = dir_path:match "([^/]+)$"
+        local window_id = vim.fn.system "tmux display-message -p '#{window_id}'"
+        window_id = window_id:gsub("%s+", "")
 
-        if vim.fn.shellescape(current_window_name) == vim.fn.shellescape(dir_name) then
-            vim.fn.system "tmux rename-window 'zsh'"
-        end
+        local cmd = string.format("tmux rename-window -t %s zsh", window_id)
+        vim.fn.system(cmd)
     end,
 })
 

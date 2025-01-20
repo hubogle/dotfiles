@@ -83,12 +83,14 @@ WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat #[fg=$bwhite]#W "
 WSFormat="$WSFormat#[fg=$yellow]#{?window_bell_flag,󰂠 ,}"
 WSFormat="$WSFormat#[fg=$yellow]#{?window_activity_flag,󰂚 ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
+WSFormat="$WSFormat#[fg=$red]#{?#{==:#{pane_mode},copy-mode}, ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}"
 WSFormat="$WSFormat#[fg=$black,bg=default]$right_icon"
 
 
 WSCFormat="#[fg=$bblack,bg=default]$right_icon_inverse"
 WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat #[fg=$white]#W "
+WSCFormat="$WSCFormat#[fg=$red]#{?#{==:#{pane_mode},copy-mode}, ,}"
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSCFormat="$WSCFormat#[fg=$green] "
 WSCFormat="$WSCFormat#[fg=$bblack,bg=default]$right_icon"
@@ -111,7 +113,7 @@ tmux_set status-left-style none
 LS="#{?#{==:#{pane_current_command},ssh},#[fg=$red]󰅡 ,󰤂 }" # SSH
 LS="#{?client_prefix,#[fg=$yellow]󰠠 ,$LS}"                 # 命令模式
 LS="#{?synchronize-panes,#[fg=$magenta]󱍸 ,$LS}"            # 同步窗格
-LS="#{?pane_in_mode,#[fg=$green]󰗦 ,$LS}"                   # Vi 模式
+LS="#{?pane_in_mode,#[fg=$red]󰗦 ,$LS}"                   # Vi 模式
 LS="#[fg=$bblack,bg=$blue,bold,nodim] $LS#[fg=$bblack,bg=$blue,bold,nodim]#S #[fg=$blue,bg=default]$right_icon"
 
 tmux_set status-left "$LS"
