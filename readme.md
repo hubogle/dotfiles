@@ -111,3 +111,34 @@ rm -rf ~/.local/share/nvim
 * `Control + u` 删除这条命令所有的单词
 * `Control + k` 删除从光标开始到一行结尾的所有字符
 * `Control + q` 删除当前命令并在下次使用时再次显示
+
+# 配置目录介绍
+
+```text
+export XDG_DATA_HOME=$HOME/.local/share   # 存储用户数据文件
+export XDG_STATE_HOME=$HOME/.local/state  # 应用程序状态信息会更新
+export XDG_CONFIG_HOME=$HOME/.config      # 应用程序的配置文件
+export XDG_CACHE_HOME=$HOME/.cache        # 用于存储缓存文件
+```
+
+## XDG_DATA_HOME 存储目录
+
+```text
+ .
+├──  atuin       # atuin 命令历史
+├──  mise        # mise 配置
+├──  nvim        # neovim 配置
+├──  terminfo
+└──  zoxide      # zoxide 智能 cd 跳转
+```
+
+## XDG_STATE_HOME 存储目录
+
+```text
+ .
+├──  ipython
+├──  less
+├──  mise
+├──  nvim
+└──  zsh
+```

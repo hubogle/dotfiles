@@ -16,19 +16,29 @@ fi
 #     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 # fi
 
+# ipython 文件位置
+if [ ! -d "${HOME}/.local/state/ipython" ]; then
+	mkdir -p ${HOME}/.local/state/ipython
+fi
+
+# zsh_history 文件位置
+if [ ! -d "${HOME}/.local/state/zsh" ]; then
+	mkdir -p ${HOME}/.local/state/zsh
+fi
+
 # tig 历史记录文件位置
-if [ ! -d "${HOME}/.local/share/tig" ]; then
-    mkdir -p ${HOME}/.local/share/tig
+if [ ! -d "${HOME}/.local/state/tig" ]; then
+    mkdir -p ${HOME}/.local/state/tig
 fi
 
 # less 历史记录文件位置
-if [ ! -d "${HOME}/.local/share/less" ]; then
-    mkdir -p ${HOME}/.local/share/less
+if [ ! -d "${HOME}/.local/state/less" ]; then
+    mkdir -p ${HOME}/.local/state/less
 fi
 
 # mycli 历史文件记录位置
-if [ ! -d "${HOME}/.local/share/mycli" ]; then
-    mkdir -p ${HOME}/.local/share/mycli
+if [ ! -d "${HOME}/.local/state/mycli" ]; then
+    mkdir -p ${HOME}/.local/state/mycli
 fi
 
 # alacritty themes

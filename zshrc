@@ -14,18 +14,18 @@ fi
 export PATH="$BREW_PATH:$PATH"
 #=====================config====================
 export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CONFIG_HOME=$HOME/.config
 export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export EDITOR="$BREW_PATH/nvim"
 export VISUAL="$BREW_PATH/nvim"
 export SHELL_SESSIONS_DISABLE=1
-export LESSHISTFILE=$XDG_DATA_HOME/less/history
-export HISTFILE=$XDG_DATA_HOME/zsh_history   # zsh 历史文件地址
+export LESSHISTFILE=$XDG_STATE_HOME/less/history
+export HISTFILE=$XDG_STATE_HOME/zsh/history
 #=====================other config==============
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
-export IPYTHONDIR=$XDG_DATA_HOME/ipython
-export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
+export IPYTHONDIR=$XDG_STATE_HOME/ipython
+export MYCLI_HISTFILE=$XDG_STATE_HOME/mycli/history
 #======================ZI========================
 source "${HOME}/.zi/bin/zi.zsh"
 autoload -Uz _zi
@@ -46,8 +46,9 @@ zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
   has'eza' atinit'AUTOCD=1' \
   z-shell/zsh-eza \
-  has'zoxide' atinit='_ZO_CMD_PREFIX=cd' \
-  z-shell/zsh-zoxide
+  has'zoxide' atinit='export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide' \
+  atload'eval "$(zoxide init zsh --cmd cd --hook pwd)"' \
+  @ajeetdsouza/zoxide
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
