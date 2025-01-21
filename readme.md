@@ -89,6 +89,7 @@ rm -rf ~/.local/share/nvim
 * `fc` 在编辑器中编辑上条命令，保存推出即执行
 * `option + d` 剪切光标位置到词尾的文本
 * `option + Backspace` 剪切光标位置到词首的文本。
+* `autocd`输入文件名回车自动进入。
 
 ## 移动光标快捷键
 

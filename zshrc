@@ -38,11 +38,14 @@ zi wait lucid for \
   OMZP::git \
   OMZP::extract
 
-zi light-mode for @sindresorhus/pure
+zi light-mode for sindresorhus/pure
 
+# autocd 直接输入目录名进入
 zi wait lucid light-mode for \
+  has'eza' atinit'AUTOCD=1' \
+  atload'eval "$(atuin init zsh --disable-up-arrow)"' \
   Aloxaf/fzf-tab \
-  atuinsh/atuin
+  z-shell/zsh-eza
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
@@ -118,16 +121,12 @@ export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS'
 --height 20%
 --reverse'
 #===================ALIAS===========================
-alias ls='eza --classify=auto --color=always'
 alias cat='bat'
 alias r='trash'
 alias rm='trash'
 alias c='clear'
 alias ping='ping -c 5'
 alias cp="cp -i"    # 防止拷贝覆盖
-alias l='eza --long --all --git --icons --time-style long-iso --colour-scale --header --group'
-alias ll='eza --long --all --git --icons  --time-style iso --colour-scale --no-user --no-permissions --sort modified --reverse'
-alias tree='eza --tree' # -L , --level=(depth)  递归的深度
 alias vi='nvim'
 alias vim='nvim'
 alias top='btm'
