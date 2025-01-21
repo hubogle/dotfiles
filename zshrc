@@ -42,10 +42,12 @@ zi light-mode for sindresorhus/pure
 
 # autocd 直接输入目录名进入
 zi wait lucid light-mode for \
-  has'eza' atinit'AUTOCD=1' \
   atload'eval "$(atuin init zsh --disable-up-arrow)"' \
   Aloxaf/fzf-tab \
-  z-shell/zsh-eza
+  has'eza' atinit'AUTOCD=1' \
+  z-shell/zsh-eza \
+  has'zoxide' atinit='_ZO_CMD_PREFIX=cd' \
+  z-shell/zsh-zoxide
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
@@ -82,10 +84,6 @@ export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
-#===================ZOXIDE============================
-# https://github.com/ajeetdsouza/zoxide
-export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide
-eval "$(zoxide init zsh --cmd cd --hook pwd)"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
