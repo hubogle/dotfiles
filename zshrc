@@ -40,15 +40,11 @@ zi wait lucid for \
 
 zi light-mode for sindresorhus/pure
 
-# autocd 直接输入目录名进入
 zi wait lucid light-mode for \
   atload'eval "$(atuin init zsh --disable-up-arrow)"' \
   Aloxaf/fzf-tab \
   has'eza' atinit'AUTOCD=1' \
-  z-shell/zsh-eza \
-  has'zoxide' atinit='export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide' \
-  atload'eval "$(zoxide init zsh --cmd cd --hook pwd)"' \
-  @ajeetdsouza/zoxide
+  z-shell/zsh-eza
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
@@ -57,7 +53,7 @@ zi wait lucid light-mode for \
 zi wait lucid light-mode for \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     z-shell/F-Sy-H \
-  atload"_zsh_autosuggest_start; \
+  atload"!_zsh_autosuggest_start; \
         ZSH_AUTOSUGGEST_STRATEGY=(history completion) \
         ZSH_AUTOSUGGEST_MANUAL_REBIND=0 \
         ZSH_AUTOSUGGEST_HISTORY_IGNORE=' *' \
@@ -82,6 +78,10 @@ print() {
 #=====================RCM==========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
+#===================ZOXIDE============================
+# https://github.com/ajeetdsouza/zoxide
+export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide
+eval "$(zoxide init zsh --cmd cd --hook pwd)"
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
@@ -106,6 +106,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --marker='✓'
 --border=rounded
 --color=dark
+--bind=tab:down,shift-tab:up
 --padding=0
 --color=gutter:-1
 --color=pointer:#ff87d7
