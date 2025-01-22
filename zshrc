@@ -44,7 +44,9 @@ zi wait lucid light-mode for \
   atload'eval "$(atuin init zsh --disable-up-arrow)"' \
   Aloxaf/fzf-tab \
   has'eza' atinit'AUTOCD=1' \
-  z-shell/zsh-eza
+  z-shell/zsh-eza \
+  atinit'YSU_MESSAGE_POSITION="after"' \
+  MichaelAquilina/zsh-you-should-use
 
 # https://wiki.zshell.dev/zh-Hans/docs/guides/syntax/for
 # echo $FPATH 根据路径生效优先级生效，如 homebrew/share/zsh/site-functions/_git 删除
