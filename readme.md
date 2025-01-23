@@ -129,7 +129,7 @@ export XDG_CACHE_HOME=$HOME/.cache        # 用于存储缓存文件
 ├──  mise        # mise 配置
 ├──  nvim        # neovim 配置
 ├──  terminfo
-└──  zoxide      # zoxide 智能 cd 跳转
+└──  zoxide      # 被修改到 ~/.zi/polaris/share
 ```
 
 ## XDG_STATE_HOME 存储目录

@@ -1,5 +1,5 @@
-export LC_ALL=zh_CN.UTF-8
-export LANG=zh_CN.UTF-8
+export LANG="${LC_ALL:-en_US.UTF-8}"
+unset LC_ALL
 # zmodload zsh/zprof # zprof | head -n 20; zmodload -u zsh/zprof
 #====================PATH=======================
 if [[ `arch` == "arm64" ]]; then
@@ -45,6 +45,8 @@ zi wait lucid light-mode for \
   Aloxaf/fzf-tab \
   has'eza' atinit'AUTOCD=1' \
   z-shell/zsh-eza \
+  has'zoxide' atinit='_ZO_CMD_PREFIX=cd' \
+  z-shell/zsh-zoxide \
   atinit'YSU_MESSAGE_POSITION="after"' \
   MichaelAquilina/zsh-you-should-use
 
@@ -80,10 +82,6 @@ print() {
 #=====================RCM==========================
 export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
-#===================ZOXIDE============================
-# https://github.com/ajeetdsouza/zoxide
-export _ZO_DATA_DIR=$XDG_DATA_HOME/zoxide
-eval "$(zoxide init zsh --cmd cd --hook pwd)"
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
