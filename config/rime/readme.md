@@ -2,6 +2,8 @@
 
 https://github.com/Mintimate/oh-my-rime
 
+将 `dict` 文件放在 `~/Library/Rime` 目录下。
+
 ## 配置文件
 
 * 方案的全局配置是 `default.yaml` 和 `defalut.custom.yaml`。

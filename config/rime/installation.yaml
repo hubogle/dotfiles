@@ -1,5 +1,7 @@
 distribution_code_name: Squirrel
 distribution_name: "鼠鬚管"
-distribution_version: 1.0.2
-rime_version: 1.11.2
-sync_dir: "~/Documents/File"
+distribution_version: 1.0.3
+install_time: "Thu Feb  6 17:47:07 2025"
+installation_id: "4caa62eb-42b8-448e-828a-d1ca40ab96cd"
+rime_version: 1.13.0
+sync_dir: "~/Documents"

@@ -1,5 +1,3 @@
-# 皮肤展示： https://github.com/NavisLab/rime-pifu
-# 修改教程： https://ssnhd.com/2022/01/06/rime/#%E7%9A%AE%E8%82%A4
 # 图形化的皮肤设计器： https://github.com/LEOYoon-Tsaw/Squirrel-Designer
 patch:
   show_notifications_when: never     # 状态通知，可设为全开（always）全关（never）
