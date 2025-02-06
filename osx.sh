@@ -20,13 +20,14 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 ###############################################################################
 # 屏幕截图                                                                     #
 ###############################################################################
+# 截图保存的位置
+defaults write com.apple.screencapture location ~/Downloads
 
 # 保存格式为 JPG
-# defaults write com.apple.screencapture type -string "jpg"
+defaults write com.apple.screencapture type -string jpg
 
 # 截图禁用阴影
 defaults write com.apple.screencapture disable-shadow -bool true
-
 
 ###############################################################################
 # Finder                                                                      #

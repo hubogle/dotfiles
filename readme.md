@@ -65,6 +65,9 @@
 * Q: 判断终端和 `tmux` 是否为 `256` 色彩
 * A: `curl https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash`
 
+* Q: 修改电脑名称 `HostName` 查看
+* A: `sudo scutil --set HostName name`
+
 ## Nvchad 重复安装
 [NvChad](https://nvchad.com/docs/quickstart/install) 安装之前卸载。
 
