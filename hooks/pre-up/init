@@ -10,12 +10,6 @@ if [ ! -d "${HOME}/.config/nvim" ]; then
     git clone https://github.com/NvChad/starter ~/.config/nvim
 fi
 
-# 安装 TMUX 插件
-# if [ ! -d "${HOME}/.config/tmux" ]; then
-#     echo "正在安装 TMUX 插件" 1>&2
-#     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-# fi
-
 # ipython 文件位置
 if [ ! -d "${HOME}/.local/state/ipython" ]; then
 	mkdir -p ${HOME}/.local/state/ipython
@@ -39,6 +33,13 @@ fi
 # mycli 历史文件记录位置
 if [ ! -d "${HOME}/.local/state/mycli" ]; then
     mkdir -p ${HOME}/.local/state/mycli
+fi
+
+# im-select 脚本安装
+if [ ! -f "${BREW_PATH}/im-select" ]; then
+    echo "安装 im-select"
+    cp $DOTFILES_DIRS/config/im-select/im-select $BREW_PATH/im-select
+    chmod +x $BREW_PATH/im-select
 fi
 
 # alacritty themes

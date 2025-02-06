@@ -2,15 +2,9 @@ export LANG="${LC_ALL:-en_US.UTF-8}"
 unset LC_ALL
 # zmodload zsh/zprof # zprof | head -n 20; zmodload -u zsh/zprof
 #====================PATH=======================
-if [[ `arch` == "arm64" ]]; then
-  export BREW_OPT="/opt/homebrew/opt"
-  export BREW_PATH="/opt/homebrew/bin"
-  export BREW_SBIN="/opt/homebrew/sbin"
-else
-  export BREW_OPT="/usr/local/opt"
-  export BREW_PATH="/usr/local/bin"
-  export BREW_SBIN="/usr/local/sbin"
-fi
+export BREW_OPT="/opt/homebrew/opt"
+export BREW_PATH="/opt/homebrew/bin"
+export BREW_SBIN="/opt/homebrew/sbin"
 export PATH="$BREW_PATH:$PATH"
 #=====================config====================
 export XDG_DATA_HOME=$HOME/.local/share
@@ -80,7 +74,7 @@ print() {
   [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
 } # 单行提示
 #=====================RCM==========================
-export DOTFILES_DIRS=$HOME/Documents/File/dotfiles
+export DOTFILES_DIRS=$HOME/Documents/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise

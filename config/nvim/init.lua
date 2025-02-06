@@ -36,7 +36,7 @@ require "nvchad.autocmds"
 local autocmd = vim.api.nvim_create_autocmd
 
 -- 定义 macism 命令的路径和输入法标识符
-local macism_cmd = "/opt/homebrew/bin/macism"
+local macism_cmd = "/opt/homebrew/bin/im-select"
 local english_input = "com.apple.keylayout.ABC"
 local current_input_method = vim.fn.system(macism_cmd):gsub("\n", "")
 
