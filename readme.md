@@ -3,12 +3,12 @@
 1. `zsh` 采用 [zi](https://wiki.zshell.dev/zh-Hans/)
 2. `vim` 采用 `neovim` + [NvChad](https://nvchad.com)
 3. `alacritty` + `tmux` 终端输入管理。
-4. 通过 `hammerspoon` + [macism](https://github.com/laishulu/macism) 实现 `App` 输入法自动切换。
+4. 通过 `hammerspoon` 实现 `App` 输入法自动切换。
 5. `brew` 所有软件及 `cli` 通过 `Brewfile` 管理。
 6. `rcm` 管理所有配置文件，所有配置尽量都放在 `~/.config` 下管理。
 7. `osx.sh` 文件为系统相关配置。
 
-`NvChad`、`macism`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
+`NvChad`、`im-select`，在执行 `rcup` 后会执行 `hooks/pre-up/init`。
 
 ## 软件升级
 
@@ -83,8 +83,6 @@ rm -rf ~/.local/share/nvim
 1. `iCloud` 关闭照片同步，打开桌面和文稿文件夹
 2. 辅助功能 》指针控制 》触摸板选项 》触摸板打开三指拖拽
 3. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
----
-
 ---
 
 [cheatsheet](https://github.com/skywind3000/awesome-cheatsheets/tree/master?tab=readme-ov-file)
