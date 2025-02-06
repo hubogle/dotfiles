@@ -30,27 +30,42 @@
 2. [Brew 官网](https://brew.sh/) 安装命令 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 3. 安装三方未知来源：`sudo spctl --master-disable`
 
-* 备份：`brew bundle dump --force --file="~/Documents/File/dotfiles/Brewfile"`
+* 备份：`brew bundle dump --force --file="~/Documents/dotfiles/Brewfile"`
 
 ## 2.自定义配置
 
 恢复软件及配置前，需要自定义配置。
 
-1. 自行注释 `hooks/post-up/rsync` 里的命令。
-2. 修改`Brewfile`, 增删自定义插件及软件。
+1. 修改 `Brewfile` 文件增删自定义插件及软件。
 ---
 
+## 3.brew 恢复软件安装
+1. 在 `dotfile` 文件夹中执行 `/opt/homebrew/bin/brew bundle --file=$PWD/Brewfile`
 
-## 3.使用rcm恢复文件及配置
-1. `brew install rcm`
-2. 修改 `zshrc` 中的 `DOTFILES_DIRS` 路径。
-3. `brew` 恢复安装：`brew bundle --file="~/Documents/File/dotfiles/Brewfile"`
-4. 执行 `rcup` 恢复配置文件。
+## 4.使用rcm配置
+1. `export PATH="/opt/homebrew/bin:$PATH" && brew install rcm`
+2. 在 `dotfile` 文件夹中执行 `rcup -d $PWD` 恢复配置文件。
 
-## 4.开发语言版本管理
+## 5.zi 手动安装
+[ZI 官网](https://wiki.zshell.dev/zh-Hans/)
+
+安装命令 `sh -c "$(curl -fsSL get.zshell.dev)" --`
+依次执行以下命令：
+* `exec zsh -il`
+* `zi self-update`
+
+## 6.开发语言版本管理
 统一管理开发语言的版本[mise](https://mise.jdx.dev/)。
 
-## 5.Nvchad 安装
+* `mise install` 安装
+
+---
+
+## QA
+* Q: 判断终端和 `tmux` 是否为 `256` 色彩
+* A: `curl https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash`
+
+## Nvchad 重复安装
 [NvChad](https://nvchad.com/docs/quickstart/install) 安装之前卸载。
 
 ```shell
@@ -58,25 +73,12 @@ rm -rf ~/.config/nvim
 rm -rf ~/.local/state/nvim
 rm -rf ~/.local/share/nvim
 ```
-## 6. zi 手动安装
-[ZI 官网](https://wiki.zshell.dev/zh-Hans/)
-
-安装命令 `sh -c "$(curl -fsSL get.zshell.dev)" --`
-执行以下命令：
-* `exec zsh -il`
-* `zi self-update`
-
----
-
-## QA
-* Q: 判断终端和 `tmux` 是否为 `256` 色彩
-* A: `curl https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash`
 ---
 
 ## 推荐系统配置
 
 1. `iCloud` 关闭照片同步，打开桌面和文稿文件夹
-2. 辅助功能触摸板打开三指拖拽
+2. 辅助功能 》指针控制 》触摸板选项 》触摸板打开三指拖拽
 3. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 ---
 
