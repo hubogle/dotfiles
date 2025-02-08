@@ -100,4 +100,12 @@ return {
             "rcarriga/nvim-notify",
         },
     },
+
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy",
+        config = function()
+            require "configs.diagnostic"
+        end
+    }
 }

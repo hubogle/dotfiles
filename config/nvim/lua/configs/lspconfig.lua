@@ -93,31 +93,3 @@ lspconfig["lua_ls"].setup {
         },
     },
 }
-
-require("nvchad.lsp").diagnostic_config()
-
-local x = vim.diagnostic.severity
-vim.diagnostic.config {
-    virtual_text = false,
-    signs = {
-        text = {
-            [x.ERROR] = "E",
-            [x.WARN] = "W",
-            [x.INFO] = "I",
-            [x.HINT] = "H",
-        },
-        numhl = {
-            [x.WARN] = "DiagnosticError",
-            [x.ERROR] = "DiagnosticWarn",
-            [x.INFO] = "DiagnosticInfo",
-            [x.HINT] = "DiagnosticHint",
-        },
-    },
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-    float = {
-        style = "minimal",
-        border = "rounded",
-    },
-}
