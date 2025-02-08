@@ -5,7 +5,7 @@ vim.notify = require("noice").notify
 local options = {
     lsp = {
         signature = {
-            enabled = false,
+            enabled = true,
         },
         hover = { -- Shift + K show hover
             enabled = true,
