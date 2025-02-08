@@ -40,6 +40,10 @@ local on_attach = function(client, bufnr)
             callback = vim.lsp.buf.clear_references,
         })
     end
+
+    if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint then
+        vim.lsp.buf.inlay_hint(bufnr, true)
+    end
 end
 
 -- EXAMPLE
@@ -95,7 +99,20 @@ require("nvchad.lsp").diagnostic_config()
 local x = vim.diagnostic.severity
 vim.diagnostic.config {
     virtual_text = false,
-    signs = { text = { [x.ERROR] = "󰅙", [x.WARN] = "", [x.INFO] = "󰋼", [x.HINT] = "󰌵" } },
+    signs = {
+        text = {
+            [x.ERROR] = "E",
+            [x.WARN] = "W",
+            [x.INFO] = "I",
+            [x.HINT] = "H",
+        },
+        numhl = {
+            [x.WARN] = "DiagnosticError",
+            [x.ERROR] = "DiagnosticWarn",
+            [x.INFO] = "DiagnosticInfo",
+            [x.HINT] = "DiagnosticHint",
+        },
+    },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
