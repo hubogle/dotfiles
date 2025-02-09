@@ -8,7 +8,7 @@ opts.current_line_blame_opts = {
     virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
     delay = 300,
     ignore_whitespace = false,
-    virt_text_priority = 5000, -- https://github.com/lewis6991/gitsigns.nvim/issues/605
+    virt_text_priority = 2047, -- https://github.com/lewis6991/gitsigns.nvim/issues/605
     use_focus = true,
 }
 opts.numhl = true -- Toggle with `:Gitsigns toggle_numhl`

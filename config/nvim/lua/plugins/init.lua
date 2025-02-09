@@ -106,6 +106,6 @@ return {
         event = "VeryLazy",
         config = function()
             require "configs.diagnostic"
-        end
-    }
+        end,
+    },
 }
