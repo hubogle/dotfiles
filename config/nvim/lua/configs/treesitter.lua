@@ -14,6 +14,9 @@ local options = {
         "toml",
         "regex",
         "bash",
+        "html",
+        "latex",
+        "typst",
     },
 
     indent = {
