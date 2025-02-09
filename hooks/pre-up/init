@@ -20,11 +20,6 @@ if [ ! -d "${HOME}/.local/state/zsh" ]; then
 	mkdir -p ${HOME}/.local/state/zsh
 fi
 
-# tig 历史记录文件位置
-if [ ! -d "${HOME}/.local/state/tig" ]; then
-    mkdir -p ${HOME}/.local/state/tig
-fi
-
 # less 历史记录文件位置
 if [ ! -d "${HOME}/.local/state/less" ]; then
     mkdir -p ${HOME}/.local/state/less

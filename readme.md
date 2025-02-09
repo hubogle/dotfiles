@@ -124,24 +124,26 @@ export XDG_CONFIG_HOME=$HOME/.config      # 应用程序的配置文件
 export XDG_CACHE_HOME=$HOME/.cache        # 用于存储缓存文件
 ```
 
-## XDG_DATA_HOME 存储目录
-
 ```text
- .
-├──  atuin       # atuin 命令历史
-├──  mise        # mise 配置
-├──  nvim        # neovim 配置
-├──  terminfo
-└──  zoxide      # 被修改到 ~/.zi/polaris/share
+├──  share
+│   ├──  atuin       # 搜索历史
+│   ├──  nvim
+│   ├──  terminfo
+│   ├──  tig
+│   │   └──  history
+│   └──  zoxide      # 移动到 ~/.zi/polaris/share
+│
+└──  state
+    ├──  ipython
+    ├──  less
+    │   └──  history
+    ├──  mise
+    │   ├──  hints
+    │   ├──  tracked-configs
+    │   └──  trusted-configs
+    ├──  mycli
+    ├──  nvim
+    └──  zsh
+        └──  history
 ```
 
-## XDG_STATE_HOME 存储目录
-
-```text
- .
-├──  ipython
-├──  less
-├──  mise
-├──  nvim
-└──  zsh
-```

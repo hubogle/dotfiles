@@ -16,6 +16,8 @@ export VISUAL="$BREW_PATH/nvim"
 export SHELL_SESSIONS_DISABLE=1
 export LESSHISTFILE=$XDG_STATE_HOME/less/history
 export HISTFILE=$XDG_STATE_HOME/zsh/history
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export TERMINFO=$XDG_DATA_HOME/terminfo
 #=====================other config==============
 export HOMEBREW_NO_AUTO_UPDATE=true     # brew 不自动更新
 export IPYTHONDIR=$XDG_STATE_HOME/ipython
