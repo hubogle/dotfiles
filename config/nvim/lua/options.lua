@@ -54,7 +54,7 @@ o.breakindent = true -- 自动换行的行会保持一定的缩进
 o.linebreak = true -- 在单词之间而非单词中间进行换行
 o.eventignore = "FocusLost,FocusGained" -- 当 vim 失去/获取 焦点
 o.termguicolors = true
-o.updatetime = 500
+o.updatetime = 250
 
 o.endofline = false -- 保存时是否要加上一个末尾换行符
 o.fixendofline = false -- 保存时是否自动根据 endofline 选项修复末尾的换行符

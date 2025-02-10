@@ -82,7 +82,8 @@ rm -rf ~/.local/share/nvim
 
 1. `iCloud` 关闭照片同步，打开桌面和文稿文件夹
 2. 辅助功能 》指针控制 》触摸板选项 》触摸板打开三指拖拽
-3. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
+3. `[System Settings] > [Keyboard]`，选中 `[Keyboard navigation]`
+4. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
 ---
 
 [cheatsheet](https://github.com/skywind3000/awesome-cheatsheets/tree/master?tab=readme-ov-file)
@@ -146,4 +147,3 @@ export XDG_CACHE_HOME=$HOME/.cache        # 用于存储缓存文件
     └──  zsh
         └──  history
 ```
-

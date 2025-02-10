@@ -178,6 +178,10 @@ M.base46 = {
         DiffDelete = { bg = "none", fg = "grey" },
     },
     hl_add = {
+        DiagnosticUnderlineError = { undercurl = true, sp = "red", fg = "red" },
+        DiagnosticUnderlineWarn = { undercurl = true, sp = "yellow", fg = "yellow" },
+        DiagnosticUnderlineInfo = { undercurl = true, sp = "cyan", fg = "cyan" },
+        DiagnosticUnderlineHint = { undercurl = true, sp = "blue", fg = "blue" },
         GitSignsCurrentLineBlame = { fg = "light_grey" },
     },
     -- https://github.com/NvChad/base46/tree/v2.5/lua/base46/integrations

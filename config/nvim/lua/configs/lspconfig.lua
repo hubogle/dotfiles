@@ -93,3 +93,6 @@ lspconfig["lua_ls"].setup {
         },
     },
 }
+
+local diagnostics = require "configs.diagnostic"
+diagnostics.setup()
