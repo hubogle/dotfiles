@@ -57,7 +57,7 @@ tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的�
 tmux_set display-panes-colour "fg=$blue"          # 设置窗格颜色
 tmux_set display-panes-active-colour "fg=$yellow" # 设置活动窗格颜色
 
-tmux_set mode-style "bg=$blue" # 设置复制模式下的高亮颜色
+tmux_set mode-style "bg=default,fg=colour244" # 调整 copy-mode 的背景和前景色
 
 tmux_set window-status-separator ""
 
