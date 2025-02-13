@@ -125,7 +125,7 @@ autocmd({ "BufReadPost", "BufEnter" }, {
     pattern = "*",
     callback = function()
         local path = vim.fn.expand "%:p"
-        if path:match "/.mise" then
+        if path:match("/.mise") and not path:match("/%.mise%.toml$") then
             vim.bo.modifiable = false
             -- vim.bo.readonly = true
         else

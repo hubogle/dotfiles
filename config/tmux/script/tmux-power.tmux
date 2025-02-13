@@ -131,11 +131,11 @@ tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
-gitStatus="#[fg=$blue]$left_separator#[fg=$black]#[bg=$blue] $GIT_BRANCH#[fg=$blue]#[bg=default]$right_separator"
-sshStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] $HOST_NAME#[fg=$red]#[bg=default]$right_separator"
-viStatus="#[fg=$green]$left_separator#[fg=$black]#[bg=$green]  #[fg=$green]#[bg=default]#[nobold]$right_separator"
-syncStatus="#[fg=$yellow]$left_separator#[fg=$black]#[bg=$yellow]  #[fg=$yellow]#[bg=default]#[nobold]$right_separator"
-prefixStatus="#[fg=$yellow]$left_separator#[fg=$black]#[bg=$yellow] 󰘳 #[fg=$yellow]#[bg=default]$right_separator"
+gitStatus="#[fg=$blue]$left_separator#[fg=$bg]#[bg=$blue] $GIT_BRANCH#[fg=$blue]#[bg=default]$right_separator"
+sshStatus="#[fg=$red]$left_separator#[fg=$bg]#[bg=$red] $HOST_NAME#[fg=$red]#[bg=default]$right_separator"
+viStatus="#[fg=$green]$left_separator#[fg=$bg]#[bg=$green]  #[fg=$green]#[bg=default]#[nobold]$right_separator"
+syncStatus="#[fg=$yellow]$left_separator#[fg=$bg]#[bg=$yellow]  #[fg=$yellow]#[bg=default]#[nobold]$right_separator"
+prefixStatus="#[fg=$yellow]$left_separator#[fg=$bg]#[bg=$yellow] 󰘳 #[fg=$yellow]#[bg=default]$right_separator"
 # inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
 
 

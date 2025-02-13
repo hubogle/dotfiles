@@ -81,6 +81,7 @@ export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
+eval "$(mise activate zsh)"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml
