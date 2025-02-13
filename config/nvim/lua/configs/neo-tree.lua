@@ -5,7 +5,7 @@ local opts = {
         "filesystem",
         "buffers",
         "git_status",
-        -- "document_symbols",
+        "document_symbols",
     },
 
     -- add_blank_line_at_top = true, -- Add a blank line at the top of the tree.
@@ -17,10 +17,15 @@ local opts = {
 
     source_selector = {
         winbar = false, -- toggle to show selector on winbar
+        sources = {
+            { source = 'filesystem', display_name = '󰉓 Files' },
+            { source = 'buffers', display_name = '  󰈙 Buf' },
+            { source = 'git_status', display_name = '  󰊢 Git' },
+            { source = 'document_symbols', display_name = '  Sym' },
+        },
         show_scrolled_off_parent_node = false, -- this will replace the tabs with the parent path
-        -- of the top visible node when scrolled down.
-        padding = { left = 0, right = 0 },
-        separator = " ",
+        padding = { left = 1, right = 0 },
+        separator = "",
         highlight_tab = "TbBufOff",
         highlight_tab_active = "TbBufOn",
         highlight_background = "TbBufOff",
@@ -29,7 +34,7 @@ local opts = {
     },
 
     window = {
-        width = 35,
+        width = 33,
         mappings = {
             ["<s-Tab>"] = "prev_source",
             ["<Tab>"] = "next_source",
@@ -42,6 +47,7 @@ local opts = {
                 desc = "Copy Path to Clipboard",
             },
             ["P"] = { "toggle_preview", config = { use_float = false } },
+            ["b"] = "",
         },
     },
     filesystem = {
@@ -53,7 +59,8 @@ local opts = {
     },
 
     document_symbols = {
-        follow_cursor = true,
+        follow_cursor = false,
+        client_filters = "first",
     },
 
     default_component_configs = {
