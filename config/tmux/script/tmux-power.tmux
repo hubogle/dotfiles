@@ -77,20 +77,19 @@ middle_separator="█"
 #==================Windows状态栏=======
 iconFormat="#{?#{==:#{pane_current_command},ssh},#[fg=$red] , }"
 iconFormat="#{?#{==:#{pane_current_command},nvim},#[fg=$ghgreen]󰕷 ,$iconFormat}"
+iconFormat="#{?#{==:#{pane_mode},copy-mode},#[fg=$ghgreen]󰕷 ,$iconFormat}"
 
 WSFormat="#[fg=$black,bg=default]$right_icon_inverse"
-WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat #[fg=$bwhite]#W "
+WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat#[fg=$bwhite]#W "
 WSFormat="$WSFormat#[fg=$yellow]#{?window_bell_flag,󰂠 ,}"
 WSFormat="$WSFormat#[fg=$yellow]#{?window_activity_flag,󰂚 ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
-WSFormat="$WSFormat#[fg=$red]#{?#{==:#{pane_mode},copy-mode}, ,}"
 WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}"
 WSFormat="$WSFormat#[fg=$black,bg=default]$right_icon"
 
 
 WSCFormat="#[fg=$bblack,bg=default]$right_icon_inverse"
-WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat #[fg=$white]#W "
-WSCFormat="$WSCFormat#[fg=$red]#{?#{==:#{pane_mode},copy-mode}, ,}"
+WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat#[fg=$white]#W "
 WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
 WSCFormat="$WSCFormat#[fg=$green] "
 WSCFormat="$WSCFormat#[fg=$bblack,bg=default]$right_icon"
@@ -119,9 +118,9 @@ LS="#[fg=$bblack,bg=$blue,bold,nodim] $LS#[fg=$bblack,bg=$blue,bold,nodim]#S #[f
 tmux_set status-left "$LS"
 
 #===========右状态栏===================
-time_icon=""
+time_icon="󰔟"
 time_format='%T'
-download_speed_icon=''
+download_speed_icon='󰄼'
 tmux_set status-right-length 150
 tmux_set status-right-style none
 
@@ -131,16 +130,14 @@ tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
-gitStatus="#[fg=$blue]$left_separator#[fg=$bg]#[bg=$blue] $GIT_BRANCH#[fg=$blue]#[bg=default]$right_separator"
-sshStatus="#[fg=$red]$left_separator#[fg=$bg]#[bg=$red] $HOST_NAME#[fg=$red]#[bg=default]$right_separator"
-viStatus="#[fg=$green]$left_separator#[fg=$bg]#[bg=$green]  #[fg=$green]#[bg=default]#[nobold]$right_separator"
-syncStatus="#[fg=$yellow]$left_separator#[fg=$bg]#[bg=$yellow]  #[fg=$yellow]#[bg=default]#[nobold]$right_separator"
-prefixStatus="#[fg=$yellow]$left_separator#[fg=$bg]#[bg=$yellow] 󰘳 #[fg=$yellow]#[bg=default]$right_separator"
+timeStatus="#[fg=$blue]#[bg=default]$left_separator#[fg=$bg]#[bg=$blue]$time_icon #[bg=default]#[fg=$white] $time_format "
+speedStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$download_speed_icon #[bg=default]#[fg=$white]#{E:@download_speed}"
+gitStatus="#[fg=$bred]#[bg=default]$left_separator#[fg=$bg]#[bg=$bred] #[bg=default]#[fg=$white] $GIT_BRANCH"
+
+viStatus="#[fg=$green]#[bf=default]  "
+syncStatus="#[fg=$yellow]#[bg=default]  "
+prefixStatus="#[fg=$yellow]#[bg=default] 󰘳 "
 # inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
-
-
-timeStatus="#[fg=$blue]$left_separator#[bg=$blue]#[fg=$bg]$time_icon $time_format#[fg=$blue]#[bg=default]$right_separator"
-speedStatus="#[fg=$cyan]$left_separator#[bg=$cyan]#[fg=$bg]$download_speed_icon#{E:@download_speed}#[fg=$cyan]#[bg=default]$right_separator"
 
 RS="$speedStatus $timeStatus"
 RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"

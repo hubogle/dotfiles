@@ -18,10 +18,10 @@ local opts = {
     source_selector = {
         winbar = false, -- toggle to show selector on winbar
         sources = {
-            { source = 'filesystem', display_name = '󰉓 Files' },
-            { source = 'buffers', display_name = '  󰈙 Buf' },
-            { source = 'git_status', display_name = '  󰊢 Git' },
-            { source = 'document_symbols', display_name = '  Sym' },
+            { source = "filesystem", display_name = "󰉓 Files" },
+            { source = "buffers", display_name = "  󰈙 Buf" },
+            { source = "git_status", display_name = "  󰊢 Git" },
+            { source = "document_symbols", display_name = "  Sym" },
         },
         show_scrolled_off_parent_node = false, -- this will replace the tabs with the parent path
         padding = { left = 1, right = 0 },

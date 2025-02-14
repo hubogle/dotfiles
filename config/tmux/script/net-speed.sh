@@ -1,47 +1,51 @@
 #!/usr/bin/env bash
 
-# https://github.com/wfxr/tmux-net-speed
-# SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-# source "$SDIR/helpers.sh"
 
-# $1: rx_bytes 下载，tx_bytes 上传
-get_bytes() {
-    netstat -ibn | sort -u -k1,1 | grep ':' | grep -Ev '^(lo|docker).*' |
-                awk '{rx += $7;tx += $10;}END{print "rx_bytes "rx,"\ntx_bytes "tx}' |
-                grep "$1" | awk '{print $2}'
+if [ -z "${INTERFACE_CACHE:-}" ]; then
+  INTERFACE_CACHE=$(route get default 2>/dev/null | awk '/interface/ {print $2}')
+fi
+iface="$INTERFACE_CACHE"
+
+if [ -z "$iface" ]; then
+  echo "  0.0B"
+  exit 0
+fi
+
+# iface="en0"
+
+# get_bytes_in() {
+#   nettop -l 1 -J interface,bytes_in -x | awk -v iface="$iface" '
+#     NF >= 2 && $(NF-1) == iface { sum += $NF }
+#     END { print sum }
+#   '
+# }
+
+get_bytes_in() {
+	netstat -ib | awk -v iface="$iface" '$1==iface { sum += $7 } END { print sum }'
 }
 
-# ref: https://unix.stackexchange.com/a/98790 @John
-bytestohuman() {
-    local bytes="${1:-0}"
-    local base="${2:-1024}"
-    awk -v bytes="$bytes" -v base="$base" '
-    function human(x) {
-        s="BKMGTPEZY"; i=0
-        while (x >= base && i < length(s)) {x /= base; i++}
-        fmt = (i == 0 ? "%d%c" : "%4.1f%c")
-        printf(fmt, x, substr(s, i+1, 1))
-    }
-    BEGIN { human(bytes) }
-    '
-}
+prev=$(get_bytes_in)
+sleep 1
 
-# $1: rx_bytes/tx_bytes
-get_speed() {
-    local pre cur diff speed pre_var
-    pre=$(get_bytes "$1")
-    sleep 1
-    cur=$(get_bytes "$1")
-    diff=$((cur - pre))
-    (( diff < 0 )) && diff=0
-    speed=$(bytestohuman $diff)
-    echo "${speed}"
-}
+size=$(( $(get_bytes_in) - prev ))
+if [ "$size" -lt 0 ]; then
+  echo "  0.0B"
+  exit 0
+fi
 
-# $1: tx_bytes/rx_bytes
-# $2: format
-main() {
-    printf "${2:-%8s}" "$(get_speed "$1")"
-}
+speed=""
+units=("B" "K" "M" "G")
+i=0
 
-main "$@"
+while [ "$size" -ge 1024 ] && [ "$i" -lt 3 ]; do
+  size=$((size / 1024))
+  i=$((i + 1))
+done
+
+if [ "$size" -ge 100 ]; then
+  speed=$(printf "%5.0f%s" "$size" "${units[$i]}")
+else
+  speed=$(printf "%5.1f%s" "$size" "${units[$i]}")
+fi
+
+echo "$speed"

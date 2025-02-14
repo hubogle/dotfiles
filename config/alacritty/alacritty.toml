@@ -41,9 +41,10 @@ multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/230
 [font]
 builtin_box_drawing = true # true 对方框图形字符使用内置字体
 size = 13
-offset = { x = 0, y = 1 }  # 字体偏移量
-# defaults write org.alacritty AppleFontSmoothing -int 0
-normal = { family = "JetBrainsMono Nerd Font", style = "Medium" }
+offset = { x = 0, y = 0 }  # 字体偏移量
+glyph_offset = { x = 0, y = 0 }
+# defaults write org.alacritty AppleFontSmoothing -int 1
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
@@ -107,7 +108,7 @@ dynamic_padding = false                    # 在终端内容周围均匀分布�
 # transparent: 标题栏、透明背景和标题栏按钮
 # buttonless: 标题栏、透明背景和无标题栏按钮
 decorations = "buttonless"         #  窗口样式
-opacity = 0.95                     # 窗口透明度
+opacity = 0.9                     # 窗口透明度
 blur = true                        # 背景毛玻璃
 decorations_theme_variant = "None" # 可支持的值包括“Dark”，“Light”和“None”。将其设置为“None”以使用默认主题变体。
 resize_increments = true           # 调整窗口大小时是否使用各个单元格的离散步长
