@@ -12,12 +12,12 @@ local stbufnr = function()
 end
 
 local function getNeoTreeWidth()
-  for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
-    if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
-      return api.nvim_win_get_width(win)
+    for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
+        if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
+            return api.nvim_win_get_width(win)
+        end
     end
-  end
-  return 0
+    return 0
 end
 
 M.ui = {
@@ -99,30 +99,30 @@ M.ui = {
         lazyload = true,
         order = { "neoTree", "buffers", "tabs", "btns" },
         modules = {
-                neoTree = function()
-                    local neo_tree_width = getNeoTreeWidth()
-                    if neo_tree_width == 0 then
-                        return ""
-                    end
-
-                    for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
-                        if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
-                            local buf = api.nvim_win_get_buf(win)
-                            local selector_value = require("neo-tree.ui.selector").get() or vim.b[buf].last_selector_value
-
-                            if selector_value then
-                                vim.b[buf].last_selector_value = selector_value
-
-                                local selector_width = vim.fn.strdisplaywidth(selector_value)
-                                local padding_width = math.max(0, neo_tree_width - selector_width)
-                                local padding = string.rep(" ", padding_width)
-                                return selector_value .. padding .. "%#NeoTreeWinSeparator#│"
-                            end
-                        end
-                    end
-
+            neoTree = function()
+                local neo_tree_width = getNeoTreeWidth()
+                if neo_tree_width == 0 then
                     return ""
                 end
+
+                for _, win in pairs(api.nvim_tabpage_list_wins(0)) do
+                    if vim.bo[api.nvim_win_get_buf(win)].ft == "neo-tree" then
+                        local buf = api.nvim_win_get_buf(win)
+                        local selector_value = require("neo-tree.ui.selector").get() or vim.b[buf].last_selector_value
+
+                        if selector_value then
+                            vim.b[buf].last_selector_value = selector_value
+
+                            local selector_width = vim.fn.strdisplaywidth(selector_value)
+                            local padding_width = math.max(0, neo_tree_width - selector_width)
+                            local padding = string.rep(" ", padding_width)
+                            return selector_value .. padding .. "%#NeoTreeWinSeparator#│"
+                        end
+                    end
+                end
+
+                return ""
+            end,
         },
     },
 }
