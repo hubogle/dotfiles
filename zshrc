@@ -71,6 +71,8 @@ zle -N edit-command-line
 source ~/.config/zsh/func.zsh
 source ~/.config/zsh/fzf-tab.zsh
 source ~/.config/zsh/history.zsh
+typeset -U path
+path=(${path:#$HOME/.zi/polaris/*})
 #====================pure=======================
 print() {
   [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
@@ -81,7 +83,7 @@ export RCRC=$HOME/.config/rcm/rcrc
 #=======================mise========================
 export MISE_DATA_DIR=$HOME/.mise
 export PATH="$MISE_DATA_DIR/shims:$PATH"
-eval "$(mise activate zsh)"
+# eval "$(mise activate zsh)"
 #===================NAVI============================
 eval "$(navi widget zsh)"
 export NAVI_CONFIG=$HOME/.config/navi/config.yaml

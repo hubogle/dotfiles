@@ -68,6 +68,9 @@
 * Q: 修改电脑名称 `HostName` 查看
 * A: `sudo scutil --set HostName name`
 
+* Q: `CursorUIViewService` 未响应
+* A: `sudo defaults write /Library/Preferences/FeatureFlags/Domain/UIKit.plist redesigned_text_cursor -dict-add Enabled -bool NO`
+
 ## Nvchad 重复安装
 [NvChad](https://nvchad.com/docs/quickstart/install) 安装之前卸载。
 
