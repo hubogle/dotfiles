@@ -76,10 +76,9 @@ autocmd("User", {
     callback = function()
         local actions_state = require "telescope.actions.state"
         local session = actions_state.get_selected_entry()
-        local dir_name = session.dir_path:match "([^/]+)$"
-        local window_id = vim.fn.system "tmux display-message -p '#{window_id}'"
-        local cmd =
-            string.format("tmux rename-window -t %s %s", window_id:gsub("%s+", ""), vim.fn.shellescape(dir_name))
+        local dir_name = session.dir_path:match "([^/]+)$" or "Unnamed"
+        local window_id = vim.fn.system("tmux display-message -p '#{window_id}'"):gsub("%s+", "")
+        local cmd = string.format("tmux rename-window -t %s %s", window_id, vim.fn.shellescape(dir_name))
         vim.fn.system(cmd)
         vim.cmd "stopinsert"
     end,
@@ -111,11 +110,7 @@ autocmd("User", {
             vim.api.nvim_set_current_buf(current_buf)
         end
 
-        local window_id = vim.fn.system "tmux display-message -p '#{window_id}'"
-        window_id = window_id:gsub("%s+", "")
-
-        local cmd = string.format("tmux rename-window -t %s zsh", window_id)
-        vim.fn.system(cmd)
+        vim.fn.system "tmux setw automatic-rename"
     end,
 })
 
