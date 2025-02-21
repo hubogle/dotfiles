@@ -76,22 +76,22 @@ middle_separator="█"
 # nobold 禁用粗体，noitalics 禁止倾斜文字 nounderscore 禁用下划线 nodim 禁用暗淡
 #==================Windows状态栏=======
 iconFormat="#{?#{==:#{pane_current_command},ssh},#[fg=$red] , }"
-iconFormat="#{?#{==:#{pane_current_command},nvim},#[fg=$ghgreen]󰕷 ,$iconFormat}"
-iconFormat="#{?#{==:#{pane_mode},copy-mode},#[fg=$ghgreen]󰕷 ,$iconFormat}"
+iconFormat="#{?#{==:#{pane_current_command},nvim},#[fg=$green]󰕷 ,$iconFormat}"
+iconFormat="#{?#{==:#{pane_mode},copy-mode},#[fg=$green]󰕷 ,$iconFormat}"
 
 WSFormat="#[fg=$black,bg=default]$right_icon_inverse"
 WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat#[fg=$bwhite]#W "
 WSFormat="$WSFormat#[fg=$yellow]#{?window_bell_flag,󰂠 ,}"
 WSFormat="$WSFormat#[fg=$yellow]#{?window_activity_flag,󰂚 ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_zoomed_flag, ,}"
-WSFormat="$WSFormat#[fg=$green]#{?window_last_flag, ,}"
+WSFormat="$WSFormat#[fg=$ghgreen]#{?window_zoomed_flag, ,}"
+WSFormat="$WSFormat#[fg=$ghgreen]#{?window_last_flag, ,}"
 WSFormat="$WSFormat#[fg=$black,bg=default]$right_icon"
 
 
 WSCFormat="#[fg=$bblack,bg=default]$right_icon_inverse"
 WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat#[fg=$white]#W "
-WSCFormat="$WSCFormat#[fg=$green]#{?window_zoomed_flag, ,}"
-WSCFormat="$WSCFormat#[fg=$green] "
+WSCFormat="$WSCFormat#[fg=$ghgreen]#{?window_zoomed_flag, ,}"
+WSCFormat="$WSCFormat#[fg=$ghgreen] "
 WSCFormat="$WSCFormat#[fg=$bblack,bg=default]$right_icon"
 
 tmux_set window-status-format "$WSFormat"
@@ -113,7 +113,7 @@ LS="#{?#{==:#{pane_current_command},ssh},#[fg=$red]󰅡 ,󰤂 }" # SSH
 LS="#{?client_prefix,#[fg=$yellow]󰠠 ,$LS}"                 # 命令模式
 LS="#{?synchronize-panes,#[fg=$magenta]󱍸 ,$LS}"            # 同步窗格
 LS="#{?pane_in_mode,#[fg=$red]󰗦 ,$LS}"                   # Vi 模式
-LS="#[fg=$bblack,bg=$blue,bold,nodim] $LS#[fg=$bblack,bg=$blue,bold,nodim]#S #[fg=$blue,bg=default]$right_icon"
+LS="#[fg=$bblack,bg=$blue,bold,nodim]  #[fg=$bblack,bg=$blue,bold,nodim]#S #[fg=$blue,bg=default]$right_icon"
 
 tmux_set status-left "$LS"
 
@@ -132,18 +132,18 @@ HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
 timeStatus="#[fg=$blue]#[bg=default]$left_separator#[fg=$bg]#[bg=$blue]$time_icon #[bg=default]#[fg=$white] $time_format "
 speedStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$download_speed_icon #[bg=default]#[fg=$white]#{E:@download_speed}"
-gitStatus="#[fg=$bred]#[bg=default]$left_separator#[fg=$bg]#[bg=$bred] #[bg=default]#[fg=$white] $GIT_BRANCH"
+gitStatus="#[fg=$green]#[bg=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=default]#[fg=$white] $GIT_BRANCH"
 
-viStatus="#[fg=$green]#[bf=default]  "
-syncStatus="#[fg=$yellow]#[bg=default]  "
+syncStatus="#[fg=$yellow]#[bg=default]$left_separator#[fg=$bg]#[bg=$yellow]󰓦 #[bg=default]#[fg=$white] SYNC"
+viStatus="#[fg=$green]#[bf=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=default]#[fg=$white] COPY"
 prefixStatus="#[fg=$yellow]#[bg=default] 󰘳 "
 # inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
 
 RS="$speedStatus $timeStatus"
 RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
 # RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
-RS="#{?pane_in_mode,$viStatus ,}$RS"
 RS="#{?synchronize-panes,$syncStatus ,}$RS"
+RS="#{?pane_in_mode,$viStatus ,}$RS"
 # RS="#{?#{==:#{E:@IM},ZH},$inputStatus ,}$RS"
 RS="#{?client_prefix,$prefixStatus ,}$RS"
 
