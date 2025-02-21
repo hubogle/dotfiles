@@ -1,4 +1,4 @@
-hotkey = require("hs.hotkey")
+hotkey = require "hs.hotkey"
 hyperkey = { "⌘⌃⇧" }
 hyper = { "⌃⌥" }
 Hyper = { "⌘⌃⌥" }
@@ -10,16 +10,16 @@ hs.alert.defaultStyle.fillColor = { white = 0.05, alpha = 0.75 }
 hs.alert.defaultStyle.radius = 10
 
 local module_list = {
-	-- "modules/reload",       -- 自动加载
-	"modules/input", -- 切换输入法
-	"modules/doubleCmd", -- 两次 Q 退出
-	"modules/app", -- App 快捷键
-	"modules/windows", -- 窗口管理
-	"modules/moveWindows", -- 移动窗口
-	-- "modules/airpods",      -- 链接 AirPods 快捷键
+    -- "modules/reload",       -- 自动加载
+    "modules/input", -- 切换输入法
+    "modules/doubleCmd", -- 两次 Q 退出
+    "modules/app", -- App 快捷键
+    "modules/windows", -- 窗口管理
+    "modules/moveWindows", -- 移动窗口
+    -- "modules/airpods",      -- 链接 AirPods 快捷键
 }
 for _, v in ipairs(module_list) do
-	require(v)
+    require(v)
 end
 
 -- https://github.com/hououinkami/HammerspoonConfig

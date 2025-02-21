@@ -128,7 +128,7 @@ tmux_set @IM "#(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirre
 tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 # tmux_set @cpu_usage "#(~/.config/tmux/script/cpu_percentage.sh)"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
-HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
+# HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
 timeStatus="#[fg=$blue]#[bg=default]$left_separator#[fg=$bg]#[bg=$blue]$time_icon #[bg=default]#[fg=$white] $time_format "
 speedStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$download_speed_icon #[bg=default]#[fg=$white]#{E:@download_speed}"
