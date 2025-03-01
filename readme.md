@@ -87,6 +87,7 @@ rm -rf ~/.local/share/nvim
 2. 辅助功能 》指针控制 》触摸板选项 》触摸板打开三指拖拽
 3. `[System Settings] > [Keyboard]`，选中 `[Keyboard navigation]`
 4. `Debug` 调试 `sudo /usr/sbin/DevToolsSecurity --enable`
+5. `Edge` 禁用 `WebRTC`, `[about:flags] > WebRTC`
 ---
 
 [cheatsheet](https://github.com/skywind3000/awesome-cheatsheets/tree/master?tab=readme-ov-file)
