@@ -44,7 +44,7 @@ size = 13
 offset = { x = 0, y = 0 }  # 字体偏移量
 glyph_offset = { x = 0, y = 0 }
 # defaults write org.alacritty AppleFontSmoothing -int 1
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+normal = { family = "Maple Mono NF CN", style = "Regular" }
 bold = { style = "Bold" }
 italic = { style = "Italic" }
 bold_italic = { style = "Bold Italic" }
