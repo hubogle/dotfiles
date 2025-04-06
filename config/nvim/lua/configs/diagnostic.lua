@@ -6,7 +6,7 @@ M.setup = function()
     local x = vim.diagnostic.severity
     vim.diagnostic.config {
         virtual_text = false,
-        virtual_lines = true,
+        virtual_lines = { current_line = true },
         signs = {
             text = {
                 [x.ERROR] = "E",

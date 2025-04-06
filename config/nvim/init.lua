@@ -131,11 +131,11 @@ autocmd({ "BufReadPost", "BufEnter" }, {
 })
 
 -- 自动显示诊断浮动窗口
-autocmd({ "CursorHold", "CursorMoved" }, {
-    callback = function()
-        vim.diagnostic.open_float(nil, { focus = false })
-    end,
-})
+-- autocmd({ "CursorHold", "CursorMoved" }, {
+--     callback = function()
+--         vim.diagnostic.open_float(nil, { focus = false })
+--     end,
+-- })
 
 -- dropbar plugin
 vim.ui.select = require("dropbar.utils.menu").select
