@@ -9,13 +9,16 @@ M.setup = function()
         virtual_lines = { current_line = true },
         signs = {
             text = {
-                [x.ERROR] = "E",
-                [x.WARN] = "W",
-                [x.INFO] = "I",
-                [x.HINT] = "H",
+                [x.ERROR] = "",
+                [x.WARN] = "",
+                [x.INFO] = "",
+                [x.HINT] = "",
             },
             numhl = {
                 [x.ERROR] = "DiagnosticError",
+                [x.WARN] = "DiagnosticWarn",
+                [x.INFO] = "DiagnosticInfo",
+                [x.HINT] = "DiagnosticHint",
             },
         },
         underline = true,

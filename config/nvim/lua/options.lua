@@ -58,3 +58,7 @@ o.updatetime = 250
 
 o.endofline = false -- 保存时是否要加上一个末尾换行符
 o.fixendofline = false -- 保存时是否自动根据 endofline 选项修复末尾的换行符
+
+o.numberwidth = 3 -- 设置行号的宽度为 2 个字符
+o.signcolumn = "yes:1" -- 显示符号列
+o.statuscolumn = "%l%s" -- 显示状态列
