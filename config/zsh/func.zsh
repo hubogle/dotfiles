@@ -1,15 +1,29 @@
 #======================proxy=====================
 function proxy() {
-    export no_proxy="localhost,127.0.0.1"
-    export http_proxy=http://127.0.0.1:7890
-    export https_proxy=http://127.0.0.1:7890
-    export all_proxy=socks5://127.0.0.1:7891
-}
-function unproxy(){
-    unset http_proxy
-    unset https_proxy
-    unset all_proxy
-    echo -e "关闭代理"
+    local cmd="$1"
+    local proxy_addr="127.0.0.1:7890"
+    local no_proxy_list="localhost,127.0.0.1,::1,*.local,*.localdomain,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
+
+    case "$cmd" in
+        on)
+            export no_proxy="$no_proxy_list"
+            export https_proxy="http://$proxy_addr"
+            export http_proxy="http://$proxy_addr"
+            export all_proxy="socks5://$proxy_addr"
+            echo -e "\033[32m[✓] 已启用代理服务器\033[0m"
+            ;;
+        off)
+            unset https_proxy http_proxy all_proxy no_proxy
+            echo -e "\033[33m[!] 已关闭代理服务器\033[0m"
+            ;;
+        *)
+            if [[ -n "$https_proxy" ]]; then
+                echo -e "代理状态：\033[32m已启用 - $https_proxy\033[0m"
+            else
+                echo -e "代理状态：\033[31m已禁用\033[0m"
+            fi
+            ;;
+    esac
 }
 
 #======================ssh=====================
