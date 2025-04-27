@@ -121,17 +121,20 @@ tmux_set status-left "$LS"
 time_icon="󰔟"
 time_format='%T'
 download_speed_icon='󰄼'
+cpu_icon=' '
 tmux_set status-right-length 150
 tmux_set status-right-style none
 
 tmux_set @IM "#(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/SCIM/ZH/')"
 tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
-# tmux_set @cpu_usage "#(~/.config/tmux/script/cpu_percentage.sh)"
+tmux_set @cpu_usage "#(~/.config/tmux/script/cpu-usage.sh)"
+
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 # HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
 timeStatus="#[fg=$blue]#[bg=default]$left_separator#[fg=$bg]#[bg=$blue]$time_icon #[bg=default]#[fg=$white] $time_format "
 speedStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$download_speed_icon #[bg=default]#[fg=$white]#{E:@download_speed}"
+cpuStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$cpu_icon #[bg=default]#[fg=$white] #{E:@cpu_usage}"
 gitStatus="#[fg=$green]#[bg=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=default]#[fg=$white] $GIT_BRANCH"
 
 syncStatus="#[fg=$yellow]#[bg=default]$left_separator#[fg=$bg]#[bg=$yellow]󰓦 #[bg=default]#[fg=$white] SYNC"
@@ -139,7 +142,7 @@ viStatus="#[fg=$green]#[bf=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=
 prefixStatus="#[fg=$yellow]#[bg=default] 󰘳 "
 # inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
 
-RS="$speedStatus $timeStatus"
+RS="$speedStatus $cpuStatus $timeStatus"
 RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
 # RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
 RS="#{?synchronize-panes,$syncStatus ,}$RS"
