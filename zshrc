@@ -77,6 +77,7 @@ path=(${path:#$HOME/.zi/polaris/*})
 print() {
   [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
 } # 单行提示
+zstyle :prompt:pure:git:fetch only_upstream yes # 当前分支上下游
 #=====================RCM==========================
 export DOTFILES_DIRS=$HOME/Documents/dotfiles
 export RCRC=$HOME/.config/rcm/rcrc
@@ -140,3 +141,8 @@ bindkey '\C-x\C-e' edit-command-line                  # control + x + control + 
 bindkey "^[m" copy-prev-shell-word                    # option + m 快速复制前面的单词
 bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark  C-x C-y
 bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
+copy_buffer_to_clipboard() {
+  print -n "$BUFFER" | pbcopy
+}
+zle -N copy_buffer_to_clipboard
+bindkey '^y' copy_buffer_to_clipboard                 # [control + y] - 复制当前行
