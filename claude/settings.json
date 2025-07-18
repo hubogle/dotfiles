@@ -1,0 +1,18 @@
+{
+  "includeCoAuthoredBy": false,
+  "permissions": {},
+  "env": {},
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Claude Job Success\" with title \"Task\"'"
+          }
+        ]
+      }
+    ]
+  }
+}
