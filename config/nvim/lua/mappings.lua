@@ -12,23 +12,47 @@ map("n", "<C-b>p", "<cmd> Telescope buffers <cr>", { desc = "Open buffers opened
 map("n", "<leader>fn", "<cmd> Telescope notify <cr>", { desc = "find notify" })
 map("n", "<leader>fp", "<cmd> Telescope persisted <cr>", { desc = "Find project" })
 
--- navhad menu
+-- 项目相关快捷键
+map("n", "<leader>pf", "<cmd>Telescope find_files<cr>", { desc = "Find files in project" })
+map("n", "<leader>pg", "<cmd>Telescope live_grep<cr>", { desc = "Grep in project" })
+map("n", "<leader>pb", "<cmd>Telescope buffers<cr>", { desc = "Project buffers" })
+map("n", "<leader>pr", "<cmd>Telescope persisted<cr>", { desc = "Recent projects" })
+map("n", "<leader>pt", "<cmd>Telescope live_grep search=TODO\\|FIXME\\|HACK\\|NOTE<cr>", { desc = "Project TODOs" })
+
+
+-- 智能菜单系统
 local menu = require "configs.menu"
+local enhanced_menu = require "configs.enhanced-menu"
+
+-- 主菜单快捷键 (Ctrl+T) - 智能菜单切换
 map("n", "<C-t>", function()
-    local filetype = vim.bo.filetype
-    if filetype == "neo-tree" then
-        -- require("menu").open(items, { border = false })
+    local ft = vim.bo.filetype
+
+    if ft == "neo-tree" then
+        require("menu").open("neo-tree", { border = false })
     else
-        require("menu").open(menu, { border = false })
+        local dynamic_menu = enhanced_menu.get_dynamic_menu()
+        require("menu").open(dynamic_menu, { border = false })
     end
-end, {})
+end, { desc = "Smart context menu" })
+
 
 map("n", "<RightMouse>", function()
     vim.cmd.exec '"normal! \\<RightMouse>"'
 
-    local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+    local ft = vim.bo.filetype
+    local options
+
+    if ft == "NvimTree" then
+        options = "nvimtree"
+    elseif ft == "neo-tree" then
+        options = "neo-tree"
+    else
+        options = enhanced_menu.get_dynamic_menu()
+    end
+
     require("menu").open(options, { mouse = true })
-end, {})
+end, { desc = "Smart right-click menu" })
 
 -- trouble
 map("n", "<leader>ex", "<cmd> Trouble diagnostics toggle filter.buf=0 <cr>", { desc = "Buffer Diagnostics (Trouble)" })
