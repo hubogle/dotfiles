@@ -1,51 +1,22 @@
 #!/usr/bin/env bash
 
+bytes_in=$(
+  netstat -w 1 -b -I en0 2>/dev/null | awk 'NR==3 {print $3; exit}'
+)
 
-if [ -z "${INTERFACE_CACHE:-}" ]; then
-  INTERFACE_CACHE=$(route get default 2>/dev/null | awk '/interface/ {print $2}')
-fi
-iface="$INTERFACE_CACHE"
-
-if [ -z "$iface" ]; then
-  echo "  0.0B"
-  exit 0
+if [[ -z "${bytes_in:-}" ]]; then
+  bytes_in=0
 fi
 
-# iface="en0"
-
-# get_bytes_in() {
-#   nettop -l 1 -J interface,bytes_in -x | awk -v iface="$iface" '
-#     NF >= 2 && $(NF-1) == iface { sum += $NF }
-#     END { print sum }
-#   '
-# }
-
-get_bytes_in() {
-	netstat -ib | awk -v iface="$iface" '$1==iface { sum += $7 } END { print sum }'
-}
-
-prev=$(get_bytes_in)
-sleep 1
-
-size=$(( $(get_bytes_in) - prev ))
-if [ "$size" -lt 0 ]; then
-  echo "  0.0B"
-  exit 0
-fi
-
-speed=""
-units=("B" "K" "M" "G")
-i=0
-
-while [ "$size" -ge 1024 ] && [ "$i" -lt 3 ]; do
-  size=$((size / 1024))
-  i=$((i + 1))
-done
-
-if [ "$size" -ge 100 ]; then
-  speed=$(printf "%5.0f%s" "$size" "${units[$i]}")
-else
-  speed=$(printf "%5.1f%s" "$size" "${units[$i]}")
-fi
-
-echo "$speed"
+awk -v b="$bytes_in" '
+  function human(n,u,i){
+    split("B K M G T",u," "); i=1
+    while(n>=1024 && i<5){ n/=1024; i++ }
+    if (n >= 100) {
+      printf("%4.0f%s\n", n, u[i])
+    } else {
+      printf("%4.1f%s\n", n, u[i])
+    }
+  }
+  BEGIN{ human(b+0) }
+'
