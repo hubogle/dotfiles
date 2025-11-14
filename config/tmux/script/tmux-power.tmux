@@ -1,153 +1,130 @@
 #!/usr/bin/env bash
-
-# $1: option, $2: value
-tmux_get() {
-    local value="$(tmux show -gqv "$1")"
-    [ -n "$value" ] && echo "$value" || echo "$2"
-}
-
-# $1: option, $2: value
 tmux_set() {
-    tmux set-option -gq "$1" "$2"
+  tmux set-option -gq "$1" "$2"
 }
-# 使用该方法设置值，tmux 页面会被刷新，shift 选择文本时
 
-# list color
-# for i in {0..255}; do
-#     printf '\x1b[38;5;%dmcolour%d\x1b[0m ' $i $i
-# done
+tmux_set @c-bg      "#1A1B26"
+tmux_set @c-fg      "#a9b1d6"
 
-bg="#1A1B26"
-fg="#a9b1d6"
-black="#414868"
-blue="#7aa2f7"
-cyan="#7dcfff"
-green="#73daca"
-magenta="#bb9af7"
-red="#f7768e"
-white="#c0caf5"
-yellow="#e0af68"
+tmux_set @c-black   "#414868"
+tmux_set @c-blue    "#7aa2f7"
+tmux_set @c-cyan    "#7dcfff"
+tmux_set @c-green   "#73daca"
+tmux_set @c-red     "#f7768e"
+tmux_set @c-white   "#c0caf5"
+tmux_set @c-yellow  "#e0af68"
 
-bblack="#2A2F41"
-bblue="#7aa2f7"
-bcyan="#7dcfff"
-bgreen="#41a6b5"
-bmagenta="#bb9af7"
-bred="#ff9e64"
-bwhite="#787c99"
-byellow="#e0af68"
+tmux_set @c-bblack  "#2A2F41"
+tmux_set @c-bwhite  "#787c99"
+tmux_set @c-gray    "#414868"
 
-ghgreen="#3fb950"
-ghmagenta="#A371F7"
-ghred="#d73a4a"
-ghyellow="#d29922"
+tmux_set @c-ghgreen "#3fb950"
 
-# https://man7.org/linux/man-pages/man1/tmux.1.html
-#==========通用颜色配置=================
-# tmux_set popup-border-style "bg=$bg,fg=$fg" # popup 边缘背景色
+#---------------------- 通用样式 ------------------------------
+tmux_set status-style                 "fg=#{@c-fg}"
+tmux_set message-style                "fg=#{@c-red}"
+tmux_set message-command-style        "fg=#{@c-red}"
+tmux_set pane-border-style            "fg=#{@c-gray}"
+tmux_set pane-active-border-style     "fg=#{@c-green}"
+tmux_set display-panes-colour         "fg=#{@c-blue}"
+tmux_set display-panes-active-colour  "fg=#{@c-yellow}"
+tmux_set mode-style                   "bg=default,fg=colour244"
+tmux_set window-status-separator      ""
+tmux_set clock-mode-colour            "#{@c-blue}"
+tmux_set clock-mode-style             24
 
-tmux_set status-style "fg=$fg" # 状态栏样式
-
-tmux_set message-style "fg=$red"          # 消息前景背景色
-tmux_set message-command-style "fg=$red"  # 设置状态行消息命令样式
-
-tmux_set pane-border-style "fg=$gray" # 设置面板默认分割线的颜色
-tmux_set pane-active-border-style "fg=$green" # 设置活动面板分割线的颜色
-
-tmux_set display-panes-colour "fg=$blue"          # 设置窗格颜色
-tmux_set display-panes-active-colour "fg=$yellow" # 设置活动窗格颜色
-
-tmux_set mode-style "bg=default,fg=colour244" # 调整 copy-mode 的背景和前景色
-
-tmux_set window-status-separator ""
-
-tmux_set clock-mode-colour "$TC"        # 时钟模式
-tmux_set clock-mode-style 24
-
-right_icon='' # e0b0
-right_icon_inverse='' # e0d7
-left_icon='' # e0b2
-left_icon_inverse='' # e0d6
-
-left_separator="" # e0b6
-right_separator="" # e0b4
-middle_separator="█"
-
-# nobold 禁用粗体，noitalics 禁止倾斜文字 nounderscore 禁用下划线 nodim 禁用暗淡
-#==================Windows状态栏=======
-iconFormat="#{?#{==:#{pane_current_command},ssh},#[fg=$red] , }"
-iconFormat="#{?#{==:#{pane_current_command},nvim},#[fg=$green]󰕷 ,$iconFormat}"
-iconFormat="#{?#{==:#{pane_mode},copy-mode},#[fg=$green]󰕷 ,$iconFormat}"
-
-WSFormat="#[fg=$black,bg=default]$right_icon_inverse"
-WSFormat="$WSFormat#[fg=$bwhite,bg=$black] $iconFormat#[fg=$bwhite]#W "
-WSFormat="$WSFormat#[fg=$yellow]#{?window_bell_flag,󰂠 ,}"
-WSFormat="$WSFormat#[fg=$yellow]#{?window_activity_flag,󰂚 ,}"
-WSFormat="$WSFormat#[fg=$ghgreen]#{?window_zoomed_flag, ,}"
-WSFormat="$WSFormat#[fg=$ghgreen]#{?window_last_flag, ,}"
-WSFormat="$WSFormat#[fg=$black,bg=default]$right_icon"
-
-
-WSCFormat="#[fg=$bblack,bg=default]$right_icon_inverse"
-WSCFormat="$WSCFormat#[fg=$white,bg=$bblack] $iconFormat#[fg=$white]#W "
-WSCFormat="$WSCFormat#[fg=$ghgreen]#{?window_zoomed_flag, ,}"
-WSCFormat="$WSCFormat#[fg=$ghgreen] "
-WSCFormat="$WSCFormat#[fg=$bblack,bg=default]$right_icon"
-
-tmux_set window-status-format "$WSFormat"
-tmux_set window-status-current-format "$WSCFormat"
-
-tmux_set window-status-bell-style 'blink' # sleep 5 && tmux display-message done
-tmux_set window-status-activity-style 'blink' # ssh 警告 sleep 2 && echo -e "\a"
-
-#===========左状态栏===================
-#     
-# ' 
+#---------------------- 符号与分隔符 --------------------------
 # https://www.nerdfonts.com/cheat-sheet
-session_icon=""
+RIGHT_ICON=''
+RIGHT_ICON_INVERSE=''
+LEFT_ICON=''
+LEFT_ICON_INVERSE=''
+LEFT_SEP=""
+RIGHT_SEP=""
 
+#---------------------- 窗口图标逻辑 --------------------------
+# 根据命令/模式选择不同图标颜色
+ICON_FORMAT="#{?#{==:#{pane_current_command},ssh},#[fg=#{@c-red}] , }"
+ICON_FORMAT="#{?#{==:#{pane_current_command},nvim},#[fg=#{@c-green}]󰕷 ,$ICON_FORMAT}"
+ICON_FORMAT="#{?#{==:#{pane_mode},copy-mode},#[fg=#{@c-green}]󰕷 ,$ICON_FORMAT}"
+
+#---------------------- Windows 状态栏 ------------------------
+# 非当前窗口
+WS_FORMAT=""
+WS_FORMAT+="#[fg=#{@c-black},bg=default]$RIGHT_ICON_INVERSE"
+WS_FORMAT+="#[fg=#{@c-bwhite},bg=#{@c-black}] $ICON_FORMAT#[fg=#{@c-bwhite}]#W "
+WS_FORMAT+="#[fg=#{@c-red}]#{?pane_in_mode, ,}"
+WS_FORMAT+="#[fg=#{@c-yellow}]#{?window_bell_flag,󰂠 ,}"
+WS_FORMAT+="#[fg=#{@c-yellow}]#{?window_activity_flag,󰂚 ,}"
+WS_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_zoomed_flag, ,}"
+WS_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_last_flag, ,}"
+WS_FORMAT+="#[fg=#{@c-black},bg=default]$RIGHT_ICON"
+
+# 当前窗口
+WSC_FORMAT=""
+WSC_FORMAT+="#[fg=#{@c-bblack},bg=default]$RIGHT_ICON_INVERSE"
+WSC_FORMAT+="#[fg=#{@c-white},bg=#{@c-bblack}] $ICON_FORMAT#[fg=#{@c-white}]#W "
+WSC_FORMAT+="#[fg=#{@c-red}]#{?pane_in_mode, ,}"
+WSC_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_zoomed_flag, ,}"
+WSC_FORMAT+="#[fg=#{@c-ghgreen}] "
+WSC_FORMAT+="#[fg=#{@c-bblack},bg=default]$RIGHT_ICON"
+
+tmux_set window-status-format          "$WS_FORMAT"
+tmux_set window-status-current-format  "$WSC_FORMAT"
+tmux_set window-status-bell-style      "blink"
+tmux_set window-status-activity-style  "blink"
+
+#---------------------- 左状态栏 ------------------------------
 tmux_set status-left-length 0
 tmux_set status-left-style none
 
-LS="#{?#{==:#{pane_current_command},ssh},#[fg=$red]󰅡 ,󰤂 }" # SSH
-LS="#{?client_prefix,#[fg=$yellow]󰠠 ,$LS}"                 # 命令模式
-LS="#{?synchronize-panes,#[fg=$magenta]󱍸 ,$LS}"            # 同步窗格
-LS="#{?pane_in_mode,#[fg=$red]󰗦 ,$LS}"                   # Vi 模式
-LS="#[fg=$bblack,bg=$blue,bold,nodim]  #[fg=$bblack,bg=$blue,bold,nodim]#S #[fg=$blue,bg=default]$right_icon"
+LS_ICON="#{?#{==:#{pane_current_command},ssh},#[fg=#{@c-red}]󰅡 ,󰤂 }"
+LS_ICON="#{?client_prefix,#[fg=#{@c-yellow}]󰠠 ,$LS_ICON}"
+LS_ICON="#{?synchronize-panes,#[fg=#{@c-green}]󱍸 ,$LS_ICON}"
+LS_ICON="#{?pane_in_mode,#[fg=#{@c-red}]󰗦 ,$LS_ICON}"
 
-tmux_set status-left "$LS"
+STATUS_LEFT=""
+STATUS_LEFT+="#[fg=#{@c-bblack},bg=#{@c-blue},bold,nodim]  "
+STATUS_LEFT+="#[fg=#{@c-bblack},bg=#{@c-blue},bold,nodim]#S "
+STATUS_LEFT+="#[fg=#{@c-blue},bg=default]$RIGHT_ICON"
 
-#===========右状态栏===================
-time_icon="󰔟"
-time_format='%T'
-download_speed_icon='󰄼'
-cpu_icon=' '
+tmux_set status-left "$STATUS_LEFT"
+
+#---------------------- 右状态栏 - 图标与格式 -----------------
+TIME_ICON="󰔟"
+TIME_FORMAT='%T'
+DOWNLOAD_ICON='󰄼'
+CPU_ICON=' '
+SSH_ICON=" "
+
 tmux_set status-right-length 150
 tmux_set status-right-style none
 
-tmux_set @IM "#(/opt/homebrew/bin/im-select | cut -d "." -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/SCIM/ZH/')"
-tmux_set @download_speed "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
-tmux_set @cpu_usage "#(~/.config/tmux/script/cpu-usage.sh)"
+# tmux_set @IM              "#(/opt/homebrew/bin/im-select | cut -d '.' -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/SCIM/ZH/')"
+tmux_set @download_speed  "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
+tmux_set @cpu_usage       "#(~/.config/tmux/script/cpu-usage.sh)"
+tmux_set @ssh_host        "#(~/.config/tmux/script/ssh-host.sh #{pane_pid})"
 
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
-# HOST_NAME="#(~/.config/tmux/script/hostname.sh)"
 
-timeStatus="#[fg=$blue]#[bg=default]$left_separator#[fg=$bg]#[bg=$blue]$time_icon #[bg=default]#[fg=$white] $time_format "
-speedStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$download_speed_icon #[bg=default]#[fg=$white]#{E:@download_speed}"
-cpuStatus="#[fg=$cyan]#[bg=default]$left_separator#[fg=$bg]#[bg=$cyan]$cpu_icon #[bg=default]#[fg=$white] #{E:@cpu_usage}"
-gitStatus="#[fg=$green]#[bg=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=default]#[fg=$white] $GIT_BRANCH"
+#---------------------- 右侧各块（右→左） -----------------------
+SEG_TIME="#[fg=#{@c-blue}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-blue}]$TIME_ICON #[bg=default]#[fg=#{@c-white}] $TIME_FORMAT "
+SEG_SPEED="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$DOWNLOAD_ICON #[bg=default]#[fg=#{@c-white}]#{E:@download_speed}"
+SEG_CPU="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$CPU_ICON#[bg=default]#[fg=#{@c-white}] #{E:@cpu_usage}"
+SEG_GIT="#[fg=#{@c-green}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] $GIT_BRANCH"
+SEG_SSH="#[fg=#{@c-red}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-red}]$SSH_ICON#[bg=default]#[fg=#{@c-white}] #{E:@ssh_host} "
 
-syncStatus="#[fg=$yellow]#[bg=default]$left_separator#[fg=$bg]#[bg=$yellow]󰓦 #[bg=default]#[fg=$white] SYNC"
-viStatus="#[fg=$green]#[bf=default]$left_separator#[fg=$bg]#[bg=$green] #[bg=default]#[fg=$white] COPY"
-prefixStatus="#[fg=$yellow]#[bg=default] 󰘳 "
-# inputStatus="#[fg=$red]$left_separator#[fg=$black]#[bg=$red] 󰗊 #[fg=$red]#[bg=default]$right_separator"
+# 状态标记块
+SEG_SYNC="#[fg=#{@c-yellow}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-yellow}]󰓦 #[bg=default]#[fg=#{@c-white}] SYNC"
+SEG_VI="#[fg=#{@c-green}]#[bf=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] COPY"
+SEG_PREFIX="#[fg=#{@c-yellow}]#[bg=default] 󰘳 "
 
-RS="$speedStatus $cpuStatus $timeStatus"
-RS="#{?$GIT_BRANCH,$gitStatus ,}$RS"
-# RS="#{?#{==:#{pane_current_command},ssh},$sshStatus ,}$RS"
-RS="#{?synchronize-panes,$syncStatus ,}$RS"
-RS="#{?pane_in_mode,$viStatus ,}$RS"
-# RS="#{?#{==:#{E:@IM},ZH},$inputStatus ,}$RS"
-RS="#{?client_prefix,$prefixStatus ,}$RS"
+# 右侧最终拼接（条件 + 信息块）
+STATUS_RIGHT="$SEG_SPEED $SEG_CPU $SEG_TIME"
+STATUS_RIGHT="#{?#{==:#{pane_current_command},ssh},$SEG_SSH,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?$GIT_BRANCH,$SEG_GIT ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?synchronize-panes,$SEG_SYNC ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?pane_in_mode,$SEG_VI ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?client_prefix,$SEG_PREFIX ,}$STATUS_RIGHT"
 
-tmux_set status-right "$RS"
+tmux_set status-right "$STATUS_RIGHT"
