@@ -44,7 +44,6 @@ M.ui = {
             "lsp_msg",
             "%=",
             "diagnostics",
-            "codeium",
             "lsp",
             "cwd",
         },

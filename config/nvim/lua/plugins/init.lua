@@ -52,20 +52,9 @@ return {
 
     { "Bekaboo/dropbar.nvim" }, -- bar
 
-    -- { "zbirenbaum/copilot.lua", cmd = "Copilot", event = "InsertEnter", opts = require "configs.copilot" },
-    --
-    -- {
-    --     "zbirenbaum/copilot-cmp",
-    --     config = function()
-    --         require("copilot_cmp").setup()
-    --     end,
-    -- },
-
     { "olimorris/persisted.nvim", opts = require "configs.persisted" }, -- open project
 
     { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
-
-    -- { "Exafunction/codeium.vim", event = "BufEnter" },
 
     {
         "kdheepak/lazygit.nvim",
