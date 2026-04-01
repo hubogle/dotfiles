@@ -91,7 +91,12 @@ autocmd("User", {
         local session = vim.g.persisted_loaded_session
         if session ~= nil then
             require("persisted").save { session = session }
-            vim.api.nvim_input "<ESC>:%bd!<CR>"
+        end
+        -- 同步删除所有 listed buffer，避免与 session 加载竞争
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+                vim.api.nvim_buf_delete(buf, { force = true })
+            end
         end
     end,
 })
