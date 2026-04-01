@@ -7,13 +7,9 @@ return {
 
     { "lewis6991/gitsigns.nvim", event = "User FilePost", opts = require "configs.gitsigns" },
 
-    -- {
-    --     "hrsh7th/nvim-cmp",
-    --     event = "InsertEnter",
-    --     opts = function()
-    --         return require "configs.cmp"
-    --     end,
-    -- },
+    { import = "nvchad.blink.lazyspec" },
+
+    { "Saghen/blink.cmp", opts = require "configs.blink"},
 
     {
         "neovim/nvim-lspconfig",
