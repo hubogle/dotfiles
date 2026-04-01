@@ -69,15 +69,7 @@ return {
 
     { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
 
-    { "Exafunction/codeium.vim", event = "BufEnter" },
-
-    {
-        "OXY2DEV/markview.nvim",
-        ft = "markdown",
-        config = function()
-            require "configs.markview"
-        end,
-    },
+    -- { "Exafunction/codeium.vim", event = "BufEnter" },
 
     {
         "kdheepak/lazygit.nvim",
