@@ -16,10 +16,11 @@ patch:
   # inline_ascii 无输入时，切换中英；有输入时，切换到临时英文模式，按回车上屏后回到中文状态
   # noop         屏蔽快捷键，不切换中英，但不要屏蔽 CapsLock
   ascii_composer:
-    good_old_caps_lock: true  # 若为 true， Caps 只切换大小写
+    # 定义切换到西文模式的快捷键
     switch_key:
-      Caps_Lock: noop # Caps 键
-      Shift_L: noop # 左 Shift，切换中英文
-      Shift_R: commit_code # 右 Shift，切换中英文
-      Control_L: noop # 左 Control，屏蔽该切换键
-      Control_R: noop # 右 Control，屏蔽该切换键
+      Caps_Lock: commit_code  # 按下 Caps Lock 会直接上屏
+      Control_L: noop  # 按下左 Control 键不做任何操作
+      Control_R: noop  # 按下右 Control 键不做任何操作
+      Shift_L: noop  # 按下左 Shift 键会直接上屏
+      Shift_R: inline_ascii  # 按下右 Shift 键会临时切换到西文模式
+    good_old_caps_lock: true  # 启用经典的 Caps Lock 开启西文模式的方式

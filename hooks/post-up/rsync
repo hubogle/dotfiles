@@ -4,20 +4,6 @@ RIME_DIR=~/Library/Rime
 # 同步 rime 自定义词库
 if [ -d "$RIME_DIR" ]; then
   ln -sfn $DOTFILES_DIRS/config/rime/default.custom.yaml $RIME_DIR/default.custom.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/default.yaml $RIME_DIR/default.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/melt_eng.dict.yaml $RIME_DIR/melt_eng.dict.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/melt_eng.schema.yaml $RIME_DIR/melt_eng.schema.yaml
   ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.custom.yaml $RIME_DIR/rime_mint.custom.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.dict.yaml $RIME_DIR/rime_mint.dict.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/rime_mint.schema.yaml $RIME_DIR/rime_mint.schema.yaml
   ln -sfn $DOTFILES_DIRS/config/rime/squirrel.custom.yaml $RIME_DIR/squirrel.custom.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/squirrel.yaml $RIME_DIR/squirrel.yaml
-  ln -sfn $DOTFILES_DIRS/config/rime/lua $RIME_DIR/lua
 fi
-
-
-# put this script in ~/Library/Rime
-
-# cd ~/Library/Rime
-# DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/Squirrel" --quit
-# DYLD_LIBRARY_PATH="/Library/Input Methods/Squirrel.app/Contents/Frameworks" "/Library/Input Methods/Squirrel.app/Contents/MacOS/rime_dict_manager" -s

@@ -2,16 +2,12 @@
 
 https://github.com/Mintimate/oh-my-rime
 
-将 `dict` 文件放在 `~/Library/Rime` 目录下。
+git clone https://github.com/Mintimate/oh-my-rime.git $HOME/Library/Rime
+
 
 ## 配置文件
-
-* 方案的全局配置是 `default.yaml` 和 `defalut.custom.yaml`。
-* 对于局部，薄荷输入法内全拼为例：
-    * `rime_mint.schema.yaml` 就是一个局部配置（全拼）。
-    * `rime_mint.schema.yaml` 内可以覆写 `default.yaml` 的配置。
-    * `rime_mint.custom.yaml` 优先级高于`rime_mint.schema.yaml`，可以覆写 `rime_mint.schema.yaml` 的配置。
-
-## 自定义配置文件
-
-* `default.custom.yaml` 覆盖 `default.yaml` 文件
+```shell
+├── default.custom.yaml   -- 全局默认配置覆盖
+├── rime_mint.custom.yaml -- 输入方案的配置覆盖
+└── squirrel.custom.yaml  -- 前端 UI（Mac 鼠须管）的配置覆盖
+```
