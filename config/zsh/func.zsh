@@ -71,12 +71,6 @@ function proxy() {
 }
 
 
-export no_proxy="localhost,127.0.0.1,::1,*.local,*.localdomain,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12"
-export https_proxy="http://127.0.0.1:1080"
-export http_proxy="http://127.0.0.1:1080"
-export all_proxy="socks5://127.0.0.1:1080"
-
-
 # https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
 update_terminfo () {
     local x ncdir terms
