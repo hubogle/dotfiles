@@ -104,6 +104,8 @@ tmux_set status-right-style none
 tmux_set @download_speed  "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 tmux_set @cpu_usage       "#(~/.config/tmux/script/cpu-usage.sh)"
 tmux_set @ssh_host        "#(~/.config/tmux/script/ssh-host.sh #{pane_pid})"
+# tmux_set @claude_tokens   "#(~/.config/tmux/script/claude-token.sh)"
+tmux_set @claude_tokens   "#(~/.config/tmux/script/claude-token.sh #{pane_current_path})"
 
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
@@ -113,6 +115,7 @@ SEG_SPEED="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$
 SEG_CPU="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$CPU_ICON#[bg=default]#[fg=#{@c-white}] #{E:@cpu_usage}"
 SEG_GIT="#[fg=#{@c-green}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] $GIT_BRANCH"
 SEG_SSH="#[fg=#{@c-red}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-red}]$SSH_ICON#[bg=default]#[fg=#{@c-white}] #{E:@ssh_host} "
+SEG_CLAUDE="#[fg=#{@c-blue}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-blue}]󰚩 #[bg=default]#[fg=#{@c-white}] #{E:@claude_tokens}"
 
 # 状态标记块
 SEG_SYNC="#[fg=#{@c-yellow}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-yellow}]󰓦 #[bg=default]#[fg=#{@c-white}] SYNC"
@@ -123,6 +126,7 @@ SEG_PREFIX="#[fg=#{@c-yellow}]#[bg=default] 󰘳 "
 STATUS_RIGHT="$SEG_SPEED $SEG_CPU $SEG_TIME"
 STATUS_RIGHT="#{?#{==:#{pane_current_command},ssh},$SEG_SSH,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?$GIT_BRANCH,$SEG_GIT ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?#{==:#{pane_current_command},claude},$SEG_CLAUDE ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?synchronize-panes,$SEG_SYNC ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?pane_in_mode,$SEG_VI ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?client_prefix,$SEG_PREFIX ,}$STATUS_RIGHT"
