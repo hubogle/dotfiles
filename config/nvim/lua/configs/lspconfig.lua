@@ -47,7 +47,7 @@ end
 
 -- EXAMPLE
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.m
-local servers = { "gopls", "pylsp", "lua_ls", "bashls", "yamlls", "jsonls" }
+local servers = { "pylsp", "lua_ls", "bashls", "yamlls", "json-lsp" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 vim.lsp.enable(servers)
