@@ -66,11 +66,12 @@ bindings = [
     { key = "N", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
     # tmux other
-    { key = "Y", mods = "Command", chars = "\u0060Y" },       # 历史粘贴板内容
-    { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
+    { key = "Y", mods = "Command", chars = "\u0060Y" }, # 历史粘贴板内容
+    # { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
-    { key = "O", mods = "Command", chars = "\u0060O" },       # open popup
+    { key = "O", mods = "Command", chars = "\u0060O" },       # open claude
+    { key = "P", mods = "Command", chars = "\u0060P" },       # open claude list
     { key = "F", mods = "Command", chars = "\u0060F" },       # 进入 tmux 的 vim 搜索
 
     # vim 提供模拟 ctrl(control) + number 命令
@@ -85,7 +86,7 @@ bindings = [
     { key = "Key9", mods = "Control", chars = "\u001b[57;5u" },
 
     # 映射给 vim 使用
-    { key = "P", mods = "Command", chars = "\u0002p" },
+    # { key = "P", mods = "Command", chars = "\u0002p" },
     { key = "I", mods = "Control", chars = "\u001b[105;6u" }, # 导航到跳转列表中的下一个位置
 
     { key = "Escape", mods = "Command", command = { program = "/opt/homebrew/bin/im-select", args = [

@@ -3,22 +3,59 @@ tmux_set() {
   tmux set-option -gq "$1" "$2"
 }
 
-tmux_set @c-bg      "#1A1B26"
-tmux_set @c-fg      "#a9b1d6"
+#---------------------- 主题选择 ------------------------------
+# @tmux_power_theme: dark | light | auto(默认)
+# auto 时读取 alacritty 当前 import 的主题名,含 light 则用浅色
+THEME="$(tmux show-option -gqv @tmux_power_theme)"
+THEME="${THEME:-auto}"
 
-tmux_set @c-black   "#414868"
-tmux_set @c-blue    "#7aa2f7"
-tmux_set @c-cyan    "#7dcfff"
-tmux_set @c-green   "#73daca"
-tmux_set @c-red     "#f7768e"
-tmux_set @c-white   "#c0caf5"
-tmux_set @c-yellow  "#e0af68"
+if [ "$THEME" = "auto" ]; then
+  ALACRITTY_CFG="$HOME/.config/alacritty/alacritty.toml"
+  if [ -f "$ALACRITTY_CFG" ] && grep -Eiq '^[[:space:]]*"[^"]*light[^"]*\.toml"' "$ALACRITTY_CFG"; then
+    THEME="light"
+  else
+    THEME="dark"
+  fi
+fi
 
-tmux_set @c-bblack  "#2A2F41"
-tmux_set @c-bwhite  "#787c99"
-tmux_set @c-gray    "#414868"
+#---------------------- 配色方案 ------------------------------
+if [ "$THEME" = "light" ]; then
+  # ayu light
+  tmux_set @c-bg      "#FFFFFF"   # 色块上的图标用白字
+  tmux_set @c-fg      "#5C6166"   # 状态栏正文
 
-tmux_set @c-ghgreen "#3fb950"
+  tmux_set @c-black   "#E1E3E6"   # 非当前窗口块底
+  tmux_set @c-blue    "#399EE6"
+  tmux_set @c-cyan    "#55B4D4"
+  tmux_set @c-green   "#6CBF43"
+  tmux_set @c-red     "#E65050"
+  tmux_set @c-white   "#3B4045"   # default 背景上的数值文字
+  tmux_set @c-yellow  "#F2AE49"
+
+  tmux_set @c-bblack  "#D1E4F4"   # 当前窗口块底(淡蓝高亮)
+  tmux_set @c-bwhite  "#8A9199"   # 非当前窗口块文字
+  tmux_set @c-gray    "#C8C9C5"   # pane 边框
+
+  tmux_set @c-ghgreen "#86B300"   # zoom/last 标记
+else
+  # Tokyo Night dark
+  tmux_set @c-bg      "#1A1B26"
+  tmux_set @c-fg      "#a9b1d6"
+
+  tmux_set @c-black   "#414868"
+  tmux_set @c-blue    "#7aa2f7"
+  tmux_set @c-cyan    "#7dcfff"
+  tmux_set @c-green   "#73daca"
+  tmux_set @c-red     "#f7768e"
+  tmux_set @c-white   "#c0caf5"
+  tmux_set @c-yellow  "#e0af68"
+
+  tmux_set @c-bblack  "#2A2F41"
+  tmux_set @c-bwhite  "#787c99"
+  tmux_set @c-gray    "#414868"
+
+  tmux_set @c-ghgreen "#3fb950"
+fi
 
 #---------------------- 通用样式 ------------------------------
 tmux_set status-style                 "fg=#{@c-fg}"
@@ -84,8 +121,8 @@ LS_ICON="#{?synchronize-panes,#[fg=#{@c-green}]󱍸 ,$LS_ICON}"
 LS_ICON="#{?pane_in_mode,#[fg=#{@c-red}]󰗦 ,$LS_ICON}"
 
 STATUS_LEFT=""
-STATUS_LEFT+="#[fg=#{@c-bblack},bg=#{@c-blue},bold,nodim]  "
-STATUS_LEFT+="#[fg=#{@c-bblack},bg=#{@c-blue},bold,nodim]#S "
+STATUS_LEFT+="#[fg=#{@c-bg},bg=#{@c-blue},bold,nodim]  "
+STATUS_LEFT+="#[fg=#{@c-bg},bg=#{@c-blue},bold,nodim]#S "
 STATUS_LEFT+="#[fg=#{@c-blue},bg=default]$RIGHT_ICON"
 
 tmux_set status-left "$STATUS_LEFT"
@@ -104,7 +141,6 @@ tmux_set status-right-style none
 tmux_set @download_speed  "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
 tmux_set @cpu_usage       "#(~/.config/tmux/script/cpu-usage.sh)"
 tmux_set @ssh_host        "#(~/.config/tmux/script/ssh-host.sh #{pane_pid})"
-# tmux_set @claude_tokens   "#(~/.config/tmux/script/claude-token.sh)"
 tmux_set @claude_tokens   "#(~/.config/tmux/script/claude-token.sh #{pane_current_path})"
 
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
