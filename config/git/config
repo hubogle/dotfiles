@@ -26,16 +26,13 @@
 [icdiff]
 	options = --highlight --line-numbers
 
-[branch "develop"]
-	rebase = true
-
 [core]
 	quotepath = false
 [pull]
 	rebase = true
 [push]
-	autoSetupRemot = true
+	autoSetupRemote = true
 [sequence]
 	editor = code --wait
 [credential]
-	helper = store
+	helper = osxkeychain
