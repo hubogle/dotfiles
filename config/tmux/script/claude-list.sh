@@ -309,9 +309,8 @@ run_picker() {
   printf -v usage_cmd '%q --usage' "$self"
   clear_kill_confirmation
   claude_usage_display; usage=$REPLY
-  # 预览只轮询当前选中会话的可见画面(-e 带颜色,-p 输出到 stdout,-S -500 带回滚)。
+  # 预览只轮询当前选中会话的可见画面(-e 带颜色,-p 输出到 stdout)。
   # fzf 变更选择时会终止旧预览并启动新预览，因此不会轮询列表里的其他会话。
-  # (否则目标名带上字面引号而匹配不到任何会话,预览空白);follow 让预览贴底显示最新画面。
   # \= 转义前导等号:fzf 用 $SHELL(可能是 zsh)跑预览,zsh 对未引用的前导 = 触发
   # EQUALS 展开(把 =name 当成命令 name 求路径),导致 "name not found";转义后 tmux 收到字面 =name。
   # 2>/dev/null 让选择期间会话退出时预览安静留空
@@ -322,12 +321,14 @@ run_picker() {
     --gap=1 \
     --highlight-line \
     --style=full \
+    --info=hidden \
+    --no-scrollbar \
     --header="$usage" \
     --bind="ctrl-r:reload($reload_cmd)+transform-header($usage_cmd)+refresh-preview" \
     --bind="ctrl-x:transform($kill_toggle_cmd {3})" \
     --bind="focus:execute-silent($clear_kill_cmd)+transform-header($usage_cmd)" \
-    --preview='while :; do printf "\033[2J\033[H"; tmux capture-pane -ept {3} -S -200 2>/dev/null; sleep 1; done' \
-    --preview-window='right,84%,nowrap,follow,noinfo') || return 0     # fzf 被取消(Esc/非零退出)则直接返回
+    --preview='while :; do printf "\033[3J\033[2J\033[H"; tmux capture-pane -ept {3} 2>/dev/null; sleep 1; done' \
+    --preview-window='right,84%,nowrap,nofollow,noinfo') || return 0   # fzf 被取消(Esc/非零退出)则直接返回
 
   [ -z "$sel" ] && exit 0
   # 卡片是多行记录:取首行、按 tab 切出第 3 字段会话名(bash 内置,不 fork head/cut)
@@ -387,9 +388,8 @@ picker_command() {
 open_popup() {
   local caller_client=${1:-} current_session host picker_cmd y
   local w h
-  w="$(tmux_get @claude_popup_width '99%')"
-  h="$(tmux_get @claude_popup_height '95%')"
-  claude_popup_y "$(tmux_get @claude_popup_y_offset '1')"; y=$REPLY
+  w="$(tmux_get @claude_popup_width '100%')"
+  h="$(tmux_get @claude_popup_height '100%')"
 
   current_session="$(client_session "$caller_client")"
   host=$caller_client
@@ -399,12 +399,13 @@ open_popup() {
     tmux detach-client -t "$caller_client" 2>/dev/null
   fi
 
-  popup_dims "$host" "$w" "$h"; w=$REPLY; h=$REPLY2   # 与客户端同奇偶消除晃动(host 空时回退百分比)
+  claude_popup_dims "$host" "$w" "$h"; w=$REPLY; h=$REPLY2   # 100% 高度预留顶部状态栏(host 空时回退百分比)
   picker_command "$host"; picker_cmd=$REPLY
   if [ -n "$host" ]; then
-    tmux display-popup -c "$host" -w "$w" -h "$h" -y "$y" -E "$picker_cmd"
+    # 无框避免透明终端中边框独立重绘时闪出底层 pane 内容。
+    tmux display-popup -b none -c "$host" -w "$w" -h "$h" -y S -E "$picker_cmd"
   else
-    tmux display-popup -w "$w" -h "$h" -y "$y" -E "$picker_cmd"
+    tmux display-popup -b none -w "$w" -h "$h" -y S -E "$picker_cmd"
   fi
 }
 

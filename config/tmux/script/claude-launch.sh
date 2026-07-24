@@ -10,9 +10,8 @@ origin_client="${3:-}"
 
 prefix="$(tmux_get @claude_session_prefix "${CLAUDE_SESSION_PREFIX:-claude-}")"
 cmd="$(claude_command)"
-w="$(tmux_get @claude_popup_width '99%')"
-h="$(tmux_get @claude_popup_height '95%')"
-claude_popup_y "$(tmux_get @claude_popup_y_offset '1')"; y=$REPLY
+w="$(tmux_get @claude_popup_width '100%')"
+h="$(tmux_get @claude_popup_height '100%')"
 sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 
 # 已经在 claude 弹窗里,不允许再嵌套开一个
@@ -20,8 +19,6 @@ if [[ "$origin_session" == "$prefix"* ]]; then
     tmux display-message "Claude popup already open"
     exit 0
 fi
-
-dir_name="${path%/}"; dir_name="${dir_name##*/}"
 
 # 新建会话运行 claude:exec 使 pane_pid 即 claude 进程 pid,
 # 对应注册表文件 ~/.claude/sessions/<pid>.json。
@@ -39,12 +36,9 @@ tmux rename-session -t "$sid" "${prefix}${pp}" 2>/dev/null
 tmux set-hook   -t "$sid" pane-exited "kill-session"
 tmux set-option -t "$sid" status off
 tmux set-option -t "$sid" remain-on-exit off
-tmux set-option -t "$sid" pane-border-lines single
-tmux set-option -t "$sid" pane-border-status top
-tmux set-option -t "$sid" pane-border-format " $dir_name "
 
 # 后台回填:轮询 json 取 claude 会话名并改名(目标名已存在则保留占位名)。
-# pane 边框恒为文件夹名(见上),此处只改会话名,不动边框。
+# 只改会话名；popup 内不显示 pane 标题栏，避免持续重绘时露出底层内容。
 (
   sf="$sessions_dir/$pp.json"
   for _ in $(seq 1 50); do
@@ -66,8 +60,10 @@ tmux set-option -t "$sid" pane-border-format " $dir_name "
 ) &
 
 if [ -n "$origin_client" ]; then
-  popup_dims "$origin_client" "$w" "$h"       # -> REPLY=宽 REPLY2=高,与客户端同奇偶消除晃动
-  tmux display-popup -c "$origin_client" -w "$REPLY" -h "$REPLY2" -y "$y" -E "tmux attach-session -t '$sid'"
+  claude_popup_dims "$origin_client" "$w" "$h" # -> REPLY=宽 REPLY2=高，100% 高度预留顶部状态栏
+  # Claude 画面持续重绘时，tmux 的 popup 边框会单独刷新；在带透明度的
+  # Alacritty 中会短暂露出底层 pane。与其他 fzf popup 保持一致，直接无框显示。
+  tmux display-popup -b none -c "$origin_client" -w "$REPLY" -h "$REPLY2" -y S -E "tmux attach-session -t '$sid'"
 else
-  tmux display-popup -w "$w" -h "$h" -y "$y" -E "tmux attach-session -t '$sid'"
+  tmux display-popup -b none -w "$w" -h "$h" -y S -E "tmux attach-session -t '$sid'"
 fi

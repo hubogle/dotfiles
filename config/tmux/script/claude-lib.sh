@@ -41,13 +41,14 @@ popup_dims() {
   (( REPLY2 < 2 )) && REPLY2=2
 }
 
-# 生成相对居中的 popup 纵向位置。默认下移 1 行；可用
-# @claude_popup_y_offset 覆盖（支持负数上移），而非把 -y 当成绝对坐标。
-# claude_popup_y <offset> -> REPLY=tmux position format
-claude_popup_y() {
-  local offset=${1:-1}
-  [[ $offset =~ ^-?[0-9]+$ ]] || offset=1
-  REPLY="#{e|+|:#{popup_centre_y},${offset}}"
+# Claude 的全屏 popup 预留宿主 session 顶部的一行 status。宽高仍可由
+# @claude_popup_width / @claude_popup_height 覆盖；只有默认的 100% 高度才扣行。
+# claude_popup_dims <client> <width_opt> <height_opt> -> REPLY=宽 REPLY2=高
+claude_popup_dims() {
+  popup_dims "$@"
+  if [ "$3" = '100%' ] && [[ $REPLY2 =~ ^[0-9]+$ ]] && (( REPLY2 > 1 )); then
+    REPLY2=$(( REPLY2 - 1 ))
+  fi
 }
 
 # 枚举所有 claude-* tmux 会话的 pane_pid(每行一个)。
