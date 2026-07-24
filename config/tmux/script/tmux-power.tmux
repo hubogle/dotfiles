@@ -31,6 +31,8 @@ if [ "$THEME" = "light" ]; then
   tmux_set @c-red     "#E65050"
   tmux_set @c-white   "#3B4045"   # default 背景上的数值文字
   tmux_set @c-yellow  "#F2AE49"
+  tmux_set @c-orange  "#FA8D3E"   # claude 待回答态(区分于 yellow 待授权)
+  tmux_set @c-magenta "#A37ACC"
 
   tmux_set @c-bblack  "#D1E4F4"   # 当前窗口块底(淡蓝高亮)
   tmux_set @c-bwhite  "#8A9199"   # 非当前窗口块文字
@@ -49,6 +51,8 @@ else
   tmux_set @c-red     "#f7768e"
   tmux_set @c-white   "#c0caf5"
   tmux_set @c-yellow  "#e0af68"
+  tmux_set @c-orange  "#ff9e64"   # claude 待回答态(区分于 yellow 待授权)
+  tmux_set @c-magenta "#bb9af7"
 
   tmux_set @c-bblack  "#2A2F41"
   tmux_set @c-bwhite  "#787c99"
@@ -138,10 +142,10 @@ tmux_set status-right-length 150
 tmux_set status-right-style none
 
 # tmux_set @IM              "#(/opt/homebrew/bin/im-select | cut -d '.' -f4 | sed -e 's/Squirrel/ZH/' -e 's/ABC/US/' -e 's/SCIM/ZH/')"
-tmux_set @download_speed  "#(~/.config/tmux/script/net-speed.sh rx_bytes '%%7s')"
+tmux_set @download_speed  "#(~/.config/tmux/script/net-speed.sh)"
 tmux_set @cpu_usage       "#(~/.config/tmux/script/cpu-usage.sh)"
 tmux_set @ssh_host        "#(~/.config/tmux/script/ssh-host.sh #{pane_pid})"
-tmux_set @claude_tokens   "#(~/.config/tmux/script/claude-token.sh #{pane_current_path})"
+tmux_set @claude_agents_status "#(~/.config/tmux/script/claude-status.sh)"
 
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
@@ -151,7 +155,10 @@ SEG_SPEED="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$
 SEG_CPU="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$CPU_ICON#[bg=default]#[fg=#{@c-white}] #{E:@cpu_usage}"
 SEG_GIT="#[fg=#{@c-green}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] $GIT_BRANCH"
 SEG_SSH="#[fg=#{@c-red}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-red}]$SSH_ICON#[bg=default]#[fg=#{@c-white}] #{E:@ssh_host} "
-SEG_CLAUDE="#[fg=#{@c-blue}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-blue}]󰚩 #[bg=default]#[fg=#{@c-white}] #{E:@claude_tokens}"
+# agents 分段底色自适应：存在待介入会话(授权/出错/未知)为红色，否则绿色(运行正常)
+# @claude_attn 由 claude-status.sh 每次刷新时根据 sessions json 状态写入
+AGENTS_ACCENT="#{?#{@claude_attn},#{@c-red},#{@c-green}}"
+SEG_AGENTS="#[fg=$AGENTS_ACCENT]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=$AGENTS_ACCENT]󰚩 #[bg=default]#[fg=#{@c-white}] #{E:@claude_agents_status}"
 
 # 状态标记块
 SEG_SYNC="#[fg=#{@c-yellow}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-yellow}]󰓦 #[bg=default]#[fg=#{@c-white}] SYNC"
@@ -162,9 +169,9 @@ SEG_PREFIX="#[fg=#{@c-yellow}]#[bg=default] 󰘳 "
 STATUS_RIGHT="$SEG_SPEED $SEG_CPU $SEG_TIME"
 STATUS_RIGHT="#{?#{==:#{pane_current_command},ssh},$SEG_SSH,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?$GIT_BRANCH,$SEG_GIT ,}$STATUS_RIGHT"
-STATUS_RIGHT="#{?#{==:#{pane_current_command},claude},$SEG_CLAUDE ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?synchronize-panes,$SEG_SYNC ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?pane_in_mode,$SEG_VI ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?#{S:#{?#{m:claude-*,#{session_name}},x,}},$SEG_AGENTS ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?client_prefix,$SEG_PREFIX ,}$STATUS_RIGHT"
 
 tmux_set status-right "$STATUS_RIGHT"

@@ -22,7 +22,11 @@ host=$(echo "$cmd" | awk '{
 
 [ -z "$host" ] && exit 0
 
-ip=$(getent ahosts "$host" | awk 'NR==1{print $1}')
+if command -v getent >/dev/null 2>&1; then
+    ip=$(getent ahosts "$host" | awk 'NR==1{print $1}')
+else
+    ip=$(dscacheutil -q host -a name "${host#*@}" | awk '/^ip_address:/{print $2; exit}')
+fi
 [ -z "$ip" ] && ip="$host"
 
 echo "$ip"
