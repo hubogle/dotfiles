@@ -3,9 +3,9 @@
 # 状态取自 ~/.claude/sessions/<pane_pid>.json;分类规则见 claude-lib.sh 的 claude_classify
 # 颜色:待授权黄 / 待回答橙 / 一般等待黄 / 运行中蓝 / 空闲灰(CLR_* 见 claude-lib.sh)
 
-prefix="${CLAUDE_SESSION_PREFIX:-claude-}"
-sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 source "${BASH_SOURCE[0]%/*}/claude-lib.sh"
+prefix="$(tmux_get @claude_session_prefix "${CLAUDE_SESSION_PREFIX:-claude-}")"
+sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 
 # 状态色由 claude-lib.sh 统一载入(CLR_*),与 picker 同源
 claude_load_colors

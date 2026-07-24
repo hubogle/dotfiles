@@ -1,4 +1,13 @@
 {
+  "env": {
+    "DISABLE_AUTOUPDATER": "1",
+    "DISABLE_INSTALLATION_CHECKS": "1"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 1
+  },
   "includeCoAuthoredBy": false,
   "permissions": {},
   "env": {},
@@ -14,5 +23,10 @@
         ]
       }
     ]
-  }
+  },
+  "theme": "dark",
+  "installMethod": "manual",
+  "skipInstallOnStartup": true,
+  "disableSymlinks": true,
+  "disableShellIntegration": true
 }

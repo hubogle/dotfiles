@@ -3,11 +3,9 @@
 # 右侧预览选中会话的当前画面。回车 attach。流程:列表 → 渲染 → 选择预览 → attach。
 set -uo pipefail
 
-prefix="${CLAUDE_SESSION_PREFIX:-claude-}"
-# claude 会话注册表:每个活动会话一份 <pid>.json,含实时 name/status。
-# launch.sh 用 exec 启动,tmux #{pane_pid} 即 json 文件名里的 pid
-sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 source "${BASH_SOURCE[0]%/*}/claude-lib.sh"
+prefix="$(tmux_get @claude_session_prefix "${CLAUDE_SESSION_PREFIX:-claude-}")"
+sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 
 # 性能:固定开销一次算进 build_theme,渲染只做字符串拼接 + printf -v(零 fork)。
 
@@ -96,15 +94,101 @@ target_width() {
   REPLY=$w
 }
 
+# 解析 `claude -p /usage` 输出，生成 fzf 顶部的紧凑额度摘要。
+# claude_usage_parse <output> -> REPLY="1:09am(23%) • Week(62%) • Fable(100%)"
+claude_usage_parse() {
+  local output=$1 line session_pct session_reset week_pct fable_pct
+  session_pct=""; session_reset=""; week_pct=""; fable_pct=""
+
+  while IFS= read -r line; do
+    case "$line" in
+      'Current session:'*)
+        if [[ $line =~ ([0-9]+)%[[:space:]]used.*at[[:space:]]([0-9]{1,2}:[0-9]{2}[[:alpha:]]{2}) ]]; then
+          session_pct=${BASH_REMATCH[1]}
+          session_reset=${BASH_REMATCH[2]}
+        fi
+        ;;
+      'Current week (all models):'*)
+        [[ $line =~ ([0-9]+)%[[:space:]]used ]] && week_pct=${BASH_REMATCH[1]}
+        ;;
+      'Current week (Fable):'*)
+        [[ $line =~ ([0-9]+)%[[:space:]]used ]] && fable_pct=${BASH_REMATCH[1]}
+        ;;
+    esac
+  done <<<"$output"
+
+  if [ -n "$session_pct" ] && [ -n "$session_reset" ] && [ -n "$week_pct" ] && [ -n "$fable_pct" ]; then
+    REPLY="${session_reset}(${session_pct}%) • Week(${week_pct}%) • Fable(${fable_pct}%)"
+  else
+    REPLY=""
+  fi
+}
+
+# 后台查询并缓存额度。缓存和时间戳属于 tmux server，而非某一个 shell 进程。
+claude_usage_refresh() {
+  local raw now
+  # tmux server 未必带有 mise 的 shim 路径；找不到 claude 时，以交互 zsh
+  # 加载用户配置后查询。只保留 /usage 返回的三行 Current 信息供后续解析。
+  if command -v claude >/dev/null 2>&1; then
+    raw=$(claude -p '/usage' 2>/dev/null | grep 'Current')
+  else
+    raw=$(zsh -ic 'claude -p "/usage"' 2>/dev/null | grep 'Current')
+  fi
+  claude_usage_parse "$raw"
+  now=$(date +%s)
+  if [ -n "$REPLY" ]; then
+    tmux set-option -g @claude_usage_cache "$REPLY"
+  else
+    tmux set-option -g @claude_usage_cache '额度查询失败'
+  fi
+  tmux set-option -g @claude_usage_cache_at "$now"
+  tmux set-option -g @claude_usage_querying ''
+  tmux set-option -g @claude_usage_querying_at ''
+}
+
+# 读取 10 分钟额度缓存；过期时异步启动查询，避免阻塞 fzf 打开。
+# claude_usage_display -> REPLY=缓存摘要或“额度查询中...”
+claude_usage_display() {
+  local cache checked querying querying_at ttl now refresh_cmd
+  cache="$(tmux_get @claude_usage_cache '')"
+  checked="$(tmux_get @claude_usage_cache_at '')"
+  querying="$(tmux_get @claude_usage_querying '')"
+  querying_at="$(tmux_get @claude_usage_querying_at '')"
+  ttl="$(tmux_get @claude_usage_cache_ttl '600')"
+  now=$(date +%s)
+  case "$ttl" in ''|*[!0-9]*) ttl=600 ;; esac
+
+  if [[ $checked =~ ^[0-9]+$ ]] && [ -n "$cache" ] && [ "$cache" != '额度查询失败' ] && (( now - checked < ttl )); then
+    REPLY=$cache
+    return
+  fi
+
+  # 后台子进程若被 popup 关闭时一并终止，30 秒后允许下次打开自动恢复查询。
+  if [ "$querying" = 1 ] && { [[ ! $querying_at =~ ^[0-9]+$ ]] || (( now - querying_at >= 30 )); }; then
+    tmux set-option -g @claude_usage_querying ''
+    querying=""
+  fi
+  if [ "$querying" != 1 ]; then
+    tmux set-option -g @claude_usage_querying 1
+    tmux set-option -g @claude_usage_querying_at "$now"
+    # 让 tmux server 独立运行查询，避免后台 Claude CLI 继承 fzf popup 的终端，
+    # 与 fzf 的输入和渲染发生竞争。
+    printf -v refresh_cmd '%q --refresh-usage' "${BASH_SOURCE[0]}"
+    tmux run-shell -b "$refresh_cmd"
+  fi
+  REPLY='额度查询中...'
+}
+
 # 输出 NUL 分隔的多行卡片(供 fzf --read0)
 # 字段:rank \t 状态时间戳 \t 会话名 \t 路径 \t 卡片(fzf 只显示卡片)
 # 排序:最近进入者置顶(rank=-1),其余 permission > question > waiting > idle > working,
 # 层内按状态时间戳倒序(最近的在前)
 emit_rows() {
-  local now s at path rank ago dir branch card idx pid sfile sjson pill pillw
+  local now s at path rank ago dir branch card idx pid sfile sjson pill pillw cache_idx git_cached
   local W la pad padsp agosp gpadsp lpadsp right gpad avail
   local name_w=0 last_idx=-1 last_max=0 ago_w=0 glen_max=0
   local -a sess ats dirs paths pills pillws ranks agos branches ginfos glens
+  local -a git_paths git_branches git_infos git_lens
 
   build_theme            # 一次性预算主题色/ANSI/5 类胶囊,后续渲染零 fork
   now=$(date +%s)
@@ -140,7 +224,23 @@ emit_rows() {
     esac
 
     fmt_ago "$at" "$now"; ago=$REPLY
-    collect_git "$path"                      # -> BRANCH,REPLY=彩色摘要,REPLY2=宽度
+    git_cached=0
+    for cache_idx in "${!git_paths[@]}"; do
+      if [[ ${git_paths[cache_idx]} == "$path" ]]; then
+        BRANCH=${git_branches[cache_idx]}
+        REPLY=${git_infos[cache_idx]}
+        REPLY2=${git_lens[cache_idx]}
+        git_cached=1
+        break
+      fi
+    done
+    if (( ! git_cached )); then
+      collect_git "$path"                    # -> BRANCH,REPLY=彩色摘要,REPLY2=宽度
+      git_paths+=("$path")
+      git_branches+=("$BRANCH")
+      git_infos+=("$REPLY")
+      git_lens+=("$REPLY2")
+    fi
 
     sess+=("$s"); ats+=("$at"); dirs+=("$dir"); paths+=("$path")
     pills+=("$pill"); pillws+=("$pillw"); ranks+=("$rank"); agos+=("$ago")
@@ -201,8 +301,16 @@ run_picker() {
     exit 0
   fi
 
-  local sel first target
-  # 预览直接抓选中会话当前可见画面(-e 带颜色,-p 输出到 stdout,-S -500 带回滚)。
+  local host=${1:-} sel first target self reload_cmd kill_toggle_cmd clear_kill_cmd usage_cmd usage
+  self=${BASH_SOURCE[0]}
+  printf -v reload_cmd '%q --list' "$self"
+  printf -v kill_toggle_cmd '%q --toggle-kill' "$self"
+  printf -v clear_kill_cmd '%q --clear-kill-confirm' "$self"
+  printf -v usage_cmd '%q --usage' "$self"
+  clear_kill_confirmation
+  claude_usage_display; usage=$REPLY
+  # 预览只轮询当前选中会话的可见画面(-e 带颜色,-p 输出到 stdout,-S -500 带回滚)。
+  # fzf 变更选择时会终止旧预览并启动新预览，因此不会轮询列表里的其他会话。
   # (否则目标名带上字面引号而匹配不到任何会话,预览空白);follow 让预览贴底显示最新画面。
   # \= 转义前导等号:fzf 用 $SHELL(可能是 zsh)跑预览,zsh 对未引用的前导 = 触发
   # EQUALS 展开(把 =name 当成命令 name 求路径),导致 "name not found";转义后 tmux 收到字面 =name。
@@ -214,8 +322,12 @@ run_picker() {
     --gap=1 \
     --highlight-line \
     --style=full \
-    --preview='tmux capture-pane -ept {3} -S -500 2>/dev/null' \
-    --preview-window='right,84%,nowrap,follow') || return 0     # fzf 被取消(Esc/非零退出)则直接返回
+    --header="$usage" \
+    --bind="ctrl-r:reload($reload_cmd)+transform-header($usage_cmd)+refresh-preview" \
+    --bind="ctrl-x:transform($kill_toggle_cmd {3})" \
+    --bind="focus:execute-silent($clear_kill_cmd)+transform-header($usage_cmd)" \
+    --preview='while :; do printf "\033[2J\033[H"; tmux capture-pane -ept {3} -S -200 2>/dev/null; sleep 1; done' \
+    --preview-window='right,84%,nowrap,follow,noinfo') || return 0     # fzf 被取消(Esc/非零退出)则直接返回
 
   [ -z "$sel" ] && exit 0
   # 卡片是多行记录:取首行、按 tab 切出第 3 字段会话名(bash 内置,不 fork head/cut)
@@ -227,50 +339,84 @@ run_picker() {
     tmux display-message "claude session '${target:-?}' no longer exists"
     exit 0
   fi
+  [ -n "$host" ] && tmux set-option -t "=$target" @claude_host_client "$host"
   tmux attach-session -t "=$target"
 }
 
-# 当前 attach 在某个 claude-* 会话上的客户端 → 返回其会话名(即已展开的弹窗)。
-# picker 与 launch 都把 claude 会话 attach 进 popup,该 popup 客户端的 session_name 即 claude-*。
-nested_session() {
-  tmux list-clients -F '#{client_name} #{session_name}' 2>/dev/null |
-    awk -v p="$prefix" 'index($2, p) == 1 { print $2; exit }'
+# 关闭指定 Claude session；= 前缀要求 tmux 精确匹配会话名，避免前缀歧义。
+kill_session() {
+  local target=${1:-}
+  [ -n "$target" ] || return 0
+  tmux kill-session -t "=$target" 2>/dev/null
 }
 
-# 宿主客户端:未停留在 claude-* 会话上的外层真实终端客户端 → 返回其 client_name。
-host_client() {
-  tmux list-clients -F '#{client_name} #{session_name}' 2>/dev/null |
-    awk -v p="$prefix" 'index($2, p) != 1 { print $1; exit }'
+clear_kill_confirmation() {
+  tmux set-option -g @claude_kill_confirm_session ''
 }
 
-# 弹窗跑 picker(默认入口)。tmux 每个客户端同一时刻只能有一个 popup:
-# 若此刻正停在某 claude 弹窗里(P 未先按 Esc 收起),直接开 picker 会因 popup 嵌套而打不开。
-# 故先 detach 收起该 claude 弹窗(会话后台保留,同 Esc 行为),再显式在宿主客户端上开 picker。
-open_popup() {
-  local w h sess host
-  w="$(tmux_get @claude_popup_width '99%')"
-  h="$(tmux_get @claude_popup_height '95%')"
+# fzf 的 transform 动作会把 stdout 当作新的 fzf 动作执行。第一次 Ctrl-X 仅写入
+# 确认状态并更新 header；同一会话第二次 Ctrl-X 才真正关闭。
+kill_toggle_action() {
+  local target=${1:-} armed self reload_cmd usage_cmd
+  [ -n "$target" ] || return 0
+  armed="$(tmux_get @claude_kill_confirm_session '')"
 
-  sess="$(nested_session)"
-  if [ -n "$sess" ]; then
-    tmux detach-client -s "$sess"
-    # 等待 detach 生效(popup 关闭)后再开,最多 ~5s;否则 popup 仍占用导致 picker 打不开
-    for _ in $(seq 1 100); do
-      [ -z "$(nested_session)" ] && break
-      sleep 0.05
-    done
+  if [ "$armed" = "$target" ]; then
+    kill_session "$target"
+    clear_kill_confirmation
+    self=${BASH_SOURCE[0]}
+    printf -v reload_cmd '%q --list' "$self"
+    printf -v usage_cmd '%q --usage' "$self"
+    printf 'reload(%s)+transform-header(%s)\n' "$reload_cmd" "$usage_cmd"
+    return
   fi
 
-  host="$(host_client)"
+  tmux set-option -g @claude_kill_confirm_session "$target"
+  printf '%s\n' 'change-header(⚠ 再按一次 Ctrl-X 关闭；Esc 取消)'
+}
+
+client_session() {
+  [ -n "$1" ] && tmux display-message -p -c "$1" '#{session_name}' 2>/dev/null
+}
+
+picker_command() {
+  printf -v REPLY '%q --picker %q' "$0" "$1"
+}
+
+# 弹窗跑 picker(默认入口)。调用方客户端由 tmux key binding 显式传入。
+open_popup() {
+  local caller_client=${1:-} current_session host picker_cmd y
+  local w h
+  w="$(tmux_get @claude_popup_width '99%')"
+  h="$(tmux_get @claude_popup_height '95%')"
+  claude_popup_y "$(tmux_get @claude_popup_y_offset '1')"; y=$REPLY
+
+  current_session="$(client_session "$caller_client")"
+  host=$caller_client
+  if [[ "$current_session" == "$prefix"* ]]; then
+    host="$(tmux show-options -qv -t "=$current_session" @claude_host_client 2>/dev/null)"
+    host=${host:-$caller_client}
+    tmux detach-client -t "$caller_client" 2>/dev/null
+  fi
+
+  popup_dims "$host" "$w" "$h"; w=$REPLY; h=$REPLY2   # 与客户端同奇偶消除晃动(host 空时回退百分比)
+  picker_command "$host"; picker_cmd=$REPLY
   if [ -n "$host" ]; then
-    tmux display-popup -c "$host" -w "$w" -h "$h" -E "$0 --picker"
+    tmux display-popup -c "$host" -w "$w" -h "$h" -y "$y" -E "$picker_cmd"
   else
-    tmux display-popup -w "$w" -h "$h" -E "$0 --picker"
+    tmux display-popup -w "$w" -h "$h" -y "$y" -E "$picker_cmd"
   fi
 }
 
 case "${1:-}" in
   --list) emit_rows ;;
-  --picker) run_picker ;;
-  *) open_popup ;;
+  --toggle-kill) kill_toggle_action "${2:-}" ;;
+  --clear-kill-confirm) clear_kill_confirmation ;;
+  --refresh-usage) claude_usage_refresh ;;
+  --usage)
+    claude_usage_display
+    printf '%s\n' "$REPLY"
+    ;;
+  --picker) run_picker "${2:-}" ;;
+  *) open_popup "${1:-}" ;;
 esac

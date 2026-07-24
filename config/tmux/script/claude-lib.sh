@@ -9,6 +9,47 @@ tmux_get() {
   printf '%s' "${v:-$2}"
 }
 
+# Claude CLI 统一入口。可用 @claude_command 覆盖；默认命令在非交互 tmux
+# 环境中不可见时，优先使用 mise 的 shim，保证 launch 与额度查询使用同一 CLI。
+claude_command() {
+  local cmd
+  cmd="$(tmux_get @claude_command 'claude')"
+  if [ "$cmd" = claude ] && [ -x "$HOME/.mise/shims/claude" ]; then
+    cmd="$HOME/.mise/shims/claude"
+  fi
+  printf '%s' "$cmd"
+}
+
+# 把 @claude_popup_width/height 的百分比换算成具体列/行,并让其与目标客户端
+# **同奇偶** —— 居中时左右(上下)margin = (client - popup)/2 恒为整列/整行,
+# 消除 popup 落在半列上、每次重绘舍入方向不定导致的内容左右晃动。
+#   popup_dims <client> <width_opt> <height_opt> -> REPLY=宽 REPLY2=高
+# 无 client 或取尺寸失败时,原样回退百分比字符串(交给 tmux 自行处理)。
+popup_dims() {
+  local client=$1 wopt=$2 hopt=$3 cw ch
+  REPLY=$wopt; REPLY2=$hopt
+  [ -z "$client" ] && return
+  cw=$(tmux display-message -p -c "$client" '#{client_width}'  2>/dev/null)
+  ch=$(tmux display-message -p -c "$client" '#{client_height}' 2>/dev/null)
+  case "$cw" in ''|*[!0-9]*) return ;; esac
+  case "$ch" in ''|*[!0-9]*) return ;; esac
+  case "$wopt" in *%) REPLY=$(( cw * ${wopt%\%} / 100 )) ;; esac
+  case "$hopt" in *%) REPLY2=$(( ch * ${hopt%\%} / 100 )) ;; esac
+  (( (cw - REPLY)  % 2 )) && (( REPLY-- ))     # 与客户端同奇偶 -> margin 为整列
+  (( (ch - REPLY2) % 2 )) && (( REPLY2-- ))
+  (( REPLY  < 2 )) && REPLY=2
+  (( REPLY2 < 2 )) && REPLY2=2
+}
+
+# 生成相对居中的 popup 纵向位置。默认下移 1 行；可用
+# @claude_popup_y_offset 覆盖（支持负数上移），而非把 -y 当成绝对坐标。
+# claude_popup_y <offset> -> REPLY=tmux position format
+claude_popup_y() {
+  local offset=${1:-1}
+  [[ $offset =~ ^-?[0-9]+$ ]] || offset=1
+  REPLY="#{e|+|:#{popup_centre_y},${offset}}"
+}
+
 # 枚举所有 claude-* tmux 会话的 pane_pid(每行一个)。
 # 这是"哪些会话算数"的唯一入口:先按名字过滤 claude-*,再取 pane_pid——
 # 因 launch.sh 用 exec,pane_pid == claude 进程 pid == <pid>.json 文件名,

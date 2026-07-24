@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
-# 在弹窗中新开一个 claude 会话:launch.sh <path> <origin_session>
+# 在弹窗中新开一个 claude 会话:launch.sh <path> <origin_session> <origin_client>
 set -uo pipefail
 
 source "${BASH_SOURCE[0]%/*}/claude-lib.sh"
 
 path="${1:-$PWD}"
 origin_session="${2:-}"
+origin_client="${3:-}"
 
-prefix="$(tmux_get @claude_session_prefix 'claude-')"
-cmd="$(tmux_get @claude_command 'claude')"
+prefix="$(tmux_get @claude_session_prefix "${CLAUDE_SESSION_PREFIX:-claude-}")"
+cmd="$(claude_command)"
 w="$(tmux_get @claude_popup_width '99%')"
 h="$(tmux_get @claude_popup_height '95%')"
+claude_popup_y "$(tmux_get @claude_popup_y_offset '1')"; y=$REPLY
 sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 
 # 已经在 claude 弹窗里,不允许再嵌套开一个
@@ -29,6 +31,10 @@ out=$(tmux new-session -d -c "$path" -P -F '#{session_id} #{pane_pid}' "zsh -ic 
 read -r sid pp <<<"$out"
 
 tmux rename-session -t "$sid" "${prefix}${pp}" 2>/dev/null
+
+# popup 内的 Claude client 需要知道自己来自哪个外层 client；列表快捷键从该 popup
+# 再次打开时据此精确回到原终端，而不是影响其他 tmux 客户端。
+[ -n "$origin_client" ] && tmux set-option -t "$sid" @claude_host_client "$origin_client"
 
 tmux set-hook   -t "$sid" pane-exited "kill-session"
 tmux set-option -t "$sid" status off
@@ -59,4 +65,9 @@ tmux set-option -t "$sid" pane-border-format " $dir_name "
   done
 ) &
 
-tmux display-popup -w "$w" -h "$h" -E "tmux attach-session -t '$sid'"
+if [ -n "$origin_client" ]; then
+  popup_dims "$origin_client" "$w" "$h"       # -> REPLY=宽 REPLY2=高,与客户端同奇偶消除晃动
+  tmux display-popup -c "$origin_client" -w "$REPLY" -h "$REPLY2" -y "$y" -E "tmux attach-session -t '$sid'"
+else
+  tmux display-popup -w "$w" -h "$h" -y "$y" -E "tmux attach-session -t '$sid'"
+fi
