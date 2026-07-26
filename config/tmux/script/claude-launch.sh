@@ -1,69 +1,64 @@
 #!/usr/bin/env bash
-# 在弹窗中新开一个 claude 会话:launch.sh <path> <origin_session> <origin_client>
-set -uo pipefail
+# 在 Claude Code 专用 hub session（默认 claude）中新建一个 window。
+set -euo pipefail
 
-source "${BASH_SOURCE[0]%/*}/claude-lib.sh"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$script_dir/claude-lib.sh"
 
 path="${1:-$PWD}"
-origin_session="${2:-}"
-origin_client="${3:-}"
-
-prefix="$(tmux_get @claude_session_prefix "${CLAUDE_SESSION_PREFIX:-claude-}")"
+# claude-launch.sh <path> <client>。旧绑定传的是 <path> <session_name> <client>
+# 且 session_name 从未被用到——第三个参数还在就说明 tmux.conf 尚未 reload。
+origin_client="${2:-}"
+[ -n "${3:-}" ] && origin_client="$3"
 cmd="$(claude_command)"
-w="$(tmux_get @claude_popup_width '100%')"
-h="$(tmux_get @claude_popup_height '100%')"
+hub="$(claude_hub_session)"
 sessions_dir="${CLAUDE_SESSIONS_DIR:-$HOME/.claude/sessions}"
 
-# 已经在 claude 弹窗里,不允许再嵌套开一个
-if [[ "$origin_session" == "$prefix"* ]]; then
-    tmux display-message "Claude popup already open"
-    exit 0
+# popup 已经开着、这一下又是从 popup 里按的:那里的 pane_current_path 是 $HOME,
+# 照常新建只会开出一个 home 目录的 Claude Code。此时 O 与 C-p 同义——收起 popup。
+# 判据是按键来自哪个 client,而不是"popup 是否显示":别的 client 在自己的项目
+# 目录里按 O 仍然要新建,只是复用已显示的 popup(见 claude-tui.sh)。
+if client_inside_popup "$origin_client"; then
+  exec "$script_dir/claude-tui.sh" "$origin_client" --toggle
 fi
 
-# 新建会话运行 claude:exec 使 pane_pid 即 claude 进程 pid,
-# 对应注册表文件 ~/.claude/sessions/<pid>.json。
-# 先用 claude-<pid> 占位命名,后台等 json 写入 name 后再改名;
-# 全程按 session_id 寻址,改名与 attach 互不干扰
-out=$(tmux new-session -d -c "$path" -P -F '#{session_id} #{pane_pid}' "zsh -ic 'exec $cmd'")
-read -r sid pp <<<"$out"
+if tmux has-session -t "$hub" 2>/dev/null; then
+  out="$(tmux new-window -d -P -F '#{window_id} #{pane_pid}' -t "$hub" -c "$path" "zsh -ic 'exec $cmd'")"
+  read -r window_id pane_pid <<<"$out"
+else
+  out="$(tmux new-session -d -P -F '#{session_id} #{window_id} #{pane_pid}' -s "$hub" -c "$path" "zsh -ic 'exec $cmd'")"
+  read -r _ window_id pane_pid <<<"$out"
+fi
 
-tmux rename-session -t "$sid" "${prefix}${pp}" 2>/dev/null
+# hub 只在 popup 里以嵌套 client 的形式露面,自己的状态栏永远不该出现。
+# 在这里一次性关掉(幂等,也顺带修好本改动之前建好的 hub),popup 的显示/隐藏
+# 就不必再去保存-关闭-还原它。
+tmux set-option -t "$hub" status off 2>/dev/null || true
 
-# popup 内的 Claude client 需要知道自己来自哪个外层 client；列表快捷键从该 popup
-# 再次打开时据此精确回到原终端，而不是影响其他 tmux 客户端。
-[ -n "$origin_client" ] && tmux set-option -t "$sid" @claude_host_client "$origin_client"
+# 窗口名直接用目录名。Claude 的 session 名就是这个目录的 basename(可能再带一个
+# 消歧后缀,列表侧会剥掉),启动时路径已经知道,没有理由先挂一个 claude-<pid>
+# 再等下面的 json 轮询改名——那会让列表在几秒内换一次名字。
+dir_name="${path%/}"; dir_name="${dir_name##*/}"
+tmux rename-window -t "$window_id" "${dir_name:-claude-$pane_pid}"
+tmux set-window-option -t "$window_id" @claude_window 1
+tmux set-window-option -t "$window_id" remain-on-exit off
+tmux set-hook -t "$window_id" pane-exited "kill-window -t '$window_id'"
 
-tmux set-hook   -t "$sid" pane-exited "kill-session"
-tmux set-option -t "$sid" status off
-tmux set-option -t "$sid" remain-on-exit off
-
-# 后台回填:轮询 json 取 claude 会话名并改名(目标名已存在则保留占位名)。
-# 只改会话名；popup 内不显示 pane 标题栏，避免持续重绘时露出底层内容。
 (
-  sf="$sessions_dir/$pp.json"
+  session_file="$sessions_dir/$pane_pid.json"
   for _ in $(seq 1 50); do
-    if [ -r "$sf" ]; then
-      j=$(<"$sf")
-      case "$j" in
-        *'"name":"'*) nm="${j#*\"name\":\"}"; nm="${nm%%\"*}" ;;
-        *)            nm="" ;;
+    if [ -r "$session_file" ]; then
+      json=$(<"$session_file")
+      case "$json" in
+        *'"name":"'*) name="${json#*\"name\":\"}"; name="${name%%\"*}" ;;
+        *) name="" ;;
       esac
-      if [ -n "$nm" ]; then
-        if ! tmux has-session -t "${prefix}${nm}" 2>/dev/null; then
-          tmux rename-session -t "$sid" "${prefix}${nm}" 2>/dev/null
-        fi
-        break
-      fi
+      [ -n "$name" ] && tmux rename-window -t "$window_id" "$name" 2>/dev/null && break
     fi
     sleep 0.1
   done
 ) &
 
-if [ -n "$origin_client" ]; then
-  claude_popup_dims "$origin_client" "$w" "$h" # -> REPLY=宽 REPLY2=高，100% 高度预留顶部状态栏
-  # Claude 画面持续重绘时，tmux 的 popup 边框会单独刷新；在带透明度的
-  # Alacritty 中会短暂露出底层 pane。与其他 fzf popup 保持一致，直接无框显示。
-  tmux display-popup -b none -c "$origin_client" -w "$REPLY" -h "$REPLY2" -y S -E "tmux attach-session -t '$sid'"
-else
-  tmux display-popup -b none -w "$w" -h "$h" -y S -E "tmux attach-session -t '$sid'"
-fi
+# 创建后直接交给 popup 管理器展示。selected window id 让左侧列表准确
+# 选中刚创建的 Claude Code，而无需先切入 hub session。
+exec "$script_dir/claude-tui.sh" "$origin_client" "$window_id"

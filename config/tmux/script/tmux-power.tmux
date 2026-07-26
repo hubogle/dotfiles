@@ -171,7 +171,7 @@ STATUS_RIGHT="#{?#{==:#{pane_current_command},ssh},$SEG_SSH,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?$GIT_BRANCH,$SEG_GIT ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?synchronize-panes,$SEG_SYNC ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?pane_in_mode,$SEG_VI ,}$STATUS_RIGHT"
-STATUS_RIGHT="#{?#{S:#{?#{m:claude-*,#{session_name}},x,}},$SEG_AGENTS ,}$STATUS_RIGHT"
+STATUS_RIGHT="#{?#{S:#{?#{m:claude,#{session_name}},x,}},$SEG_AGENTS ,}$STATUS_RIGHT"
 STATUS_RIGHT="#{?client_prefix,$SEG_PREFIX ,}$STATUS_RIGHT"
 
 tmux_set status-right "$STATUS_RIGHT"
