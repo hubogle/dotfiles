@@ -1,7 +1,6 @@
 tap "buo/cask-upgrade"
 brew "atuin"
 brew "bat"
-brew "czg"
 brew "eza"
 brew "fd"
 brew "fzf"
