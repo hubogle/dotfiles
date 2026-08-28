@@ -39,6 +39,9 @@ if [ "$THEME" = "light" ]; then
   tmux_set @c-gray    "#C8C9C5"   # pane 边框
 
   tmux_set @c-ghgreen "#86B300"   # zoom/last 标记
+
+  SB_FG="#8A9199"                 # 滚动条滑块(同 bwhite)
+  SB_BG="#E1E3E6"                 # 滚动条轨道(同 black)
 else
   # Tokyo Night dark
   tmux_set @c-bg      "#1A1B26"
@@ -59,6 +62,9 @@ else
   tmux_set @c-gray    "#414868"
 
   tmux_set @c-ghgreen "#3fb950"
+
+  SB_FG="#787c99"                 # 滚动条滑块(同 bwhite)
+  SB_BG="#2A2F41"                 # 滚动条轨道(同 bblack)
 fi
 
 #---------------------- 通用样式 ------------------------------
@@ -67,6 +73,7 @@ tmux_set message-style                "fg=#{@c-red}"
 tmux_set message-command-style        "fg=#{@c-red}"
 tmux_set pane-border-style            "fg=#{@c-gray}"
 tmux_set pane-active-border-style     "fg=#{@c-green}"
+tmux_set pane-scrollbars-style        "fg=$SB_FG,bg=$SB_BG,width=1,pad=0"
 tmux_set display-panes-colour         "fg=#{@c-blue}"
 tmux_set display-panes-active-colour  "fg=#{@c-yellow}"
 tmux_set mode-style                   "bg=default,fg=colour244"

@@ -52,7 +52,8 @@ return {
 
     { "Bekaboo/dropbar.nvim" }, -- bar
 
-    { "olimorris/persisted.nvim", opts = require "configs.persisted" }, -- open project
+    -- open project: 必须 lazy = false，否则 VimEnter 的 autoload 钩子不会注册
+    { "olimorris/persisted.nvim", lazy = false, opts = require "configs.persisted" },
 
     { "rmagatti/goto-preview", event = "BufReadPre", opts = require "configs.goto-preview" }, -- preview
 

@@ -88,10 +88,9 @@ autocmd("User", {
 autocmd("User", {
     pattern = "PersistedTelescopeLoadPre",
     callback = function()
-        local session = vim.g.persisted_loaded_session
-        if session ~= nil then
-            require("persisted").save { session = session }
-        end
+        -- 保存当前项目：已加载过 session 就写回原文件，
+        -- 新项目（persisted_loaded_session 为 nil）则按当前 cwd 新建，否则永远建不出记录
+        require("persisted").save { session = vim.g.persisted_loaded_session }
         -- 同步删除所有 listed buffer，避免与 session 加载竞争
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
@@ -108,14 +107,19 @@ autocmd("User", {
         local current_buf = vim.api.nvim_get_current_buf()
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             if vim.bo[buf].filetype == "neo-tree" then
-                vim.cmd "Neotree close"
+                pcall(vim.cmd, "Neotree close")
             end
         end
         if vim.api.nvim_buf_is_valid(current_buf) then
             vim.api.nvim_set_current_buf(current_buf)
         end
+    end,
+})
 
-        vim.fn.system "tmux setw automatic-rename"
+-- vim 退出时恢复 tmux window 名称（:q / :qa 均生效）
+autocmd("VimLeavePre", {
+    callback = function()
+        vim.fn.system "tmux rename-window zsh"
     end,
 })
 
@@ -131,6 +135,25 @@ autocmd({ "BufReadPost", "BufEnter" }, {
         else
             vim.bo.modifiable = true
             -- vim.bo.readonly = false
+        end
+    end,
+})
+
+-- 重新打开文件时恢复到上次编辑的光标位置
+autocmd("BufReadPost", {
+    pattern = "*",
+    callback = function(args)
+        -- session 加载期间由 session 文件自己定位，避免冲突
+        if vim.g.SessionLoad == 1 then
+            return
+        end
+        local ft = vim.bo[args.buf].filetype
+        if ft == "gitcommit" or ft == "gitrebase" then
+            return
+        end
+        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+        if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
+            pcall(vim.api.nvim_win_set_cursor, 0, mark)
         end
     end,
 })
