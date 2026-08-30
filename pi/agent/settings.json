@@ -1,0 +1,54 @@
+{
+  "lastChangelogVersion": "0.84.4",
+  "defaultThinkingLevel": "high",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "transport": "auto",
+  "defaultTools": [
+    "read",
+    "bash",
+    "edit",
+    "write"
+  ],
+  "npmCommand": [
+    "mise",
+    "exec",
+    "--",
+    "npm"
+  ],
+  "shellPath": "/opt/homebrew/bin/zsh",
+  "packages": [
+    "npm:pi-cc-extensions",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-rtk-optimizer",
+    "npm:pi-subagents"
+  ],
+  "terminal": {
+    "hyperlinks": "auto",
+    "images": "auto",
+    "trueColor": "auto"
+  },
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3,
+    "baseDelayMs": 2000,
+    "provider": {
+      "maxRetries": 0,
+      "maxRetryDelayMs": 60000
+    }
+  },
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 16384,
+    "keepRecentTokens": 20000
+  },
+  "hideThinkingBlock": true,
+  "showCacheMissNotices": false,
+  "quietStartup": true,
+  "tuiMode": "fullscreen",
+  "fullscreenExitOutput": "transcript",
+  "markdown": {
+    "mermaid": "final"
+  },
+  "theme": "cc-dark"
+}

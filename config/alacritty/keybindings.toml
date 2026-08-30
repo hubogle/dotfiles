@@ -4,6 +4,7 @@
 # \x14 来表示按键操作（如 Ctrl+T) 表示 \u00141
 [keyboard]
 bindings = [
+    { key = "Enter", mods = "Alt", chars = "\u001b[13;3u" }, # Alt + Enter
     # MacOs only
     { key = "Key0", mods = "Command", action = "ResetFontSize" },
     { key = "Plus", mods = "Command", action = "IncreaseFontSize" },
