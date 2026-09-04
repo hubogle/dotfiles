@@ -69,8 +69,10 @@ fi
 
 #---------------------- 通用样式 ------------------------------
 tmux_set status-style                 "fg=#{@c-fg}"
-tmux_set message-style                "fg=#{@c-red}"
-tmux_set message-command-style        "fg=#{@c-red}"
+tmux_set message-style                "fg=#{@c-red},bg=#{@c-bblack},fill=#{@c-bblack},width=50%,align=left"  # 消息铺满状态栏左半，右侧状态保持可见
+tmux_set message-command-style        "fg=#{@c-red},bg=#{@c-bblack},fill=#{@c-bblack}"      # 命令提示符铺满整行
+tmux_set copy-mode-line-number-style          "fg=#{@c-bwhite}"
+tmux_set copy-mode-current-line-number-style  "fg=#{@c-yellow},bold"
 tmux_set pane-border-style            "fg=#{@c-gray}"
 tmux_set pane-active-border-style     "fg=#{@c-green}"
 tmux_set pane-scrollbars-style        "fg=$SB_FG,bg=$SB_BG,width=1,pad=0"

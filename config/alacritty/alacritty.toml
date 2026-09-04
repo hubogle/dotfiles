@@ -28,7 +28,7 @@ shell = { program = "/opt/homebrew/bin/tmux", args = [
 	"-s",
 	"main",
 ] }
-osc52 = "OnlyCopy"
+osc52 = "CopyPaste"
 
 [mouse]
 hide_when_typing = true                                              # 如果为“true”，则键入时光标将暂时隐藏
