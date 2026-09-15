@@ -3,24 +3,53 @@ onboarding = false
 [theme]
 name = "tokyo-night"
 
-[terminal]
-default_shell = "/opt/homebrew/bin/zsh"
-shell_mode = "non_login"
-new_cwd = "follow"
-
 [keys]
 prefix = "backtick"
-detach = "prefix+shift+p"
 
+# 通用
+help = "prefix+?"
+settings = "prefix+shift+s"
+detach = ["prefix+d", "prefix+shift+p"]
+reload_config = "prefix+r"
+open_notification_target = "prefix+shift+o"
 
-rename_pane = "prefix+comma"
-reload_config = "prefix+shift+r"
+# Workspace
+goto = "prefix+s"
+workspace_picker = "prefix+w"
+previous_workspace = "prefix+p"
+next_workspace = "prefix+n"
+switch_workspace = "alt+1..9"
 
-switch_workspace = "prefix+shift+1..9"
-focus_agent = "prefix+alt+1..9"
+new_workspace = ["prefix+a"]
+new_worktree = "prefix+alt+g"
+rename_workspace = "prefix+$"
+close_workspace = "prefix+shift+x"
 
+# table
+new_tab = "prefix+c"
+rename_tab = "prefix+comma"
+switch_tab = "prefix+1..9"
+close_tab = ""
+
+# Pane
+copy_mode = ["prefix+[", "alt+esc"]
+edit_scrollback = "prefix+e"
+focus_pane_left = "prefix+left"
+focus_pane_right = "prefix+right"
+focus_pane_down = "prefix+down"
+focus_pane_up = "prefix+up"
+last_pane = ["prefix+l", "prefix+semicolon"]
+split_vertical = ["prefix+v", "prefix+percent"]
+split_horizontal = ["prefix+minus", "prefix+double_quote"]
+zoom = "prefix+z"
+resize_mode = "prefix+shift+r"                             # 进入 resize 模式
+toggle_sidebar = "prefix+b"                                # 切换侧边栏
 close_pane = ""
 
+# Agent
+focus_agent = "prefix+alt+1..9"
+
+# 关闭确认
 [[keys.command]]
 key = "prefix+x"
 type = "popup"
@@ -30,18 +59,6 @@ width = 46
 height = 8
 
 
-[ui]
-redraw_on_focus_gained = false
-
-agent_panel_sort = "priority"
-status_indicators = "symbols"
-show_agent_labels_on_pane_borders = true
-
-# 单 Tab 时减少一行 UI 占用
-hide_tab_bar_when_single_tab = true
-
-confirm_close = true
-
 [worktrees]
 directory = "~/Documents/worktrees"
 
@@ -49,6 +66,24 @@ directory = "~/Documents/worktrees"
 switch_ascii_input_source_in_prefix = true
 reveal_hidden_cursor_for_cjk_ime = true
 cjk_ime_agents = ["claude", "codex", "pi"]
-
-# 防止把可能包含 token、命令输出的终端内容写进持久化历史
+cjk_ime_cursor_shape = "steady_bar"
 pane_history = false
+
+[ui]
+redraw_on_focus_gained = false
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "compact"
+agent_panel_sort = "priority"
+status_indicators = "symbols"
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = true
+confirm_close = true
+prompt_new_tab_name = false
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+
+[terminal]
+default_shell = "/opt/homebrew/bin/zsh"
+shell_mode = "non_login"
+new_cwd = "follow"

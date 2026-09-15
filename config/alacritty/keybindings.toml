@@ -67,12 +67,10 @@ bindings = [
     { key = "N", mods = "Command", chars = "\u0060\u0061" }, # 新建 Session
 
     # tmux other
-    { key = "Y", mods = "Command", chars = "\u0060Y" }, # 历史粘贴板内容
-    # { key = "I", mods = "Command", chars = "\u0060I" },       # 触发 aichat 输入
+    { key = "Y", mods = "Command", chars = "\u0060Y" },       # 历史粘贴板内容
     { key = "I", mods = "Command|Shift", chars = "\u0060y" }, # 同步输入 tmux 命令
     { key = "G", mods = "Command", chars = "\u0060G" },       # open navi
-    { key = "O", mods = "Command", chars = "\u0060O" },       # open claude
-    { key = "P", mods = "Command", chars = "\u0060P" },       # open claude list
+    { key = "P", mods = "Command", chars = "\u0060P" },       # 隐藏 Herdr
     { key = "F", mods = "Command", chars = "\u0060F" },       # 进入 tmux 的 vim 搜索
 
     # vim 提供模拟 ctrl(control) + number 命令
