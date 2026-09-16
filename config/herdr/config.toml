@@ -1,7 +1,7 @@
 onboarding = false
 
 [theme]
-name = "tokyo-night"
+name = "terminal"
 
 [keys]
 prefix = "backtick"
@@ -82,6 +82,25 @@ prompt_new_tab_name = false
 pane_outer_borders = false
 pane_gaps = false
 pane_scrollbars = false
+
+[ui.toast]
+delivery = "system"
+delay_seconds = 1
+
+[ui.sidebar.agents]
+rows = [
+  [
+    "state_icon",
+    { token = "workspace", bold = false },
+    "tab",
+  ],
+  [
+    "agent",
+    { token = "$model_low", fg = "#a6e3a1", dim = false },
+    { token = "$model_mid", fg = "#f9e2af", dim = false },
+    { token = "$model_high", fg = "#f38ba8", dim = false, bold = true },
+  ],
+]
 
 [terminal]
 default_shell = "/opt/homebrew/bin/zsh"
