@@ -16,7 +16,6 @@ bindings = [
     { key = "F", mods = "Command|Control", action = "ToggleFullscreen" },
     { key = "K", mods = "Command", chars = "reset \n" },                  # 清空历史
 
-    { key = "Back", action = "ReceiveChar" },              # 解决 Rime 输入法删除问题，0.11.0 版本修复问题
     { key = "Back", mods = "Command", chars = "\u0015" },  # Delete line
     { key = "Right", mods = "Option", chars = "\u001bF" }, # 向右移动一个单词
     { key = "Left", mods = "Option", chars = "\u001bB" },  # 向左移动一个单词

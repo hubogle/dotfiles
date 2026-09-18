@@ -3,6 +3,11 @@ onboarding = false
 [theme]
 name = "terminal"
 
+auto_switch = false
+
+[theme.custom]
+panel_bg = "reset"
+
 [keys]
 prefix = "backtick"
 
@@ -48,6 +53,8 @@ close_pane = ""
 
 # Agent
 focus_agent = "prefix+alt+1..9"
+next_agent = "alt+n"
+previous_agent = "alt+p"
 
 # 关闭确认
 [[keys.command]]
@@ -106,3 +113,4 @@ rows = [
 default_shell = "/opt/homebrew/bin/zsh"
 shell_mode = "non_login"
 new_cwd = "follow"
+kitty_graphics = false

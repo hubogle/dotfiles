@@ -35,7 +35,7 @@ hide_when_typing = true                                              # 如果为
 bindings = [{ mouse = "Right", mods = "Control", action = "Paste" }]
 
 [scrolling]
-history = 10000 #  回滚区最大行数
+history = 0
 multiplier = 0  # 滚动距离 https://github.com/alacritty/alacritty/issues/2300
 
 [font]
