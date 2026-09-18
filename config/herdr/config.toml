@@ -48,7 +48,7 @@ split_vertical = ["prefix+v", "prefix+percent"]
 split_horizontal = ["prefix+minus", "prefix+double_quote"]
 zoom = "prefix+z"
 resize_mode = "prefix+shift+r"                             # 进入 resize 模式
-toggle_sidebar = "prefix+b"                                # 切换侧边栏
+toggle_sidebar = "alt+b"
 close_pane = ""
 
 # Agent
