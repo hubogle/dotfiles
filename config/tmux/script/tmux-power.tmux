@@ -3,84 +3,28 @@ tmux_set() {
   tmux set-option -gq "$1" "$2"
 }
 
-#---------------------- 主题选择 ------------------------------
-# @tmux_power_theme: dark | light | auto(默认)
-# auto 时读取 alacritty 当前 import 的主题名,含 light 则用浅色
-THEME="$(tmux show-option -gqv @tmux_power_theme)"
-THEME="${THEME:-auto}"
-
-if [ "$THEME" = "auto" ]; then
-  ALACRITTY_CFG="$HOME/.config/alacritty/alacritty.toml"
-  if [ -f "$ALACRITTY_CFG" ] && grep -Eiq '^[[:space:]]*"[^"]*light[^"]*\.toml"' "$ALACRITTY_CFG"; then
-    THEME="light"
-  else
-    THEME="dark"
-  fi
-fi
-
-#---------------------- 配色方案 ------------------------------
-if [ "$THEME" = "light" ]; then
-  # ayu light
-  tmux_set @c-bg      "#FFFFFF"   # 色块上的图标用白字
-  tmux_set @c-fg      "#5C6166"   # 状态栏正文
-
-  tmux_set @c-black   "#E1E3E6"   # 非当前窗口块底
-  tmux_set @c-blue    "#399EE6"
-  tmux_set @c-cyan    "#55B4D4"
-  tmux_set @c-green   "#6CBF43"
-  tmux_set @c-red     "#E65050"
-  tmux_set @c-white   "#3B4045"   # default 背景上的数值文字
-  tmux_set @c-yellow  "#F2AE49"
-  tmux_set @c-orange  "#FA8D3E"
-  tmux_set @c-magenta "#A37ACC"
-
-  tmux_set @c-bblack  "#D1E4F4"   # 当前窗口块底(淡蓝高亮)
-  tmux_set @c-bwhite  "#8A9199"   # 非当前窗口块文字
-  tmux_set @c-gray    "#C8C9C5"   # pane 边框
-
-  tmux_set @c-ghgreen "#86B300"   # zoom/last 标记
-
-  SB_FG="#8A9199"                 # 滚动条滑块(同 bwhite)
-  SB_BG="#E1E3E6"                 # 滚动条轨道(同 black)
-else
-  # Tokyo Night dark
-  tmux_set @c-bg      "#1A1B26"
-  tmux_set @c-fg      "#a9b1d6"
-
-  tmux_set @c-black   "#414868"
-  tmux_set @c-blue    "#7aa2f7"
-  tmux_set @c-cyan    "#7dcfff"
-  tmux_set @c-green   "#73daca"
-  tmux_set @c-red     "#f7768e"
-  tmux_set @c-white   "#c0caf5"
-  tmux_set @c-yellow  "#e0af68"
-  tmux_set @c-orange  "#ff9e64"
-  tmux_set @c-magenta "#bb9af7"
-
-  tmux_set @c-bblack  "#2A2F41"
-  tmux_set @c-bwhite  "#787c99"
-  tmux_set @c-gray    "#414868"
-
-  tmux_set @c-ghgreen "#3fb950"
-
-  SB_FG="#787c99"                 # 滚动条滑块(同 bwhite)
-  SB_BG="#2A2F41"                 # 滚动条轨道(同 bblack)
-fi
-
 #---------------------- 通用样式 ------------------------------
-tmux_set status-style                 "fg=#{@c-fg}"
-tmux_set message-style                "fg=#{@c-red},bg=#{@c-bblack},fill=#{@c-bblack},width=50%,align=left"  # 消息铺满状态栏左半，右侧状态保持可见
-tmux_set message-command-style        "fg=#{@c-red},bg=#{@c-bblack},fill=#{@c-bblack}"      # 命令提示符铺满整行
-tmux_set copy-mode-line-number-style          "fg=#{@c-bwhite}"
-tmux_set copy-mode-current-line-number-style  "fg=#{@c-yellow},bold"
-tmux_set pane-border-style            "fg=#{@c-gray}"
-tmux_set pane-active-border-style     "fg=#{@c-green}"
-tmux_set pane-scrollbars-style        "fg=$SB_FG,bg=$SB_BG,width=1,pad=0"
-tmux_set display-panes-colour         "fg=#{@c-blue}"
-tmux_set display-panes-active-colour  "fg=#{@c-yellow}"
-tmux_set mode-style                   "bg=default,fg=colour244"
+# ANSI 颜色名引用终端调色板，terminal 使用终端默认前景或背景。
+tmux_set status-style                 "fg=terminal,bg=terminal"
+tmux_set message-style                "fg=red,bg=terminal,fill=terminal,width=50%,align=left"  # 消息铺满状态栏左半，右侧状态保持可见
+tmux_set message-command-style        "fg=red,bg=terminal,fill=terminal"      # 命令提示符铺满整行
+tmux_set popup-style                  "fg=terminal,bg=terminal"
+tmux_set popup-border-style           "fg=brightblack,bg=terminal"
+tmux_set menu-style                   "fg=terminal,bg=terminal"
+tmux_set menu-border-style            "fg=brightblack,bg=terminal"
+tmux_set menu-selected-style          "fg=black,bg=blue"
+tmux_set copy-mode-line-number-style          "fg=terminal"
+tmux_set copy-mode-current-line-number-style  "fg=yellow,bold"
+# 显式设置前景，避免浅色主题的默认深色文字落在 ANSI 深色背景上。
+tmux_set copy-mode-current-line-style         "fg=brightwhite,bg=brightblack"
+tmux_set pane-border-style            "fg=brightblack"
+tmux_set pane-active-border-style     "fg=green"
+tmux_set pane-scrollbars-style        "fg=white,bg=brightblack,width=1,pad=0"
+tmux_set display-panes-colour         "blue"
+tmux_set display-panes-active-colour  "yellow"
+tmux_set mode-style                   "fg=black,bg=blue"
 tmux_set window-status-separator      ""
-tmux_set clock-mode-colour            "#{@c-blue}"
+tmux_set clock-mode-colour            "blue"
 tmux_set clock-mode-style             24
 
 #---------------------- 符号与分隔符 --------------------------
@@ -94,33 +38,34 @@ RIGHT_SEP=""
 
 #---------------------- 窗口图标逻辑 --------------------------
 # 根据命令/模式选择不同图标颜色
-ICON_FORMAT="#{?#{==:#{pane_current_command},ssh},#[fg=#{@c-red}] , }"
-ICON_FORMAT="#{?#{==:#{pane_current_command},nvim},#[fg=#{@c-green}]󰕷 ,$ICON_FORMAT}"
-ICON_FORMAT="#{?#{==:#{pane_mode},copy-mode},#[fg=#{@c-green}]󰕷 ,$ICON_FORMAT}"
+ICON_FORMAT="#{?#{==:#{pane_current_command},ssh},#[fg=red] , }"
+ICON_FORMAT="#{?#{==:#{pane_current_command},nvim},#[fg=green]󰕷 ,$ICON_FORMAT}"
+ICON_FORMAT="#{?#{==:#{pane_mode},copy-mode},#[fg=green]󰕷 ,$ICON_FORMAT}"
 
 #---------------------- Windows 状态栏 ------------------------
 # 非当前窗口
 WS_FORMAT=""
-WS_FORMAT+="#[fg=#{@c-black},bg=default]$RIGHT_ICON_INVERSE"
-WS_FORMAT+="#[fg=#{@c-bwhite},bg=#{@c-black}] $ICON_FORMAT#[fg=#{@c-bwhite}]#W "
-WS_FORMAT+="#[fg=#{@c-red}]#{?pane_in_mode, ,}"
-WS_FORMAT+="#[fg=#{@c-yellow}]#{?window_bell_flag,󰂠 ,}"
-WS_FORMAT+="#[fg=#{@c-yellow}]#{?window_activity_flag,󰂚 ,}"
-WS_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_zoomed_flag, ,}"
-WS_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_last_flag, ,}"
-WS_FORMAT+="#[fg=#{@c-black},bg=default]$RIGHT_ICON"
+WS_FORMAT+="#[fg=black,bg=terminal]$RIGHT_ICON_INVERSE"
+WS_FORMAT+="#[fg=white,bg=black] $ICON_FORMAT#[fg=white]#W "
+WS_FORMAT+="#[fg=red]#{?pane_in_mode, ,}"
+WS_FORMAT+="#[fg=yellow]#{?window_bell_flag,󰂠 ,}"
+WS_FORMAT+="#[fg=yellow]#{?window_activity_flag,󰂚 ,}"
+WS_FORMAT+="#[fg=brightgreen]#{?window_zoomed_flag, ,}"
+WS_FORMAT+="#[fg=brightgreen]#{?window_last_flag, ,}"
+WS_FORMAT+="#[fg=black,bg=terminal]$RIGHT_ICON"
 
 # 当前窗口
 WSC_FORMAT=""
-WSC_FORMAT+="#[fg=#{@c-bblack},bg=default]$RIGHT_ICON_INVERSE"
-WSC_FORMAT+="#[fg=#{@c-white},bg=#{@c-bblack}] $ICON_FORMAT#[fg=#{@c-white}]#W "
-WSC_FORMAT+="#[fg=#{@c-red}]#{?pane_in_mode, ,}"
-WSC_FORMAT+="#[fg=#{@c-ghgreen}]#{?window_zoomed_flag, ,}"
-WSC_FORMAT+="#[fg=#{@c-ghgreen}] "
-WSC_FORMAT+="#[fg=#{@c-bblack},bg=default]$RIGHT_ICON"
+WSC_FORMAT+="#[fg=brightblack,bg=terminal]$RIGHT_ICON_INVERSE"
+WSC_FORMAT+="#[fg=brightwhite,bg=brightblack] $ICON_FORMAT#[fg=brightwhite]#W "
+WSC_FORMAT+="#[fg=red]#{?pane_in_mode, ,}"
+WSC_FORMAT+="#[fg=brightgreen]#{?window_zoomed_flag, ,}"
+WSC_FORMAT+="#[fg=brightgreen] "
+WSC_FORMAT+="#[fg=brightblack,bg=terminal]$RIGHT_ICON"
 
 tmux_set window-status-format          "$WS_FORMAT"
 tmux_set window-status-current-format  "$WSC_FORMAT"
+tmux_set window-status-current-style   "default"
 tmux_set window-status-bell-style      "blink"
 tmux_set window-status-activity-style  "blink"
 
@@ -128,15 +73,15 @@ tmux_set window-status-activity-style  "blink"
 tmux_set status-left-length 0
 tmux_set status-left-style none
 
-LS_ICON="#{?#{==:#{pane_current_command},ssh},#[fg=#{@c-red}]󰅡 ,󰤂 }"
-LS_ICON="#{?client_prefix,#[fg=#{@c-yellow}]󰠠 ,$LS_ICON}"
-LS_ICON="#{?synchronize-panes,#[fg=#{@c-green}]󱍸 ,$LS_ICON}"
-LS_ICON="#{?pane_in_mode,#[fg=#{@c-red}]󰗦 ,$LS_ICON}"
+LS_ICON="#{?#{==:#{pane_current_command},ssh},#[fg=red]󰅡 ,󰤂 }"
+LS_ICON="#{?client_prefix,#[fg=yellow]󰠠 ,$LS_ICON}"
+LS_ICON="#{?synchronize-panes,#[fg=green]󱍸 ,$LS_ICON}"
+LS_ICON="#{?pane_in_mode,#[fg=red]󰗦 ,$LS_ICON}"
 
 STATUS_LEFT=""
-STATUS_LEFT+="#[fg=#{@c-bg},bg=#{@c-blue},bold,nodim]  "
-STATUS_LEFT+="#[fg=#{@c-bg},bg=#{@c-blue},bold,nodim]#S "
-STATUS_LEFT+="#[fg=#{@c-blue},bg=default]$RIGHT_ICON"
+STATUS_LEFT+="#[fg=black,bg=blue,bold,nodim]  "
+STATUS_LEFT+="#[fg=black,bg=blue,bold,nodim]#S "
+STATUS_LEFT+="#[fg=blue,bg=terminal]$RIGHT_ICON"
 
 tmux_set status-left "$STATUS_LEFT"
 
@@ -158,16 +103,16 @@ tmux_set @ssh_host        "#(~/.config/tmux/script/ssh-host.sh #{pane_pid})"
 GIT_BRANCH="#(git -C #{pane_current_path} rev-parse --abbrev-ref HEAD)"
 
 #---------------------- 右侧各块（右→左） -----------------------
-SEG_TIME="#[fg=#{@c-blue}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-blue}]$TIME_ICON #[bg=default]#[fg=#{@c-white}] $TIME_FORMAT "
-SEG_SPEED="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$DOWNLOAD_ICON #[bg=default]#[fg=#{@c-white}]#{E:@download_speed}"
-SEG_CPU="#[fg=#{@c-cyan}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-cyan}]$CPU_ICON#[bg=default]#[fg=#{@c-white}] #{E:@cpu_usage}"
-SEG_GIT="#[fg=#{@c-green}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] $GIT_BRANCH"
-SEG_SSH="#[fg=#{@c-red}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-red}]$SSH_ICON#[bg=default]#[fg=#{@c-white}] #{E:@ssh_host} "
+SEG_TIME="#[fg=blue]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=blue]$TIME_ICON #[bg=terminal]#[fg=terminal] $TIME_FORMAT "
+SEG_SPEED="#[fg=cyan]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=cyan]$DOWNLOAD_ICON #[bg=terminal]#[fg=terminal]#{E:@download_speed}"
+SEG_CPU="#[fg=cyan]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=cyan]$CPU_ICON#[bg=terminal]#[fg=terminal] #{E:@cpu_usage}"
+SEG_GIT="#[fg=green]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=green] #[bg=terminal]#[fg=terminal] $GIT_BRANCH"
+SEG_SSH="#[fg=red]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=red]$SSH_ICON#[bg=terminal]#[fg=terminal] #{E:@ssh_host} "
 
 # 状态标记块
-SEG_SYNC="#[fg=#{@c-yellow}]#[bg=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-yellow}]󰓦 #[bg=default]#[fg=#{@c-white}] SYNC"
-SEG_VI="#[fg=#{@c-green}]#[bf=default]$LEFT_SEP#[fg=#{@c-bg}]#[bg=#{@c-green}] #[bg=default]#[fg=#{@c-white}] COPY"
-SEG_PREFIX="#[fg=#{@c-yellow}]#[bg=default] 󰘳 "
+SEG_SYNC="#[fg=yellow]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=yellow]󰓦 #[bg=terminal]#[fg=terminal] SYNC"
+SEG_VI="#[fg=green]#[bg=terminal]$LEFT_SEP#[fg=black]#[bg=green] #[bg=terminal]#[fg=terminal] COPY"
+SEG_PREFIX="#[fg=yellow]#[bg=terminal] 󰘳 "
 
 # 右侧最终拼接（条件 + 信息块）
 STATUS_RIGHT="$SEG_SPEED $SEG_CPU $SEG_TIME"
