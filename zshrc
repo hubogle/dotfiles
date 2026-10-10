@@ -146,3 +146,4 @@ copy_buffer_to_clipboard() {
 }
 zle -N copy_buffer_to_clipboard
 bindkey '^y' copy_buffer_to_clipboard                 # [control + y] - 复制当前行
+export FFF_ENABLE_HOME_SCAN=0                         # fff 不扫描 $HOME 目录
